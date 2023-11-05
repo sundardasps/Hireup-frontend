@@ -8,6 +8,8 @@ import UserHome from "../Pages/userPages/userHomePage/Home";
 import UserPublic from "../Utils/protected/UserPublic.jsx";
 import {useSelector}  from 'react-redux'
 import { useEffect, useState } from "react";
+import UserResetPass from "../Components/userComponents/userLoginComponents/UserResetPass.jsx";
+import UserForgotPass from "../Components/userComponents/userLoginComponents/UserForgotPass.jsx";
 
 
 function UserRoutes() {
@@ -24,6 +26,9 @@ function UserRoutes() {
         <Route path="/register" element={<UserPublic><UserRegister /></UserPublic>} />
         <Route path="/login" element={<UserPublic><UserLogin /></UserPublic>} />
         <Route path="/:userId/varification/:token" element={<UserPublic><UserVarification /></UserPublic>}/>
+        <Route path="/:userId/resetPassword/:token" element={<UserPublic><UserResetPass /></UserPublic>}/>
+        <Route path="/forgotePassword" element={<UserPublic><UserForgotPass/></UserPublic>}/>
+
         <Route path="/" element={<UserLayOut></UserLayOut>}>
         <Route path="/" element={user?<UserHome />:<LandingPage />} />
       </Route>

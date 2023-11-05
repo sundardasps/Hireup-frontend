@@ -1,48 +1,38 @@
-import { useNavigate } from "react-router-dom";
+
 import { useFormik } from "formik";
-import { userLogInSchema } from "../../../Utils/yupValidations/yupUserValidations";
-import { userLogin } from "../../../Api/userApi";
 import toast, { Toaster } from "react-hot-toast";
+import { userVarifySchema } from "../../../Utils/yupValidations/yupUserValidations";
 import { Button } from "@material-tailwind/react";
-import { useDispatch } from "react-redux";
-import {setUserDetails} from "../../../Redux/storeSlices/userSlice";
+import { userForgotPass } from "../../../Api/userApi";
 
-function UserLogin() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const initialValue = {
-    email: "",
-    password: "",
-  };
 
-  const { handleBlur, handleChange, handleSubmit, errors, touched, values } =
-    useFormik({
-      initialValues: initialValue,
-      validationSchema: userLogInSchema,
-      onSubmit: async (values) => {
-        console.log(values);
-        const response = await userLogin(values);
-        console.log(response);
-        if (response.data.loginSuccess) {
-      
-          console.log(response.data.loginData.userName,"gfdjndkgfndgjkfdnkgdkgkgkgkdfhk")
-          dispatch(
-            setUserDetails({
-              userName:response.data.loginData.userName,
-              email:response.data.loginData.email,
-              role:response.data.loginData.role,
-            })
-          );
-          localStorage.setItem("token", response.data.jwtToken);
-          navigate('/')
-        } else {
-          toast.error(response.data.message);
-        }
-      },
-    });
+function UserForgotPass() {
+    const initialValue = {
+        email: "",
+      };
+    
+      const { handleBlur, handleChange, handleSubmit, errors, touched, values } =
+        useFormik({
+          initialValues: initialValue,
+          validationSchema: userVarifySchema,
+          onSubmit: async (values) => {
+            console.log(values);
+            const response = await userForgotPass(values);
+            console.log(response);
+            if (response.data.created) {
+              toast.success(response.data.message);
+              setTimeout(()=>{
+                window.location.reload()
+              },2000)
+            } else {
+              toast.error(response.data.message);
+            }
+          },
+        });
 
   return (
+    <div>
     <div className=" flex flex-col items-center justify-between pt-0 pr-2 sm:pr-5 pb-0 pl-2 sm:pl-5 mt-0 mx-auto max-w-screen-xl xl:px-5 lg:flex-row">
       <div className="flex flex-col items-center w-full pr-2 sm:pr-5  pl-2 sm:pl-5 lg:flex-row">
         <div className="w-full bg-cover relative max-w-md lg:max-w-2xl lg:w-7/12">
@@ -57,7 +47,7 @@ function UserLogin() {
           <form action="" onSubmit={handleSubmit}>
             <div className="flex flex-col items-start justify-start pt-5 sm:pt-10 pr-2 sm:pr-5 pb-5 sm:pb-10 pl-2 sm:pl-5 bg-white shadow-2xl rounded-xl relative z-10">
               <p className="w-full text-2xl sm:text-4xl font-medium text-center leading-snug font-serif">
-                User login
+              Enter your email
               </p>
               <div className="w-full mt-3 sm:mt-6 mr-0 mb-0 ml-0 relative space-y-4 sm:space-y-8">
                 <div className="relative">
@@ -77,59 +67,20 @@ function UserLogin() {
                   )}
                 </div>
                 <div className="relative">
-                  <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
-                    Password
-                  </p>
-                  <input
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.password}
-                    type="password"
-                    name="password"
-                    label="Input Error"
-                    className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
-                  />
-                  {errors.password && touched.password && (
-                    <div className="text-2 text-red-500">{errors.password}</div>
-                  )}
-                </div>
-                <p className="mt-4 block text-center font-sans text-base font-normal leading-relaxed text-gray-700 ">
-                Forgote password :{}
-                <a
-                  className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
-                  onClick={() => {
-                    navigate("/forgotePassword");
-                  }}
-                >
-                  Click here
-                </a>
-              </p>
-                <div className="relative">
                   <Button
                     type="submit"
                     className="w-full inline-block pt-2 pr-3 pb-2 pl-3 text-base sm:text-xl font-medium text-center text-white bg-black rounded-lg transition duration-200 hover:bg-blue-700 ease"
                   >
-                    Submit
+                    Varify
                   </Button>
                 </div>
               </div>
-              <p className="mt-4 block text-center font-sans text-base font-normal leading-relaxed text-gray-700 ">
-                Already have an account? {}
-                <a
-                  className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
-                  onClick={() => {
-                    navigate("/register");
-                  }}
-                >
-                  Sign In
-                </a>
-              </p>
             </div>
           </form>
           <svg
             viewBox="0 0 91 91"
             className="absolute top-0 left-0 z-0 w-32 h-32 -mt-12 -ml-12 text-blue-300
-            fill-current"
+          fill-current"
           >
             <g stroke="none" strokeWidth="1" fillRule="evenodd">
               <g fillRule="nonzero">
@@ -221,7 +172,7 @@ function UserLogin() {
           <svg
             viewBox="0 0 91 91"
             className="absolute bottom-0 right-0 z-0 w-32 h-32 -mb-12 -mr-12 text-black-500
-            fill-current"
+          fill-current"
           >
             <g stroke="none" strokeWidth="1" fillRule="evenodd">
               <g fillRule="nonzero">
@@ -314,7 +265,8 @@ function UserLogin() {
       </div>
       <Toaster />
     </div>
-  );
+  </div>
+  )
 }
 
-export default UserLogin;
+export default UserForgotPass
