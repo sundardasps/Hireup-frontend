@@ -2,8 +2,7 @@ import { Navigate } from "react-router-dom";
 
 
 function userPublic(props) {
- const token = localStorage.getItem("token")
-
+ const token = localStorage.getItem("userToken")
 
   if (token) {
     return <Navigate to={"/"} />;

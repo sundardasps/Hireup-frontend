@@ -3,13 +3,15 @@ import { useFormik } from "formik";
 import { companyLoginSchema } from "../../../Utils/yupValidations/yupCompanyvalidations";
 import { companyLogin } from "../../../Api/companyApi";
 import toast, { Toaster } from "react-hot-toast";
-
+import {useDispatch} from 'react-redux'
+import { setCompanyDetails } from "../../../Redux/storeSlices/companyslice";
 const initialvalue = {
   email: "",
   password: "",
 };
 
 function CompanyLogin() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const { handleBlur, handleChange, handleSubmit, errors, touched, values } =
@@ -19,8 +21,14 @@ function CompanyLogin() {
       onSubmit: async (value) => {
         const response = await companyLogin(value);
         if (response.data.loginSuccess) {
+          console.log(response.data.loginData.companyName,response.data.loginData.email,response.data.loginData.role);
+          dispatch(setCompanyDetails({
+            companyName:response.data.loginData.companyName,
+            email:response.data.loginData.email,
+            role:response.data.loginData.role 
+          }))  
           localStorage.setItem("companyToken",response.data.jwtToken)
-          navigate('/company')
+          navigate('/company/home')
         } else {
           toast.error(response.data.message);
         }

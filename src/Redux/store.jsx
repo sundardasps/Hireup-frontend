@@ -3,6 +3,7 @@ import storage from 'redux-persist/lib/storage'
 import { persistStore } from 'redux-persist'
 import { configureStore } from '@reduxjs/toolkit'
 import  userReducer  from './storeSlices/userSlice'
+import  companyReducer from './storeSlices/companyslice'
 
 const persistConfig = {
     key:'root',
@@ -10,11 +11,14 @@ const persistConfig = {
 };
 
 
-const Persisted = persistReducer(persistConfig,userReducer);
+const userPersisted = persistReducer(persistConfig,userReducer);
+const companyPersisted = persistReducer(persistConfig,companyReducer);
+
 
 const Store = configureStore({
     reducer:{
-        user:Persisted
+        user:userPersisted,
+        company:companyPersisted,
     }
 })
 

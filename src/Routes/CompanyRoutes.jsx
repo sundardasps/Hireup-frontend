@@ -3,24 +3,30 @@ import CompanyRegister from '../Pages/companyPages/companyRegisterPage/CompanyRe
 import CompanyLayout from '../Components/companyComponents/companyLayout/CompanyLayout'
 import CompanyLogin from '../Components/companyComponents/companyLoginComponent/CompanyLogin'
 import CompanyVarification from '../Components/companyComponents/companyLoginComponent/CompanyVarification'
-// import { useSelector } from "react-redux";
-// import { useEffect, useState } from 'react'
+import CompanyHomePage from '../Pages/companyPages/companyHomePage/CompanyHomePage'
+import CompanyPublic from '../Utils/protected/CompanyPublic'
+import LandingPage from '../Pages/commonPages/LandingPage'
+import { useSelector } from "react-redux";
+import { useEffect, useState } from 'react'
 function CompanyRoutes() {
 
-  // const [user, setUser] = useState("");
-  // const userStore = useSelector((state) => state.company);
-  // useEffect(() => {
-  //   setUser(userStore.role);
-  // },[userStore.role] );
+  const [company, setCompany] = useState("");
+  const userStore = useSelector((state) => state.company);
+  useEffect(() => {
+    setCompany(userStore.role);
+  },[userStore.role] );
 
   return (
     <div>
       <Routes>
+        
+         <Route path='/companyRegister' element={<CompanyPublic><CompanyRegister/></CompanyPublic>}/>
+         <Route path="/:companyId/varification/:token" element={<CompanyPublic><CompanyVarification/></CompanyPublic>}/>
+         <Route path='/login' element={<CompanyPublic><CompanyLogin/></CompanyPublic>}/>
+        
+        
          <Route path='/'  element={<CompanyLayout/>} >
-         <Route path='/companyRegister' element={<CompanyRegister/>}/>
-         <Route path="/:companyId/varification/:token" element={<CompanyVarification/>}/>
-         <Route path='/login' element={<CompanyLogin/>}/>
-         <Route path='/home' element={<CompanyLogin/>}/>
+         <Route path='/home' element={company?<CompanyHomePage/>:<LandingPage/>}/>
          </Route>
       </Routes>
       
