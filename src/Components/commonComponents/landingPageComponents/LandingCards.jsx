@@ -2,7 +2,6 @@ import { Card, CardHeader, CardBody } from "@material-tailwind/react";
 // import { TypeAnimation } from 'react-type-animation';
 import { useNavigate } from "react-router-dom";
 
-
 function LandingCards() {
   const navigate = useNavigate();
   return (
@@ -18,8 +17,6 @@ function LandingCards() {
              wrapper="h2"
              repeat={Infinity}
             /> */}
-
-           
           </h2>
           <p className="mt-4 text-lg leading-8 text-gray-500 ">
             Connecting Opportunity Seekers with Opportunity Creators Where
@@ -30,9 +27,9 @@ function LandingCards() {
           </p>
         </div>
         {/* Company selection div */}
-        <Card 
+        <Card
           onClick={() => {
-            navigate("/company");
+            navigate("/company/companyRegister");
           }}
           shadow={false}
           className="animated-image relative md:h-[20rem] md:max-w-[20rem] mt-4  grid h-[23rem] w-full max-w-[23rem] items-end justify-center  p-10 overflow-hidden shadow-2xl border  inline-flex border-blue-600 border hover:scale-105 duration-500 "
@@ -123,7 +120,6 @@ function LandingCards() {
             }
           }
           `}
-
         </style>
       </div>
     </>

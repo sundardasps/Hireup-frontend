@@ -1,64 +1,52 @@
-import { useNavigate } from "react-router-dom";
-import { companySignUpSchema } from "../../../Utils/yupValidations/yupCompanyvalidations";
+import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
-import { companySingup } from "../../../Api/companyApi.js";
+import { userVarifySchema } from "../../../Utils/yupValidations/yupUserValidations";
 import toast, { Toaster } from "react-hot-toast";
+import { Button } from "@material-tailwind/react";
+import { companyVarification } from "../../../Api/companyApi";
 
-const initialValue = {
-  companyName: "",
-  number: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
-function CompanyRegister() {
-  const navigate = useNavigate();
+function CompanyVarification() {
+  const { companyId, token } = useParams();
+  const navigate =  useNavigate()
+  const initialValue = {
+    email: "",
 
-  const { handleChange, handleBlur, handleSubmit, errors, touched, values } =
+  };
+
+  const { handleBlur, handleChange, handleSubmit, errors, touched, values } =
     useFormik({
       initialValues: initialValue,
-      validationSchema: companySignUpSchema,
-      onSubmit: async (value) => {
-        const response = await companySingup(value);
-        if (response.data.created) {
-          toast.success(response.data.message, { duration: 10000 });
-          setTimeout(function () {
-            window.location.reload();
-          }, 5000);
+      validationSchema: userVarifySchema,
+      onSubmit: async (values) => {
+        const response = await companyVarification({companyId,token,values});
+       
+        if (response.data.varification) {
+              navigate('/company/login')
         } else {
           toast.error(response.data.message);
         }
       },
     });
+
   return (
     <div>
-      <div className=" flex flex-col items-center justify-between pt-0 pr-2 sm:pr-5 pb-0 pl-2 sm:pl-5 mt-10 mx-auto max-w-screen-xl xl:px-5 lg:flex-row">
+      <div className=" flex flex-col items-center justify-between pt-0 pr-2 sm:pr-5 pb-0 pl-2 sm:pl-5 mt-0 mx-auto max-w-screen-xl xl:px-5 lg:flex-row">
         <div className="flex flex-col items-center w-full pr-2 sm:pr-5  pl-2 sm:pl-5 lg:flex-row">
+          <div className="w-full bg-cover relative max-w-md lg:max-w-2xl lg:w-7/12">
+            <div className="flex flex-col items-center justify-center w-full h-full relative lg:pr-2 sm:pr-5">
+              <img
+                src="/public/6876640.jpg"
+                className="w-full h-auto lg:h-full max-w-full"
+              />
+            </div>
+          </div>
           <div className="w-full mt-5 sm:mt-20 mr-0 mb-0 ml-0 relative z-10 max-w-2xl lg:mt-0 lg:w-5/12">
             <form action="" onSubmit={handleSubmit}>
               <div className="flex flex-col items-start justify-start pt-5 sm:pt-10 pr-2 sm:pr-5 pb-5 sm:pb-10 pl-2 sm:pl-5 bg-white shadow-2xl rounded-xl relative z-10">
                 <p className="w-full text-2xl sm:text-4xl font-medium text-center leading-snug font-serif">
-                  Sign up for Company
+                 Email varification
                 </p>
                 <div className="w-full mt-3 sm:mt-6 mr-0 mb-0 ml-0 relative space-y-4 sm:space-y-8">
-                  <div className="relative">
-                    <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
-                      Companyname
-                    </p>
-                    <input
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.companyName}
-                      name="companyName"
-                      type="text"
-                      className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
-                    />
-                    {errors.companyName && touched.companyName && (
-                      <div className="font-light  text-red-500">
-                        {errors.companyName}
-                      </div>
-                    )}
-                  </div>
                   <div className="relative">
                     <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
                       Email
@@ -72,91 +60,24 @@ function CompanyRegister() {
                       className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
                     />
                     {errors.email && touched.email && (
-                      <div className="font-light  text-red-500">
-                        {errors.email}
-                      </div>
+                      <div className="text-2 text-red-500">{errors.email}</div>
                     )}
                   </div>
                   <div className="relative">
-                    <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
-                      Mobile number
-                    </p>
-                    <input
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.number}
-                      name="number"
-                      type="number"
-                      className="border  placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
-                    />
-                    {errors.number && touched.number && (
-                      <div className="font-light  text-red-500">
-                        {errors.number}
-                      </div>
-                    )}
-                  </div>
-                  <div className="relative">
-                    <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
-                      Password
-                    </p>
-                    <input
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.password}
-                      type="password"
-                      name="password"
-                      className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
-                    />
-                    {errors.password && touched.password && (
-                      <div className="font-light  text-red-500">
-                        {errors.password}
-                      </div>
-                    )}
-                  </div>
-                  <div className="relative">
-                    <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
-                      Confirm Password
-                    </p>
-                    <input
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.confirmPassword}
-                      type="password"
-                      name="confirmPassword"
-                      className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
-                    />
-                    {errors.confirmPassword && touched.companyName && (
-                      <div className="font-light  text-red-500">
-                        {errors.confirmPassword}
-                      </div>
-                    )}
-                  </div>
-                  <div className="relative">
-                    <button
+                    <Button
                       type="submit"
-                      className="w-full inline-block pt-2 pr-3 pb-2 pl-3 text-base sm:text-xl font-medium text-center text-white bg-black rounded-lg transition duration-200 hover:bg-blue-600 ease"
+                      className="w-full inline-block pt-2 pr-3 pb-2 pl-3 text-base sm:text-xl font-medium text-center text-white bg-black rounded-lg transition duration-200 hover:bg-blue-700 ease"
                     >
-                      Submit
-                    </button>
+                      Varify
+                    </Button>
                   </div>
                 </div>
-                <p className="mt-4 block text-center font-sans text-base font-normal leading-relaxed text-gray-700 ">
-                  Already have an account? {}
-                  <a
-                    className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
-                    onClick={() => {
-                      navigate("/company/login");
-                    }}
-                  >
-                    Login
-                  </a>
-                </p>
               </div>
             </form>
             <svg
               viewBox="0 0 91 91"
-              className="absolute top-0 left-0 z-0 w-32 h-32 -mt-12 -ml-12 text-black-300
-              fill-current"
+              className="absolute top-0 left-0 z-0 w-32 h-32 -mt-12 -ml-12 text-blue-300
+            fill-current"
             >
               <g stroke="none" strokeWidth="1" fillRule="evenodd">
                 <g fillRule="nonzero">
@@ -247,8 +168,8 @@ function CompanyRegister() {
             </svg>
             <svg
               viewBox="0 0 91 91"
-              className="absolute bottom-0 right-0 z-0 w-32 h-32 -mb-12 -mr-12 text-blue-500
-              fill-current"
+              className="absolute bottom-0 right-0 z-0 w-32 h-32 -mb-12 -mr-12 text-black-500
+            fill-current"
             >
               <g stroke="none" strokeWidth="1" fillRule="evenodd">
                 <g fillRule="nonzero">
@@ -338,19 +259,11 @@ function CompanyRegister() {
               </g>
             </svg>
           </div>
-          <div className="w-full bg-cover relative max-w-md lg:max-w-2xl lg:w-7/12">
-            <div className="flex flex-col items-center justify-center w-full h-full relative lg:pr-2 sm:pr-5">
-              <img
-                src="/public/hiring register.jpg"
-                className="w-full h-auto lg:h-full max-w-full"
-              />
-            </div>
-          </div>
-          <Toaster />
+          <Toaster/>
         </div>
       </div>
     </div>
   );
 }
 
-export default CompanyRegister;
+export default CompanyVarification;

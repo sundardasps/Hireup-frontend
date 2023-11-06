@@ -1,8 +1,10 @@
 import { Navigate } from "react-router-dom";
 
+
 function userPublic(props) {
  const token = localStorage.getItem("token")
- console.log((token));
+
+
   if (token) {
     return <Navigate to={"/"} />;
   } else {

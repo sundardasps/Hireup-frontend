@@ -1,147 +1,159 @@
 import { useFormik } from "formik";
 import { userSignUpSchema } from "../../../Utils/yupValidations/yupUserValidations";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { userSignIn } from "../../../Api/userApi";
 import { Button } from "@material-tailwind/react";
-import toast, { Toaster } from 'react-hot-toast';
-
+import toast, { Toaster } from "react-hot-toast";
 
 function UserRegister() {
+  const navigate = useNavigate();
 
- 
-  const navigate = useNavigate()
-     
   const initialValue = {
     userName: "",
     number: "",
     email: "",
     password: "",
     confirmPassword: "",
-    
-  }
+  };
 
-
-const {handleSubmit,handleChange,handleBlur,errors,touched,values} = useFormik({
-     initialValues:initialValue,
-     validationSchema:userSignUpSchema,
-     onSubmit: async (values) =>{
-       const response = await userSignIn(values)
-       if(response.data.created){
-        toast.success(response.data.message,{ duration: 10000,})
-        setTimeout(function () {
-          window.location.reload();
-        }, 5000);
-       }else{
-        toast.error(response.data.message)
-       }
-       
-     }
-     
-    
-  })
-  
+  const { handleSubmit, handleChange, handleBlur, errors, touched, values } =
+    useFormik({
+      initialValues: initialValue,
+      validationSchema: userSignUpSchema,
+      onSubmit: async (values) => {
+        const response = await userSignIn(values);
+        if (response.data.created) {
+          toast.success(response.data.message, { duration: 10000 });
+          setTimeout(function () {
+            window.location.reload();
+          }, 5000);
+        } else {
+          toast.error(response.data.message);
+        }
+      },
+    });
 
   return (
     <div className=" flex flex-col items-center justify-between pt-0 pr-2 sm:pr-5 pb-0 pl-2 sm:pl-5 mt-10 mx-auto max-w-screen-xl xl:px-5 lg:flex-row">
       <div className="flex flex-col items-center w-full pr-2 sm:pr-5  pl-2 sm:pl-5 lg:flex-row">
         <div className="w-full mt-5 sm:mt-20 mr-0 mb-0 ml-0 relative z-10 max-w-2xl lg:mt-0 lg:w-5/12">
-        <form action="" onSubmit={handleSubmit} >
-          <div className="flex flex-col items-start justify-start pt-5 sm:pt-10 pr-2 sm:pr-5 pb-5 sm:pb-10 pl-2 sm:pl-5 bg-white shadow-2xl rounded-xl relative z-10">
-            <p className="w-full text-2xl sm:text-4xl font-medium text-center leading-snug font-serif">
-              Sign up for an account
-            </p>
-            <div className="w-full mt-3 sm:mt-6 mr-0 mb-0 ml-0 relative space-y-4 sm:space-y-8">
-              <div className="relative">
-                <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
-                  Username
-                </p>
-                <input
-                  
-                  onChange={handleChange}
-                  value={values.userName}
-                  onBlur={handleBlur}
-                  name="userName"
-                  type="text"
-                  className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
-                />
-                {errors.userName && touched.userName && <span className="font-light  text-red-500">{errors.userName}</span>}
+          <form action="" onSubmit={handleSubmit}>
+            <div className="flex flex-col items-start justify-start pt-5 sm:pt-10 pr-2 sm:pr-5 pb-5 sm:pb-10 pl-2 sm:pl-5 bg-white shadow-2xl rounded-xl relative z-10">
+              <p className="w-full text-2xl sm:text-4xl font-medium text-center leading-snug font-serif">
+                Sign up for an account
+              </p>
+              <div className="w-full mt-3 sm:mt-6 mr-0 mb-0 ml-0 relative space-y-4 sm:space-y-8">
+                <div className="relative">
+                  <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
+                    Username
+                  </p>
+                  <input
+                    onChange={handleChange}
+                    value={values.userName}
+                    onBlur={handleBlur}
+                    name="userName"
+                    type="text"
+                    className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
+                  />
+                  {errors.userName && touched.userName && (
+                    <span className="font-light  text-red-500">
+                      {errors.userName}
+                    </span>
+                  )}
+                </div>
+                <div className="relative">
+                  <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
+                    Email
+                  </p>
+                  <input
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                    name="email"
+                    type="text"
+                    className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
+                  />
+                  {errors.email && touched.email && (
+                    <div className="font-light text-red-500">
+                      {errors.email}
+                    </div>
+                  )}
+                </div>
+                <div className="relative">
+                  <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
+                    Mobile number
+                  </p>
+                  <input
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.number}
+                    name="number"
+                    type="number"
+                    className="border  placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
+                  />
+                  {errors.number && touched.number && (
+                    <div className="font-light  text-red-500">
+                      {errors.number}
+                    </div>
+                  )}
+                </div>
+                <div className="relative">
+                  <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
+                    Password
+                  </p>
+                  <input
+                    type="password"
+                    name="password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
+                  />
+                  {errors.password && touched.password && (
+                    <div className="font-light  text-red-500">
+                      {errors.password}
+                    </div>
+                  )}
+                </div>
+                <div className="relative">
+                  <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
+                    Confirm Password
+                  </p>
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    onChange={handleChange}
+                    value={values.confirmPassword}
+                    onBlur={handleBlur}
+                    className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
+                  />
+                  {errors.confirmPassword && touched.confirmPassword && (
+                    <div className="font-light  text-red-500">
+                      {errors.confirmPassword}
+                    </div>
+                  )}
+                </div>
+                <div className="relative">
+                  <Button
+                    type="submit"
+                    className="w-full inline-block pt-2 pr-3 pb-2 pl-3 text-base sm:text-xl font-medium text-center text-white bg-black rounded-lg transition duration-200 hover:bg-blue-700 ease"
+                  >
+                    Submit
+                  </Button>
+                </div>
               </div>
-              <div className="relative">
-                <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
-                  Email
-                </p>
-                <input
-                  
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                  name="email"
-                  type="text"
-                  className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
-                />
-                {errors.email && touched.email && <div className="font-light text-red-500">{errors.email}</div>}
-              </div>
-              <div className="relative">
-                <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
-                  Mobile number
-                </p>
-                <input
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.number}
-                  name="number"
-                  type='number'
-                  
-                  className="border  placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
-                />
-                {errors.number && touched.number && <div className="font-light  text-red-500">{errors.number}</div>}
-              </div>
-              <div className="relative">
-                <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
-                  Password
-                </p>
-                <input
-                  type="password"
-                  name="password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
-                />
-                {errors.password && touched.password && <div className="font-light  text-red-500">{errors.password}</div>}
-              </div>
-              <div className="relative">
-                <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
-                  Confirm Password
-                </p>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  onChange={handleChange}
-                  value={values.confirmPassword}
-                  onBlur={handleBlur}
-                  className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
-                />
-                {errors.confirmPassword && touched.confirmPassword && <div className="font-light  text-red-500">{errors.confirmPassword}</div>}
-              </div>
-              <div className="relative">
-                <Button type='submit' className="w-full inline-block pt-2 pr-3 pb-2 pl-3 text-base sm:text-xl font-medium text-center text-white bg-black rounded-lg transition duration-200 hover:bg-blue-700 ease">
-                  Submit
-                </Button>
-              </div>
+              <p className="mt-4 block text-center font-sans text-base font-normal leading-relaxed text-gray-700 ">
+                Already have an account? {}
+                <a
+                  className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  Log In
+                </a>
+              </p>
             </div>
-            <p className="mt-4 block text-center font-sans text-base font-normal leading-relaxed text-gray-700 ">
-      Already have an account? {}
-      <a
-        className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
-        onClick={()=>{
-             navigate('/login')
-        }}
-      >
-        Log In
-      </a>
-    </p>
-          </div>
-        </form>
+          </form>
           <svg
             viewBox="0 0 91 91"
             className="absolute top-0 left-0 z-0 w-32 h-32 -mt-12 -ml-12 text-black-300
@@ -336,9 +348,8 @@ const {handleSubmit,handleChange,handleBlur,errors,touched,values} = useFormik({
           </div>
         </div>
       </div>
-      <Toaster/>
+      <Toaster />
     </div>
-    
   );
 }
 

@@ -6,31 +6,63 @@ import UserLayOut from "../Components/userComponents/userLayout/userLayOut";
 import UserVarification from "../Components/userComponents/userLoginComponents/UserVarification";
 import UserHome from "../Pages/userPages/userHomePage/Home";
 import UserPublic from "../Utils/protected/UserPublic.jsx";
-import {useSelector}  from 'react-redux'
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import UserResetPass from "../Components/userComponents/userLoginComponents/UserResetPass.jsx";
 import UserForgotPass from "../Components/userComponents/userLoginComponents/UserForgotPass.jsx";
 
-
 function UserRoutes() {
-  
-  const [user,setUser]=useState("")
-  const userStore = useSelector(state => state.user)
-  console.log(userStore.role);
- useEffect(()=>{
-    setUser(userStore.role)
- })
-  
+  const [user, setUser] = useState("");
+  const userStore = useSelector((state) => state.user);
+  useEffect(() => {
+    setUser(userStore.role);
+  },[userStore.role] );
+
   return (
     <Routes>
-        <Route path="/register" element={<UserPublic><UserRegister /></UserPublic>} />
-        <Route path="/login" element={<UserPublic><UserLogin /></UserPublic>} />
-        <Route path="/:userId/varification/:token" element={<UserPublic><UserVarification /></UserPublic>}/>
-        <Route path="/:userId/resetPassword/:token" element={<UserPublic><UserResetPass /></UserPublic>}/>
-        <Route path="/forgotePassword" element={<UserPublic><UserForgotPass/></UserPublic>}/>
+      <Route
+        path="/register"
+        element={
+          <UserPublic>
+            <UserRegister />
+          </UserPublic>
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          <UserPublic>
+            <UserLogin />
+          </UserPublic>
+        }
+      />
+      <Route
+        path="/:userId/varification/:token"
+        element={
+          <UserPublic>
+            <UserVarification />
+          </UserPublic>
+        }
+      />
+      <Route
+        path="/:userId/resetPassword/:token"
+        element={
+          <UserPublic>
+            <UserResetPass />
+          </UserPublic>
+        }
+      />
+      <Route
+        path="/forgotePassword"
+        element={
+          <UserPublic>
+            <UserForgotPass />
+          </UserPublic>
+        }
+      />
 
-        <Route path="/" element={<UserLayOut></UserLayOut>}>
-        <Route path="/" element={user?<UserHome />:<LandingPage />} />
+      <Route path="/" element={<UserLayOut></UserLayOut>}>
+        <Route path="/" element={user ? <UserHome /> : <LandingPage />} />
       </Route>
     </Routes>
   );

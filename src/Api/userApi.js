@@ -1,4 +1,3 @@
-
 import { userInterseption } from "../Utils/interceptors/userRequest";
 
 const userCheck = userInterseption;
@@ -17,38 +16,33 @@ export async function userLogin(userData) {
     const response = await userCheck.post("/login", userData);
     return response;
   } catch (error) {
-    alert(error.message);
+    console.log(error);
   }
 }
 
 export async function userVarification(userData) {
   try {
-    const response = await userCheck.post("/varification",userData);
+    const response = await userCheck.post("/varification", userData);
     return response;
-  } catch (error) {
-    alert(error);
-  }
-}
-
-export async function userForgotPass(email){
-
-  try {
-    const response = await userCheck.post('/forgetPassword',email)
-    console.log(email);
-    return response
   } catch (error) {
     console.log(error);
   }
-
 }
 
-
-export async function userResetPass(userData){
-
+export async function userForgotPass(email) {
   try {
-    const response = await userCheck.post('/resetPassword',userData)
-    return response
+    const response = await userCheck.post("/forgetPassword", email);
+    return response;
   } catch (error) {
-      console.log(error);
+    console.log(error);
+  }
+}
+
+export async function userResetPass(userData) {
+  try {
+    const response = await userCheck.post("/resetPassword", userData);
+    return response;
+  } catch (error) {
+    console.log(error);
   }
 }

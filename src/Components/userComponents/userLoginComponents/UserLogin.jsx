@@ -20,21 +20,18 @@ function UserLogin() {
     useFormik({
       initialValues: initialValue,
       validationSchema: userLogInSchema,
-      onSubmit: async (values) => {
-        console.log(values);
-        const response = await userLogin(values);
-        console.log(response);
+      onSubmit: async (value) => {
+        const response = await userLogin(value);
         if (response.data.loginSuccess) {
-      
-          console.log(response.data.loginData.userName,"gfdjndkgfndgjkfdnkgdkgkgkgkdfhk")
+          
           dispatch(
             setUserDetails({
               userName:response.data.loginData.userName,
               email:response.data.loginData.email,
               role:response.data.loginData.role,
             })
-          );
-          localStorage.setItem("token", response.data.jwtToken);
+            );
+          localStorage.setItem("token",response.data.jwtToken);
           navigate('/')
         } else {
           toast.error(response.data.message);
@@ -312,7 +309,7 @@ function UserLogin() {
           </svg>
         </div>
       </div>
-      <Toaster />
+      <Toaster/>
     </div>
   );
 }
