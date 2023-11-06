@@ -6,6 +6,9 @@ import CompanyVarification from '../Components/companyComponents/companyLoginCom
 import CompanyHomePage from '../Pages/companyPages/companyHomePage/CompanyHomePage'
 import CompanyPublic from '../Utils/protected/CompanyPublic'
 import LandingPage from '../Pages/commonPages/LandingPage'
+import CompanyForgotPass from '../Components/companyComponents/companyLoginComponent/CompanyForgotPass'
+import CompanyResetPassword from '../Components/companyComponents/companyLoginComponent/CompanyResetPass'
+
 import { useSelector } from "react-redux";
 import { useEffect, useState } from 'react'
 function CompanyRoutes() {
@@ -22,8 +25,10 @@ function CompanyRoutes() {
         
          <Route path='/companyRegister' element={<CompanyPublic><CompanyRegister/></CompanyPublic>}/>
          <Route path="/:companyId/varification/:token" element={<CompanyPublic><CompanyVarification/></CompanyPublic>}/>
+         <Route path="/:companyId/resetPassword/:token" element={<CompanyPublic><CompanyResetPassword/></CompanyPublic>}/>
          <Route path='/login' element={<CompanyPublic><CompanyLogin/></CompanyPublic>}/>
-        
+         <Route path='/forgotePassword' element={<CompanyPublic><CompanyForgotPass/></CompanyPublic>}/>
+
         
          <Route path='/'  element={<CompanyLayout/>} >
          <Route path='/home' element={company?<CompanyHomePage/>:<LandingPage/>}/>

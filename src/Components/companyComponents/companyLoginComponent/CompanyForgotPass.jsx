@@ -1,27 +1,26 @@
-import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
-import { userResetPasswordSchema } from "../../../Utils/yupValidations/yupUserValidations";
-
 import toast, { Toaster } from "react-hot-toast";
+import { userVarifySchema } from "../../../Utils/yupValidations/yupUserValidations";
 import { Button } from "@material-tailwind/react";
-import { userResetPass } from "../../../Api/userApi";
+import { companyForgotPassword } from "../../../Api/companyApi";
 
-function UserResetPass() {
-  const { userId, token } = useParams();
-  const navigate = useNavigate();
+function CompanyForgotPass() {
   const initialValue = {
-    password: "",
-    confirmPassword: "",
+    email: "",
   };
 
   const { handleBlur, handleChange, handleSubmit, errors, touched, values } =
     useFormik({
       initialValues: initialValue,
-      validationSchema: userResetPasswordSchema,
+      validationSchema: userVarifySchema,
       onSubmit: async (values) => {
-        const response = await userResetPass({ userId, token, values });
-        if (response.data.reseted) {
-          navigate("/login");
+        const response = await companyForgotPassword(values);
+        console.log(response);
+        if (response.data.created) {
+          toast.success(response.data.message);
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
         } else {
           toast.error(response.data.message);
         }
@@ -44,45 +43,25 @@ function UserResetPass() {
             <form action="" onSubmit={handleSubmit}>
               <div className="flex flex-col items-start justify-start pt-5 sm:pt-10 pr-2 sm:pr-5 pb-5 sm:pb-10 pl-2 sm:pl-5 bg-white shadow-2xl rounded-xl relative z-10">
                 <p className="w-full text-2xl sm:text-4xl font-medium text-center leading-snug font-serif">
-                  Enter new password
+                  Enter your email
                 </p>
                 <div className="w-full mt-3 sm:mt-6 mr-0 mb-0 ml-0 relative space-y-4 sm:space-y-8">
                   <div className="relative">
                     <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
-                      Password
+                      Email
                     </p>
                     <input
-                      type="password"
-                      name="password"
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      value={values.email}
+                      name="email"
+                      type="text"
                       className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
                     />
-                    {errors.password && touched.password && (
-                      <div className="font-light  text-red-500">
-                        {errors.password}
-                      </div>
+                    {errors.email && touched.email && (
+                      <div className="text-2 text-red-500">{errors.email}</div>
                     )}
                   </div>
-                  <div className="relative">
-                    <p className="bg-white pt-0 pr-2 pb-0 pl-2 -mt-2 sm:-mt-3 mr-0 mb-0 ml-2 font-medium text-gray-600 absolute">
-                      Confirm Password
-                    </p>
-                    <input
-                      type="password"
-                      name="confirmPassword"
-                      onChange={handleChange}
-                      value={values.confirmPassword}
-                      onBlur={handleBlur}
-                      className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
-                    />
-                    {errors.confirmPassword && touched.confirmPassword && (
-                      <div className="font-light  text-red-500">
-                        {errors.confirmPassword}
-                      </div>
-                    )}
-                  </div>
-
                   <div className="relative">
                     <Button
                       type="submit"
@@ -97,7 +76,7 @@ function UserResetPass() {
             <svg
               viewBox="0 0 91 91"
               className="absolute top-0 left-0 z-0 w-32 h-32 -mt-12 -ml-12 text-blue-300
-              fill-current"
+          fill-current"
             >
               <g stroke="none" strokeWidth="1" fillRule="evenodd">
                 <g fillRule="nonzero">
@@ -189,7 +168,7 @@ function UserResetPass() {
             <svg
               viewBox="0 0 91 91"
               className="absolute bottom-0 right-0 z-0 w-32 h-32 -mb-12 -mr-12 text-black-500
-              fill-current"
+          fill-current"
             >
               <g stroke="none" strokeWidth="1" fillRule="evenodd">
                 <g fillRule="nonzero">
@@ -286,4 +265,4 @@ function UserResetPass() {
   );
 }
 
-export default UserResetPass;
+export default CompanyForgotPass;

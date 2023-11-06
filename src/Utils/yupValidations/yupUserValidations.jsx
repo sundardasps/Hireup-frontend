@@ -57,6 +57,7 @@ export const userVarifySchema = Yup.object().shape({
     .trim(),
 });
 
+
 export const userResetPasswordSchema = Yup.object().shape({
   password: Yup.string()
     .required("This field is required")

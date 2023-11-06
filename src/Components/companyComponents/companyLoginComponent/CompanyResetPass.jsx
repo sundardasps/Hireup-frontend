@@ -1,13 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import { userResetPasswordSchema } from "../../../Utils/yupValidations/yupUserValidations";
-
 import toast, { Toaster } from "react-hot-toast";
 import { Button } from "@material-tailwind/react";
-import { userResetPass } from "../../../Api/userApi";
+import { companyResetPassword } from "../../../Api/companyApi";
 
-function UserResetPass() {
-  const { userId, token } = useParams();
+function CompanyResetPass() {
+  const { companyId, token } = useParams();
   const navigate = useNavigate();
   const initialValue = {
     password: "",
@@ -19,9 +18,14 @@ function UserResetPass() {
       initialValues: initialValue,
       validationSchema: userResetPasswordSchema,
       onSubmit: async (values) => {
-        const response = await userResetPass({ userId, token, values });
+        console.log(values);
+        const response = await companyResetPassword({
+          companyId,
+          token,
+          values,
+        });
         if (response.data.reseted) {
-          navigate("/login");
+          navigate("/company/login");
         } else {
           toast.error(response.data.message);
         }
@@ -56,6 +60,7 @@ function UserResetPass() {
                       name="password"
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      value={values.password}
                       className="border placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
                     />
                     {errors.password && touched.password && (
@@ -286,4 +291,4 @@ function UserResetPass() {
   );
 }
 
-export default UserResetPass;
+export default CompanyResetPass;

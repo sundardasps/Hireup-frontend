@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { companyLoginSchema } from "../../../Utils/yupValidations/yupCompanyvalidations";
 import { companyLogin } from "../../../Api/companyApi";
 import toast, { Toaster } from "react-hot-toast";
-import {useDispatch} from 'react-redux'
+import { useDispatch } from "react-redux";
 import { setCompanyDetails } from "../../../Redux/storeSlices/companyslice";
 const initialvalue = {
   email: "",
@@ -11,8 +11,8 @@ const initialvalue = {
 };
 
 function CompanyLogin() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { handleBlur, handleChange, handleSubmit, errors, touched, values } =
     useFormik({
@@ -21,14 +21,20 @@ function CompanyLogin() {
       onSubmit: async (value) => {
         const response = await companyLogin(value);
         if (response.data.loginSuccess) {
-          console.log(response.data.loginData.companyName,response.data.loginData.email,response.data.loginData.role);
-          dispatch(setCompanyDetails({
-            companyName:response.data.loginData.companyName,
-            email:response.data.loginData.email,
-            role:response.data.loginData.role 
-          }))  
-          localStorage.setItem("companyToken",response.data.jwtToken)
-          navigate('/company/home')
+          console.log(
+            response.data.loginData.companyName,
+            response.data.loginData.email,
+            response.data.loginData.role
+          );
+          dispatch(
+            setCompanyDetails({
+              companyName: response.data.loginData.companyName,
+              email: response.data.loginData.email,
+              role: response.data.loginData.role,
+            })
+          );
+          localStorage.setItem("companyToken", response.data.jwtToken);
+          navigate("/company/home");
         } else {
           toast.error(response.data.message);
         }
@@ -90,6 +96,17 @@ function CompanyLogin() {
                       </div>
                     )}
                   </div>
+                  <p className="mt-4 block text-center font-sans text-base font-normal leading-relaxed text-gray-700 ">
+                    Forgote password :{}
+                    <a
+                      className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
+                      onClick={() => {
+                        navigate("/company/forgotePassword");
+                      }}
+                    >
+                      Click here
+                    </a>
+                  </p>
                   <div className="relative">
                     <button
                       type="submit"
