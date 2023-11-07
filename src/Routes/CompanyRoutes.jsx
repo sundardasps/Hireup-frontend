@@ -11,6 +11,7 @@ import CompanyResetPassword from '../Components/companyComponents/companyLoginCo
 
 import { useSelector } from "react-redux";
 import { useEffect, useState } from 'react'
+import CompanyProtected from '../Utils/protected/CompanyProtected'
 function CompanyRoutes() {
 
   const [company, setCompany] = useState("");
@@ -30,8 +31,10 @@ function CompanyRoutes() {
          <Route path='/forgotePassword' element={<CompanyPublic><CompanyForgotPass/></CompanyPublic>}/>
 
         
-         <Route path='/'  element={<CompanyLayout/>} >
-         <Route path='/home' element={company?<CompanyHomePage/>:<LandingPage/>}/>
+         <Route element={<CompanyProtected/>}>
+         <Route element={<CompanyLayout/>} >
+         <Route path='/' element={company?<CompanyHomePage/>:<LandingPage/>}/>
+         </Route>
          </Route>
       </Routes>
       
