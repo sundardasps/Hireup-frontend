@@ -180,7 +180,7 @@ function UserNavbar() {
             ) : (
               <Menu>
                 <MenuHandler>
-                  <Button>Login</Button>
+                  <Button variant="outlined">Login</Button>
                 </MenuHandler>
                 <MenuList>
                   <hr className="my-2 border-blue-gray-50" />
