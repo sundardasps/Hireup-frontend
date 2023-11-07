@@ -1,3 +1,4 @@
+import { usersData } from "../../../Api/adminApi";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
@@ -16,6 +17,7 @@ import {
   IconButton,
   Tooltip,
 } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
  
 const TABS = [
   {
@@ -23,68 +25,39 @@ const TABS = [
     value: "all",
   },
   {
-    label: "Monitored",
-    value: "monitored",
-  },
-  {
-    label: "Unmonitored",
-    value: "unmonitored",
+    label: "Blocked",
+    value: "Blocked",
   },
 ];
  
-const TABLE_HEAD = ["Member", "Function", "Status", "Employed", ""];
+const TABLE_HEAD = ["Member", "Email", "Number", "Employed", ""];
  
-const TABLE_ROWS = [
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    online: true,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: false,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    online: false,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: true,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    online: false,
-    date: "04/10/21",
-  },
-];
+
  
 export function UserListComponent() {
+ const [userData , setUserData] = useState([])
+    useEffect(()=>{
+          const usersList = async ()=>{
+               try {
+                const response = await usersData()
+                console.log(response.data);
+                  if(response.data.status){
+                    setUserData(response.data.usersData)
+                  }else{
+                    console.log(response.data.message);
+                  }
+               } catch (error) {
+                 console.log(error);
+               }
+          }
+          usersList()
+    },[])
+
+
+
+
   return (
-    <Card className="h-full w-full m-5 border-2">
+    <Card className="h-full w-full border-2">
       <CardHeader floated={false} shadow={false} className="rounded-none">
         <div className="mb-8 flex items-center justify-between gap-8">
           <div>
@@ -94,14 +67,6 @@ export function UserListComponent() {
             <Typography color="gray" className="mt-1 font-normal">
               See information about all members
             </Typography>
-          </div>
-          <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-            <Button variant="outlined" size="sm">
-              view all
-            </Button>
-            <Button className="flex items-center gap-3" size="sm">
-              <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add member
-            </Button>
           </div>
         </div>
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
@@ -143,33 +108,33 @@ export function UserListComponent() {
             </tr>
           </thead>
           <tbody>
-            {TABLE_ROWS.map(
-              ({ img, name, email, job, org, online, date }, index) => {
-                const isLast = index === TABLE_ROWS.length - 1;
+            {userData.map(
+              ({ _id, userName, email,number }, index) => {
+                const isLast = index === userData.length - 1;
                 const classes = isLast
                   ? "p-4"
                   : "p-4 border-b border-blue-gray-50";
  
                 return (
-                  <tr key={name}>
+                  <tr key={_id}>
                     <td className={classes}>
                       <div className="flex items-center gap-3">
-                        <Avatar src={img} alt={name} size="sm" />
+                        <Avatar src={'/public/6876640.jpg'} alt={name} size="sm" />
                         <div className="flex flex-col">
                           <Typography
                             variant="small"
                             color="blue-gray"
                             className="font-normal"
                           >
-                            {name}
+                            {userName}
                           </Typography>
-                          <Typography
+                          {/* <Typography
                             variant="small"
                             color="blue-gray"
                             className="font-normal opacity-70"
                           >
                             {email}
-                          </Typography>
+                          </Typography> */}
                         </div>
                       </div>
                     </td>
@@ -180,18 +145,18 @@ export function UserListComponent() {
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {job}
+                          {email}
                         </Typography>
                         <Typography
                           variant="small"
                           color="blue-gray"
                           className="font-normal opacity-70"
                         >
-                          {org}
+                          {/* {org} */}
                         </Typography>
                       </div>
                     </td>
-                    <td className={classes}>
+                    {/* <td className={classes}>
                       <div className="w-max">
                         <Chip
                           variant="ghost"
@@ -200,14 +165,14 @@ export function UserListComponent() {
                           color={online ? "green" : "blue-gray"}
                         />
                       </div>
-                    </td>
+                    </td> */}
                     <td className={classes}>
                       <Typography
                         variant="small"
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {date}
+                        {number}
                       </Typography>
                     </td>
                     <td className={classes}>

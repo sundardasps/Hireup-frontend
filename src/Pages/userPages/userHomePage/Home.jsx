@@ -4,7 +4,7 @@ import { SideBarFilter } from '../../../Components/userComponents/userHomeCompon
 
 function Home() {
   return (
-    <div className="flex bg-blue-100 p-10 gap-10 ">
+    <div className="flex  bg-blue-100 p-10 gap-10 ">
       <SideBarFilter/>
        <JobCards/>
     </div>

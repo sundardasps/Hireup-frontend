@@ -39,12 +39,6 @@ export function SideBarFilter() {
   return (
     <div className="box-content">
     <Card className="h-[calc(100vh-2rem)] w-full  max-w-[20rem] p-4  shadow-xl shadow-blue-gray-900/5 ">
-      <div className="mb-2 flex items-center gap-4 p-4">
-        <img src="/img/logo-ct-dark.png" alt="brand" className="h-8 w-8" />
-        <Typography variant="h5" color="blue-gray">
-          Sidebar
-        </Typography>
-      </div>
       <div className="p-2">
         <Input icon={<MagnifyingGlassIcon className="h-5 w-5" />} label="Search" />
       </div>
@@ -58,7 +52,7 @@ export function SideBarFilter() {
             />
           }
         >
-          <ListItem className="p-0" selected={open === 1}>
+          {/* <ListItem className="p-0" selected={open === 1}>
             <AccordionHeader onClick={() => handleOpen(1)} className="border-b-0 p-3">
               <ListItemPrefix>
                 <PresentationChartBarIcon className="h-5 w-5" />
@@ -67,7 +61,7 @@ export function SideBarFilter() {
                 Dashboard
               </Typography>
             </AccordionHeader>
-          </ListItem>
+          </ListItem> */}
           <AccordionBody className="py-1">
             <List className="p-0">
               <ListItem>
@@ -100,7 +94,7 @@ export function SideBarFilter() {
             />
           }
         >
-          <ListItem className="p-0" selected={open === 2}>
+          {/* <ListItem className="p-0" selected={open === 2}>
             <AccordionHeader onClick={() => handleOpen(2)} className="border-b-0 p-3">
               <ListItemPrefix>
                 <ShoppingBagIcon className="h-5 w-5" />
@@ -109,7 +103,7 @@ export function SideBarFilter() {
                 E-Commerce
               </Typography>
             </AccordionHeader>
-          </ListItem>
+          </ListItem> */}
           <AccordionBody className="py-1">
             <List className="p-0">
               <ListItem>

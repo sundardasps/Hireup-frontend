@@ -10,3 +10,15 @@ export async function adminLogin(logindata) {
     console.log(error);
   }
 }
+
+
+export async function usersData(){
+
+  try {
+    const response = await adminCheck.get('/users')
+    return response
+  } catch (error) {
+    console.log(error);
+  }
+
+}
