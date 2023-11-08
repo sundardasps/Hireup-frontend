@@ -5,6 +5,11 @@ import { companyLogin } from "../../../Api/companyApi";
 import toast, { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { setCompanyDetails } from "../../../Redux/storeSlices/companyslice";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useEffect, useState } from "react";
+
+import axios from "axios";
+import { Button } from "@material-tailwind/react";
 const initialvalue = {
   email: "",
   password: "",
@@ -13,6 +18,58 @@ const initialvalue = {
 function CompanyLogin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [user, setUser] = useState([]);
+
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: () => toast.error("Goole login failed"),
+  });
+
+  {
+    /*  Google login field   */
+  }
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+           companyLogin({ email: res.data.email, password: res.data.id }).then(
+            (result) => {
+              if (result.data.loginSuccess) {
+                console.log(result);
+                dispatch(
+                  setCompanyDetails({
+                    companyName: result.data.loginData.companyName,
+                    email: result.data.loginData.email,
+                    role: result.data.loginData.role,
+                  })
+                );
+                localStorage.setItem("companyToken", result.data.jwtToken);
+                navigate("/company");
+              } else {
+                toast.error(result.data.message);
+              }
+            }
+          );
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user, dispatch, navigate]);
+
+
+
+
 
   const { handleBlur, handleChange, handleSubmit, errors, touched, values } =
     useFormik({
@@ -114,18 +171,36 @@ function CompanyLogin() {
                     >
                       Submit
                     </button>
-                    <p className="mt-4 block text-center font-sans text-base font-normal leading-relaxed text-gray-700 ">
-                    Not registered yet? {}
-                <a
-                  className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
-                  onClick={() => {
-                    navigate("/company/companyRegister");
-                  }}
-                >
-                  Sign In
-                </a>
-              </p>
-                  </div>
+                    <div className="flex justify-center mt-1">
+                <p className="mt-4 block text-center font-sans text-sm font-normal leading-relaxed text-gray-700 ">
+                  Not registered yet? {}
+                  <a
+                    className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
+                    onClick={() => {
+                      navigate("/company/companyRegister");
+                    }}
+                  >
+                    Sign In
+                  </a>
+                </p>
+                <div className="flex justify-center items-center">
+                  <Button
+                    onClick={login}
+                    size="sm"
+                    variant="text"
+                    color="blue-gray"
+                    className="flex items-center gap-1 m-2"
+                  >
+                    <img
+                      src="https://freesvg.org/img/1534129544.png"
+                      alt="metamask"
+                      className="h-6 w-6"
+                    />
+                    Continue with Google
+                  </Button>
+                </div>
+              </div>
+                </div>
                 </div>
               </div>
             </form>

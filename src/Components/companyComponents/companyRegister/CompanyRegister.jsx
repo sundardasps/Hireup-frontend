@@ -10,7 +10,6 @@ import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setUserDetails } from "../../../Redux/storeSlices/userSlice";
 import { Button } from "@material-tailwind/react";
 import { setCompanyDetails } from "../../../Redux/storeSlices/companyslice.jsx";
 
@@ -49,10 +48,6 @@ function CompanyRegister() {
         )
         .then((res) => {
           companyRegisterGoogle(res.data).then((result) => {
-            console.log(
-              result,
-              "======================================================"
-            );
             if (result.data.created) {
               alert();
               console.log(result);
@@ -73,6 +68,8 @@ function CompanyRegister() {
         .catch((err) => console.log(err));
     }
   }, [user, dispatch, navigate]);
+
+
 
   const { handleChange, handleBlur, handleSubmit, errors, touched, values } =
     useFormik({

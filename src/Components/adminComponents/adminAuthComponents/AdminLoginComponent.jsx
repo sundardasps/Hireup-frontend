@@ -4,9 +4,54 @@ import { useNavigate } from "react-router-dom";
 import { companyLoginSchema } from "../../../Utils/yupValidations/yupCompanyvalidations";
 import { adminLogin } from "../../../Api/adminApi";
 import toast, { Toaster } from "react-hot-toast";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Button } from "@material-tailwind/react";
+
 function AdminLoginComponent() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [user, setUser] = useState([]);
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: () => toast.error("Goole login failed"),
+  });
+
+  {
+    /*  Google login field   */
+  }
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          adminLogin({ email: res.data.email, password: res.data.id }).then(
+            (result) => {
+              if (result.data.loginSuccess) {
+                console.log(result);
+                localStorage.setItem("adminToken", result.data.jwtToken);
+                navigate("/admin");
+              } else {
+                toast.error(result.data.message);
+              }
+            }
+          );
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user, dispatch, navigate]);
 
   const { handleBlur, handleChange, handleSubmit, errors, touched, values } =
     useFormik({
@@ -15,7 +60,7 @@ function AdminLoginComponent() {
       onSubmit: async (value) => {
         const response = await adminLogin(value);
         if (response.data.loginSuccess) {
-          localStorage.setItem("adminToken",response.data.jwtToken);
+          localStorage.setItem("adminToken", response.data.jwtToken);
           navigate("/admin");
         } else {
           toast.error(response.data.message);
@@ -87,6 +132,22 @@ function AdminLoginComponent() {
                     >
                       Submit
                     </button>
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <Button
+                      onClick={login}
+                      size="sm"
+                      variant="text"
+                      color="blue-gray"
+                      className="flex items-center gap-1 m-2"
+                    >
+                      <img
+                        src="https://freesvg.org/img/1534129544.png"
+                        alt="metamask"
+                        className="h-6 w-6"
+                      />
+                      Continue with Google
+                    </Button>
                   </div>
                 </div>
               </div>
