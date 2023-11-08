@@ -34,7 +34,7 @@ function CompanyLogin() {
             })
           );
           localStorage.setItem("companyToken", response.data.jwtToken);
-          navigate("/company/home");
+          navigate("/company");
         } else {
           toast.error(response.data.message);
         }
@@ -114,6 +114,17 @@ function CompanyLogin() {
                     >
                       Submit
                     </button>
+                    <p className="mt-4 block text-center font-sans text-base font-normal leading-relaxed text-gray-700 ">
+                    Not registered yet? {}
+                <a
+                  className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
+                  onClick={() => {
+                    navigate("/company/companyRegister");
+                  }}
+                >
+                  Sign In
+                </a>
+              </p>
                   </div>
                 </div>
               </div>

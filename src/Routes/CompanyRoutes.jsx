@@ -33,7 +33,7 @@ function CompanyRoutes() {
         
          <Route element={<CompanyProtected/>}>
          <Route element={<CompanyLayout/>} >
-         <Route path='/' element={company?<CompanyHomePage/>:<LandingPage/>}/>
+         <Route path='/' element={<CompanyHomePage/>}/>
          </Route>
          </Route>
       </Routes>

@@ -1,12 +1,11 @@
-import React from 'react'
+
 import { Navigate, Outlet } from 'react-router-dom'
 
 function UserProtected() {
-    
-    if(localStorage.getItem("userToken")){
-             return <Outlet/>
+    if(localStorage.getItem("token")){
+        return <Outlet/>
     }else{
-        return <Navigate to={'/login'}  />
+        return <Navigate to={'/user/login'}  />
     } 
 }
 

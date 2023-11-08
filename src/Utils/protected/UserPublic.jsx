@@ -1,14 +1,12 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 
 function userPublic(props) {
- const token = localStorage.getItem("userToken")
+  if (localStorage.getItem("token")) {
+     return <Navigate to={"/user"} />;
 
-  if (token) {
-    return <Navigate to={"/"} />;
   } else {
-    <Navigate to={"/login"} />;
-    return props.children;
+    return <Outlet/>
   }
 }
 

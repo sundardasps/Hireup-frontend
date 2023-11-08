@@ -61,7 +61,7 @@ function UserNavbar() {
           }`}
         >
           <li className="md:ml-8 md:my-0 my-7 font-semibold">
-            {localStorage.getItem("token") ? (
+            {localStorage.getItem("token")?(
               <Menu>
                 <MenuHandler>
                   <Avatar

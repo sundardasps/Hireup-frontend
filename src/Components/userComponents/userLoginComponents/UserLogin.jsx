@@ -32,7 +32,7 @@ function UserLogin() {
             })
             );
           localStorage.setItem("token",response.data.jwtToken);
-          navigate('/')
+          navigate('/user')
         } else {
           toast.error(response.data.message);
         }
@@ -111,11 +111,11 @@ function UserLogin() {
                 </div>
               </div>
               <p className="mt-4 block text-center font-sans text-base font-normal leading-relaxed text-gray-700 ">
-                Already have an account? {}
+                Not registered yet? {}
                 <a
                   className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
                   onClick={() => {
-                    navigate("/register");
+                    navigate("/user/register");
                   }}
                 >
                   Sign In

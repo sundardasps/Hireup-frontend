@@ -21,7 +21,7 @@ function UserResetPass() {
       onSubmit: async (values) => {
         const response = await userResetPass({ userId, token, values });
         if (response.data.reseted) {
-          navigate("/login");
+          navigate("/user/login");
         } else {
           toast.error(response.data.message);
         }

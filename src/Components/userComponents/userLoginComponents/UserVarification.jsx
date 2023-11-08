@@ -21,7 +21,7 @@ function UserVarification() {
         console.log(values);
         const response = await userVarification({userId,token,values});
         if (response.data.loginSuccess) {
-              navigate('/login')
+              navigate('/user/login')
         } else {
           toast.error(response.data.message);
         }

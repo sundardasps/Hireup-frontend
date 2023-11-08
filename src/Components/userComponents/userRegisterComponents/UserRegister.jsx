@@ -146,7 +146,7 @@ function UserRegister() {
                 <a
                   className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
                   onClick={() => {
-                    navigate("/login");
+                    navigate("/user/login");
                   }}
                 >
                   Log In

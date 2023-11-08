@@ -66,7 +66,7 @@ function LandingCards() {
           shadow={false}
           className="animated-image-top relative  mt-10 grid h-[23rem] w-full max-w-[23rem] items-end justify-center  p-10 overflow-hidden shadow-2xl border  inline-flex border-blue-600 border hover:scale-105 duration-500 md:h-[20rem] md:max-w-[20rem]"
           onClick={() => {
-            navigate("/register");
+            navigate("/user/register");
           }}
         >
           <CardHeader

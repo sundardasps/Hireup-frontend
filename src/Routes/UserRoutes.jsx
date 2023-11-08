@@ -10,59 +10,27 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import UserResetPass from "../Components/userComponents/userLoginComponents/UserResetPass.jsx";
 import UserForgotPass from "../Components/userComponents/userLoginComponents/UserForgotPass.jsx";
+import UserProtected from "../Utils/protected/UserProtected.jsx";
 
 function UserRoutes() {
   const [user, setUser] = useState("");
-  const userStore = useSelector((state) => state.user);
   useEffect(() => {
-    setUser(userStore.role);
-  },[userStore.role] );
+    setUser(localStorage.getItem('token'));
+  },[user]);
 
   return (
     <Routes>
-      <Route
-        path="/register"
-        element={
-          <UserPublic>
-            <UserRegister />
-          </UserPublic>
-        }
-      />
-      <Route
-        path="/login"
-        element={
-          <UserPublic>
-            <UserLogin />
-          </UserPublic>
-        }
-      />
-      <Route
-        path="/:userId/varification/:token"
-        element={
-          <UserPublic>
-            <UserVarification />
-          </UserPublic>
-        }
-      />
-      <Route
-        path="/:userId/resetPassword/:token"
-        element={
-          <UserPublic>
-            <UserResetPass />
-          </UserPublic>
-        }
-      />
-      <Route
-        path="/forgotePassword"
-        element={
-          <UserPublic>
-            <UserForgotPass />
-          </UserPublic>
-        }
-      />
-
-      <Route path="/" element={<UserLayOut></UserLayOut>}>
-        <Route path="/" element={user ? <UserHome /> : <LandingPage />} />
+      <Route element={<UserPublic/>}>
+      <Route path="/register"element={<UserRegister /> }/>
+      <Route path="/login"element={<UserLogin />}/>
+      <Route path="/:userId/varification/:token"element={ <UserVarification /> } />
+      <Route path="/:userId/resetPassword/:token" element={   <UserResetPass />   }/>
+      <Route path="/forgotePassword" element={ <UserForgotPass />} />
+      </Route>
+      <Route element={<UserProtected/>}>
+      <Route element={<UserLayOut/>}>
+      <Route path="/" element={<UserHome/>}/>
+      </Route>
       </Route>
     </Routes>
   );
