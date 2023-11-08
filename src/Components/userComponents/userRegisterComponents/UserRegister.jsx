@@ -1,12 +1,67 @@
 import { useFormik } from "formik";
 import { userSignUpSchema } from "../../../Utils/yupValidations/yupUserValidations";
 import { useNavigate } from "react-router-dom";
-import { userSignIn } from "../../../Api/userApi";
+import { userRegisterGoogle, userSignIn } from "../../../Api/userApi";
 import { Button } from "@material-tailwind/react";
 import toast, { Toaster } from "react-hot-toast";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setUserDetails } from "../../../Redux/storeSlices/userSlice";
 
 function UserRegister() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [user, setUser] = useState([]);
+
+  const googleRegister = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: () => toast.error("Goole login failed"),
+  });
+
+  {
+    /*  Google login field   */
+  }
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          userRegisterGoogle(res.data).then((result) => {
+            console.log(
+              result,
+              "======================================================"
+            );
+            if (result.data.created) {
+              alert();
+              console.log(result);
+              dispatch(
+                setUserDetails({
+                  userName: result.data.name,
+                  email: result.data.email,
+                  role: "user",
+                })
+              );
+              localStorage.setItem("token", result.data.jwtToken);
+              navigate("/user");
+            } else {
+              toast.error(result.data.message);
+            }
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user, dispatch, navigate]);
 
   const initialValue = {
     userName: "",
@@ -15,7 +70,6 @@ function UserRegister() {
     password: "",
     confirmPassword: "",
   };
-
   const { handleSubmit, handleChange, handleBlur, errors, touched, values } =
     useFormik({
       initialValues: initialValue,
@@ -141,17 +195,35 @@ function UserRegister() {
                   </Button>
                 </div>
               </div>
-              <p className="mt-4 block text-center font-sans text-base font-normal leading-relaxed text-gray-700 ">
-                Already have an account? {}
-                <a
-                  className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
-                  onClick={() => {
-                    navigate("/user/login");
-                  }}
-                >
-                  Log In
-                </a>
-              </p>
+              <div className="flex justify-center mt-1">
+                <p className="mt-4 block text-center font-sans text-sm font-normal leading-relaxed text-gray-700 ">
+                  Already have an account?
+                  <a
+                    className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
+                    onClick={() => {
+                      navigate("/user/login");
+                    }}
+                  >
+                    Login
+                  </a>
+                </p>
+                <div className="flex justify-center items-center">
+                  <Button
+                    onClick={googleRegister}
+                    size="sm"
+                    variant="text"
+                    color="blue-gray"
+                    className="flex items-center gap-1 m-2"
+                  >
+                    <img
+                      src="https://freesvg.org/img/1534129544.png"
+                      alt="metamask"
+                      className="h-6 w-6"
+                    />
+                    Continue with Google
+                  </Button>
+                </div>
+              </div>
             </div>
           </form>
           <svg

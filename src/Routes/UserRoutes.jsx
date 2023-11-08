@@ -27,6 +27,8 @@ function UserRoutes() {
       <Route path="/:userId/resetPassword/:token" element={   <UserResetPass />   }/>
       <Route path="/forgotePassword" element={ <UserForgotPass />} />
       </Route>
+
+      
       <Route element={<UserProtected/>}>
       <Route element={<UserLayOut/>}>
       <Route path="/" element={<UserHome/>}/>

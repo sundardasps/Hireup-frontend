@@ -5,16 +5,70 @@ import { userLogin } from "../../../Api/userApi";
 import toast, { Toaster } from "react-hot-toast";
 import { Button } from "@material-tailwind/react";
 import { useDispatch } from "react-redux";
-import {setUserDetails} from "../../../Redux/storeSlices/userSlice";
+import { setUserDetails } from "../../../Redux/storeSlices/userSlice";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function UserLogin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [user, setUser] = useState([]);
 
   const initialValue = {
     email: "",
     password: "",
   };
+
+  const login = useGoogleLogin({
+    onSuccess: (codeResponse) => setUser(codeResponse),
+    onError: () => toast.error("Goole login failed"),
+  });
+
+  {
+    /*  Google login field   */
+  }
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          userLogin({ email: res.data.email, password: res.data.id }).then(
+            (result) => {
+              if (result.data.loginSuccess) {
+                console.log(result);
+                dispatch(
+                  setUserDetails({
+                    userName: result.data.loginData.name,
+                    email: result.data.loginData.email,
+                    role: "user",
+                  })
+                );
+                localStorage.setItem("token", result.data.jwtToken);
+                navigate("/user");
+              } else {
+                toast.error(result.data.message);
+              }
+            }
+          );
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user, dispatch, navigate]);
+
+  {
+    /*  Normal login field   */
+  }
 
   const { handleBlur, handleChange, handleSubmit, errors, touched, values } =
     useFormik({
@@ -23,16 +77,15 @@ function UserLogin() {
       onSubmit: async (value) => {
         const response = await userLogin(value);
         if (response.data.loginSuccess) {
-          
           dispatch(
             setUserDetails({
-              userName:response.data.loginData.userName,
-              email:response.data.loginData.email,
-              role:response.data.loginData.role,
+              userName: response.data.loginData.userName,
+              email: response.data.loginData.email,
+              role: response.data.loginData.role,
             })
-            );
-          localStorage.setItem("token",response.data.jwtToken);
-          navigate('/user')
+          );
+          localStorage.setItem("token", response.data.jwtToken);
+          navigate("/user");
         } else {
           toast.error(response.data.message);
         }
@@ -91,16 +144,16 @@ function UserLogin() {
                   )}
                 </div>
                 <p className="mt-4 block text-center font-sans text-base font-normal leading-relaxed text-gray-700 ">
-                Forgote password :{}
-                <a
-                  className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
-                  onClick={() => {
-                    navigate("/forgotePassword");
-                  }}
-                >
-                  Click here
-                </a>
-              </p>
+                  Forgote password :{}
+                  <a
+                    className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
+                    onClick={() => {
+                      navigate("/forgotePassword");
+                    }}
+                  >
+                    Click here
+                  </a>
+                </p>
                 <div className="relative">
                   <Button
                     type="submit"
@@ -110,17 +163,35 @@ function UserLogin() {
                   </Button>
                 </div>
               </div>
-              <p className="mt-4 block text-center font-sans text-base font-normal leading-relaxed text-gray-700 ">
-                Not registered yet? {}
-                <a
-                  className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
-                  onClick={() => {
-                    navigate("/user/register");
-                  }}
-                >
-                  Sign In
-                </a>
-              </p>
+              <div className="flex justify-center mt-1">
+                <p className="mt-4 block text-center font-sans text-sm font-normal leading-relaxed text-gray-700 ">
+                  Not registered yet? {}
+                  <a
+                    className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
+                    onClick={() => {
+                      navigate("/user/register");
+                    }}
+                  >
+                    Sign In
+                  </a>
+                </p>
+                <div className="flex justify-center items-center">
+                  <Button
+                    onClick={login}
+                    size="sm"
+                    variant="text"
+                    color="blue-gray"
+                    className="flex items-center gap-1 m-2"
+                  >
+                    <img
+                      src="https://freesvg.org/img/1534129544.png"
+                      alt="metamask"
+                      className="h-6 w-6"
+                    />
+                    Continue with Google
+                  </Button>
+                </div>
+              </div>
             </div>
           </form>
           <svg
@@ -309,7 +380,7 @@ function UserLogin() {
           </svg>
         </div>
       </div>
-      <Toaster/>
+      <Toaster />
     </div>
   );
 }

@@ -46,3 +46,12 @@ export async function userResetPass(userData) {
     console.log(error);
   }
 }
+
+export async function userRegisterGoogle(userData){
+   try {
+    const response = await userCheck.post('/userRegisterWithGoole',userData)
+    return response
+   } catch (error) {
+    console.log(error);
+   }
+}
