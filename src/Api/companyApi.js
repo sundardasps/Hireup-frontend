@@ -3,7 +3,6 @@ import { companyInterseptor } from "../Utils/interceptors/companyRequest.jsx";
 const companyCheck = companyInterseptor;
 
 export async function companySingup(companyData) {
-
   try {
     const response = await companyCheck.post("/register", companyData);
     return response;
@@ -23,13 +22,12 @@ export async function companyVarification(companyData) {
 
 export async function companyLogin(loginData) {
   try {
-    const response = await companyCheck.post("/login",loginData);
+    const response = await companyCheck.post("/login", loginData);
     return response;
   } catch (error) {
     console.log(error);
   }
 }
-
 
 export async function companyForgotPassword(email) {
   try {
@@ -43,6 +41,18 @@ export async function companyForgotPassword(email) {
 export async function companyResetPassword(email) {
   try {
     const response = await companyCheck.post("/resetPassword", email);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function companyRegisterGoogle(userData) {
+  try {
+    const response = await companyCheck.post(
+      "/companyRegisterWithGoole",
+      userData
+    );
     return response;
   } catch (error) {
     console.log(error);

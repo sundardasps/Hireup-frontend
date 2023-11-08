@@ -16,7 +16,9 @@ function LandingCards() {
              sequence={['Choose Your Role Wisely', 2000, '']}
              wrapper="h2"
              repeat={Infinity}
+             
             /> */}
+          
           </h2>
           <p className="mt-4 text-lg leading-8 text-gray-500 ">
             Connecting Opportunity Seekers with Opportunity Creators Where
