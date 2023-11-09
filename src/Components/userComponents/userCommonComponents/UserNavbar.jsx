@@ -3,7 +3,6 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/solid";
-import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutDetails } from "../../../Redux/storeSlices/userSlice";
 
