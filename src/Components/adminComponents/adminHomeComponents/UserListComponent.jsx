@@ -1,6 +1,8 @@
 import { usersData } from "../../../Api/adminApi";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import {
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
+
 import {
   Card,
   CardHeader,
@@ -18,7 +20,7 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
- 
+
 const TABS = [
   {
     label: "All",
@@ -29,31 +31,29 @@ const TABS = [
     value: "Blocked",
   },
 ];
- 
-const TABLE_HEAD = ["Member", "Email", "Number", "Employed", ""];
- 
 
- 
+const TABLE_HEAD = ["Member", "Email","Status", "Number", "Action",];
+
 export function UserListComponent() {
- const [userData , setUserData] = useState([])
-    useEffect(()=>{
-          const usersList = async ()=>{
-               try {
-                const response = await usersData()
-                console.log(response.data);
-                  if(response.data.status){
-                    setUserData(response.data.usersData)
-                  }else{
-                    console.log(response.data.message);
-                  }
-               } catch (error) {
-                 console.log(error);
-               }
-          }
-          usersList()
-    },[])
+  const [userData, setUserData] = useState([]);
+  const [search, setSearch] = useState([]);
 
-
+  useEffect(() => {
+    const usersList = async () => {
+      try {
+        const response = await usersData();
+        console.log(response.data);
+        if (response.data.status) {
+          setUserData(response.data.usersData);
+        } else {
+          console.log(response.data.message);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    usersList();
+  }, []);
 
 
   return (
@@ -108,84 +108,99 @@ export function UserListComponent() {
             </tr>
           </thead>
           <tbody>
-            {userData.map(
-              ({ _id, userName, email,number }, index) => {
-                const isLast = index === userData.length - 1;
-                const classes = isLast
-                  ? "p-4"
-                  : "p-4 border-b border-blue-gray-50";
- 
-                return (
-                  <tr key={_id}>
-                    <td className={classes}>
-                      <div className="flex items-center gap-3">
-                        <Avatar src={'/public/6876640.jpg'} alt={name} size="sm" />
-                        <div className="flex flex-col">
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal"
-                          >
-                            {userName}
-                          </Typography>
-                          {/* <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal opacity-70"
-                          >
-                            {email}
-                          </Typography> */}
-                        </div>
-                      </div>
-                    </td>
-                    <td className={classes}>
+            {userData.map(({ _id, userName, email, number }, index) => {
+              const isLast = index === userData.length - 1;
+              const classes = isLast
+                ? "p-4"
+                : "p-4 border-b border-blue-gray-50";
+
+              return (
+                <tr key={_id} >
+                  <td className={classes} >
+                    <div className="flex items-center gap-3">
+                      <Avatar
+                        src={"/public/6876640.jpg"}
+                        alt={userName}
+                        size="sm"
+                      />
                       <div className="flex flex-col">
                         <Typography
                           variant="small"
                           color="blue-gray"
                           className="font-normal"
                         >
-                          {email}
+                          {userName}
                         </Typography>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal opacity-70"
-                        >
-                          {/* {org} */}
-                        </Typography>
+                        {/* <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="font-normal opacity-70"
+                          >
+                            {email}
+                          </Typography> */}
                       </div>
-                    </td>
-                    {/* <td className={classes}>
-                      <div className="w-max">
-                        <Chip
-                          variant="ghost"
-                          size="sm"
-                          value={online ? "online" : "offline"}
-                          color={online ? "green" : "blue-gray"}
-                        />
-                      </div>
-                    </td> */}
-                    <td className={classes}>
+                    </div>
+                  </td>
+                  <td className={classes}>
+                    <div className="flex flex-col">
                       <Typography
                         variant="small"
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {number}
+                        {email}
                       </Typography>
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal opacity-70"
+                      >
+                        {/* {org} */}
+                      </Typography>
+                    </div>
+                  </td>
+                  <td className={classes}>
+                      <div className="w-max">
+                        <Chip
+                          variant="ghost"
+                          size="sm"
+                          value={usersData ? "online" : "offline"}
+                          color={usersData ? "green" : "blue-gray"}
+                        />
+                      </div>
                     </td>
-                    <td className={classes}>
-                      <Tooltip content="Edit User">
-                        <IconButton variant="text">
-                          <PencilIcon className="h-4 w-4" />
-                        </IconButton>
-                      </Tooltip>
-                    </td>
-                  </tr>
-                );
-              },
-            )}
+                  <td className={classes}>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className="font-normal"
+                    >
+                      {number}
+                    </Typography>
+                  </td>
+                  <td className={classes}>
+                    <Tooltip content="block">
+                      <IconButton color="red" variant="text">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
+                          />
+                        </svg>
+                      </IconButton>
+                    </Tooltip>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </CardBody>

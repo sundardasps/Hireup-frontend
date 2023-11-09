@@ -148,7 +148,7 @@ function UserLogin() {
                   <a
                     className="font-medium text-pink-500 transition-colors hover:text-blue-700 cursor-pointer"
                     onClick={() => {
-                      navigate("/forgotePassword");
+                      navigate("/user/forgotePassword");
                     }}
                   >
                     Click here
