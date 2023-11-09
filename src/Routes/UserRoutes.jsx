@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import UserResetPass from "../Components/userComponents/userLoginComponents/UserResetPass.jsx";
 import UserForgotPass from "../Components/userComponents/userLoginComponents/UserForgotPass.jsx";
 import UserProtected from "../Utils/protected/UserProtected.jsx";
+import Profile from "../Pages/userPages/userHomePage/Profile.jsx";
 
 function UserRoutes() {
   const [user, setUser] = useState("");
@@ -32,6 +33,8 @@ function UserRoutes() {
       <Route element={<UserProtected/>}>
       <Route element={<UserLayOut/>}>
       <Route path="/" element={<UserHome/>}/>
+      <Route path="/profile/:email" element={<Profile/>}/>
+
       </Route>
       </Route>
     </Routes>

@@ -6,11 +6,11 @@ import UserFooter from "../../Components/userComponents/userCommonComponents/Use
 
 function LandingPage() {
   return (
-    <div>
+    <>
       <LandingNavbar/>
       <LandingCards />
       <UserFooter/>
-    </div>
+    </>
   );
 }
 

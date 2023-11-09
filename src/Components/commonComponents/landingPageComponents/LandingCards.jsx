@@ -25,7 +25,7 @@ function LandingCards() {
             Dreams Find Their Perfect Match
           </p>
           <p className="pt-2 text-sm font-semibold leading-6 text-blue-400">
-            Get started <span aria-hidden="true">→</span>
+            Enroll now <span aria-hidden="true">→</span>
           </p>
         </div>
         {/* Company selection div */}
