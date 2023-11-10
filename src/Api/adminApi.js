@@ -12,21 +12,24 @@ export async function adminLogin(logindata) {
 }
 
 
-export async function usersData(){
-
+export async function usersData({search,filter,page}){
   try {
-    const response = await adminCheck.get('/users')
+    const response = await adminCheck.get('/users',{
+      params:{
+        page,search,filter
+      }
+    })
     return response
   } catch (error) {
     console.log(error);
   }
-
 }
 
 export async function userblockOrUnBlock(id) {
+
   try {
-    
-    const response = await adminCheck.post("/userBlockOrUnblock",id);
+    console.log(id,"=========isinefifhslkrhfsdlhfldshfsdjhfkh");
+    const response = await adminCheck.put(`/userBlockOrUnblock/${id}`);
     return response;
   } catch (error) {
     console.error(error);
