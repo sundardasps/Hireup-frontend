@@ -1,3 +1,4 @@
+import { checkbox } from "@material-tailwind/react";
 import { userInterseption } from "../Utils/interceptors/userRequest";
 
 const userCheck = userInterseption;
@@ -47,11 +48,11 @@ export async function userResetPass(userData) {
   }
 }
 
-export async function userRegisterGoogle(userData){
-   try {
-    const response = await userCheck.post('/userRegisterWithGoole',userData)
-    return response
-   } catch (error) {
+export async function userRegisterGoogle(userData) {
+  try {
+    const response = await userCheck.post("/userRegisterWithGoole", userData);
+    return response;
+  } catch (error) {
     console.log(error);
-   }
+  }
 }

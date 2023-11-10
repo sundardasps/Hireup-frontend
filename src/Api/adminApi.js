@@ -22,3 +22,13 @@ export async function usersData(){
   }
 
 }
+
+export async function userblockOrUnBlock(id) {
+  try {
+    
+    const response = await adminCheck.post("/userBlockOrUnblock",id);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
