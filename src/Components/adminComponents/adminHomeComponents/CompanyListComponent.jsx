@@ -1,4 +1,4 @@
-import { usersData } from "../../../Api/adminApi";
+
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
 
@@ -18,6 +18,8 @@ import {
 } from "@material-tailwind/react";
 
 import React, { useEffect, useState } from "react";
+
+import { companiesData } from "../../../Api/adminApi";
 import { Dialogue } from "../adminCommonComponents/Dialogue";
 
 const TABS = [
@@ -37,7 +39,7 @@ const TABS = [
 
 const TABLE_HEAD = ["Member", "Email", "Status", "Number", "Action"];
 
-export function UserListComponent() {
+export function CompanyListComponent() {
   const [name, setname] = useState("");
   const [size, setSize] = React.useState(null);
   const [search, setSearch] = useState("");
@@ -56,13 +58,17 @@ export function UserListComponent() {
     return () => clearTimeout(timeoutId);
   });
 
+
+
   const { data, isLoading, error } = useQuery({
-    queryKey: ["users", { page: page, filter, search: debounsedSearch }],
+    queryKey: ["company", { page: page, filter, search: debounsedSearch }],
     queryFn: () =>
-      usersData({ page: page, filter, search: debounsedSearch }).then(
+      companiesData({ page: page, filter, search: debounsedSearch }).then(
         (res) => res.data
       ),
   });
+
+  console.log(data);
 
   const handlePage = async (newPage) => {
     if (newPage < 1 || newPage > data.totalPage) {
@@ -70,10 +76,6 @@ export function UserListComponent() {
     }
     setPage(newPage);
   };
-
-  const handleSearch = async (event) =>{
-      setSearch(event.target.value)
-  }
 
   if (isLoading) {
     return (
@@ -121,9 +123,11 @@ export function UserListComponent() {
             <div className="w-full md:w-72">
               <Input
                 label="Search"
-                autoFocus
                 value={search}
-                onChange={handleSearch}
+                autoFocus
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
                 icon={<MagnifyingGlassIcon className="h-5 w-5" />}
               />
             </div>
@@ -153,7 +157,7 @@ export function UserListComponent() {
               {data &&
                 data.data &&
                 data.data.map(
-                  ({ _id, userName,role, is_blocked, email, number }, index) => {
+                  ({ _id, companyName, is_blocked, email, number }, index) => {
                     const isLast = index === data.data.length - 1;
                     const classes = isLast
                       ? "p-4"
@@ -165,7 +169,7 @@ export function UserListComponent() {
                           <div className="flex items-center gap-3">
                             <Avatar
                               src={"/public/6876640.jpg"}
-                              alt={userName}
+                              alt={companyName}
                               size="sm"
                             />
                             <div className="flex flex-col">
@@ -174,7 +178,7 @@ export function UserListComponent() {
                                 color="blue-gray"
                                 className="font-normal"
                               >
-                                {userName}
+                                {companyName}
                               </Typography>
                               {/* <Typography
                             variant="small"
@@ -231,9 +235,8 @@ export function UserListComponent() {
                           <Dialogue
                             data={{
                               is_blocked: is_blocked,
-                              name:userName,
-                              role,
-                              id:_id,
+                              name:companyName,
+                              id: _id,
                               content:
                                 "Blocking this user will restrict their access Please confirm your decision to proceed",
                             }}
@@ -248,7 +251,7 @@ export function UserListComponent() {
         </CardBody>
         <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
           <Typography variant="small" color="blue-gray" className="font-normal">
-          Page {page} of {data.totalPage}
+            Page {page} of {data.totalPage}
           </Typography>
           <div className="flex gap-2">
             <Button

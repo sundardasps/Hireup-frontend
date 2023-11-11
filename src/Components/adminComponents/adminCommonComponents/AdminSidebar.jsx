@@ -133,7 +133,7 @@ export function AdminSidebar() {
             <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
           </ListItemSuffix>
         </ListItem>
-        <ListItem>
+        <ListItem onClick={()=>{navigate('/admin/companies')}}>
           <ListItemPrefix>
             <UserCircleIcon className="h-5 w-5" />
           </ListItemPrefix>
