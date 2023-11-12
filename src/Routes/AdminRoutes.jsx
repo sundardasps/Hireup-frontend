@@ -6,6 +6,7 @@ import AdminLayout from '../Components/adminComponents/adminLayout/AdminLayout'
 import AdminProtected from '../Utils/protected/AdminProtected'
 import  { UserListComponent }     from '../Components/adminComponents/adminHomeComponents/UserListComponent'
 import { CompanyListComponent } from '../Components/adminComponents/adminHomeComponents/CompanyListComponent'
+import { CategoriesTable } from '../Components/adminComponents/adminHomeComponents/CategoriesTable'
 
 function AdminRoutes() {
   return (
@@ -20,6 +21,8 @@ function AdminRoutes() {
         <Route path='/' element={<DashboardPage/>}/>
         <Route path='/users' element={<UserListComponent/>} />
         <Route path='/companies' element={<CompanyListComponent/>} />
+        <Route path='/category' element={<CategoriesTable/>} />
+
 
         </Route>
         </Route>

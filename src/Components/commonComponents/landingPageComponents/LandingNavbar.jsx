@@ -50,7 +50,7 @@ function UserNavbar() {
           <li className="md:ml-8 md:my-0 my-7 font-semibold">
               <Menu>
                 <MenuHandler>
-                  <Button variant="outlined">Login</Button>
+                  <Button className="border shadow"  color="white" >Login</Button>
                 </MenuHandler>
                 <MenuList>
                   <hr className="my-2 border-blue-gray-50" />

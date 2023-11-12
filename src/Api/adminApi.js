@@ -67,3 +67,17 @@ export async function companyblockOrUnBlock(id) {
     console.error(error);
   }
 }
+
+
+
+//-----------------------------------------------Category section----------------------------------------//
+
+
+export async function categoryTitleAdd(title) {
+  try {
+    const response = await adminCheck.post("/addTile",title);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
