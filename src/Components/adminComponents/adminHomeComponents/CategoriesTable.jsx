@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
 
 import {
@@ -14,14 +14,16 @@ import {
   TabsHeader,
   Tab,
   Avatar,
+  Select,
+  Option,
 } from "@material-tailwind/react";
 
 import React, { useEffect, useState } from "react";
-
 import { categoryData } from "../../../Api/adminApi";
 import { Dialogue } from "../adminCommonComponents/Dialogue";
 import { CategoryDialog } from "./CategoryDialog";
 import { CategoryTitleDialog } from "./CategoryTitleDialog";
+import { useNavigate } from "react-router-dom";
 
 const TABS = [
   {
@@ -47,7 +49,8 @@ export function CategoriesTable() {
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(1);
   const [debounsedSearch, setDebouncedSearch] = useState("");
-
+  const [currentCategory, setCategory] = useState([]);
+  const navigate = useNavigate();
   const handleOpen = (value, name) => {
     setSize(value), setname(name);
   };
@@ -106,7 +109,7 @@ export function CategoriesTable() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <Tabs value="all" className="w-full md:w-max">
+            <Tabs value="all" className="w-full md:w-max">
               <TabsHeader>
                 {TABS.map(({ label, value }) => (
                   <Tab
@@ -125,7 +128,7 @@ export function CategoriesTable() {
 
             <div className="w-full md:w-72">
               <Input
-                label="Search"
+                label="Search title"
                 value={search}
                 autoFocus
                 onChange={(e) => {
@@ -173,6 +176,7 @@ export function CategoriesTable() {
                             src={"/public/6876640.jpg"}
                             alt={title}
                             size="sm"
+                            onClick={() => navigate(`/admin/category/${_id}`)}
                           />
                           <div className="flex flex-col">
                             <Typography
@@ -182,13 +186,15 @@ export function CategoriesTable() {
                             >
                               {title}
                             </Typography>
-                            {/* <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal opacity-70"
-                          >
-                            {email}
-                          </Typography> */}
+                            <Select
+                              onChange={(e) => {
+                                setCategory(e.target.value);
+                              }}
+                            >
+                              {category.map((value, index) => (
+                                <Option key={index}>{value} </Option>
+                              ))}
+                            </Select>
                           </div>
                         </div>
                       </td>

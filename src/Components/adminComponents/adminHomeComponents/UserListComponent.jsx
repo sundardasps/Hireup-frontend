@@ -78,10 +78,9 @@ export function UserListComponent() {
   }
 
   if (isLoading) {
-       alert()
     return (
       <div>
-            <MainLoading/>
+            <MainLoading />
       </div>
     );
   }
