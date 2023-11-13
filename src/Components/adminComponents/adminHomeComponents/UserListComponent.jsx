@@ -19,6 +19,8 @@ import {
 
 import React, { useEffect, useState } from "react";
 import { Dialogue } from "../adminCommonComponents/Dialogue";
+import MainLoading from "../../commonComponents/Loadings/MainLoding";
+
 
 const TABS = [
   {
@@ -76,9 +78,10 @@ export function UserListComponent() {
   }
 
   if (isLoading) {
+       alert()
     return (
       <div>
-        <Typography variant="h1">loading...</Typography>
+            <MainLoading/>
       </div>
     );
   }

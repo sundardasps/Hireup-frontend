@@ -1,8 +1,7 @@
-import React from 'react';
-import { GooSpinner } from 'react-spinners-kit';
-// import YourLogo from './path-to-your-logo'; // Import your logo component or image
 
-function MainLoading() {
+import { GooSpinner } from 'react-spinners-kit';
+
+function MainLoading({loading}) {
   return (
     <div className='w-screen h-screen flex flex-col items-center justify-center'>
 
@@ -10,7 +9,7 @@ function MainLoading() {
 
       {/* GooSpinner */}
       <div className='mt-4'>
-        <GooSpinner />
+        <GooSpinner  loading={loading} />
       </div>
     </div>
   );

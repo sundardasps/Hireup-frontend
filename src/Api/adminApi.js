@@ -11,9 +11,7 @@ export async function adminLogin(logindata) {
   }
 }
 
-
 //--------------------------------------------------Users section----------------------------------------//
-
 
 export async function usersData({ search, filter, page }) {
   try {
@@ -39,12 +37,10 @@ export async function userblockOrUnBlock(id) {
   }
 }
 
-
 //--------------------------------------------------Companies section----------------------------------------//
 
 export async function companiesData({ search, filter, page }) {
   try {
-    console.log(search,filter,page,'==================Admin apissss');
     const response = await adminCheck.get("/companies", {
       params: {
         page,
@@ -58,7 +54,6 @@ export async function companiesData({ search, filter, page }) {
   }
 }
 
-
 export async function companyblockOrUnBlock(id) {
   try {
     const response = await adminCheck.put(`/companyBlockOrUnblock/${id}`);
@@ -68,16 +63,47 @@ export async function companyblockOrUnBlock(id) {
   }
 }
 
-
-
 //-----------------------------------------------Category section----------------------------------------//
-
 
 export async function categoryTitleAdd(title) {
   try {
-    const response = await adminCheck.post("/addTile",title);
+    const response = await adminCheck.post("/addTile", title);
     return response;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function addCategory(data) {
+  try {
+    console.log(data);
+    const response = adminCheck.post("/addCategory", data);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function getCategoryTitle() {
+  try {
+    const response = adminCheck.get("/getTitle");
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function categoryData({ search, filter, page }) {
+  try {
+    const response = await adminCheck.get("/categoryData", {
+      params: {
+        page,
+        search,
+        filter,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
   }
 }

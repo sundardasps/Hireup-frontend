@@ -49,6 +49,7 @@ export function Dialogue({ data }) {
           fullWidth={true}
           onClick={handleOpen}
           size="sm"
+          className="w-[7rem]"
           color={data.is_blocked ? "green" : "red"}
           variant="gradient"
         >

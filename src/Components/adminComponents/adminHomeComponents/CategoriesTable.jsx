@@ -18,7 +18,7 @@ import {
 
 import React, { useEffect, useState } from "react";
 
-import { companiesData } from "../../../Api/adminApi";
+import { categoryData } from "../../../Api/adminApi";
 import { Dialogue } from "../adminCommonComponents/Dialogue";
 import { CategoryDialog } from "./CategoryDialog";
 import { CategoryTitleDialog } from "./CategoryTitleDialog";
@@ -38,7 +38,7 @@ const TABS = [
   },
 ];
 
-const TABLE_HEAD = ["Member", "Email", "Status", "Number", "Action"];
+const TABLE_HEAD = ["Member", "Status", "Action"];
 
 export function CategoriesTable() {
   const [name, setname] = useState("");
@@ -60,14 +60,12 @@ export function CategoriesTable() {
   });
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["company", { page: page, filter, search: debounsedSearch }],
+    queryKey: ["category", { page: page, filter, search: debounsedSearch }],
     queryFn: () =>
-      companiesData({ page: page, filter, search: debounsedSearch }).then(
+      categoryData({ page: page, filter, search: debounsedSearch }).then(
         (res) => res.data
       ),
   });
-
-  console.log(data);
 
   const handlePage = async (newPage) => {
     if (newPage < 1 || newPage > data.totalPage) {
@@ -108,6 +106,19 @@ export function CategoriesTable() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+          <Tabs value="all" className="w-full md:w-max">
+              <TabsHeader>
+                {TABS.map(({ label, value }) => (
+                  <Tab
+                    onClick={() => setFilter(value)}
+                    key={value}
+                    value={value}
+                  >
+                    &nbsp;&nbsp;{label}&nbsp;&nbsp;
+                  </Tab>
+                ))}
+              </TabsHeader>
+            </Tabs>
             <CategoryTitleDialog />
 
             <CategoryDialog />
@@ -148,95 +159,63 @@ export function CategoriesTable() {
             <tbody>
               {data &&
                 data.data &&
-                data.data.map(
-                  ({ _id, companyName, is_blocked, email, number }, index) => {
-                    const isLast = index === data.data.length - 1;
-                    const classes = isLast
-                      ? "p-4"
-                      : "p-4 border-b border-blue-gray-50";
+                data.data.map(({ _id, title, is_active, category }, index) => {
+                  const isLast = index === data.data.length - 1;
+                  const classes = isLast
+                    ? "p-4"
+                    : "p-4 border-b border-blue-gray-50";
 
-                    return (
-                      <tr key={_id}>
-                        <td className={classes}>
-                          <div className="flex items-center gap-3">
-                            <Avatar
-                              src={"/public/6876640.jpg"}
-                              alt={companyName}
-                              size="sm"
-                            />
-                            <div className="flex flex-col">
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal"
-                              >
-                                {companyName}
-                              </Typography>
-                              {/* <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal opacity-70"
-                          >
-                            {email}
-                          </Typography> */}
-                            </div>
-                          </div>
-                        </td>
-                        <td className={classes}>
+                  return (
+                    <tr key={_id}>
+                      <td className={classes}>
+                        <div className="flex items-center gap-3">
+                          <Avatar
+                            src={"/public/6876640.jpg"}
+                            alt={title}
+                            size="sm"
+                          />
                           <div className="flex flex-col">
                             <Typography
                               variant="small"
                               color="blue-gray"
                               className="font-normal"
                             >
-                              {email}
+                              {title}
                             </Typography>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal opacity-70"
-                            >
-                              {/* {org} */}
-                            </Typography>
-                          </div>
-                        </td>
-                        <td className={classes}>
-                          <div className="w-max">
-                            <Chip
-                              variant="ghost"
-                              size="sm"
-                              value={is_blocked === true ? "blocked" : "active"}
-                              color={
-                                is_blocked === true ? "blue-gray" : "green"
-                              }
-                            />
-                          </div>
-                        </td>
-                        <td className={classes}>
-                          <Typography
+                            {/* <Typography
                             variant="small"
                             color="blue-gray"
-                            className="font-normal"
+                            className="font-normal opacity-70"
                           >
-                            {number}
-                          </Typography>
-                        </td>
-
-                        <td>
-                          <Dialogue
-                            data={{
-                              is_blocked: is_blocked,
-                              name: companyName,
-                              id: _id,
-                              content:
-                                "Blocking this user will restrict their access Please confirm your decision to proceed",
-                            }}
+                            {email}
+                          </Typography> */}
+                          </div>
+                        </div>
+                      </td>
+                      <td className={classes}>
+                        <div className="w-max">
+                          <Chip
+                            variant="ghost"
+                            size="sm"
+                            value={is_active === false ? "blocked" : "active"}
+                            color={is_active === true ? "blue-gray" : "green"}
                           />
-                        </td>
-                      </tr>
-                    );
-                  }
-                )}
+                        </div>
+                      </td>
+                      <td>
+                        <Dialogue
+                          data={{
+                            is_blocked: !is_active,
+                            name: title,
+                            id: _id,
+                            content:
+                              "Blocking this category restrict their access Please confirm your decision to proceed",
+                          }}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </CardBody>
