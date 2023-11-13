@@ -189,10 +189,13 @@ export function CategoriesTable() {
                             <Select
                               onChange={(e) => {
                                 setCategory(e.target.value);
-                              }}
+                               
+                              }} 
+                              
+                            
                             >
                               {category.map((value, index) => (
-                                <Option key={index}>{value} </Option>
+                                <Option disabled  key={index} className="text-black border-2">{value} </Option>
                               ))}
                             </Select>
                           </div>

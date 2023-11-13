@@ -76,14 +76,18 @@ export function AdminSidebar() {
           </ListItemPrefix>
           users
         </ListItem>
-        <ListItem onClick={()=>{navigate('/admin/category')}}>
+        <ListItem
+          onClick={() => {
+            navigate("/admin/category");
+          }}
+        >
           <ListItemPrefix>
             <ClipboardDocumentListIcon className="h-5 w-5" />
           </ListItemPrefix>
           Category
         </ListItem>
         <hr className="my-2 border-blue-gray-50" />
-        <ListItem>
+        <ListItem onClick={handleLogOut}>
           <ListItemPrefix>
             <PowerIcon className="h-5 w-5" />
           </ListItemPrefix>

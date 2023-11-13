@@ -56,3 +56,12 @@ export async function userRegisterGoogle(userData) {
     console.log(error);
   }
 }
+
+export async function categoryDataForUser() {
+  try {
+    const response = await userCheck.get("/categoryDataForUser");
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
