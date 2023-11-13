@@ -107,3 +107,12 @@ export async function categoryData({ search, filter, page }) {
     console.log(error);
   }
 }
+
+export async function categoryblockOrUnBlock(id) {
+  try {
+    const response = await adminCheck.put(`/catgoryBlockOrUnblock/${id}`);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}

@@ -91,7 +91,7 @@ export function CategoriesTable() {
   }
   return (
     <>
-      <Card className="h-full w-full border-2">
+      <Card className="h-full w-full border-2 border-black">
         <CardHeader
           ader
           floated={false}

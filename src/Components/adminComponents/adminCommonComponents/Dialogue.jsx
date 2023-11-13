@@ -8,26 +8,37 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import { useQueryClient } from "@tanstack/react-query";
-import { companyblockOrUnBlock, userblockOrUnBlock } from "../../../Api/adminApi";
+import { toast, Toaster } from "react-hot-toast";
+import {
+  companyblockOrUnBlock,
+  userblockOrUnBlock,
+  categoryblockOrUnBlock,
+} from "../../../Api/adminApi";
 
 export function Dialogue({ data }) {
   const [open, setOpen] = React.useState(false);
   const quaryClint = useQueryClient();
   const handleOpen = () => setOpen(!open);
- 
- 
+
+//---------------- user block or unblock -------------------//
+
+
   const handleActionUser = async () => {
     try {
       const response = await userblockOrUnBlock(data.id);
       if (response) {
         quaryClint.invalidateQueries("users");
         setOpen(false);
+      } else {
+        toast.error(response.data.message);
       }
     } catch (error) {
       console.error(error);
     }
   };
- 
+
+//---------------- company block or unblock -------------------//
+
 
   const handleActionCompany = async () => {
     try {
@@ -35,12 +46,32 @@ export function Dialogue({ data }) {
       if (response) {
         quaryClint.invalidateQueries("company");
         setOpen(false);
+      } else {
+        toast.error(response.data.message);
       }
     } catch (error) {
       console.error(error);
     }
   };
-  
+
+//---------------- category block or unblock -------------------//
+
+
+  const handleActionCategory = async () => {
+    try {
+      const response = await categoryblockOrUnBlock(data.id);
+      if (response.data.updated) {
+        quaryClint.invalidateQueries("category");
+        setOpen(false);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
 
   return (
     <>
@@ -71,10 +102,27 @@ export function Dialogue({ data }) {
           >
             <span>Cancel</span>
           </Button>
-          <Button variant="gradient" color="green" onClick={data.role === "user" ? handleActionUser : handleActionCompany}>
-            <span>Confirm</span>
-          </Button>
+          {data.role ? (
+            <Button
+              variant="gradient"
+              color="green"
+              onClick={
+                data.role === "user" ? handleActionUser : handleActionCompany
+              }
+            >
+              <span>Confirm</span>
+            </Button>
+          ) : (
+            <Button
+              variant="gradient"
+              color="green"
+              onClick={handleActionCategory}
+            >
+              <span>Confirm</span>
+            </Button>
+          )}
         </DialogFooter>
+        <Toaster />
       </Dialog>
     </>
   );
