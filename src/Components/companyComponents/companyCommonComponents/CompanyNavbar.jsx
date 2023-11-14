@@ -19,7 +19,7 @@ import { logOutDetails2 } from "../../../Redux/storeSlices/companyslice";
 function CompanyNavbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const email = useSelector((state) => state.company.email);
 
   const handleLogOut = () => {
     localStorage.removeItem("companyToken");
@@ -91,7 +91,7 @@ function CompanyNavbar() {
                 />
               </MenuHandler>
               <MenuList>
-                <MenuItem className="flex items-center gap-2">
+                <MenuItem onClick={()=>navigate("/company/profile")} className="flex items-center gap-2">
                   <svg
                     width="16"
                     height="16"

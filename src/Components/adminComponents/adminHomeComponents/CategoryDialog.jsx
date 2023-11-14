@@ -39,7 +39,7 @@ export function CategoryDialog() {
       }
     };
     categoryTitle();
-  }, []);
+  }, [titles]);
 
   const { handleBlur, handleChange, handleSubmit, values, errors, touched } =
     useFormik({
@@ -108,7 +108,7 @@ export function CategoryDialog() {
               >
                 {titles.map((titles, index) => (
                   <Option key={index} value={titles._id}>
-                    {titles.title}
+                    {titles.is_active&&titles.title}
                   </Option>
                 ))}
               </Select>

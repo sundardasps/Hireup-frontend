@@ -59,4 +59,13 @@ export async function companyRegisterGoogle(userData) {
   }
 }
 
+export async function companyProfile(email) {
+  try {
+    const response = await companyCheck.get(`/companyDetails/${email}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 

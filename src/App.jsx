@@ -6,15 +6,18 @@ import LandingPage from './Pages/commonPages/LandingPage';
 
 
 
+
 function App() {
 
   return (
      <Router>
       <Routes>
+        
          <Route index path="/" element={<LandingPage/>}/>
          <Route path="/user/*" element={<UserRoutes/>}/>
          <Route path="/company/*" element={<CompanyRoutes/>}/>
          <Route path="/admin/*" element={<AdminRoutes/>}/>
+   
       </Routes>
     </Router>
   )
