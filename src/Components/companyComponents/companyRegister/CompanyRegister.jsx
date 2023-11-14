@@ -69,8 +69,6 @@ function CompanyRegister() {
     }
   }, [user, dispatch, navigate]);
 
-
-
   const { handleChange, handleBlur, handleSubmit, errors, touched, values } =
     useFormik({
       initialValues: initialValue,

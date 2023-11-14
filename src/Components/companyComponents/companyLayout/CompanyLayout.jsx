@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 import CompanyNavbar from '../companyCommonComponents/CompanyNavbar'
 function CompanyLayout() {
   return (
-    <div className="grid grid-rows-[4rem] overflow-x-hidden">
+    <div className="grid grid-rows-[5rem] overflow-x-hidden">
       <div className="sticky  top-0 z-50">
                <CompanyNavbar/>
                 </div>

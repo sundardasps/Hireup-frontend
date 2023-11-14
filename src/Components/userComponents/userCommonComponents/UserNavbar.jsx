@@ -2,6 +2,7 @@ import {
   Bars3CenterLeftIcon,
   Bars3Icon,
   XMarkIcon,
+  HomeIcon
 } from "@heroicons/react/24/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutDetails } from "../../../Redux/storeSlices/userSlice";
@@ -42,6 +43,20 @@ function UserNavbar() {
       <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
         <Typography
           as="li"
+          variant="h"
+          color="blue-gray"
+          className="p-1 font-medium flex items-center"
+        >
+          <HomeIcon className="h-8 w-8 p-1"/>
+          <a
+            onClick={()=>navigate('/user')}
+            className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
+          >
+            Home
+          </a>
+        </Typography>
+        {/* <Typography
+          as="li"
           variant="small"
           color="blue-gray"
           className="p-1 font-medium"
@@ -50,7 +65,7 @@ function UserNavbar() {
             href="#"
             className="flex items-center hover:text-blue-500 transition-colors"
           >
-            Pages
+            chat
           </a>
         </Typography>
         <Typography
@@ -63,22 +78,9 @@ function UserNavbar() {
             href="#"
             className="flex items-center hover:text-blue-500 transition-colors"
           >
-            Account
+            Saved
           </a>
-        </Typography>
-        <Typography
-          as="li"
-          variant="small"
-          color="blue-gray"
-          className="p-1 font-medium"
-        >
-          <a
-            href="#"
-            className="flex items-center hover:text-blue-500 transition-colors"
-          >
-            Blocks
-          </a>
-        </Typography>
+        </Typography> */}
         <Typography
           as="li"
           variant="small"

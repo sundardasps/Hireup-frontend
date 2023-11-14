@@ -4,7 +4,7 @@ function UserDetails() {
   return (
 
 
-<div className="bg-gray-100">
+<div className="bg-gray-100 overflow-hidden">
  <div className="w-full text-white bg-main-color">
  
     </div>
