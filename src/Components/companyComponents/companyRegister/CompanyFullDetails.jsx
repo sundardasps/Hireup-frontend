@@ -1,11 +1,13 @@
-import {Field, useFormik} from 'formik'
+import { useFormik} from 'formik'
 import { companyFullDetailsSchema } from '../../../Utils/yupValidations/yupCompanyvalidations';
 import { useState } from 'react';
 import { addCompanyfullDetails } from '../../../Api/companyApi';
 import {useSelector} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+import {toast,Toaster} from 'react-hot-toast'
 function CompanyFullDetails() {
- const [showImage,setShowImage] = useState('')
-   
+ const [isLoading,setLoading] = useState(false)
+ const navigate = useNavigate()   
  const id = useSelector(state => state.company.id)
   const initialValue = {
     companyName: "",
@@ -19,7 +21,7 @@ function CompanyFullDetails() {
 
   }
 
-  const {handleBlur,handleChange,handleSubmit,errors,touched,values} = useFormik({
+  const {handleBlur,handleChange,handleSubmit,setFieldValue,errors,touched,values} = useFormik({
      initialValues:initialValue,
      validationSchema:companyFullDetailsSchema,
      onSubmit: async (values) =>{
@@ -31,23 +33,34 @@ function CompanyFullDetails() {
       formData.append("gstNumber",values.gstNumber)
       formData.append("image",values.image)
       formData.append("companyRoles",values.companyRoles)
-     
-      const response = await addCompanyfullDetails({formData,id})
+
+      const response = await addCompanyfullDetails(formData,id)
+       setLoading(pre=>!pre)
        if(response.data.updated){
-        alert()
+       setLoading(pre=>!pre)
+           navigate("/company")
+       }else{
+           toast.error(response.data.message)
        }
   }
   })
   
+  if(isLoading){
+  
+    return (
+      <h1>Loadingg........</h1>
+    )
 
+  }
 
     return (
+      <>
       <div>
         <section className="max-w-3xl p-3 mx-auto bg-blue-700 rounded-md shadow-md dark:bg-gray-800 mt-1">
            <h1 className="text-xl font-bold text-white capitalize dark:text-white">
             Account settings
           </h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}   encType="multipart/form-data" >
             <div className="grid grid-cols-1 gap-3 mt-4 sm:grid-cols-2">
               <div>
                 <label
@@ -202,12 +215,8 @@ function CompanyFullDetails() {
                           onBlur={handleBlur}
                           // value={values.image}
                           onChange={(event) => {
-                            handleChange({
-                              target: {
-                                name: "image",
-                                value: event.currentTarget.files[0], 
-                              },
-                            });
+                             const selectedfield = event.currentTarget.files[0]
+                             setFieldValue("image",selectedfield)
                           }}
                           accept="image/*"
                         />
@@ -236,6 +245,8 @@ function CompanyFullDetails() {
           </form>
         </section>
       </div>
+      <Toaster/>
+      </>
     );
   }
   

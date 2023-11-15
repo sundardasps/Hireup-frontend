@@ -1,7 +1,7 @@
 import * as Yup  from 'yup'
 
 const MAX_FILE_SIZE = 10485760; // 10 MB in bytes (10 * 1024 * 1024)
-
+const imageFormats = ["image/jpeg", "image/png", "image/avif"];
 
 
 
@@ -46,11 +46,17 @@ export const companySignUpSchema = Yup.object().shape({
     gstNumber: Yup.string().required("This field is required").max(10,'Please enter a valid gst number').trim(),
     companyRoles: Yup.string()
     .matches(/[a-zA-Z]/, "At least one alphabet character required").min(10)
-    .matches(/\*/, "At least one * symbol required")
+    // .matches(/\*/, "At least one * symbol required")
     .required("At least one alphabet character and one * symbol required")
-    .max(25),
+    .max(500),
     image:Yup.mixed()
-    .required("Required")
+    .test("is-image", "Only image files are allowed", (value) => {
+      if (value) {
+        return imageFormats.includes(value.type);
+      }
+      return true;
+    })
+    .required("choose a Photo")
     .test(
       "is-valid-size",
       "Max allowed size is 10 mb",

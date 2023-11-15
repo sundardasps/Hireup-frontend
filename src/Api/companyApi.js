@@ -68,10 +68,12 @@ export async function companyProfile(email) {
   }
 }
 
-export async function addCompanyfullDetails(data) {
+export async function addCompanyfullDetails(formData,id) {
   try {
-    console.log(data);
-    const response = await companyCheck.post(`/companyFullDetails/${data.id}`,data.formData);
+    console.log(formData);
+    const response = await companyCheck.post(`/companyFullDetails/${id}`,formData,{headers:{
+      "Content-Type":"multipart/form-data"
+    }});
     return response;
   } catch (error) {
     console.log(error);
