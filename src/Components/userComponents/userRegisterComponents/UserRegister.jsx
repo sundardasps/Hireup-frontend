@@ -141,6 +141,7 @@ function UserRegister() {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.number}
+                    min={1}
                     name="number"
                     type="number"
                     className="border  placeholder-gray-400 focus:outline-none focus:border-black w-full pt-2 pr-2 pb-2 pl-2 mt-1 mr-0 mb-0 ml-0 text-base block bg-white border-gray-300 rounded-md"

@@ -43,13 +43,13 @@ function CompanyLogin() {
           }
         )
         .then((res) => {
-          console.log(res);
            companyLogin({ email: res.data.email, password: res.data.id }).then(
             (result) => {
+              console.log(result.data,"==========ggogogogogo");
               if (result.data.loginSuccess) {
-                console.log(result);
                 dispatch(
                   setCompanyDetails({
+                    id:result.data.loginData._id,
                     companyName: result.data.loginData.companyName,
                     email: result.data.loginData.email,
                     role: result.data.loginData.role,
@@ -78,16 +78,14 @@ function CompanyLogin() {
       onSubmit: async (value) => {
         const response = await companyLogin(value);
         if (response.data.loginSuccess) {
-          console.log(
-            response.data.loginData.companyName,
-            response.data.loginData.email,
-            response.data.loginData.role
-          );
+          console.log(response,"==================================");
           dispatch(
             setCompanyDetails({
+              id: response.data.loginData._id,
               companyName: response.data.loginData.companyName,
               email: response.data.loginData.email,
               role: response.data.loginData.role,
+
             })
           );
           localStorage.setItem("companyToken", response.data.jwtToken);

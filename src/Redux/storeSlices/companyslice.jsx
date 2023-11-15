@@ -4,6 +4,7 @@ const initialState = {
     companyName:"",
     email:"",
     role:"",
+    id:""
 
 }
 
@@ -15,13 +16,14 @@ const companySlice = createSlice({
             state.companyName = action.payload.companyName
             state.email = action.payload.email
             state.role = action.payload.role
+            state.id = action.payload.id
+
         },
         logOutDetails2:(state)=>{
             state.companyName = ""
             state.email = ""
             state.role = ""
-
-            
+            state.id=""
         }
     }
 })

@@ -1,18 +1,20 @@
 import {Field, useFormik} from 'formik'
 import { companyFullDetailsSchema } from '../../../Utils/yupValidations/yupCompanyvalidations';
+import { useState } from 'react';
+import { addCompanyfullDetails } from '../../../Api/companyApi';
+import {useSelector} from 'react-redux'
 function CompanyFullDetails() {
-
-
-
+ const [showImage,setShowImage] = useState('')
+   
+ const id = useSelector(state => state.company.id)
   const initialValue = {
-    
     companyName: "",
     companyLocation: "",
     companyAddress:"",
     size: "",
     gstNumber: "",
     companyRoles: "",
-    image:null,
+    image:"",
   
 
   }
@@ -21,19 +23,32 @@ function CompanyFullDetails() {
      initialValues:initialValue,
      validationSchema:companyFullDetailsSchema,
      onSubmit: async (values) =>{
-       console.log(values);
+      const formData = new FormData()
+      formData.append("companyName",values.companyName)
+      formData.append("companyLocation",values.companyLocation)
+      formData.append("companyAddress",values.companyAddress)
+      formData.append("size",values.size)
+      formData.append("gstNumber",values.gstNumber)
+      formData.append("image",values.image)
+      formData.append("companyRoles",values.companyRoles)
+     
+      const response = await addCompanyfullDetails({formData,id})
+       if(response.data.updated){
+        alert()
+       }
   }
   })
+  
 
 
     return (
       <div>
-        <section className="max-w-4xl p-6 mx-auto bg-blue-700 rounded-md shadow-md dark:bg-gray-800 mt-20">
-          <h1 className="text-xl font-bold text-white capitalize dark:text-white">
+        <section className="max-w-3xl p-3 mx-auto bg-blue-700 rounded-md shadow-md dark:bg-gray-800 mt-1">
+           <h1 className="text-xl font-bold text-white capitalize dark:text-white">
             Account settings
           </h1>
           <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 mt-4 sm:grid-cols-2">
               <div>
                 <label
                   className="text-white dark:text-gray-200"
@@ -49,7 +64,7 @@ function CompanyFullDetails() {
                   value={values.companyName}
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                 />
-                {errors.companyName && touched.companyName &&   <div className="font-semibold  text-red-500">
+                {errors.companyName && touched.companyName &&   <div className="font-semibold text-xs  text-red-500">
                         {errors.companyName}
                       </div> }
               </div>
@@ -68,37 +83,11 @@ function CompanyFullDetails() {
                   value={values.companyLocation}
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                 />
-                 {errors.companyLocation && touched.companyLocation &&   <div className="font-semibold  text-red-500">
+                 {errors.companyLocation && touched.companyLocation &&   <div className="font-semibold text-xs  text-red-500">
                         {errors.companyLocation}
                       </div> }
               </div>
-  
-              {/* <div>
-                <label
-                  className="text-white dark:text-gray-200"
-                  htmlFor="passwordConfirmation"
-                >
-                  Password Confirmation
-                </label>
-                <input
-                  id="passwordConfirmation"
-                  type="password"
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                />
-              </div> */}
-              {/* <div>
-                <label
-                  className="text-white dark:text-gray-200"
-                  htmlFor="passwordConfirmation"
-                >
-                  Color
-                </label>
-                <input
-                  id="color"
-                  type="color"
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                />
-              </div> */}
+
               <div>
                 <label
                   className="text-white dark:text-gray-200"
@@ -114,7 +103,7 @@ function CompanyFullDetails() {
                   value={values.companyAddress}
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                 />
-                 {errors.companyAddress && touched.companyAddress &&   <div className="font-semibold  text-red-500">
+                 {errors.companyAddress && touched.companyAddress &&   <div className="font-semibold text-xs  text-red-500">
                         {errors.companyAddress}
                       </div> }
               </div>
@@ -127,13 +116,14 @@ function CompanyFullDetails() {
                 </label>
                 <input
                   name="size"
-                  type="text"
+                  type="number"
+                  min={1}
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.size}
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                 />
-                 {errors.size && touched.size &&   <div className="font-semibold  text-red-500">
+                 {errors.size && touched.size &&   <div className="font-semibold text-xs   text-red-500">
                         {errors.size}
                       </div> }
               </div>
@@ -146,29 +136,17 @@ function CompanyFullDetails() {
                 </label>
                 <input
                   name="gstNumber"
-                  type="text"
+                  type="number"
+                  min={1}
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.gstNumber}
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                 />
-                 {errors.gstNumber && touched.gstNumber &&   <div className="font-semibold  text-red-500">
+                 {errors.gstNumber && touched.gstNumber &&   <div className="font-semibold  text-xs  text-red-500">
                         {errors.gstNumber}
                       </div> }
               </div>
-              {/* <div>
-                <label
-                  className="text-white dark:text-gray-200"
-                  htmlFor="passwordConfirmation"
-                >
-                 Started date
-                </label>
-                <input
-                  id="date"
-                  type="date"
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                />
-              </div> */}
               <div>
                 <label
                   className="text-white dark:text-gray-200"
@@ -184,11 +162,13 @@ function CompanyFullDetails() {
                   value={values.companyRoles}
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                 ></textarea>
-                 {errors.companyRoles && touched.companyRoles &&   <div className="font-semibold  text-red-500">
+                 {errors.companyRoles && touched.companyRoles &&   <div className="font-semibold text-xs   text-red-500">
                         {errors.companyRoles}
                       </div> }
               </div>
+              
               <div>
+              
                 <label className="block text-sm font-medium text-white">
                   Add profile image 
                 </label>
@@ -220,10 +200,19 @@ function CompanyFullDetails() {
                           type="file"
                           className="sr-only"
                           onBlur={handleBlur}
-                          onChange={handleChange}
-                          value={values.image}
-                          accept='image/*'
+                          // value={values.image}
+                          onChange={(event) => {
+                            handleChange({
+                              target: {
+                                name: "image",
+                                value: event.currentTarget.files[0], 
+                              },
+                            });
+                          }}
+                          accept="image/*"
                         />
+                          
+                        
                        
                       </label>
                       <p className="pl-1 text-white">or drag and drop</p>
@@ -232,13 +221,14 @@ function CompanyFullDetails() {
                   </div>
                   
                 </div>
-                {errors.image && touched.image &&   <div className="font-semibold  text-red-500">
+                {errors.image && touched.image &&   <div className="font-semibold text-xs  text-red-500">
                         {errors.image}
                       </div> }
               </div>
+         
             </div>
-  
-            <div className="flex justify-end mt-6">
+            
+            <div className="flex justify-end mt-3">
               <button type='submit' className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
                 Save
               </button>

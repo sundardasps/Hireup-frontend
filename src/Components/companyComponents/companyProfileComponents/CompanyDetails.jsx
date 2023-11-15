@@ -27,7 +27,7 @@ import {jwtDecode} from 'jwt-decode'
 
 
 function CompanyDetails() {
-   const token= localStorage.getItem('companyToken')
+const token= localStorage.getItem('companyToken')
 const data = jwtDecode(token)
   const navigate = useNavigate()
 
@@ -62,7 +62,7 @@ const data = jwtDecode(token)
                 placeholder="Input 4"
                 className="w-full sm:w-1/3 mb-2 sm:mb-0"
               >
-                Gst:
+                Gst:{data.exist._id}
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 h-auto sm:h-8 m-5">
