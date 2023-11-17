@@ -1,4 +1,4 @@
-import { Bars3CenterLeftIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { Bars3CenterLeftIcon, Bars3Icon, HomeIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import {
   Avatar,
   Button,
@@ -15,11 +15,19 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logOutDetails2 } from "../../../Redux/storeSlices/companyslice";
+import toast from "react-hot-toast";
 
 function CompanyNavbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const email = useSelector((state) => state.company.email);
+
+  const completed = useSelector((state) =>{
+    return state.company.completed
+   })
+
+   useEffect(()=>{
+     console.log(completed);
+   },[completed])
 
   const handleLogOut = () => {
     localStorage.removeItem("companyToken");
@@ -28,6 +36,7 @@ function CompanyNavbar() {
         companyName: "",
         email: "",
         role: "",
+        id:""
       })
     );
     navigate("/");
@@ -37,43 +46,21 @@ function CompanyNavbar() {
       <ul className="my-2 flex flex-col  lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
         <Typography
           as="li"
-          variant="small"
+          variant="h"
           color="blue-gray"
-          className="p-1 font-medium"
+          className="p-1 font-medium flex items-center"
+          onClick={()=>navigate('/company')}
         >
+          <HomeIcon className="h-8 w-8 p-1 cursor-pointer"/>
           <a
-            href="#"
-            className="flex items-center hover:text-blue-500 transition-colors"
+           
+            className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
           >
-            Pages
+            Home
           </a>
         </Typography>
-        <Typography
-          as="li"
-          variant="small"
-          color="blue-gray"
-          className="p-1 font-medium"
-        >
-          <a
-            href="#"
-            className="flex items-center hover:text-blue-500 transition-colors"
-          >
-            Account
-          </a>
-        </Typography>
-        <Typography
-          as="li"
-          variant="small"
-          color="blue-gray"
-          className="p-1 font-medium"
-        >
-          <a
-            href="#"
-            className="flex items-center hover:text-blue-500 transition-colors"
-          >
-            Blocks
-          </a>
-        </Typography>
+    
+
         <Typography
           as="li"
           variant="small"
@@ -91,7 +78,7 @@ function CompanyNavbar() {
                 />
               </MenuHandler>
               <MenuList>
-                <MenuItem onClick={()=>navigate("/company/profile")} className="flex items-center gap-2">
+                <MenuItem onClick={()=>completed ? navigate("/company/profile") : toast.error("Please update your profile first!")} className="flex items-center gap-2">
                   <svg
                     width="16"
                     height="16"

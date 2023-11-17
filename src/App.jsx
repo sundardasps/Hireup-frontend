@@ -8,11 +8,11 @@ import LandingPage from './Pages/commonPages/LandingPage';
 
 
 function App() {
-
+                  
   return (
      <Router>
+
       <Routes>
-        
          <Route index path="/" element={<LandingPage/>}/>
          <Route path="/user/*" element={<UserRoutes/>}/>
          <Route path="/company/*" element={<CompanyRoutes/>}/>

@@ -19,7 +19,6 @@ function UserNavbar() {
   let [isOpen, setOpen] = useState(false);
   const navigate = useNavigate();
 
-
   const myStyle = {
     zIndex: 999,
   };
@@ -48,37 +47,31 @@ function UserNavbar() {
           }`}
         >
           <li className="md:ml-8 md:my-0 my-7 font-semibold">
-              <Menu>
-                <MenuHandler>
-                  <Button className="border shadow"  color="white" >Login</Button>
-                </MenuHandler>
-                <MenuList>
-                  <hr className="my-2 border-blue-gray-50" />
-                  <MenuItem className="flex items-center gap-2 ">
-                    <Typography
-                      onClick={() => {
-                        navigate("/user/login");
-                      }}
-                      variant="small"
-                      className="font-medium"
-                    >
-                      User Login
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem className="flex items-center gap-2 ">
-                    <Typography
-                      onClick={() => {
-                        navigate("/company/login");
-                      }}
-                      variant="small"
-                      className="font-medium"
-                    >
-                      Company Login
-                    </Typography>
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            
+            <Menu>
+              <MenuHandler>
+                <Button className="border shadow" color="white">
+                  Login
+                </Button>
+              </MenuHandler>
+              <MenuList>
+                <hr className="my-2 border-blue-gray-50" />
+                <MenuItem className="flex items-center gap-2 ">
+                  <Typography variant="small" className="font-medium">
+                    User
+                  </Typography>
+                </MenuItem>
+                <MenuItem
+                  className="flex items-center gap-2 "
+                  onClick={() => {
+                    navigate("/company/login");
+                  }}
+                >
+                  <Typography variant="small" className="font-medium">
+                    Company
+                  </Typography>
+                </MenuItem>
+              </MenuList>
+            </Menu>
           </li>
         </ul>
         {/* Button */}

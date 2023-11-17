@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom"
 import CompanyNavbar from '../companyCommonComponents/CompanyNavbar'
+import CompanyFooter from '../companyCommonComponents/CompanyFooter'
 function CompanyLayout() {
   return (
     <div className="grid grid-rows-[5rem] overflow-x-hidden">
@@ -10,8 +11,8 @@ function CompanyLayout() {
                 <Outlet/>
                 </div>
            <div>
-      <div className="h-28 w-screen bg-white"></div>
-         
+         <div className="h-screen w-screen bg-white"></div>
+           <CompanyFooter/>
       </div>
     </div>
   )

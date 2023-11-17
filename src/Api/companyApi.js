@@ -59,9 +59,9 @@ export async function companyRegisterGoogle(userData) {
   }
 }
 
-export async function companyProfile(email) {
+export async function companyProfile() {
   try {
-    const response = await companyCheck.get(`/companyDetails/${email}`);
+    const response = await companyCheck.get("/companyDetails");
     return response;
   } catch (error) {
     console.log(error);
@@ -70,7 +70,7 @@ export async function companyProfile(email) {
 
 export async function addCompanyfullDetails(formData,id) {
   try {
-    console.log(formData);
+    console.log(formData,id);
     const response = await companyCheck.post(`/companyFullDetails/${id}`,formData,{headers:{
       "Content-Type":"multipart/form-data"
     }});

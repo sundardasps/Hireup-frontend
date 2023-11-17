@@ -5,24 +5,25 @@ import CompanyLogin from '../Components/companyComponents/companyLoginComponent/
 import CompanyVarification from '../Components/companyComponents/companyLoginComponent/CompanyVarification'
 import CompanyHomePage from '../Pages/companyPages/companyHomePage/CompanyHomePage'
 import CompanyPublic from '../Utils/protected/CompanyPublic'
-import LandingPage from '../Pages/commonPages/LandingPage'
+
 import CompanyForgotPass from '../Components/companyComponents/companyLoginComponent/CompanyForgotPass'
 import CompanyResetPassword from '../Components/companyComponents/companyLoginComponent/CompanyResetPass'
 
-import { useSelector } from "react-redux";
-import { useEffect, useState } from 'react'
 import CompanyProtected from '../Utils/protected/CompanyProtected'
 import CompanyProfilePage from '../Pages/companyPages/companyProfilePage/CompanyProfilePage'
 import CompanyFullDetails from '../Components/companyComponents/companyRegister/CompanyFullDetails'
+import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import CompanyPostPage from '../Pages/companyPages/companyPostsPage/CompanyPostPage'
 function CompanyRoutes() {
+   const completed = useSelector((state) =>{
+    return state.company.completed
+   })
 
-  const [company, setCompany] = useState("");
-  const userStore = useSelector((state) => state.company);
-  useEffect(() => {
-    setCompany(userStore.role);
-  },[userStore.role] );
-
-  return (
+   useEffect(()=>{
+     console.log(completed);
+   },[completed])
+   return (
     <div>
       <Routes>
         
@@ -32,12 +33,12 @@ function CompanyRoutes() {
          <Route path='/login' element={<CompanyPublic><CompanyLogin/></CompanyPublic>}/>
          <Route path='/forgotePassword' element={<CompanyPublic><CompanyForgotPass/></CompanyPublic>}/>
          
-         <Route path='/fulldetailsform' element={<CompanyFullDetails/>} />
-        
          <Route element={<CompanyProtected/>}>
          <Route element={<CompanyLayout/>} >
-         <Route path='/' element={<CompanyHomePage/>}/>
+         <Route path='/' element={completed ? <CompanyHomePage/> : <CompanyFullDetails/> }/>
          <Route path='/profile' element={<CompanyProfilePage/>}/>
+         <Route path='/posts' element={<CompanyPostPage/>}/>
+
          </Route>
          </Route>
       </Routes>

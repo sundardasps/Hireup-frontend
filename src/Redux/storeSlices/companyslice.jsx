@@ -4,8 +4,8 @@ const initialState = {
     companyName:"",
     email:"",
     role:"",
-    id:""
-
+    id:"",
+    completed:false 
 }
 
 const companySlice = createSlice({
@@ -16,6 +16,7 @@ const companySlice = createSlice({
             state.companyName = action.payload.companyName
             state.email = action.payload.email
             state.role = action.payload.role
+            state.completed = action.payload.completed
             state.id = action.payload.id
 
         },
@@ -23,6 +24,7 @@ const companySlice = createSlice({
             state.companyName = ""
             state.email = ""
             state.role = ""
+            state.completed = false 
             state.id=""
         }
     }

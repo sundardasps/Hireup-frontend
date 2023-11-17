@@ -9,8 +9,9 @@ export const userInterseption = axios.create({
 
 userInterseption.interceptors.request.use((request) => {
   
-  if (localStorage.getItem("userToken")) {
-    request.headers.Authorization = localStorage.getItem("userToken");
+  if (localStorage.getItem("token")) {
+    console.log("hiii");
+    request.headers.Authorization = localStorage.getItem("token");
   }
   return request;
 });

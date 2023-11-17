@@ -49,13 +49,12 @@ function CompanyRegister() {
         .then((res) => {
           companyRegisterGoogle(res.data).then((result) => {
             if (result.data.created) {
-              alert();
-              console.log(result);
               dispatch(
                 setCompanyDetails({
                   companyName: result.data.userData.companyName,
                   email: result.data.userData.email,
                   role: result.data.userData.role,
+                  completed: result.data.userData.is_completed,
                   id:result.data.userData._id
                 })
               );

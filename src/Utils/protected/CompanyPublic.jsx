@@ -1,12 +1,13 @@
 import { Navigate } from "react-router-dom";
+import {jwtDecode} from 'jwt-decode'
 
 function CompanyPublic(props) {
-  const company = localStorage.getItem("companyToken");
+ 
 
-  if (company) {
+  if (localStorage.getItem("companyToken")) {
     return <Navigate to={"/company"} />;
   } else {
-    <Navigate to={"/"} />;
+     <Navigate to={"/"} />;
     return props.children;
   }
 }

@@ -45,17 +45,18 @@ function CompanyLogin() {
         .then((res) => {
            companyLogin({ email: res.data.email, password: res.data.id }).then(
             (result) => {
-              console.log(result.data,"==========ggogogogogo");
               if (result.data.loginSuccess) {
+                console.log(result.data.loginData.is_completed);
                 dispatch(
                   setCompanyDetails({
                     id:result.data.loginData._id,
                     companyName: result.data.loginData.companyName,
                     email: result.data.loginData.email,
                     role: result.data.loginData.role,
+                    completed:result.data.loginData.is_completed,
                   })
                 );
-                localStorage.setItem("companyToken", result.data.jwtToken);
+                localStorage.setItem("companyToken",result.data.jwtToken);
                 navigate("/company");
               } else {
                 toast.error(result.data.message);
@@ -85,6 +86,7 @@ function CompanyLogin() {
               companyName: response.data.loginData.companyName,
               email: response.data.loginData.email,
               role: response.data.loginData.role,
+              completed:response.data.loginData.is_completed,
 
             })
           );
