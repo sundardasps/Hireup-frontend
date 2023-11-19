@@ -8,7 +8,6 @@ function CompanyProfilePage() {
     <div className=''>
     <CompanySidebar/>
     </div>
-    
 </div>
 
 

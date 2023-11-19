@@ -31,7 +31,7 @@ function UserNavbar() {
       <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
         {/* Logo section */}
         <div className="font-extrabold text-2xl cursor-pointer text-blue-500  flex items-center gap-1">
-          <span>HireUp</span>
+          <img src="/public/logo.png" className="min-w-fit h-14"/><span>HireUp</span>
         </div>
         {/* Menu icon */}
         <div

@@ -9,7 +9,7 @@ function PostsCard() {
   <div className='flex flex-col w-full sm:w-auto p-4'>
     <Typography color='blue' className='text-3xl font-bold mb-2'>
       Junior Frontend Developer
-      <hr className="my-1 border-teal-400" />
+      
     </Typography>
     <div className='flex flex-col sm:flex-row justify-between items-start'>
       <div className='flex items-center gap-2'>

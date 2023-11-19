@@ -80,3 +80,13 @@ export async function addCompanyfullDetails(formData,id) {
   }
 }
 
+export async function addCompanyPost(formData) {
+  try {
+    console.log(formData);
+    const response = await companyCheck.post("/companyFullDetails",formData)
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+

@@ -53,15 +53,15 @@ function CompanyDetails() {
             </text>
             <div className="flex flex-col sm:flex-row gap-1 h-auto sm:h-8 m-5">
               <MapPinIcon className="w-5 h-5" />
-              <p className="w-full sm:w-1/3 mb-2 sm:mb-0 text-sm">
+              <text className="w-full sm:w-1/3 mb-2 sm:mb-0 text-sm">
                 location:
                 <span className="text-gray-900 font-bold">
                   {data.exist.location}
                 </span>
-              </p>
+              </text>
 
               <BuildingOffice2Icon className="w-5 h-5" />
-              <p
+              <text
                 type="text"
                 placeholder="Input 4"
                 className="w-full sm:w-1/3 mb-2 sm:mb-0 text-sm"
@@ -70,10 +70,10 @@ function CompanyDetails() {
                 <span className="text-gray-900 font-bold">
                   {data.exist.size}
                 </span>
-              </p>
+              </text>
 
               <CurrencyRupeeIcon className="w-5 h-5" />
-              <p
+              <text
                 type="text"
                 placeholder="Input 4"
                 className="w-full sm:w-1/3 mb-2 sm:mb-0 text-sm"
@@ -82,7 +82,7 @@ function CompanyDetails() {
                 <span className="text-gray-900 font-bold">
                   {data.exist.gst_number}
                 </span>
-              </p>
+              </text>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 h-auto sm:h-8 m-5">
               <ChatBubbleBottomCenterTextIcon className="w-5 h-5" />

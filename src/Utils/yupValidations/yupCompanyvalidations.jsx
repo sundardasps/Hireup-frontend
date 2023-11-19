@@ -64,3 +64,13 @@ export const companySignUpSchema = Yup.object().shape({
     ),
 });
   
+
+export const companyPostSchema = Yup.object().shape({
+  jobPosition: Yup.string().required("This field is required").trim(),
+  skills: Yup.string().required("This field is required").trim(),
+  experience: Yup.string().required("This field is required").trim(),
+  type: Yup.string().required("This field is required").trim(),
+  responsibilities: Yup.string().required("This field is required").trim(),
+  endTime: Yup.string().required("This field is required").trim(),
+  salery:Yup.string().required("This field is required").trim()
+});

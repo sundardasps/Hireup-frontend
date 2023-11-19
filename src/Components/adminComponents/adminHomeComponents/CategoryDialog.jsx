@@ -91,6 +91,7 @@ export function CategoryDialog() {
                   {errors.category}
                 </span>
               )}
+              
               <Typography className="-mb-2" variant="h6">
                 Title
               </Typography>

@@ -27,6 +27,7 @@ export function CategoryTitleDialog() {
       initialValues: initialValue,
       validationSchema: titleValidationSchema,
       onSubmit: async (value) => {
+        alert()
         const response = await categoryTitleAdd(value);
         if (response.data.created) {
           window.location.reload();

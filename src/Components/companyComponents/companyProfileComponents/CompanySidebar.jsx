@@ -5,8 +5,6 @@ import {
   List,
   ListItem,
   ListItemPrefix,
-  ListItemSuffix,
-  Chip,
 } from "@material-tailwind/react";
 import {
   PresentationChartBarIcon,
@@ -20,7 +18,7 @@ import {
   TableCellsIcon,
   UserIcon
 } from "@heroicons/react/24/solid";
-import { AddPostForm } from '../companyDialogs/AddPostForm';
+import  {AddPostForm}  from '../companyDialogs/AddPostForm';
 
 function CompanySidebar() {
   const navigate = useNavigate()
@@ -34,31 +32,27 @@ function CompanySidebar() {
           <hr className="my-2 border-blue-gray-50" />
         </div>
         <List>
-        <ListItem onClick={() => navigate("/company/profile") }>
+        <ListItem key={"profile"} onClick={() => navigate("/company/profile") }>
             <ListItemPrefix>
               <UserIcon className="h-5 w-5" />
-            </ListItemPrefix>
+            </ListItemPrefix >
             Profile
-            <ListItemSuffix></ListItemSuffix>
           </ListItem>
-          <ListItem onClick={() => navigate("/company/posts") }>
+          <ListItem key={"post"}  onClick={() => navigate("/company/posts") }>
             <ListItemPrefix>
               <TableCellsIcon className="h-5 w-5" />
             </ListItemPrefix>
             Posts
-            <ListItemSuffix></ListItemSuffix>
+          
           </ListItem>
-          <ListItem
-            onClick={() => {
-            
-            }}
+          <ListItem key={"addpost"} 
           >
             <ListItemPrefix>
               <PlusCircleIcon className="h-5 w-5" />
             </ListItemPrefix>
-            <AddPostForm/>
+            <AddPostForm />
           </ListItem>
-          <ListItem
+          <ListItem key={"schedule"} 
             onClick={() => {
               
             }}
