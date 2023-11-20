@@ -8,7 +8,7 @@ export const companyInterseptor = axios.create({
 
 companyInterseptor.interceptors.request.use((request) => {
   if (localStorage.getItem("companyToken")) {
-    request.headers.Authorization = localStorage.getItem("companyToken");
+    request.headers.Authorization = "Bearer " + localStorage.getItem("companyToken");
   }
 
   return request;

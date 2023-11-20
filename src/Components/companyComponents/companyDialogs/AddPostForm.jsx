@@ -1,5 +1,5 @@
 
-import {XMarkIcon} from '@heroicons/react/20/solid'
+import {PlusCircleIcon, XMarkIcon} from '@heroicons/react/20/solid'
 import {
   Dialog,
   DialogBody,
@@ -10,6 +10,8 @@ import {
   Button,
   CardBody,
   Card,
+  Badge,
+  CardFooter,
 } from "@material-tailwind/react";
 import { useFormik} from 'formik' 
 import {toast,Toaster} from 'react-hot-toast'
@@ -19,71 +21,185 @@ import { addCompanyPost } from '../../../Api/companyApi';
 export function AddPostForm() {
   const [open, setOpen] = useState(false);
   function handleOpen(){setOpen(!open)}
-  const [value,setValue] = useState({
-     jobPosition:"",skills:"",experience:"",jobtype:"",responsibilities:"",endTime:"",salery:""
-  })
+
+  const jobType = [
+    "Remote",
+    "Hybrid",
+    "On site",
+  ];
+
+
+  const initialValues = {
+    jobPosition: "",
+    experience: "",
+    skills: "",
+    responsibilities: "",
+    endTime: "",
+    salery: "",
+  };
  
  
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleSubmit,
+    handleChange,
+    setFieldValue,
+    setValues,
+  } = useFormik({
+    initialValues: initialValues,
+    validationSchema: companyPostSchema,
+    onSubmit: async (values) => {
+      console.log(values);
+      const formData = new FormData();
+      formData.append("jobType", values.jobType);
+      formData.append("experience", values.experience);
+      formData.append("place", values.place);
+      formData.append("skills", values.skills);
+      formData.append("jobPosition", values.jobPosition);
+      formData.append("responsibilities", values.responsibilities);
+      const response = await addCompanyPost(formData)
+      if (response.data.created) {
+        setOpen(!open);
+      } else {
+        setOpen(!open);
+        toast.error()
+      }
+    },
+  });
 
 
 
+   const handlejobTypeChange = (selectedValue) =>{
+      setFieldValue("jobType",selectedValue)
+   }
 
-  const handleSubmit = (e) =>{
-    
-    e.preventDefault()
-    
-   if(value.jobPosition === ""){
-      toast.error("jobPosition field required")
-     
-    }else if(value.experience === ""){
-      toast.error("experience field required")
 
-       
-    }else if(value.jobtype === ""){
-      console.log(value.jobtype,"======");
-      toast.error("type field required")
-
-      
-    }else if(value.skills === ""){
-      toast.error("skills field required")
-
-      
-    }else if(value.responsibilities === ""){
-      toast.error("responsibilities field required")
-      
-      
-    }else if(value.endTime === ""){
-      toast.error("endTime field required")
-
-       
-    }else if(value.salery === ""){
-      toast.error("salery field required")
-    }else{
-      alert()
-    }
-
-  }
     
   
  
   return (
-    <React.Fragment>
-  
+    <>
+    <p  onClick={handleOpen}>
+      Complete Now
+    </p>
 
+    <Dialog
+      size="md"
+      open={open}
+      
+      className="bg-transparent shadow-none"
+    >
+      <form onSubmit={handleSubmit}>
+        <Card className="mx-auto w-full">
+          <CardBody className="flex flex-col gap-2">
+          <XMarkIcon className='w-6 h-6' onClick={handleOpen}/>
+          
+            <Input
+              label="Job title"
+              size="lg"
+              name="jobPosition"
+              type="jobPosition"
+              value={values.jobPosition}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {touched.jobPosition && errors.jobPosition && (
+              <div className="text-red-500 text-xs ">{errors.jobPosition}</div>
+            )}
+            <Input
+              label="experience"
+              name="experience"
+              value={values.experience}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              size="lg"
+            />
+            {touched.experience && errors.experience && (
+              <div className="text-red-500 text-xs ">{errors.experience}</div>
+            )}
+            <div>
+              <Input
+                label="skills"
+                name="skills"
+                style={{ Height: "40px" }}
+                value={values.skills}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              {touched.skills && errors.skills && (
+                <div className="text-red-500 text-xs ">
+                  {errors.skills}
+                </div>
+              )}
+            </div>
+            <Input
+              label="responsibilities"
+              name="responsibilities"
+              value={values.responsibilities}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              size="lg"
+            />
+            {touched.responsibilities && errors.responsibilities && (
+              <div className="text-red-500 text-xs ">{errors.responsibilities}</div>
+            )}
 
-<Typography>
-  <button onClick={handleOpen}>Add post</button>
-</Typography>
-  
-    
-      <Dialog open={open}  size="md" >
-            <Card className="mx-auto w-full max-w-[24rem]">
-            <CardBody className="flex flex-col gap-4">
-              </CardBody>
-             
-              </Card>
+            
+            <Input
+              label="salery"
+              name="salery"
+              value={values.salery}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              size="lg"
+              type='number'
+            />
+            {touched.salery && errors.salery && (
+              <div className="text-red-500 text-xs ">{errors.salery}</div>
+            )}
 
-      </Dialog>
-    </React.Fragment>
+            <div className="flex gap-2">
+              <Select
+                onChange={handlejobTypeChange}
+                value={values.jobType}
+                name="jobType"
+                label="Catogery"
+                onBlur={handleBlur}
+              >
+                {jobType.map((item) => (
+                  <Option value={item} key={item}>{item}</Option>
+                ))}
+              </Select>
+              {touched.jobType && errors.jobType && (
+              <div className="text-red-500 text-xs ">{errors.jobType}</div>
+            )}
+
+           <Input
+              label="endTime"
+              name="endTime"
+              value={values.endTime}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              size="lg"
+              type='date'
+            />
+            {touched.endTime && errors.endTime && (
+              <div className="text-red-500 text-xs ">{errors.endTime}</div>
+            )}
+            </div>
+
+          </CardBody>
+          <CardFooter className="pt-0">
+            <Button variant="gradient" type="submit" fullWidth>
+              Update
+            </Button>
+          </CardFooter>
+        </Card>
+      </form>
+    </Dialog>
+  </>
   );
 }
