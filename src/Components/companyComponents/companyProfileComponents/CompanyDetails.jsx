@@ -119,8 +119,8 @@ function CompanyDetails() {
           {data.exist.company_roles}
         </CardBody>
         <CardFooter className="flex justify-end gap-2">
-      
-             <Button variant="outlined">Edit</Button>
+{/*       
+             <Button variant="outlined">Edit</Button> */}
     
 
         </CardFooter>

@@ -56,8 +56,8 @@ export const userLogInSchema = Yup.object().shape({
 });
 
 export const userVarifySchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Please enter a valid email")
+  email: Yup.string().matches(/^[\w.-]+@[\w.-]+\.\w+$/,"Please enter a valid email"
+  ).email("Please enter a valid email")
     .required("This field is required")
     .trim(),
 });

@@ -56,7 +56,7 @@ function LandingCards() {
             </div>
             <div className="absolute bottom-0 left-0 py-1 px-1 md:px-3 bg-gradient-to-r rounded from-blue-400 to-blue-700 shadow-lg">
               <h1 className="text-2xl md:text-1xl lg:text-2xl text-white ">
-                Hireing job
+                Hiring job
               </h1>
             </div>
           </CardBody>

@@ -55,7 +55,9 @@ function UserNavbar() {
               </MenuHandler>
               <MenuList>
                 <hr className="my-2 border-blue-gray-50" />
-                <MenuItem className="flex items-center gap-2 ">
+                <MenuItem className="flex items-center gap-2 "  onClick={() => {
+                    navigate("/user/login");
+                  }}>
                   <Typography variant="small" className="font-medium">
                     User
                   </Typography>

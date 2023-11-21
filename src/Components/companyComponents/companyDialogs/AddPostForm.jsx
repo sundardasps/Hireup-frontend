@@ -14,20 +14,20 @@ import {
   CardFooter,
 } from "@material-tailwind/react";
 import { useFormik} from 'formik' 
-import {toast,Toaster} from 'react-hot-toast'
+import {Toaster, toast} from 'react-hot-toast'
 import { companyPostSchema } from "../../../Utils/yupValidations/yupCompanyvalidations";
 import React, { useState } from 'react';
 import { addCompanyPost } from '../../../Api/companyApi';
+import {useNavigate} from 'react-router-dom'
 export function AddPostForm() {
   const [open, setOpen] = useState(false);
   function handleOpen(){setOpen(!open)}
-
+  const navigate = useNavigate()
   const jobType = [
     "Remote",
     "Hybrid",
     "On site",
   ];
-
 
   const initialValues = {
     jobPosition: "",
@@ -53,19 +53,12 @@ export function AddPostForm() {
     validationSchema: companyPostSchema,
     onSubmit: async (values) => {
       console.log(values);
-      const formData = new FormData();
-      formData.append("jobType", values.jobType);
-      formData.append("experience", values.experience);
-      formData.append("place", values.place);
-      formData.append("skills", values.skills);
-      formData.append("jobPosition", values.jobPosition);
-      formData.append("responsibilities", values.responsibilities);
-      const response = await addCompanyPost(formData)
+      const response = await addCompanyPost(values)
       if (response.data.created) {
         setOpen(!open);
+        navigate("/company/posts")
       } else {
-        setOpen(!open);
-        toast.error()
+        toast.error(response.data.message)
       }
     },
   });
@@ -83,7 +76,7 @@ export function AddPostForm() {
   return (
     <>
     <p  onClick={handleOpen}>
-      Complete Now
+      Add post 
     </p>
 
     <Dialog
@@ -92,7 +85,7 @@ export function AddPostForm() {
       
       className="bg-transparent shadow-none"
     >
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <Card className="mx-auto w-full">
           <CardBody className="flex flex-col gap-2">
           <XMarkIcon className='w-6 h-6' onClick={handleOpen}/>
@@ -194,11 +187,12 @@ export function AddPostForm() {
           </CardBody>
           <CardFooter className="pt-0">
             <Button variant="gradient" type="submit" fullWidth>
-              Update
+             Submit
             </Button>
           </CardFooter>
         </Card>
       </form>
+      <Toaster/>
     </Dialog>
   </>
   );
