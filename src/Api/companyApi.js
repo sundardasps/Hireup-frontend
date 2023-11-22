@@ -89,3 +89,12 @@ export async function addCompanyPost(formData) {
   }
 }
 
+export async function companyPosts({page,filter,search}) {
+  try {
+    const response = await companyCheck.get("/getPost",{params:{page,filter,search}})
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+

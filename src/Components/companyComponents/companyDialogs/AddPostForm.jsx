@@ -19,10 +19,12 @@ import { companyPostSchema } from "../../../Utils/yupValidations/yupCompanyvalid
 import React, { useState } from 'react';
 import { addCompanyPost } from '../../../Api/companyApi';
 import {useNavigate} from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query';
 export function AddPostForm() {
   const [open, setOpen] = useState(false);
   function handleOpen(){setOpen(!open)}
   const navigate = useNavigate()
+  const quaryClint = useQueryClient();
   const jobType = [
     "Remote",
     "Hybrid",
@@ -56,6 +58,7 @@ export function AddPostForm() {
       const response = await addCompanyPost(values)
       if (response.data.created) {
         setOpen(!open);
+        quaryClint.invalidateQueries("jobs");
         navigate("/company/posts")
       } else {
         toast.error(response.data.message)
