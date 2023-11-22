@@ -15,6 +15,8 @@ import CompanyFullDetails from '../Components/companyComponents/companyRegister/
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import CompanyPostPage from '../Pages/companyPages/companyPostsPage/CompanyPostPage'
+import PostFullDetails from '../Components/companyComponents/companyPostsComponents/PostFullDetails'
+import PostFullDetailsPage from '../Pages/companyPages/companyPostsPage/PostFullDetailsPage'
 function CompanyRoutes() {
    const completed = useSelector((state) =>{
     return state.company.completed
@@ -38,7 +40,8 @@ function CompanyRoutes() {
          <Route path='/' element={completed ? <CompanyHomePage/> : <CompanyFullDetails/> }/>
          <Route path='/profile' element={<CompanyProfilePage/>}/>
          <Route path='/posts' element={<CompanyPostPage/>}/>
-
+         <Route path='/post/details' element={<PostFullDetailsPage/>}/>
+         
          </Route>
          </Route>
       </Routes>

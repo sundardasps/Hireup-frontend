@@ -98,3 +98,14 @@ export async function companyPosts({page,filter,search}) {
   }
 }
 
+
+export async function postDetails(id){
+
+try {
+  const response = await companyCheck.get(`/postDetails/${id}`)
+  return response
+} catch (error) {
+   console.log(error);
+}
+
+}

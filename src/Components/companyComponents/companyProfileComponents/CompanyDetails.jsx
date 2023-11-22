@@ -37,7 +37,7 @@ function CompanyDetails() {
  
   return (
     <div className=" ">
-      <Card className="flex justify-between container mx-2 my-5   bg-gray-100  h-auto border">
+      <Card className="flex justify-between container mx-2 my-5   bg-white  h-auto border">
         <CardHeader className="flex flex-col sm:flex-row justify-between w-auto   m-4 first-letter rounded">
           <div className="w-80  h-60 sm:h-auto md:w-auto ">
             <img

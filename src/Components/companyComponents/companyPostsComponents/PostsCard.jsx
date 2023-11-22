@@ -15,12 +15,12 @@ import {
 } from "@heroicons/react/24/solid";
 import { companyPosts } from "../../../Api/companyApi";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-
+import {useNavigate} from "react-router-dom"
 function PostsCard() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(1);
-
+  const navigate = useNavigate()
   const [debounsedSearch, setDebouncedSearch] = useState("");
   const TABS = [
     {
@@ -54,7 +54,7 @@ function PostsCard() {
       
   },);
 
-  console.log(data);
+
 
   const handlePage = async (newPage) => {
     if (newPage < 1 || newPage > data.totalPage) {
@@ -64,10 +64,10 @@ function PostsCard() {
   };
 
   return (
-    <>  
+    <div>  
          <div className="flex gap-4 md:flex-row mt-5">
         <Tabs value="all" className="w-full md:w-max">
-          <TabsHeader>
+          <TabsHeader >
             {TABS.map(({ label, value }) => (
               <Tab onClick={() => setFilter(value)} key={value} value={value}>
                 &nbsp;&nbsp;{label}&nbsp;&nbsp;
@@ -92,11 +92,11 @@ function PostsCard() {
 
       {data &&
         data.data &&
-        data.data.map(({ job_title, end_time, job_type, required_skills }) => {
+        data.data.map(({ _id, job_title, end_time, job_type, required_skills }) => {
           return (
-            <Card
+            <Card onClick={()=>navigate(`/company/post/details`,{state : {_id}})}
               key={job_title}
-              className="flex flex-col sm:flex-row justify-between container mx-5 my-5 xl:h-auto xl:w-[40rem] border bg-white shadow-lg rounded-md"
+              className="flex flex-col sm:flex-row justify-between container mx-5 my-5 xl:h-auto xl:w-[40rem] border bg-white shadow-lg rounded-md hover:scale-105 duration-500"
             >
               <div className="flex flex-col w-full sm:w-auto p-4">
                 <Typography color="blue" className="text-3xl font-bold mb-2">
@@ -156,7 +156,7 @@ function PostsCard() {
           </Button>
         </div>
       </div>
-    </>
+    </div>
 
   );
 }

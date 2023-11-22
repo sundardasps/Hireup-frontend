@@ -269,6 +269,7 @@ function CompanyNavbar() {
     <Collapse open={openNav}>
       <NavList />
     </Collapse>
+    
   </Navbar>
   );
 }
