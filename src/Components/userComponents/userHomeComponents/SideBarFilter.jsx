@@ -21,7 +21,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import { categoryDataForUser } from "../../../Api/userApi";
-import { useQuery } from "@tanstack/react-query";
+
 
 export function SideBarFilter() {
   const [open, setOpen] = React.useState(0);
@@ -39,14 +39,14 @@ export function SideBarFilter() {
   }, []);
 
   return (
-    <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue  border-2 m-5">
+    <Card className="h-auto w-full max-w-[16rem] p-4 shadow-xl shadow-blue  border-2 m-5">
       <div className="mb-1 p-2">
         <Typography variant="h3" color="blue-gray">
           Job positions
         </Typography>
       </div>
       <List>
-        {category.map((value, index) => (
+        {category&&category.map((value, index) => (
           <Accordion
             key={index}
             open={open === index + 1}

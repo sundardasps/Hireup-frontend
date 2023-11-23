@@ -63,6 +63,20 @@ export const companySignUpSchema = Yup.object().shape({
       (value) => value && value.size <= MAX_FILE_SIZE
     ),
 });
+
+export const companyFullDetailsEditSchema = Yup.object().shape({
+  companyName: Yup.string().required("This field is required").trim(),
+  companyLocation: Yup.string().required("This field is required").trim(),
+  companyAddress: Yup.string().required("This field is required").trim(),
+  size: Yup.string().required("This field is required").min(1,'Add minimus size').min(1,'Please enter a valid size').max(5,'Please enter a valid size').trim(),
+  gstNumber: Yup.string().required("This field is required").max(10,'Please enter a valid gst number').trim(),
+  companyRoles: Yup.string()
+  .matches(/[a-zA-Z]/, "At least one alphabet character required").min(10)
+  // .matches(/\*/, "At least one * symbol required")
+  .required("At least one alphabet character and one * symbol required")
+  .max(500),
+  number: Yup.string().required("This field is required").min(10,'Please enter a valid phone number').max(10,'Please enter a valid phone number').trim(),
+});
   
 
 export const companyPostSchema = Yup.object().shape({
@@ -75,4 +89,5 @@ export const companyPostSchema = Yup.object().shape({
   .required('Date is required')
   .min(new Date(), 'Date must be in the future'),
   salery:Yup.string().required("This field is required").trim()
+  
 });

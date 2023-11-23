@@ -72,11 +72,8 @@ if (error) {
     <CardBody className="flex flex-col sm:flex-row justify-between w-auto h-auto bg-white m-2 first-letter shadow-inner rounded border">
     {data ? data.jobDetails.responsibilities  : ""}
     </CardBody>
-    <CardFooter className="flex justify-end gap-2">
-      
+     <CardFooter className="flex justify-end gap-2">
           <Button variant="outlined">Edit</Button>
-
-
     </CardFooter>
   </Card></div>
   )

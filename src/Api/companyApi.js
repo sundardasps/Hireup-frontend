@@ -68,12 +68,18 @@ export async function companyProfile() {
   }
 }
 
-export async function addCompanyfullDetails(formData,id) {
+export async function addCompanyfullDetails(formData, id) {
   try {
-    console.log(formData,id);
-    const response = await companyCheck.post(`/companyFullDetails/${id}`,formData,{headers:{
-      "Content-Type":"multipart/form-data"
-    }});
+    console.log(formData, id);
+    const response = await companyCheck.post(
+      `/companyFullDetails/${id}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     return response;
   } catch (error) {
     console.log(error);
@@ -82,30 +88,38 @@ export async function addCompanyfullDetails(formData,id) {
 
 export async function addCompanyPost(formData) {
   try {
-    const response = await companyCheck.post("/addpost",formData)
+    const response = await companyCheck.post("/addpost", formData);
     return response;
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function companyPosts({page,filter,search}) {
+export async function companyPosts({ page, filter, search }) {
   try {
-    const response = await companyCheck.get("/getPost",{params:{page,filter,search}})
+    const response = await companyCheck.get("/getPost", {
+      params: { page, filter, search },
+    });
     return response;
   } catch (error) {
     console.log(error);
   }
 }
 
-
-export async function postDetails(id){
-
-try {
-  const response = await companyCheck.get(`/postDetails/${id}`)
-  return response
-} catch (error) {
-   console.log(error);
+export async function postDetails(id) {
+  try {
+    const response = await companyCheck.get(`/postDetails/${id}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
+export async function editProfileDetails(values) {
+  try {
+    const response = await companyCheck.post("/editProfile", values);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 }

@@ -1,33 +1,47 @@
 
 import { Button, Card, CardBody, CardFooter, CardHeader, IconButton, Tooltip, Typography } from '@material-tailwind/react'
-import React from 'react'
+import { BuildingOffice2Icon } from '@heroicons/react/20/solid'
 
 function  JobCards() {
   return (
 <>
 
-  <Card className="w-full max-w-[29rem] shadow-lg sm:m-10 md:m-5 lg:m-10 border-2 ">
-      <CardBody>
-        <div className="mb-3 flex items-center justify-between">
-          <Typography variant="h5" color="blue-gray" className="font-medium">
-          <span>Frontend Engineer</span>
-          </Typography>
-          <span className="bg-green-500 rounded-full uppercase text-white text-sm px-4 py-1 font-bold shadow-xl"> Remote </span>
-
-        </div>
-        <span>Banglore, India</span>
-
-        <Typography color="gray">
-          Enter a freshly updated and thoughtfully furnished peaceful home
-          surrounded by ancient trees, stone walls, and open meadows.
-        </Typography>
-      </CardBody>
-      <CardFooter className="pt-3">
-        <Button className="mr-2 my-1 uppercase tracking-wider px-2 text-indigo-600 border-indigo-600 hover:bg-indigo-600 hover:text-white border text-sm font-semibold rounded py-1 transition transform duration-500 cursor-pointer">
-           Apply
-        </Button>
-      </CardFooter>
-    </Card>
+            <Card 
+          
+              className="flex flex-col sm:flex-row justify-between container mx-5 my-5 xl:h-auto xl:w-[30rem] border bg-white shadow-lg rounded-md hover:scale-110 duration-1000"
+            >
+              <div className="flex flex-col w-full sm:w-auto p-4">
+                <Typography color="blue" className="text-3xl font-bold mb-2">
+              fsaf
+                </Typography>
+                <div className="flex flex-col sm:flex-row justify-between items-start">
+                  <div className="flex items-center gap-2">
+                    <BuildingOffice2Icon className="h-6 w-6 text-teal-500" />
+                   fs
+                    <Typography className="font-bold text-gray-700"></Typography>
+                  </div>
+                  <div className="flex flex-col mt-2 sm:mt-0">
+                    <Typography className="font-semibold text-gray-700">
+                      Location:
+                    </Typography>
+                    <span className="text-gray-500">
+                    fsfdds
+                    </span>
+                  </div>
+                </div>
+                <div className="text-gray-500 mt-2">
+                  Ending date: [dsfsf]
+                </div>
+              </div>
+              <CardFooter className="flex justify-end items-center p-4">
+                <Button
+                  color="purple"
+                  className="hover:bg-purple-700 focus:outline-none focus:border-purple-700"
+                >
+                  Remove
+                </Button>
+              </CardFooter>
+            </Card>
     
 
 

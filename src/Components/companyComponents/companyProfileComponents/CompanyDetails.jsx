@@ -10,38 +10,47 @@ import {
   TableCellsIcon,
 } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
-
+import { BarLoader } from 'react-spinners';
 import {
   Button,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
-  List,
-  ListItem,
-  ListItemPrefix,
-  ListItemSuffix,
-  Typography,
 } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
-import { companyProfile } from "../../../Api/companyApi";
-import { useSelector } from "react-redux";
 
-import { jwtDecode } from "jwt-decode";
+import { companyProfile } from "../../../Api/companyApi";
+import { useQuery } from "@tanstack/react-query";
+import { EditProfile } from "../companyDialogs/EditProfile";
+import MainLoading from "../../commonComponents/Loadings/MainLoding";
 
 function CompanyDetails() {
-  const token = localStorage.getItem("companyToken");
-  const data = jwtDecode(token);
-  const navigate = useNavigate();
 
- 
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["companyProfile"],
+    queryFn: async () => {
+      const response = await companyProfile().then((res) => res.data);
+      return response;
+    },
+  });
+
+
+  if (isLoading) {
+    return <MainLoading />;
+  }
+  
+  if (error) {
+    return <h1>errorr.....</h1>;
+  }
+
   return (
     <div className=" ">
       <Card className="flex justify-between container mx-2 my-5   bg-white  h-auto border">
         <CardHeader className="flex flex-col sm:flex-row justify-between w-auto   m-4 first-letter rounded">
           <div className="w-80  h-60 sm:h-auto md:w-auto ">
             <img
-              src={data.exist.image && data.exist.image }
+              src={data.exist.image ? data.exist.image : ""}
               alt=""
               className="w-ful h-full object-cover shadow-black shadow-sm rounded"
             />
@@ -113,20 +122,39 @@ function CompanyDetails() {
                 className="w-full sm:w-1/3 mb-2 sm:mb-0"
               ></p>
             </div>
+            <div className="flex flex-col sm:flex-row gap-2 h-auto sm:h-8 m-5">
+              <PhoneIcon className="w-5 h-5" />
+              <p
+                type="text"
+                placeholder="Input 4"
+                className="w-full  mb-2 sm:mb-0 text-sm"
+              >
+                Address: {""}
+                <span className="text-gray-900 font-bold">
+                  {data.exist.address}
+                </span>
+              </p>
+            </div>
           </div>
         </CardHeader>
         <CardBody className="flex flex-col sm:flex-row justify-between w-auto h-auto bg-white m-4 first-letter shadow-inner rounded border">
           {data.exist.company_roles}
         </CardBody>
         <CardFooter className="flex justify-end gap-2">
-{/*       
-             <Button variant="outlined">Edit</Button> */}
-    
-
+          <EditProfile
+            data={{
+              companyName: data.exist.companyName,
+              location: data.exist.location,
+              size: data.exist.size,
+              gstNumber: data.exist.gst_number,
+              email: data.exist.email,
+              number: data.exist.number,
+              roles: data.exist.company_roles,
+              address: data.exist.address,
+            }}
+          />
         </CardFooter>
       </Card>
-
-     
     </div>
   );
 }

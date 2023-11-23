@@ -10,7 +10,7 @@ function UserLayout() {
           <UserNavbar />
         </div>
 
-        <div className="">
+        <div className="bg-gray-100">
           <Outlet />
         </div>
         <div>

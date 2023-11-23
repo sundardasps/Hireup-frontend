@@ -1,15 +1,15 @@
+import React from 'react';
+import { BarLoader } from 'react-spinners';
 
-import { GooSpinner } from 'react-spinners-kit';
-
-function MainLoading({loading}) {
+function MainLoading({ showLogo = true, loaderProps = {} }) {
   return (
     <div className='w-screen h-screen flex flex-col items-center justify-center'>
+      <div>
+        <img src="/public/logo.png" alt="" />
+      </div>
 
-      {/* <YourLogo /> */}
-
-      {/* GooSpinner */}
       <div className='mt-4'>
-        <GooSpinner  loading={loading} />
+        <BarLoader {...loaderProps} />
       </div>
     </div>
   );
