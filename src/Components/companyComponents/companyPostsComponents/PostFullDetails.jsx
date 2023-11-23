@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useParams } from "react-router-dom";
 import {useQuery} from '@tanstack/react-query'
 import { postDetails } from '../../../Api/companyApi';
+import EditPost from '../companyDialogs/EditPost';
 function PostFullDetails() {
   const location = useLocation()
   const jobId = location.state._id
@@ -16,8 +17,7 @@ function PostFullDetails() {
       return response.data;
      }
   })
-  
-  console.log(data);
+
 if (isLoading) {
   <div>dsjsghfdhjgfhjdgs</div>
 }
@@ -73,9 +73,14 @@ if (error) {
     {data ? data.jobDetails.responsibilities  : ""}
     </CardBody>
      <CardFooter className="flex justify-end gap-2">
-          <Button variant="outlined">Edit</Button>
+        
+          {
+            data ? <EditPost postData={data} />
+          : ""
+          }
     </CardFooter>
-  </Card></div>
+    </Card>
+  </div>
   )
 }
 

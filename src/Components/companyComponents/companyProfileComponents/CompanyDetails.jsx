@@ -10,7 +10,7 @@ import {
   TableCellsIcon,
 } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
-import { BarLoader } from 'react-spinners';
+import { BarLoader } from "react-spinners";
 import {
   Button,
   Card,
@@ -23,10 +23,9 @@ import { companyProfile } from "../../../Api/companyApi";
 import { useQuery } from "@tanstack/react-query";
 import { EditProfile } from "../companyDialogs/EditProfile";
 import MainLoading from "../../commonComponents/Loadings/MainLoding";
+import ProfileImageEdit from "../companyDialogs/ProfileImageEdit";
 
 function CompanyDetails() {
-
-
   const { data, isLoading, error } = useQuery({
     queryKey: ["companyProfile"],
     queryFn: async () => {
@@ -35,11 +34,10 @@ function CompanyDetails() {
     },
   });
 
-
   if (isLoading) {
     return <MainLoading />;
   }
-  
+
   if (error) {
     return <h1>errorr.....</h1>;
   }
@@ -47,13 +45,17 @@ function CompanyDetails() {
   return (
     <div className=" ">
       <Card className="flex justify-between container mx-2 my-5   bg-white  h-auto border">
-        <CardHeader className="flex flex-col sm:flex-row justify-between w-auto   m-4 first-letter rounded">
-          <div className="w-80  h-60 sm:h-auto md:w-auto ">
+        <CardHeader className="flex flex-col sm:flex-row  w-auto   m-4 first-letter rounded">
+          
+          <div className=" m-2 cursor-pointer" >
+          
             <img
               src={data.exist.image ? data.exist.image : ""}
               alt=""
-              className="w-ful h-full object-cover shadow-black shadow-sm rounded"
+              className="w-full h-full object-cover rounded"
+              style={{ width: "80%", height: "80%" }}
             />
+            <ProfileImageEdit datas={{image:data.exist.image,size:"xs"}}/>
           </div>
 
           <div className="mx-2 my-2  container border  rounded-lg p-4">

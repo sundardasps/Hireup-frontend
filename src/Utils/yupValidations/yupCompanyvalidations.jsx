@@ -91,3 +91,19 @@ export const companyPostSchema = Yup.object().shape({
   salery:Yup.string().required("This field is required").trim()
   
 });
+
+
+export const imageEditSchema = Yup.object().shape({
+  image:Yup.mixed()
+  .test("is-image", "Only image files are allowed", (value) => {
+    if (value) {
+      return imageFormats.includes(value.type);
+    }
+    return true;
+  }).required("choose a Photo")
+  .test(
+    "is-valid-size",
+    "Max allowed size is 10 mb",
+    (value) => value && value.size <= MAX_FILE_SIZE
+  ),
+});

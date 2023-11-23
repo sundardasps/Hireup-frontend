@@ -123,3 +123,28 @@ export async function editProfileDetails(values) {
     console.log(error);
   }
 }
+
+export async function editProfileImage(formData) {
+  try {
+    console.log(formData,"===========");
+    const response = await companyCheck.post("/changeProfileImage",formData,{
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export async function editPostDetails(values,postId) {
+  try {
+    console.log(postId);
+    const response = await companyCheck.put(`/editPost/${postId}`, values);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
