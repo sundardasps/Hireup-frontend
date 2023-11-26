@@ -89,8 +89,29 @@ export async function getProfile() {
 
 export async function editUserProfile(data) {
   try {
-    console.log(data,"=======user api");
     const response = await userCheck.put("/EditProfile",data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function editUserDp(formData) {
+  try {
+    const response = await userCheck.post("/EditDp",formData,{headers: {
+      "Content-Type": "multipart/form-data",
+    },});
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function editUserBgImg(formData) {
+  try {
+    const response = await userCheck.post("/EditBgImg",formData,{headers: {
+      "Content-Type": "multipart/form-data",
+    },});
     return response;
   } catch (error) {
     console.log(error);

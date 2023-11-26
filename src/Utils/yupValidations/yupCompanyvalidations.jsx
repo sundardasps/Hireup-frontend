@@ -98,7 +98,7 @@ export const imageEditSchema = Yup.object().shape({
       return imageFormats.includes(value.type);
     }
     return true;
-  }).required("choose a Photo")
+  }).required("Choose a Photo")
   .test(
     "is-valid-size",
     "Max allowed size is 10 mb",
