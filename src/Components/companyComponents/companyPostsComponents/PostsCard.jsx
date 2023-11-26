@@ -96,10 +96,10 @@ function PostsCard() {
           return (
             <Card onClick={()=>navigate(`/company/post/details`,{state : {_id}})}
               key={job_title}
-              className="flex flex-col sm:flex-row justify-between container mx-5 my-5 xl:h-auto xl:w-[40rem] border bg-white shadow-lg rounded-md hover:scale-105 duration-500"
+              className="flex  sm:flex-row justify-between container m-5  h-min xl:w-[30rem] border bg-white shadow-lg rounded-md hover:scale-105 duration-500"
             >
               <div className="flex flex-col w-full sm:w-auto p-4">
-                <Typography color="blue" className="text-3xl font-bold mb-2">
+                <Typography color="blue" className="text-1xl font-bold mx-5">
                   {job_title}
                 </Typography>
                 <div className="flex flex-col sm:flex-row justify-between items-start">

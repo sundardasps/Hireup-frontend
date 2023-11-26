@@ -2,13 +2,14 @@ import {
   Bars3CenterLeftIcon,
   Bars3Icon,
   XMarkIcon,
-  HomeIcon
+  HomeIcon,
+  MagnifyingGlassIcon
 } from "@heroicons/react/24/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutDetails } from "../../../Redux/storeSlices/userSlice";
 
 import { useNavigate } from "react-router-dom";
-import { Button, Collapse, IconButton, Navbar } from "@material-tailwind/react";
+import { Button, Collapse, IconButton, Input, Navbar } from "@material-tailwind/react";
 
 import {
   Menu,
@@ -18,14 +19,15 @@ import {
   Avatar,
   Typography,
 } from "@material-tailwind/react";
-import React from "react";
+import React, { useState } from "react";
+
 
 function UserNavbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const email = useSelector((state) => state.user.email);
-
+ 
+ 
   const handleLogOut = () => {
     localStorage.removeItem("token");
     dispatch(
@@ -38,9 +40,26 @@ function UserNavbar() {
     navigate("/");
   };
 
+
+
+  
+
+
   function NavList() {
     return (
+     
+      
+    
       <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+          
+         <Typography
+          as="li"
+          variant="h"
+          color="blue-gray"
+          className="p-1 font-medium flex items-center"
+        >
+        </Typography>
+
         <Typography
           as="li"
           variant="h"
@@ -81,13 +100,15 @@ function UserNavbar() {
             Saved
           </a>
         </Typography> */}
+
+
         <Typography
           as="li"
           variant="small"
           color="blue-gray"
           className="p-1 font-medium"
         >
-          {localStorage.getItem("token") ? (
+        
             <Menu>
               <MenuHandler>
                 <Avatar
@@ -117,7 +138,7 @@ function UserNavbar() {
                   <Typography
                     variant="small"
                     className="font-medium"
-                    onClick={() => navigate(`/user/profile/${email}`)}
+                    onClick={() => navigate("/user/profile")}
                   >
                     My Profile
                   </Typography>
@@ -207,42 +228,12 @@ function UserNavbar() {
                 </MenuItem>
               </MenuList>
             </Menu>
-          ) : (
-            <Menu>
-              <MenuHandler>
-                <Button variant="outlined">Login</Button>
-              </MenuHandler>
-              <MenuList>
-                <hr className="my-2 border-blue-gray-50" />
-                <MenuItem className="flex items-center gap-2 ">
-                  <Typography
-                    onClick={() => {
-                      navigate("/login");
-                    }}
-                    variant="small"
-                    className="font-medium"
-                  >
-                    User Login
-                  </Typography>
-                </MenuItem>
-                <MenuItem className="flex items-center gap-2 ">
-                  <Typography
-                    onClick={() => {
-                      navigate("/company/login");
-                    }}
-                    variant="small"
-                    className="font-medium"
-                  >
-                    Company Login
-                  </Typography>
-                </MenuItem>
-              </MenuList>
-            </Menu>
-          )}
         </Typography>
       </ul>
     );
   }
+
+
   const [openNav, setOpenNav] = React.useState(false);
 
   const handleWindowResize = () =>
@@ -256,15 +247,22 @@ function UserNavbar() {
     };
   }, []);
   return (
+    <div>
+ 
+
+
     <Navbar className="mx-auto max-w-screen-xxl px-6 py-3">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography
-          as="a"
-          variant="h6"
-          className="mr-4 cursor-pointer py-1.5"
-        >
-          Material Tailwind
-        </Typography>
+      <Typography
+        as="a"
+
+        variant="h6"
+        className="mr-4 cursor-pointer py-1.5"
+      >
+         <div className="font-extrabold text-2xl cursor-pointer text-blue-500  flex items-center gap-1">
+          <img src="/public/logo.png" className="min-w-fit h-14"/><span>HireUp</span>
+        </div>
+      </Typography>
         <div className="hidden lg:block">
           <NavList />
         </div>
@@ -285,6 +283,10 @@ function UserNavbar() {
         <NavList />
       </Collapse>
     </Navbar>
+     
+     
+
+    </div>
   );
 }
 

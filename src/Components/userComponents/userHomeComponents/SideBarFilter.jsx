@@ -10,6 +10,7 @@ import {
   Accordion,
   AccordionHeader,
   AccordionBody,
+  Input,
 } from "@material-tailwind/react";
 import {
   PresentationChartBarIcon,
@@ -18,14 +19,20 @@ import {
   Cog6ToothIcon,
   InboxIcon,
   PowerIcon,
+  MagnifyingGlassIcon,
+  ChevronDownIcon,
 } from "@heroicons/react/24/solid";
-import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import { categoryDataForUser } from "../../../Api/userApi";
+import JobCards from "./JobCards";
 
 
 export function SideBarFilter() {
   const [open, setOpen] = React.useState(0);
   const [category, setCategory] = React.useState([]);
+  const [search,setSearch] = useState()
+  const [filter,setFilter] = useState()
+  const [data,setData] = useState({search:"",filter:""})
+
 
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
@@ -38,12 +45,37 @@ export function SideBarFilter() {
     fetchCategory();
   }, []);
 
+  const handleSearch =(e)=>{
+    setSearch(e.target.value)
+
+  }
+  const handleFilter = (e)=>{
+     const selectedValue = e.target.innerText; 
+     setFilter(selectedValue)
+  }
+
+
+
+
   return (
-    <Card className="h-auto w-full max-w-[16rem] p-4 shadow-xl shadow-blue  border-2 m-5">
+    <>
+    
+    <Card className="h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5">
       <div className="mb-1 p-2">
         <Typography variant="h3" color="blue-gray">
-          Job positions
+          Find jobs..
         </Typography>
+      <div className="w-auto">
+              <Input
+                label="Search"
+                value={search}
+                autoFocus
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+                icon={<MagnifyingGlassIcon className="h-5 w-5" onClick={handleSearch} />}
+                />
+            </div>
       </div>
       <List>
         {category&&category.map((value, index) => (
@@ -60,7 +92,7 @@ export function SideBarFilter() {
             }
           >
             <ListItem
-              className="p-1 hover:bg-gray-200 border-2 "
+              className="p-1 hover:bg-gray-200 border "
               selected={open === index + 1}
             >
               <AccordionHeader
@@ -76,10 +108,8 @@ export function SideBarFilter() {
               {value.category.map((value, index) => (
                 <List
                   key={index}
-                  className="p-0 text-sm  "
-                  onClick={() => alert()}
                 >
-                  <ListItem className="font-bold">{value}</ListItem>
+                  <ListItem key={index} onClick={handleFilter}className="font-medium">{value}</ListItem>
                 </List>
               ))}
             </AccordionBody>
@@ -87,5 +117,7 @@ export function SideBarFilter() {
         ))}
       </List>
     </Card>
+
+    </>
   );
 }

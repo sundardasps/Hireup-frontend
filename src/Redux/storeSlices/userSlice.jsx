@@ -20,8 +20,6 @@ const userSlice = createSlice({
             state.userName = ""
             state.email = ""
             state.role = ""
-
-            
         }
     }
 })

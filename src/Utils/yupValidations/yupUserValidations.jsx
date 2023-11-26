@@ -1,15 +1,14 @@
 import * as Yup from "yup";
 
-
-
 export const userSignUpSchema = Yup.object().shape({
   userName: Yup.string().required("This field is required").trim(),
   number: Yup.string()
     .required("This field is required")
-    .min(10, "Please enter a valid phone number").max(10, "Please enter a valid phone number")
+    .min(10, "Please enter a valid phone number")
+    .max(10, "Please enter a valid phone number")
     .trim(),
-  email: Yup.string().matches(/^[\w.-]+@[\w.-]+\.\w+$/,"Please enter a valid email"
-  )
+  email: Yup.string()
+    .matches(/^[\w.-]+@[\w.-]+\.\w+$/, "Please enter a valid email")
     .email("Please enter a valid email")
     .required("This field is required")
     .trim(),
@@ -34,10 +33,9 @@ export const userSignUpSchema = Yup.object().shape({
   }),
 });
 
-
 export const userLogInSchema = Yup.object().shape({
-  email: Yup.string().matches(/^[\w.-]+@[\w.-]+\.\w+$/,"Please enter a valid email"
-    )
+  email: Yup.string()
+    .matches(/^[\w.-]+@[\w.-]+\.\w+$/, "Please enter a valid email")
     .email("Please enter a valid email")
     .required("This field is required")
     .trim(),
@@ -56,12 +54,12 @@ export const userLogInSchema = Yup.object().shape({
 });
 
 export const userVarifySchema = Yup.object().shape({
-  email: Yup.string().matches(/^[\w.-]+@[\w.-]+\.\w+$/,"Please enter a valid email"
-  ).email("Please enter a valid email")
+  email: Yup.string()
+    .matches(/^[\w.-]+@[\w.-]+\.\w+$/, "Please enter a valid email")
+    .email("Please enter a valid email")
     .required("This field is required")
     .trim(),
 });
-
 
 export const userResetPasswordSchema = Yup.object().shape({
   password: Yup.string()
@@ -83,4 +81,21 @@ export const userResetPasswordSchema = Yup.object().shape({
         .oneOf([Yup.ref("password")], "The passwords do not match");
     }
   }),
+});
+
+
+export const userEditSchema = Yup.object().shape({
+  name: Yup.string().required("This field is required").trim(),
+  number: Yup.string()
+    .required("This field is required")
+    .min(10, "Please enter a valid phone number")
+    .max(10, "Please enter a valid phone number")
+    .trim(),
+  email: Yup.string()
+    .matches(/^[\w.-]+@[\w.-]+\.\w+$/, "Please enter a valid email")
+    .email("Please enter a valid email")
+    .required("This field is required")
+    .trim(),
+    title:Yup.string().required("This field is required").trim(),
+    place:Yup.string().required("This field is required").trim()
 });

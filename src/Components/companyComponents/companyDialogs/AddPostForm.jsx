@@ -58,6 +58,7 @@ export function AddPostForm() {
       const response = await addCompanyPost(values)
       if (response.data.created) {
         setOpen(!open);
+        window.location.reload()
         quaryClint.invalidateQueries("jobs");
         navigate("/company/posts")
       } else {
@@ -107,6 +108,7 @@ export function AddPostForm() {
             )}
             <Input
               label="experience"
+              type='number'
               name="experience"
               value={values.experience}
               onChange={handleChange}

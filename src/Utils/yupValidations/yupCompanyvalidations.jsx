@@ -89,9 +89,7 @@ export const companyPostSchema = Yup.object().shape({
   .required('Date is required')
   .min(new Date(), 'Date must be in the future'),
   salery:Yup.string().required("This field is required").trim()
-  
 });
-
 
 export const imageEditSchema = Yup.object().shape({
   image:Yup.mixed()

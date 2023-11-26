@@ -65,3 +65,34 @@ export async function categoryDataForUser() {
     console.log(error);
   }
 }
+
+export async function getAllJobs({ search, filter }) {
+  try {
+    const response = await userCheck.get("/getAllJobs", {
+      params: { search, filter },
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getProfile() {
+  try {
+    const response = await userCheck.get("/profile");
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export async function editUserProfile(data) {
+  try {
+    console.log(data,"=======user api");
+    const response = await userCheck.put("/EditProfile",data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -33,7 +33,7 @@ function UserRoutes() {
       <Route element={<UserProtected/>}>
       <Route element={<UserLayOut/>}>
       <Route path="/" element={<UserHome/>}/>
-      <Route path="/profile/:email" element={<Profile/>}/>
+      <Route path="/profile" element={<Profile/>}/>
 
       </Route>
       </Route>
