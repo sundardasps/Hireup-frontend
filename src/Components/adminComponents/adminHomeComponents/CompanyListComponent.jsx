@@ -157,7 +157,7 @@ export function CompanyListComponent() {
               {data &&
                 data.data &&
                 data.data.map(
-                  ({ _id, companyName, is_blocked, email, number }, index) => {
+                  ({ _id, companyName, is_blocked, email, number ,role}, index) => {
                     const isLast = index === data.data.length - 1;
                     const classes = isLast
                       ? "p-4"
@@ -234,6 +234,7 @@ export function CompanyListComponent() {
                         <td>
                           <Dialogue
                             data={{
+                              role:role,
                               is_blocked: is_blocked,
                               name:companyName,
                               id: _id,

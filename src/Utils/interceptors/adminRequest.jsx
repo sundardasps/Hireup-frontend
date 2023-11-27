@@ -8,7 +8,7 @@ export  const adminInterseptor = axios.create({
 
 adminInterseptor.interceptors.request.use((request) => {
   if (localStorage.getItem("adminToken")) {
-    request.headers.Authorization = localStorage.getItem("adminToken");
+    request.headers.Authorization = "Bearer " + localStorage.getItem("adminToken");
   }
   return request;
 });

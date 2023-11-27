@@ -56,7 +56,7 @@ export async function companiesData({ search, filter, page }) {
 
 export async function companyblockOrUnBlock(id) {
   try {
-    const response = await adminCheck.put(`/companyBlockOrUnblock/${id}`);
+    const response = await adminCheck.post(`/companyBlockOrUnblock/${id}`);
     return response;
   } catch (error) {
     console.error(error);

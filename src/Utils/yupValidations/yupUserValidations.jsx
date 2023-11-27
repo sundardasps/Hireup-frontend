@@ -91,11 +91,11 @@ export const userEditSchema = Yup.object().shape({
     .min(10, "Please enter a valid phone number")
     .max(10, "Please enter a valid phone number")
     .trim(),
-  email: Yup.string()
-    .matches(/^[\w.-]+@[\w.-]+\.\w+$/, "Please enter a valid email")
-    .email("Please enter a valid email")
-    .required("This field is required")
-    .trim(),
+  // email: Yup.string()
+  //   .matches(/^[\w.-]+@[\w.-]+\.\w+$/, "Please enter a valid email")
+  //   .email("Please enter a valid email")
+  //   .required("This field is required")
+  //   .trim(),
     title:Yup.string().required("This field is required").trim(),
     place:Yup.string().required("This field is required").trim()
 });

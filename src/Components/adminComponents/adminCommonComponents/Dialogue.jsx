@@ -22,7 +22,7 @@ export function Dialogue({ data }) {
 
 //---------------- user block or unblock -------------------//
 
-
+console.log(data);
   const handleActionUser = async () => {
     try {
       const response = await userblockOrUnBlock(data.id);

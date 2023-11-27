@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Spinner } from "@material-tailwind/react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import PropTypes from "prop-types"; // Import prop-types library
 import {
   Button,
   Dialog,
@@ -17,6 +18,7 @@ import { userEditSchema } from "../../../Utils/yupValidations/yupUserValidations
 import { editUserProfile } from "../../../Api/userApi";
 
 export default function UserProfileEdit({ profileData }) {
+  console.log(profileData);
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = useState(false);
   const handleOpen = () => {
@@ -30,13 +32,15 @@ export default function UserProfileEdit({ profileData }) {
     name: profileData.data.exist.userName,
     title: profileData.data.exist.userTitle,
     place: profileData.data.exist.place,
-    email: profileData.data.exist.email,
+    // email: profileData.data.exist.email,
     number: profileData.data.exist.number,
   };
   
   const handleLoding = () =>{
     setLoading((currentLoading)=>!currentLoading)
   }
+ 
+
 
   //-----------------------------------Profile  edit--------------------------------//
 
@@ -48,9 +52,9 @@ export default function UserProfileEdit({ profileData }) {
         handleLoding()
         const response = await editUserProfile(values);
         if (response.data.updated) {
+          queryClient.invalidateQueries("userProfile");
           handleLoding()
           handleOpen();
-          queryClient.invalidateQueries("userProfile");
           toast.success(response.data.message);
         } else {
           toast.error(response.data.message);
@@ -164,7 +168,7 @@ export default function UserProfileEdit({ profileData }) {
                     </div>
                   )}
                 </div>
-                <div>
+                {/* <div>
                   <label
                     className="text-white dark:text-gray-200"
                     htmlFor="emailAddress"
@@ -185,7 +189,7 @@ export default function UserProfileEdit({ profileData }) {
                       {errors.email}
                     </div>
                   )}
-                </div>
+                </div> */}
               </div>
 
               <div className="flex justify-end mt-3">
@@ -212,3 +216,17 @@ export default function UserProfileEdit({ profileData }) {
     </>
   );
 }
+
+UserProfileEdit.propTypes = {
+  profileData: PropTypes.shape({
+    data: PropTypes.shape({
+      exist: PropTypes.shape({
+        userName: PropTypes.string,
+        userTitle: PropTypes.string,
+        place: PropTypes.string,
+        email: PropTypes.string,
+        number: PropTypes.string,
+      }),
+    }),
+  }),
+};

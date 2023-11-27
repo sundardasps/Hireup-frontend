@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import userLogo from '../../../../public/user.png'
+import banner from '../../../../public/banner.webp'
 import {
   Button,
   Dialog,
@@ -10,37 +12,25 @@ import {
   Input,
   Checkbox,
   Spinner,
+  Tabs,
+  TabsHeader,
+  Tab,
+  Progress,
+  IconButton,
 } from "@material-tailwind/react";
 import { PencilIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import UserProfileEdit from "../userDialogs/UserProfileEdit";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { editUserDp, getProfile } from "../../../Api/userApi";
+import { addSkills, editUserDp, getProfile } from "../../../Api/userApi";
 import { useFormik } from "formik";
 import toast, { ToastBar, Toaster } from "react-hot-toast";
 import { imageEditSchema } from "../../../Utils/yupValidations/yupCompanyvalidations";
 import { UserBgImg } from "../userDialogs/UserBgImg";
+import { PlusIcon } from "@heroicons/react/24/solid";
+import { AllSkills } from "../userDialogs/AllSkills";
 
 function UserDetails() {
   const queryClient = useQueryClient();
-  const [open, setOpen] = React.useState(false);
-  const [loading, setLoading] = useState(false);
-  const [selectedImage, setSelectedImage] = useState("");
-
-  const initialValue = {
-    image: selectedImage,
-  };
-
-  const handleOpen = () => {
-    setOpen((cur) => !cur), setSelectedImage("");
-  };
-
-  const handleLoading = () => {
-    setLoading((currentLoading) => !currentLoading);
-    console.log(loading);
-  };
-
-  //-----------------------------------------Profile data fetching----------------------------------------//
-
   const { data, isLoading, error } = useQuery({
     queryKey: ["userProfile"],
     queryFn: async () => {
@@ -48,6 +38,78 @@ function UserDetails() {
       return response;
     },
   });
+  const [open, setOpen] = React.useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const [skillForm, setSkillForm] = useState({
+    skill: "",
+    level: "",
+  });
+  const [selectedImage, setSelectedImage] = useState("");
+
+  const [skillErros, setSkillError] = useState({
+    skill: "",
+    level: "",
+  });
+
+  console.log(skillForm);
+
+  const initialValue = {
+    image: selectedImage,
+  };
+
+  const TABS = [
+    {
+      label: "Beginner",
+      value: "Beginner",
+    },
+    {
+      label: "Intermediate",
+      value: "Intermediate",
+    },
+    {
+      label: "Advanced",
+      value: "Advanced",
+    },
+  ];
+
+  const handleOpen = () => {
+    setOpen((cur) => !cur), setSelectedImage("");
+  };
+
+  const handleLoading = () => {
+    setLoading((currentLoading) => !currentLoading);
+  };
+
+  //-----------------------------------------Profile data fetching----------------------------------------//
+
+
+
+  
+
+  const handleSkill = (e) => {
+    const { name, value } = e.target;
+    setSkillForm((pre) => ({
+      ...pre,
+      [name]: value,
+    }));
+
+    setSkillError((pre) => ({
+      ...pre,
+      [name]: "",
+    }));
+  };
+
+  const validateSkill = (skillForm) => {
+    const errors = {};
+    if (!skillForm.skill) {
+      errors.skill = "Skill is required";
+    }
+    if (!skillForm.level.trim()) {
+      errors.level = "Level is required";
+    }
+    return errors;
+  };
 
   //-----------------------------------------User dp updation ----------------------------------------//
 
@@ -71,6 +133,29 @@ function UserDetails() {
       },
     });
 
+  //-----------------------------------------User Skills updation ----------------------------------------//
+
+  const AddSkills = async () => {
+    try {
+      const errors = validateSkill(skillForm);
+      if (Object.keys(errors).length > 0) {
+        setSkillError(errors);
+        return;
+      }
+      const response = await addSkills(skillForm);
+      if (response.data.updated) {
+        toast.success(response.data.message);
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   if (isLoading) {
     return <h1>Lodiing.....</h1>;
   }
@@ -82,30 +167,28 @@ function UserDetails() {
   return (
     <>
       <div className="flex justify-center">
-        <div className="bg-gray-100 overflow-hidden">
+        <div className="bg-gray-100 overflow-auto no-scrollbar">
           <div className="container mx-auto my-5 p-5">
             <div className="md:flex no-wrap md:-mx-2 ">
               <div className="w-full md:w-6/12 md:mx-2">
-                <div className=" bg-white p-2 ">
+                <div className=" bg-white p-2 shadow-md">
                   <div className=" relative mb-20">
                     {/* Background Image */}
-
                     <div className="bgimage relative">
                       <img
-                        src={data ? data.exist.userCoverDp : ""}
+                        src={data.exist.userCoverDp  ? data.exist.userCoverDp : banner}
                         className="inline-block w-full h-48 border-2 border-white rounded-md object-cover object-center"
                         alt="Background"
                       />
                       <div className="absolute bottom-4 right-5  rounded-lg cursor-pointer">
-                        <UserBgImg bgImage={{data}}/>
+                        <UserBgImg bgImage={{ data }} />
                       </div>
                     </div>
-
                     {/* Profile Image */}
                     <div className=" absolute bottom-[-50%] left-24 transform -translate-x-1/2 mb-5">
                       <a onClick={handleOpen}>
                         <img
-                          src={data ? data.exist.userDp : ""}
+                          src={data.exist.userDp ? data.exist.userDp : userLogo}
                           className="relative inline-block h-40 w-40 rounded-full outline-double object-cover object-center cursor-pointer"
                           alt="Profile"
                         />
@@ -120,7 +203,7 @@ function UserDetails() {
                       {data ? data.exist.userTitle : ""}
                     </h3>
                   </div>
-                  <p className="text-sm text-gray-500 hover:text-gray-600 leading-6 cursor-pointer hover:text-light-blue-500">
+                  <p className="text-sm text-gray-500 hover:text-gray-600 leading-6 cursor-pointer ">
                     {data ? data.exist.place : ""}
                   </p>
                   <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
@@ -152,72 +235,62 @@ function UserDetails() {
 
                 <div className="my-4"></div>
 
-                <div className="bg-white p-3 hover:shadow">
-                  <div className="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
-                    <span className="text-green-500">
-                      <svg
-                        className="h-5 fill-current"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                <div className="bg-white p-2 hover:shadow">
+                  <form action="">
+                    <div className="flex justify-between  space-x-3 font-semibold text-gray-900 text-xl leading-8">
+                      <span>Add skills</span>
+                      <PlusIcon
+                        className="w-8 h-5 cursor-pointer"
+                        onClick={AddSkills}
+                      />
+                    </div>
+
+                    <div className="flex flex-col  justify-center gap-4">
+                      <div className="">
+                        <Input
+                          label="Add skills.."
+                          name="skill"
+                          onChange={handleSkill}
                         />
-                      </svg>
-                    </span>
-                    <span>Similar Profiles</span>
-                  </div>
-                  <div className="grid grid-cols-3">
-                    <div className="text-center my-2">
-                      <img
-                        className="h-16 w-16 rounded-full mx-auto"
-                        src="https://cdn.australianageingagenda.com.au/wp-content/uploads/2015/06/28085920/Phil-Beckett-2-e1435107243361.jpg"
-                        alt=""
-                      />
-                      <a href="#" className="text-main-color">
-                        Kojstantin
-                      </a>
+                        {skillErros.skill && (
+                          <div className="text-sm text-orange-900">
+                            {skillErros.skill}
+                          </div>
+                        )}
+                      </div>
+                      <div className="">
+                        <span className="font-medium">Select your level</span>
+                        <Tabs value={skillForm.level} className="w-full ">
+                          <TabsHeader>
+                            {TABS.map(({ label, value }) => (
+                              <Tab
+                                name="level"
+                                onClick={() =>
+                                  handleSkill({
+                                    target: { name: "level", value },
+                                  })
+                                }
+                                key={value}
+                                value={value}
+                              >
+                                &nbsp;&nbsp;{label}&nbsp;&nbsp;
+                              </Tab>
+                            ))}
+                          </TabsHeader>
+                        </Tabs>
+                        {skillErros.level && (
+                          <div className="text-sm text-orange-900">
+                            {skillErros.level}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <div className="text-center my-2">
-                      <img
-                        className="h-16 w-16 rounded-full mx-auto"
-                        src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4"
-                        alt=""
-                      />
-                      <a href="#" className="text-main-color">
-                        James
-                      </a>
-                    </div>
-                    <div className="text-center my-2">
-                      <img
-                        className="h-16 w-16 rounded-full mx-auto"
-                        src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
-                        alt=""
-                      />
-                      <a href="#" className="text-main-color">
-                        Natie
-                      </a>
-                    </div>
-                    <div className="text-center my-2">
-                      <img
-                        className="h-16 w-16 rounded-full mx-auto"
-                        src="https://bucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com/public/images/f04b52da-12f2-449f-b90c-5e4d5e2b1469_361x361.png"
-                        alt=""
-                      />
-                      <a href="#" className="text-main-color">
-                        Casey
-                      </a>
-                    </div>
-                  </div>
+                  </form>
                 </div>
               </div>
+
               <div className="w-full md:w-6/12 mx-2 h-60">
-                <div className="bg-white p-3 shadow-sm rounded-sm">
+                <div className="bg-white p-2 shadow-sm rounded-sm">
                   <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                     <span className="text-green-500">
                       <svg
@@ -235,71 +308,44 @@ function UserDetails() {
                         />
                       </svg>
                     </span>
-                    <span className="tracking-wide">About</span>
+                    <span className="tracking-wide">Skills</span>
                   </div>
-                  <div className="text-gray-700">
-                    <div className="grid md:grid-cols-2 text-sm">
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">
-                          First Name
+
+                    <div
+                      
+                      className="flex  text-gray-700 bg-blue-gray-100 rounded-xl m-2 "
+                      >
+                      {data.exist.skills.slice(0, 3).map((value, index) => (
+                      <div key={index} className="grid md:grid-cols-1  mx-2">
+                        <div className="grid grid-cols-3">
+                          <div className=" px-2 py-2 font-semibold text-sm w-72 ">
+                            <span> {value.skill}</span>
+                          </div>
                         </div>
-                        <div className="px-4 py-2">Jane</div>
-                      </div>
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">Last Name</div>
-                        <div className="px-4 py-2">Doe</div>
-                      </div>
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">Gender</div>
-                        <div className="px-4 py-2">Female</div>
-                      </div>
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">
-                          Contact No.
-                        </div>
-                        <div className="px-4 py-2">+11 998001001</div>
-                      </div>
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">
-                          Current Address
-                        </div>
-                        <div className="px-4 py-2">
-                          Beech Creek, PA, Pennsylvania
+                        <div className="flex items-center m-1 ">
+                          {value.level === "Beginner" && (
+                            <Progress value={25} color="blue" />
+                          )}
+                          {value.level === "Intermediate" && (
+                            <Progress value={50} color="yellow" />
+                          )}
+                          {value.level === "Advanced" && (
+                            <Progress value={90} color="light-green" />
+                          )}
                         </div>
                       </div>
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">
-                          Permanant Address
-                        </div>
-                        <div className="px-4 py-2">
-                          Arlington Heights, IL, Illinois
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">Email.</div>
-                        <div className="px-4 py-2">
-                          <a
-                            className="text-blue-800"
-                            href="mailto:jane@example.com"
-                          >
-                            jane@example.com
-                          </a>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">Birthday</div>
-                        <div className="px-4 py-2">Feb 06, 1998</div>
-                      </div>
+                        ))}
                     </div>
-                  </div>
+
+
                   <button className="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">
-                    Show Full Information
+                    <AllSkills SkillsData={{ data }} />
                   </button>
                 </div>
 
                 <div className="my-4"></div>
 
-                <div className="bg-white p-3 shadow-sm rounded-sm">
+                <div className="bg-white p-2 shadow-sm rounded-sm">
                   <div className="grid grid-cols-2">
                     <div>
                       <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
@@ -512,10 +558,30 @@ function UserDetails() {
           </div>
         </div>
       </div>
-
       <Dialog size="xs" open={open} className="bg-transparent shadow-none">
         <Card className="mx-auto w-full max-w-[25rem]   ">
-          <XMarkIcon className="w-9 h-9 m-1" onClick={handleOpen} />
+          <IconButton
+            color="blue-gray"
+            size="sm"
+            variant="text"
+            onClick={handleOpen}
+            className="m-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+              className="h-5 w-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </IconButton>
           <form onSubmit={handleSubmit} encType="multipart/form-data">
             <CardBody className="flex flex-col gap-1">
               <div className="flex justify-center items-center  ">
@@ -523,7 +589,7 @@ function UserDetails() {
                   <div className="mx-9 ">
                     <img
                       className="rounded-lg shadow-l border-2"
-                      src={data.exist.userDp}
+                      src={data.exist.userDp?data.exist.userDp:userLogo}
                       style={{ width: "150px", height: "150px" }}
                       alt=""
                     />

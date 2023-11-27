@@ -126,7 +126,6 @@ export async function editProfileDetails(values) {
 
 export async function editProfileImage(formData) {
   try {
-    console.log(formData,"===========");
     const response = await companyCheck.post("/changeProfileImage",formData,{
       headers: {
         "Content-Type": "multipart/form-data",
@@ -143,6 +142,15 @@ export async function editPostDetails(values,postId) {
   try {
     console.log(postId);
     const response = await companyCheck.put(`/editPost/${postId}`, values);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getUserList({search}) {
+  try {
+    const response = await companyCheck.get("/getUserList",{params:{search}})
     return response;
   } catch (error) {
     console.log(error);

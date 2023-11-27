@@ -122,12 +122,6 @@ function PostsCard() {
                 </div>
               </div>
               <CardFooter className="flex justify-end items-center p-4">
-                <Button
-                  color="purple"
-                  className="hover:bg-purple-700 focus:outline-none focus:border-purple-700"
-                >
-                  Remove
-                </Button>
               </CardFooter>
             </Card>
           );

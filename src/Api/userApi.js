@@ -86,10 +86,9 @@ export async function getProfile() {
   }
 }
 
-
 export async function editUserProfile(data) {
   try {
-    const response = await userCheck.put("/EditProfile",data);
+    const response = await userCheck.put("/EditProfile", data);
     return response;
   } catch (error) {
     console.log(error);
@@ -98,9 +97,11 @@ export async function editUserProfile(data) {
 
 export async function editUserDp(formData) {
   try {
-    const response = await userCheck.post("/EditDp",formData,{headers: {
-      "Content-Type": "multipart/form-data",
-    },});
+    const response = await userCheck.post("/EditDp", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response;
   } catch (error) {
     console.log(error);
@@ -109,11 +110,43 @@ export async function editUserDp(formData) {
 
 export async function editUserBgImg(formData) {
   try {
-    const response = await userCheck.post("/EditBgImg",formData,{headers: {
-      "Content-Type": "multipart/form-data",
-    },});
+    const response = await userCheck.post("/EditBgImg", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response;
   } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function addSkills(skillForm) {
+  try {
+    const response = await userCheck.post("/addSkill", skillForm);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export async function deleteSkill(skill) {
+  try {
+    console.log(skill);
+    const response = await userCheck.post("/deleteSkill",skill);
+    return response;
+  } catch (error) { 
+    console.log(error);
+  }
+}
+
+export async function editSkill(value) {
+  try {
+    console.log(value);
+    // const response = await userCheck.put("/deleteSkill",value);
+    // return response;
+  } catch (error) { 
     console.log(error);
   }
 }
