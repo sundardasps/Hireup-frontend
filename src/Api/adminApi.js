@@ -116,3 +116,14 @@ export async function categoryblockOrUnBlock(id) {
     console.error(error);
   }
 }
+
+
+export async function subCategoryDelete(value,id) {
+  try {
+
+    const response = await adminCheck.post("/deleteSubcategory",{value,id});
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}

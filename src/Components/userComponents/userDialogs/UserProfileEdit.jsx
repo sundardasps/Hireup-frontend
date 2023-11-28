@@ -18,7 +18,6 @@ import { userEditSchema } from "../../../Utils/yupValidations/yupUserValidations
 import { editUserProfile } from "../../../Api/userApi";
 
 export default function UserProfileEdit({ profileData }) {
-  console.log(profileData);
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = useState(false);
   const handleOpen = () => {
@@ -32,7 +31,6 @@ export default function UserProfileEdit({ profileData }) {
     name: profileData.data.exist.userName,
     title: profileData.data.exist.userTitle,
     place: profileData.data.exist.place,
-    // email: profileData.data.exist.email,
     number: profileData.data.exist.number,
   };
   

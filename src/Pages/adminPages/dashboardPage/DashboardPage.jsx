@@ -2,7 +2,6 @@
 function DashboardPage() {
   return (
     <div >  
-          
     </div>
   )
 }

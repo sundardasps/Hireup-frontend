@@ -101,9 +101,6 @@ export function CompanyListComponent() {
               <Typography variant="h5" color="blue-gray">
                 Members list
               </Typography>
-              <Typography color="gray" className="mt-1 font-normal">
-                See information about all members
-              </Typography>
             </div>
           </div>
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
@@ -133,7 +130,7 @@ export function CompanyListComponent() {
             </div>
           </div>
         </CardHeader>
-        <CardBody className="overflow-scroll px-0">
+        <CardBody className="overflow-scroll px-0 h-full">
           <table className="mt-4 w-full min-w-max table-auto text-left">
             <thead>
               <tr>

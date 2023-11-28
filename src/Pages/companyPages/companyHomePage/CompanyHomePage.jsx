@@ -4,6 +4,7 @@ import UserCards from '../../../Components/companyComponents/companyHomeComponen
 function CompanyHomePage() {
   return (
     <div className=''>
+        
         <UserCards/>
     </div>
   )

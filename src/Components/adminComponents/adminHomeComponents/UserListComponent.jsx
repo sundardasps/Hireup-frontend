@@ -20,6 +20,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { Dialogue } from "../adminCommonComponents/Dialogue";
 import MainLoading from "../../commonComponents/Loadings/MainLoding";
+import { UserFulldetails } from "../adminDialog/UserFulldetails";
 
 
 const TABS = [
@@ -56,6 +57,7 @@ export function UserListComponent() {
       setDebouncedSearch(search);
     }, 1000);
     return () => clearTimeout(timeoutId);
+   
   });
 
   const { data, isLoading, error } = useQuery({
@@ -65,6 +67,8 @@ export function UserListComponent() {
         (res) => res.data
       ),
   });
+
+
 
   const handlePage = async (newPage) => {
     if (newPage < 1 || newPage > data.totalPage) {
@@ -101,9 +105,7 @@ export function UserListComponent() {
               <Typography variant="h5" color="blue-gray">
                 Members list
               </Typography>
-              <Typography color="gray" className="mt-1 font-normal">
-                See information about all members
-              </Typography>
+
             </div>
           </div>
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
@@ -131,7 +133,7 @@ export function UserListComponent() {
             </div>
           </div>
         </CardHeader>
-        <CardBody className="overflow-scroll px-0">
+        <CardBody className="overflow-scroll px-0 h-full">
           <table className="mt-4 w-full min-w-max table-auto text-left">
             <thead>
               <tr>
@@ -155,7 +157,7 @@ export function UserListComponent() {
               {data &&
                 data.data &&
                 data.data.map(
-                  ({ _id, userName,role, is_blocked, email, number }, index) => {
+                  ({ _id, userName,role, is_blocked, email, number,userDp,userTitle,skills,place,userCoverDp,experience },index) => {
                     const isLast = index === data.data.length - 1;
                     const classes = isLast
                       ? "p-4"
@@ -166,7 +168,7 @@ export function UserListComponent() {
                         <td className={classes}>
                           <div className="flex items-center gap-3">
                             <Avatar
-                              src={"/public/6876640.jpg"}
+                              src={userDp}
                               alt={userName}
                               size="sm"
                             />
@@ -176,7 +178,7 @@ export function UserListComponent() {
                                 color="blue-gray"
                                 className="font-normal"
                               >
-                                {userName}
+                                <UserFulldetails userData={{ _id, userName,role, is_blocked, email, number,userDp,userTitle,skills,place,userCoverDp,experience}} />
                               </Typography>
                               {/* <Typography
                             variant="small"

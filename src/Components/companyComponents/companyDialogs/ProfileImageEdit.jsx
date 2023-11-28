@@ -56,7 +56,7 @@ export default function ProfileImageEdit({ datas }) {
             <img
               src={datas.image}
               alt=""
-              style={{ width: "40%", height: "40%" }}
+              className="max-h-24 max-h-20"
             />
 
             <div className="mt-5">

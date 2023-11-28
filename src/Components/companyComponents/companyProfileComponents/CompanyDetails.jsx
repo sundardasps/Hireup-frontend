@@ -52,13 +52,13 @@ function CompanyDetails() {
             <img
               src={data.exist.image ? data.exist.image : ""}
               alt=""
-              className="w-full h-full object-cover rounded"
-              style={{ width: "80%", height: "80%" }}
+              className="max-h-44 w-60 object-cover rounded"
+             
             />
             <ProfileImageEdit datas={{image:data.exist.image,size:"xs"}}/>
           </div>
 
-          <div className="mx-2 my-2  container border  rounded-lg p-4">
+          <div className=" mx-2 my-2 max-w-sm  border  rounded-lg p-4">
             <text className="text-4xl text-light-blue-700 font-bold  underline">
               {data.exist.companyName}
             </text>
@@ -138,6 +138,7 @@ function CompanyDetails() {
               </p>
             </div>
           </div>
+
         </CardHeader>
         <CardBody className="flex flex-col sm:flex-row justify-between w-auto h-auto bg-white m-4 first-letter shadow-inner rounded border">
           {data.exist.company_roles}

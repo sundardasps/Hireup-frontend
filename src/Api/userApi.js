@@ -141,11 +141,28 @@ export async function deleteSkill(skill) {
   }
 }
 
-export async function editSkill(value) {
+export async function addExperience(value){
   try {
-    console.log(value);
-    // const response = await userCheck.put("/deleteSkill",value);
-    // return response;
+    const response = await userCheck.post("/addExperience",value);
+    return response;
+  } catch (error) { 
+    console.log(error);
+  }
+}
+
+export async function experienceEdit(value,edited){
+  try {
+    const response = await userCheck.put("/editExperience",{value,edited});
+    return response;
+  } catch (error) { 
+    console.log(error);
+  }
+}
+
+export async function experienceDelete(value){
+  try {
+    const response = await userCheck.post(`/deleteExperience/${value}`);
+    return response;
   } catch (error) { 
     console.log(error);
   }

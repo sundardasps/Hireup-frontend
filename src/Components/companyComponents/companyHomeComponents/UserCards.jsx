@@ -47,7 +47,7 @@ useEffect(() => {
 
   return (
     <div >
-      <Card className="h-1/2 max-w-screen-lg border-1 m-5">
+      <Card className="h-screen max-w-screen-lg border-1 m-5">
         <CardHeader floated={false} shadow={false} className="rounded-none h-auto">
           <div className="flex flex-col items-center justify-between  md:flex-row">
             <Tabs value="all" className="w-full md:w-max">
@@ -63,7 +63,7 @@ useEffect(() => {
                 ))} */}
               </TabsHeader>
             </Tabs>
-            <div  className="w-full md:w-72 mb-5">
+            <div  className="w-full md:w-72 m-3">
               <Input
                 label="Search"
                 autoFocus

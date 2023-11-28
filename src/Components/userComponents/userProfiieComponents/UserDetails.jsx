@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import userLogo from '../../../../public/user.png'
-import banner from '../../../../public/banner.webp'
+import userLogo from "../../../../public/user.png";
+import banner from "../../../../public/banner.webp";
 import {
   Button,
   Dialog,
@@ -28,6 +28,7 @@ import { imageEditSchema } from "../../../Utils/yupValidations/yupCompanyvalidat
 import { UserBgImg } from "../userDialogs/UserBgImg";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { AllSkills } from "../userDialogs/AllSkills";
+import { EditExperience } from "../userDialogs/EditExperience";
 
 function UserDetails() {
   const queryClient = useQueryClient();
@@ -52,7 +53,7 @@ function UserDetails() {
     level: "",
   });
 
-  console.log(skillForm);
+
 
   const initialValue = {
     image: selectedImage,
@@ -62,14 +63,17 @@ function UserDetails() {
     {
       label: "Beginner",
       value: "Beginner",
+      color: "text-light-blue-700",
     },
     {
       label: "Intermediate",
       value: "Intermediate",
+      color: "text-yellow-800",
     },
     {
       label: "Advanced",
       value: "Advanced",
+      color: "text-green-600",
     },
   ];
 
@@ -82,10 +86,6 @@ function UserDetails() {
   };
 
   //-----------------------------------------Profile data fetching----------------------------------------//
-
-
-
-  
 
   const handleSkill = (e) => {
     const { name, value } = e.target;
@@ -102,7 +102,7 @@ function UserDetails() {
 
   const validateSkill = (skillForm) => {
     const errors = {};
-    if (!skillForm.skill) {
+    if (!skillForm.skill.trim()) {
       errors.skill = "Skill is required";
     }
     if (!skillForm.level.trim()) {
@@ -176,7 +176,11 @@ function UserDetails() {
                     {/* Background Image */}
                     <div className="bgimage relative">
                       <img
-                        src={data.exist.userCoverDp  ? data.exist.userCoverDp : banner}
+                        src={
+                          data.exist.userCoverDp
+                            ? data.exist.userCoverDp
+                            : banner
+                        }
                         className="inline-block w-full h-48 border-2 border-white rounded-md object-cover object-center"
                         alt="Background"
                       />
@@ -262,7 +266,7 @@ function UserDetails() {
                         <span className="font-medium">Select your level</span>
                         <Tabs value={skillForm.level} className="w-full ">
                           <TabsHeader>
-                            {TABS.map(({ label, value }) => (
+                            {TABS.map(({ label, value, color }) => (
                               <Tab
                                 name="level"
                                 onClick={() =>
@@ -272,6 +276,7 @@ function UserDetails() {
                                 }
                                 key={value}
                                 value={value}
+                                className={color}
                               >
                                 &nbsp;&nbsp;{label}&nbsp;&nbsp;
                               </Tab>
@@ -311,14 +316,11 @@ function UserDetails() {
                     <span className="tracking-wide">Skills</span>
                   </div>
 
-                    <div
-                      
-                      className="flex  text-gray-700 bg-blue-gray-100 rounded-xl m-2 "
-                      >
-                      {data.exist.skills.slice(0, 3).map((value, index) => (
+                  <div className="flex  text-gray-700 bg-blue-gray-100 rounded-xl m-2 ">
+                    {data.exist.skills.slice(0, 3).map((value, index) => (
                       <div key={index} className="grid md:grid-cols-1  mx-2">
                         <div className="grid grid-cols-3">
-                          <div className=" px-2 py-2 font-semibold text-sm w-72 ">
+                          <div className=" px-2 py-2 font-semibold text-sm w-72 uppercase">
                             <span> {value.skill}</span>
                           </div>
                         </div>
@@ -334,9 +336,8 @@ function UserDetails() {
                           )}
                         </div>
                       </div>
-                        ))}
-                    </div>
-
+                    ))}
+                  </div>
 
                   <button className="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">
                     <AllSkills SkillsData={{ data }} />
@@ -346,111 +347,39 @@ function UserDetails() {
                 <div className="my-4"></div>
 
                 <div className="bg-white p-2 shadow-sm rounded-sm">
-                  <div className="grid grid-cols-2">
+                  <div className="grid  ">
                     <div>
-                      <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
-                        <span className="text-green-500">
-                          <svg
-                            className="h-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                            />
-                          </svg>
-                        </span>
+
+
+                      <div className="flex justify-between items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
+                  
+
                         <span className="tracking-wide">Experience</span>
+                        <EditExperience addData={{data}}/>
                       </div>
-                      <ul className="list-inside space-y-2">
-                        <li>
-                          <div className="text-teal-600">
-                            Owner at Her Company Inc.
+                  
+                  <ul  className="list-inside space-y-2 overflow-y-scroll max-h-48">
+                  {data.exist.experience.map((value,index)=>(
+                        <li key={value} className="flex items-center justify-between border rounded-xl">
+                          <div>
+                            <div className="text-teal-600 text-sm m-1">
+                             {value}
+                            </div>
                           </div>
-                          <div className="text-gray-500 text-xs">
-                            March 2020 - Now
-                          </div>
+                          <EditExperience editdata={{value,index}} />
                         </li>
-                        <li>
-                          <div className="text-teal-600">
-                            Owner at Her Company Inc.
-                          </div>
-                          <div className="text-gray-500 text-xs">
-                            March 2020 - Now
-                          </div>
-                        </li>
-                        <li>
-                          <div className="text-teal-600">
-                            Owner at Her Company Inc.
-                          </div>
-                          <div className="text-gray-500 text-xs">
-                            March 2020 - Now
-                          </div>
-                        </li>
-                        <li>
-                          <div className="text-teal-600">
-                            Owner at Her Company Inc.
-                          </div>
-                          <div className="text-gray-500 text-xs">
-                            March 2020 - Now
-                          </div>
-                        </li>
+                        ))}
                       </ul>
-                    </div>
-                    <div>
-                      <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
-                        <span className="text-green-500">
-                          <svg
-                            className="h-5"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
-                            <path
-                              fill="#fff"
-                              d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-                            />
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                            />
-                          </svg>
-                        </span>
-                        <span className="tracking-wide">Education</span>
-                      </div>
-                      <ul className="list-inside space-y-2">
-                        <li>
-                          <div className="text-teal-600">
-                            Masters Degree in Oxford
-                          </div>
-                          <div className="text-gray-500 text-xs">
-                            March 2020 - Now
-                          </div>
-                        </li>
-                        <li>
-                          <div className="text-teal-600">
-                            Bachelors Degreen in LPU
-                          </div>
-                          <div className="text-gray-500 text-xs">
-                            March 2020 - Now
-                          </div>
-                        </li>
-                      </ul>
+                    
+
+
                     </div>
                   </div>
                 </div>
+
                 <div className="my-4"></div>
 
-                <div className="bg-white p-3 shadow-sm rounded-sm">
+                {/* <div className="bg-white p-3 shadow-sm rounded-sm">
                   <div className="grid grid-cols-2">
                     <div>
                       <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
@@ -481,14 +410,7 @@ function UserDetails() {
                             March 2020 - Now
                           </div>
                         </li>
-                        <li>
-                          <div className="text-teal-600">
-                            Owner at Her Company Inc.
-                          </div>
-                          <div className="text-gray-500 text-xs">
-                            March 2020 - Now
-                          </div>
-                        </li>
+
                         <li>
                           <div className="text-teal-600">
                             Owner at Her Company Inc.
@@ -552,7 +474,7 @@ function UserDetails() {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -589,7 +511,7 @@ function UserDetails() {
                   <div className="mx-9 ">
                     <img
                       className="rounded-lg shadow-l border-2"
-                      src={data.exist.userDp?data.exist.userDp:userLogo}
+                      src={data.exist.userDp ? data.exist.userDp : userLogo}
                       style={{ width: "150px", height: "150px" }}
                       alt=""
                     />

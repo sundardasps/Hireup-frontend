@@ -109,7 +109,7 @@ function JobCards() {
             </div>
           </div>
           <List>
-            {/* {category &&
+            {category &&
               category.map((value, index) => (
                 <Accordion
                   key={index}
@@ -153,7 +153,7 @@ function JobCards() {
                     ))}
                   </AccordionBody>
                 </Accordion>
-              ))} */}
+              ))}
           </List>
           <List>
            

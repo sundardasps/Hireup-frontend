@@ -24,6 +24,7 @@ import { Dialogue } from "../adminCommonComponents/Dialogue";
 import { CategoryDialog } from "./CategoryDialog";
 import { CategoryTitleDialog } from "./CategoryTitleDialog";
 import { useNavigate } from "react-router-dom";
+import { SubcategoryList } from "../adminDialog/SubcategoryList";
 
 const TABS = [
   {
@@ -94,7 +95,7 @@ export function CategoriesTable() {
   }
   return (
     <>
-      <Card className="h-full w-full border-2 border-black">
+      <Card className="h-full w-full border-2 border-black ">
         <CardHeader
           ader
           floated={false}
@@ -139,7 +140,7 @@ export function CategoriesTable() {
             </div>
           </div>
         </CardHeader>
-        <CardBody className="overflow-scroll px-0">
+        <CardBody className="overflow-scroll px-0 h-full">
           <table className="mt-4 w-full min-w-max table-auto text-left">
             <thead>
               <tr>
@@ -159,7 +160,7 @@ export function CategoriesTable() {
                 ))}
               </tr>
             </thead>
-            <tbody>
+            <tbody >
               {data &&
                 data.data &&
                 data.data.map(({ _id, title, is_active, category }, index) => {
@@ -183,10 +184,12 @@ export function CategoriesTable() {
                               variant="small"
                               color="blue-gray"
                               className="font-normal"
+                              
                             >
-                              {title}
+                              {/* {title} */}
                             </Typography>
-                            <Select
+                            <SubcategoryList  Subcategories={{category,title,_id}} />
+                            {/* <Select
                               onChange={(e) => {
                                 setCategory(e.target.value);
                                
@@ -197,7 +200,7 @@ export function CategoriesTable() {
                               {category.map((value, index) => (
                                 <Option disabled  key={index} className="text-black border-2">{value} </Option>
                               ))}
-                            </Select>
+                            </Select> */}
                           </div>
                         </div>
                       </td>

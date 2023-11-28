@@ -10,7 +10,6 @@ function CompanyLayout() {
                 </div>
                 <div>
                 <Outlet />
-
                 </div>
            <div>
          <div className=" bg-white"></div>

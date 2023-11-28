@@ -17,6 +17,7 @@ import {
   EllipsisVerticalIcon,
   ShoppingBagIcon,
   CursorArrowRippleIcon,
+  BuildingOffice2Icon,
 } from "@heroicons/react/20/solid";
 import JobApply from "../userDialogs/JobApply";
 
@@ -25,9 +26,16 @@ export function JobFullDetails({ jobdata }) {
     <div>
       <Card className="  container  bg-white  w-auto  border ">
         <div className="flex  flex-col w-auto m-2 ">
-          <text className="flex justify-between text-xl  text-light-blue-700 font-bold  underline m-1">
+          <text className="flex justify-between text-xl  text-light-blue-700 font-bold   m-1">
             {jobdata.job_title}
           </text>
+          <div>
+          <text className="flex gap-2 text-sm  text-gray-500 font-bold  m-1">
+          <BuildingOffice2Icon className="h-5 w-5 text-teal-500" />
+            {jobdata.companyName}
+          </text>
+          </div>
+         
         </div>
 
         <div className="flex flex-col gap-1 m-2 ">
