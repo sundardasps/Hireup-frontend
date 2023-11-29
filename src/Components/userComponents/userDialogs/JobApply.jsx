@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Dialog,
@@ -9,63 +9,75 @@ import {
   Typography,
   Input,
   Checkbox,
+  Progress,
 } from "@material-tailwind/react";
 
 function JobApply() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen((cur) => !cur);
+
+     
+
+    const initialOne = {
+       name:"",
+       email:"",
+       number:"",
+       title:"",
+    }
+    
+
   return (
     <div>
-         <p onClick={handleOpen}>Apply</p>
+       <p onClick={handleOpen}>Apply</p>
       <Dialog
-        size="xl"
+        size="xs"
         open={open}
-        handler={handleOpen}
         className="bg-transparent shadow-none"
+        animate={{
+          mount: { scale: 1, y: 0 },
+          unmount: { scale: 0.5, y: -100 },
+        }}
       >
-        <Card className="mx-auto w-full max-w-[24rem]">
-          <CardBody className="flex flex-col gap-4">
-            <Typography variant="h4" color="blue-gray">
-              Sign In
+        <Card >
+
+          <CardBody className="grid grid-cols-1 gap-2 ">
+            <Typography variant="h6" color="blue-gray">
+              Apply for job
             </Typography>
-            <Typography
-              className="mb-3 font-normal"
-              variant="paragraph"
-              color="gray"
-            >
-              Enter your email and password to Sign In.
+            <div className="flex w-full flex-col mb-5">
+           <Progress value={5} color="blue" />
+             </div>
+            <Typography className="-mb-2" variant="small">
+              Your Name
             </Typography>
-            <Typography className="-mb-2" variant="h6">
+            <Input  size="lg" />
+            <Typography className="-mb-2" variant="small">
               Your Email
             </Typography>
-            <Input label="Email" size="lg" />
-            <Typography className="-mb-2" variant="h6">
-              Your Password
-            </Typography>
-            <Input label="Password" size="lg" />
-            <div className="-ml-2.5 -mt-3">
+            <Input  size="lg" />
+            {/* <div className="-ml-2.5 -mt-3">
               <Checkbox label="Remember Me" />
-            </div>
-          </CardBody>
-          <CardFooter className="pt-0">
-            <Button variant="gradient" onClick={handleOpen} fullWidth>
-              Sign In
-            </Button>
-            <Typography variant="small" className="mt-4 flex justify-center">
-              Don&apos;t have an account?
-              <Typography
-                as="a"
-                href="#signup"
-                variant="small"
-                color="blue-gray"
-                className="ml-1 font-bold"
-                onClick={handleOpen}
-              >
-                Sign up
-              </Typography>
+            </div> */}
+             <Typography className="-mb-2" variant="small">
+              Your Number
             </Typography>
+            <Input  size="lg" />
+            <Typography className="-mb-2" variant="small">
+              Your Title
+            </Typography>
+            <Input  size="lg" />
+          </CardBody>
+          <CardFooter className="flex justify-end gap-2">
+            <Button variant="gradient" onClick={handleOpen} >
+              Discard
+            </Button>
+            <Button variant="gradient" color="blue" onClick={handleOpen} >
+              Next
+            </Button>
           </CardFooter>
         </Card>
+
+
       </Dialog>
     </div>
   )

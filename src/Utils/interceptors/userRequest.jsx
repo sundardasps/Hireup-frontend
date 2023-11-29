@@ -1,6 +1,5 @@
 import axios from "axios";
-
-
+import {toast} from 'react-hot-toast'
 const baseURL =  "http://localhost:5000/user"
 
 export const userInterseption = axios.create({
@@ -14,3 +13,18 @@ userInterseption.interceptors.request.use((request) => {
   }
   return request;
 });
+
+
+userInterseption.interceptors.response.use(
+  (response) => response,
+  (error)=>{
+    if (error.response && error.response.status === 403){
+          toast.error("User where blocked by admin!")
+          localStorage.removeItem("token");
+          setTimeout(()=>{
+             window.location.reload()
+          },1000)
+      }
+    return Promise.reject(error);
+  }
+)

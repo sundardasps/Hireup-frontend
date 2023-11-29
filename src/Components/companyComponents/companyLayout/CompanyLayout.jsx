@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom"
 import CompanyNavbar from '../companyCommonComponents/CompanyNavbar'
 import CompanyFooter from '../companyCommonComponents/CompanyFooter'
-import {ToastBar} from 'react-hot-toast'
+import {ToastBar, Toaster} from 'react-hot-toast'
 function CompanyLayout() {
   return (
     <div className="grid grid-rows-[5rem] overflow-x-hidden  bg-gray-100">
@@ -15,6 +15,7 @@ function CompanyLayout() {
          <div className=" bg-white"></div>
            <CompanyFooter/>
       </div>
+      <Toaster/>
     </div>
   )
 }

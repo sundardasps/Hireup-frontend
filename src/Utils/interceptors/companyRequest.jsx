@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const baseurl = "http://localhost:5000/company";
 
@@ -13,3 +14,18 @@ companyInterseptor.interceptors.request.use((request) => {
 
   return request;
 });
+
+
+companyInterseptor.interceptors.response.use(
+  (response) => response,
+  (error)=>{
+    if (error.response && error.response.status === 403){
+          toast.error("User where blocked by admin!")
+          localStorage.removeItem("companyToken");
+          setTimeout(()=>{
+             window.location.reload()
+          },1000)
+      }
+    return Promise.reject(error);
+  }
+)

@@ -21,6 +21,7 @@ import React, { useEffect, useState } from "react";
 
 import { companiesData } from "../../../Api/adminApi";
 import { Dialogue } from "../adminCommonComponents/Dialogue";
+import { UserFulldetails } from "../adminDialog/UserFulldetails";
 
 const TABS = [
   {
@@ -154,7 +155,7 @@ export function CompanyListComponent() {
               {data &&
                 data.data &&
                 data.data.map(
-                  ({ _id, companyName, is_blocked, email, number ,role}, index) => {
+                  ({ _id, companyName, is_blocked, email, number ,role,image,gst_number,jobs,address,company_roles,location}, index) => {
                     const isLast = index === data.data.length - 1;
                     const classes = isLast
                       ? "p-4"
@@ -165,7 +166,7 @@ export function CompanyListComponent() {
                         <td className={classes}>
                           <div className="flex items-center gap-3">
                             <Avatar
-                              src={"/public/6876640.jpg"}
+                              src={image}
                               alt={companyName}
                               size="sm"
                             />
@@ -175,7 +176,7 @@ export function CompanyListComponent() {
                                 color="blue-gray"
                                 className="font-normal"
                               >
-                                {companyName}
+                                <UserFulldetails companyData={{ _id, companyName, is_blocked, email, number ,role,image,gst_number,jobs,address,company_roles,location}}/>
                               </Typography>
                               {/* <Typography
                             variant="small"

@@ -1,6 +1,7 @@
 import UserNavbar from "../../userComponents/userCommonComponents/UserNavbar";
 import UserFooter from "../../userComponents/userCommonComponents/UserFooter";
 import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 function UserLayout() {
   return (
@@ -16,6 +17,7 @@ function UserLayout() {
         <div>
           <UserFooter />
         </div>
+        <Toaster/>
       </div>
     </>
   );

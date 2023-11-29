@@ -72,8 +72,8 @@ function JobCards() {
   //-----------------------------------------------------//
 
   const handleFilter = (e) => {
-    const selectedValue = e.target.innerText;
-    setFilter(selectedValue);
+    // const selectedValue = e.target.innerText;
+    // setFilter(selectedValue);
   };
   //-----------------------------------------------------//
 
@@ -93,7 +93,7 @@ function JobCards() {
   return (
     <div className="flex">
       <div>
-        <Card className="h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5">
+        <Card className=" h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5">
           <div className="mb-1 p-2">
             <Typography variant="h3" color="blue-gray">
               Find jobs..
@@ -145,7 +145,7 @@ function JobCards() {
                         <ListItem
                           key={index}
                           onClick={handleFilter}
-                          className="font-medium"
+                          className="border-b-0 p-0"
                         >
                           {value}
                         </ListItem>
@@ -160,6 +160,9 @@ function JobCards() {
           </List>
         </Card>
       </div>
+
+
+
 
       <div className="">
         {data &&
@@ -212,7 +215,7 @@ function JobCards() {
                 </div>
               </div>
               <CardFooter className=" ">
-                <BookmarkIcon className="w-5 h-5  cursor-pointer " />
+                {/* <BookmarkIcon className="w-5 h-5  cursor-pointer " /> */}
               </CardFooter>
             </Card>
           ))}
