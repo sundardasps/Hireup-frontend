@@ -2,28 +2,28 @@ import {
   Accordion,
   AccordionBody,
   AccordionHeader,
-  Button,
   Card,
-  CardBody,
   CardFooter,
-  CardHeader,
-  IconButton,
   Input,
   List,
   ListItem,
-  Tooltip,
   Typography,
 } from "@material-tailwind/react";
 import { BuildingOffice2Icon } from "@heroicons/react/20/solid";
 import { useQuery } from "@tanstack/react-query";
 import { categoryDataForUser, getAllJobs } from "../../../Api/userApi";
-import { CheckCircleIcon, BookmarkIcon } from "@heroicons/react/24/outline";
+import {
+  CheckCircleIcon,
+  BookmarkIcon,
+} from "@heroicons/react/24/outline";
 import { JobFullDetails } from "./JobFullDetails";
 import React, { useEffect, useState } from "react";
 import {
+  BookmarkSlashIcon,
   ChevronDownIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/solid";
+import MainLoading from "../../commonComponents/Loadings/MainLoding";
 
 function JobCards() {
   const [open, setOpen] = React.useState(0);
@@ -32,17 +32,19 @@ function JobCards() {
   const [filter, setFilter] = useState();
   const [selectedJob, setSelectedJob] = useState(null);
   const [debounsedSearch, setDebouncedSearch] = useState("");
+
   //----------------------------------------Side bar data fetch----------------------------------------//
 
   useEffect(() => {
     const fetchCategory = async () => {
       await categoryDataForUser().then((res) => setCategory(res.data.data));
     };
-    fetchCategory();
 
+    fetchCategory();
     const timeoutId = setTimeout(() => {
       setDebouncedSearch(search);
     }, 1000);
+
     return () => clearTimeout(timeoutId);
   }, [search]);
 
@@ -55,6 +57,7 @@ function JobCards() {
         search: debounsedSearch,
         filter,
       }).then((res) => res.data);
+
       return response;
     },
   });
@@ -71,7 +74,7 @@ function JobCards() {
   };
   //-----------------------------------------------------//
 
-  const handleFilter = (e) => {
+  const handleFilter = () => {
     // const selectedValue = e.target.innerText;
     // setFilter(selectedValue);
   };
@@ -80,27 +83,26 @@ function JobCards() {
   const handleShowDetails = (jobData) => {
     setSelectedJob(jobData);
   };
-  //-----------------------------------------------------//
 
-  if (isLoading) {
-    return <h1>loadiii</h1>;
-  }
-
-  if (error) {
-    return <h1>errorr</h1>;
+  if (isLoading || !selectedJob) {
+    if (data && data.data && data.data.length > 0 && !selectedJob) {
+      setSelectedJob(data.data[0]);
+    }
+    return <MainLoading />;
   }
 
   return (
-    <div className="flex">
-      <div>
-        <Card className=" h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5">
+    <div className="flex justify-center ">
+      <div className="">
+        <Card className="fixed h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5 ">
           <div className="mb-1 p-2">
             <Typography variant="h3" color="blue-gray">
               Find jobs..
             </Typography>
             <div className="w-full ">
               <Input
-                label="Search"
+                label="Search ..."
+                // placeholder="Seach job,company,place,skill.."
                 autoFocus
                 value={search}
                 onChange={handleSearch}
@@ -155,39 +157,41 @@ function JobCards() {
                 </Accordion>
               ))}
           </List>
-          <List>
-           
-          </List>
+          <List></List>
         </Card>
       </div>
 
-
-
-
-      <div className="">
+      <div className=" mx-auto ">
         {data &&
           data.data &&
           data.data.map((data, index) => (
             <Card
               key={index}
-              className="flex  sm:flex-row justify-between container m-5  h-min xl:w-[30rem] border bg-white shadow-lg rounded-md hover:shadow-xl "
+              className=" flex mr-0  sm:flex-row justify-between container m-5  xl:w-[30rem] border bg-white  rounded-md hover:shadow-xl  "
             >
-              <div className="flex flex-col w-full sm:w-auto m-5">
-                <div className="flex flew-row  ">
-                  <img
-                    src={data.companyImage}
-                    style={{ width: "50px", height: "50px" }}
-                    className="rounded-sm"
-                  />
-                  <Typography color="blue" className="text-1xl font-bold mx-5">
+              <div className="m-2 mt-4 w-auto h-auto">
+                <img
+                  src={data.companyImage}
+                  style={{ width: "80px", height: "50px" }}
+                  className="rounded-sm"
+                />
+              </div>
+              <div className="flex flex-col  w-full  m-5">
+                <div className="">
+                  <Typography color="blue" className="text-lg font-bold ">
                     {data.job_title}
                   </Typography>
                 </div>
+                <div className="flex gap-1">
+                  <BuildingOffice2Icon className="h-4 w-4 text-teal-500" />
+                  <Typography className="text-sm">
+                    {data.companyName}
+                  </Typography>
+                </div>
                 <div className="flex flex-col sm:flex-row justify-between items-start">
-                  <div className="flex justify-center gap-2 mt-2">
-                    <BuildingOffice2Icon className="h-5 w-5 text-teal-500" />
-                    <Typography className="font-light text-gray-700">
-                      {data.companyLocation},({data.job_type})
+                  <div className="flex justify-center gap-2 ">
+                    <Typography className="font-serift text-sm text-gray-600">
+                      {data.companyLocation}({data.job_type})
                     </Typography>
                   </div>
                   <div className="flex flex-col mt-2 sm:mt-0">
@@ -198,41 +202,43 @@ function JobCards() {
                 <div className="flex justify-between">
                   {data.is_active ? (
                     <div className=" flex text-green-400 mt-2 font-normal ">
-                      <CheckCircleIcon className="w-5 h-5 mt-1" /> Actively
-                      hiring
+                      <CheckCircleIcon className="w-5 h-5 mt-1 " /> Actively
+                      recruiting
                     </div>
                   ) : (
-                    ""
+                    <div className=" flex  mt-2 font-normal ">
+                    </div>
                   )}
-
                   <div
-                    className="mt-2 cursor-pointer font-light hover:underline "
+                    className="mt-2 cursor-pointer font-light hover:underline left-0 "
                     style={{ userSelect: "none" }}
                     onClick={() => handleShowDetails(data)}
                   >
-                    Show details
+                    <span> Show details</span>
                   </div>
                 </div>
               </div>
               <CardFooter className=" ">
-                {/* <BookmarkIcon className="w-5 h-5  cursor-pointer " /> */}
+                <BookmarkIcon className="w-5 h-5  cursor-pointer  underline" />
+                <BookmarkSlashIcon className="w-5 h-5  cursor-pointer  underline" />
               </CardFooter>
             </Card>
           ))}
       </div>
 
-      <div className="">
+      <div className="  m-5  hidden lg:block ">
         {selectedJob && (
-          <div className=" m-5">
-            <JobFullDetails
-              jobdata={selectedJob}
-              onClose={() => setSelectedJob(null)}
-            />
-          </div>
+          <JobFullDetails
+            jobdata={selectedJob}
+            // onClose={() => setSelectedJob(null)}
+          />
         )}
       </div>
     </div>
   );
 }
+
+
+
 
 export default JobCards;

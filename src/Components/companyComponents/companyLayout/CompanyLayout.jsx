@@ -4,8 +4,8 @@ import CompanyFooter from '../companyCommonComponents/CompanyFooter'
 import {ToastBar, Toaster} from 'react-hot-toast'
 function CompanyLayout() {
   return (
-    <div className="grid grid-rows-[5rem] overflow-x-hidden  bg-gray-100">
-      <div className="sticky  top-0 z-50 ">
+           <div className=" bg-gray-100">
+               <div >
                <CompanyNavbar/>
                 </div>
                 <div>

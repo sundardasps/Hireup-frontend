@@ -132,6 +132,7 @@ export default function EditPost({ postData }) {
                 onBlur={handleBlur}
                 size="lg"
                 type="number"
+                min={1}
               />
               {touched.salery && errors.salery && (
                 <div className="text-red-500 text-xs ">{errors.salery}</div>

@@ -3,7 +3,10 @@ import {
   Bars3Icon,
   XMarkIcon,
   HomeIcon,
-  MagnifyingGlassIcon
+  MagnifyingGlassIcon,
+  BookmarkIcon,
+  ChatBubbleBottomCenterIcon,
+  ChatBubbleLeftRightIcon
 } from "@heroicons/react/24/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutDetails } from "../../../Redux/storeSlices/userSlice";
@@ -50,56 +53,47 @@ function UserNavbar() {
      
       
     
-      <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+      <ul className="my-2 flex  flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-20 ">
           
-         <Typography
-          as="li"
-          variant="h"
-          color="blue-gray"
-          className="p-1 font-medium flex items-center"
+        <a
+          onClick={()=>navigate('/user')}
+          className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
         >
-        </Typography>
-
         <Typography
           as="li"
-          variant="h"
+          variant="small"
           color="blue-gray"
-          className="p-1 font-medium flex items-center"
+          className=" font-medium "
         >
-          <HomeIcon className="h-8 w-8 p-1"/>
-          <a
-            onClick={()=>navigate('/user')}
-            className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
-          >
+          <HomeIcon className="h-8 w-7 "/>
             Home
-          </a>
         </Typography>
-        {/* <Typography
-          as="li"
-          variant="small"
-          color="blue-gray"
-          className="p-1 font-medium"
-        >
+          </a>
           <a
-            href="#"
-            className="flex items-center hover:text-blue-500 transition-colors"
-          >
-            chat
-          </a>
-        </Typography>
+          onClick={()=>navigate('/user')}
+          className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
+        >
         <Typography
           as="li"
           variant="small"
           color="blue-gray"
-          className="p-1 font-medium"
+          className=" font-medium "
+        > <BookmarkIcon  className="h-8 w-7 "/>saved
+        </Typography>
+        </a>
+        <a
+          onClick={()=>navigate('/user')}
+          className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
         >
-          <a
-            href="#"
-            className="flex items-center hover:text-blue-500 transition-colors"
-          >
-            Saved
-          </a>
-        </Typography> */}
+        <Typography
+          as="li"
+          variant="small"
+          color="blue-gray"
+          className=" font-medium "
+        > <ChatBubbleLeftRightIcon  className=" h-8 w-7 "/>Chat
+        </Typography>
+        </a>
+
 
 
         <Typography
@@ -247,20 +241,20 @@ function UserNavbar() {
     };
   }, []);
   return (
-    <div>
+    <div >
  
 
 
-    <Navbar className=" mx-auto max-w-screen-xxl px-6 py-3">
+    <Navbar className="fixed top-0 left-0 right-0 z-50  h-auto max-w-screen-xxl px-6 py-3">
       <div className="flex items-center justify-between text-blue-gray-900">
       <Typography
         as="a"
 
-        variant="h6"
+        variant="h3"
         className="mr-4 cursor-pointer py-1.5"
       >
-         <div className="font-extrabold text-2xl cursor-pointer text-blue-500  flex items-center gap-1">
-          <img src="/public/logo.png" className="min-w-fit h-14"/><span>HireUp</span>
+         <div className="font-extrabold text-xl cursor-pointer text-blue-500  flex items-center gap-1">
+          <img src="/public/logo.png" className="min-w-fit h-10"/><span>HireUp</span>
         </div>
       </Typography>
         <div className="hidden lg:block">

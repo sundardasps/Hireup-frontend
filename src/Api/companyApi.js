@@ -156,3 +156,24 @@ export async function getUserList({search}) {
     console.log(error);
   }
 }
+
+
+export async function checkCompleted() {
+  try {
+    const response = await companyCheck.get("/checkCompleted")
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export async function deleteJob(id) {
+  try {
+    console.log(id);
+    const response = await companyCheck.get(`/deleteJob/${id}`)
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -43,103 +43,101 @@ function CompanyDetails() {
   }
 
   return (
-    <div className=" ">
-      <Card className="flex justify-between container mx-2 my-5   bg-white  h-auto border">
-        <CardHeader className="flex flex-col sm:flex-row  w-auto   m-4 first-letter rounded">
-          
-          <div className=" m-2 cursor-pointer" >
-          
+    <d>
+      <Card className="flex justify-between container mx-2 my-2   bg-white  h-auto ">
+        <CardHeader className="flex flex-col sm:flex-row w-auto m-4 first-letter rounded shadow">
+          <div className=" m-2 cursor-pointer">
             <img
               src={data.exist.image ? data.exist.image : ""}
               alt=""
-              className="max-h-44 w-60 object-cover rounded"
-             
+              className="max-h-44 w-full object-cover rounded sm:w-60"
             />
-            <ProfileImageEdit datas={{image:data.exist.image,size:"xs"}}/>
+            <ProfileImageEdit datas={{ image: data.exist.image, size: "xs" }} />
           </div>
 
-          <div className=" mx-2 my-2 max-w-sm  border  rounded-lg p-4">
-            <text className="text-4xl text-light-blue-700 font-bold  underline">
-              {data.exist.companyName}
-            </text>
-            <div className="flex flex-col sm:flex-row gap-1 h-auto sm:h-8 m-5">
-              <MapPinIcon className="w-5 h-5" />
-              <text className="w-full sm:w-1/3 mb-2 sm:mb-0 text-sm">
-                location:
-                <span className="text-gray-900 font-bold">
-                  {data.exist.location}
-                </span>
-              </text>
-
-              <BuildingOffice2Icon className="w-5 h-5" />
-              <text
-                type="text"
-                placeholder="Input 4"
-                className="w-full sm:w-1/3 mb-2 sm:mb-0 text-sm"
-              >
-                Comapany Size:{" "}
-                <span className="text-gray-900 font-bold">
-                  {data.exist.size}
-                </span>
-              </text>
-
-              <CurrencyRupeeIcon className="w-5 h-5" />
-              <text
-                type="text"
-                placeholder="Input 4"
-                className="w-full sm:w-1/3 mb-2 sm:mb-0 text-sm"
-              >
-                Gst:
-                <span className="text-gray-900 font-bold">
-                  {data.exist.gst_number}
-                </span>
+          <div className=" w-auto rounded-lg">
+            <div className=" mb-4 sm:mb-0">
+              <text className="text-4xl text-light-blue-700 font-bold underline m-1">
+                {data.exist.companyName}
               </text>
             </div>
-            <div className="flex flex-col sm:flex-row gap-2 h-auto sm:h-8 m-5">
-              <ChatBubbleBottomCenterTextIcon className="w-5 h-5" />
-              <p
-                type="text"
-                placeholder="Input 4"
-                className="w-full sm:w-1/3 mb-2 sm:mb-0 text-sm"
-              >
-                Email:
-                <span className="text-gray-900 font-bold">
-                  {data.exist.email}
-                </span>
-              </p>
-              <PhoneIcon className="w-5 h-5" />
-              <p
-                type="text"
-                placeholder="Input 4"
-                className="w-full sm:w-1/3 mb-2 sm:mb-0 text-sm"
-              >
-                Mobile:
-                <span className="text-gray-900 font-bold">
-                  {data.exist.number}
-                </span>
-              </p>
-              <p
-                type="text"
-                placeholder="Input 4"
-                className="w-full sm:w-1/3 mb-2 sm:mb-0"
-              ></p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-2 h-auto sm:h-8 m-5">
-              <PhoneIcon className="w-5 h-5" />
-              <p
-                type="text"
-                placeholder="Input 4"
-                className="w-full  mb-2 sm:mb-0 text-sm"
-              >
-                Address: {""}
-                <span className="text-gray-900 font-bold">
-                  {data.exist.address}
-                </span>
-              </p>
+
+            <div className="ml-5">
+              <div className="flex gap-2 w-auto my-2">
+                <MapPinIcon className="w-5 h-5" />
+                <div className="flex flex-col">
+                  <text className="mb-2 text-sm">
+                    location: {""}
+                    <span className="text-gray-900 font-semibold w-auto">
+                      {data.exist.location}
+                    </span>
+                  </text>
+                </div>
+              </div>
+              
+              <div className="flex gap-2 w-auto my-2">
+                <BuildingOffice2Icon className="w-5 h-5" />
+                <div className="flex flex-col">
+                  <text className="mb-2 text-sm">
+                  Comapany Size:{" "}
+                  <span className="text-gray-900 font-semibold w-auto">
+                    {data.exist.size}
+                  </span>
+                  </text>
+                </div>
+              </div>
+             
+              <div className="flex gap-2 w-auto my-2">
+                <CurrencyRupeeIcon className="w-5 h-5" />
+                <div className="flex flex-col">
+                  <text className="mb-2 text-sm">
+                  Gst: {""}
+                  <span className="text-gray-900 font-semibold w-auto">
+                    {data.exist.gst_number}
+                  </span>
+                  </text>
+                </div>
+              </div>
+              
+              <div className="flex gap-2 w-auto my-2">
+                <ChatBubbleBottomCenterTextIcon className="w-5 h-5" />
+                <div className="flex flex-col">
+                  <text className="mb-2 text-sm">
+                  Email: {""}
+                  <span className="text-gray-900 font-semibold w-auto">
+                    {data.exist.email}
+                  </span>
+                  </text>
+                </div>
+              </div>
+
+              <div className="flex gap-2 w-auto my-2">
+                <PhoneIcon className="w-5 h-5" />
+                <div className="flex flex-col">
+                  <text className="mb-2 text-sm">
+                  Mobile: {""}
+                  <span className="text-gray-900 font-semibold w-auto">
+                    {data.exist.number}
+                  </span>
+                  </text>
+                </div>
+              </div>
+
+              <div className="flex gap-2 w-auto my-2">
+                <PhoneIcon className="w-5 h-5" />
+                <div className="flex flex-col">
+                  <text className="mb-2 text-sm">
+                  Address: {""}
+                  <span className="text-gray-900 font-semibold w-auto">
+                    {data.exist.address}
+                  </span>
+                  </text>
+                </div>
+              </div>
             </div>
           </div>
-
         </CardHeader>
+
         <CardBody className="flex flex-col sm:flex-row justify-between w-auto h-auto bg-white m-4 first-letter shadow-inner rounded border">
           {data.exist.company_roles}
         </CardBody>
@@ -158,7 +156,7 @@ function CompanyDetails() {
           />
         </CardFooter>
       </Card>
-    </div>
+    </d>
   );
 }
 

@@ -59,7 +59,6 @@ export function AddPostForm() {
       if (response.data.created) {
         setOpen(!open);
         window.location.reload()
-        quaryClint.invalidateQueries("jobs");
         navigate("/company/posts")
       } else {
         toast.error(response.data.message)
@@ -114,6 +113,7 @@ export function AddPostForm() {
               onChange={handleChange}
               onBlur={handleBlur}
               size="lg"
+              min={0}
             />
             {touched.experience && errors.experience && (
               <div className="text-red-500 text-xs ">{errors.experience}</div>
@@ -154,6 +154,7 @@ export function AddPostForm() {
               onBlur={handleBlur}
               size="lg"
               type='number'
+              min={0}
             />
             {touched.salery && errors.salery && (
               <div className="text-red-500 text-xs ">{errors.salery}</div>
@@ -191,7 +192,7 @@ export function AddPostForm() {
 
           </CardBody>
           <CardFooter className="pt-0">
-            <Button variant="gradient" type="submit" fullWidth>
+            <Button variant="gradient" type="submit" fullWidth >
              Submit
             </Button>
           </CardFooter>

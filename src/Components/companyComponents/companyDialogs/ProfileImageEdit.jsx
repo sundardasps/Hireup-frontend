@@ -48,8 +48,8 @@ export default function ProfileImageEdit({ datas }) {
 
   return (
     <>
-      <p onClick={handleOpen}>Click here to change image</p>
-      <Dialog open={open} size={datas.size}>
+      <p onClick={handleOpen} className="mx-5 my-5">Click here to change image</p>
+      <Dialog open={open} size={datas.size} >
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <DialogHeader>Edit profile image.</DialogHeader>
           <DialogBody>

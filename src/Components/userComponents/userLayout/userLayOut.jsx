@@ -7,15 +7,14 @@ function UserLayout() {
   return (
     <>
       <div>
-        <div>
+        <div className="mb-20">
           <UserNavbar />
         </div>
-
-        <div className="bg-gray-100 ">
-          <Outlet />
+        <div className="bg-gray-100 min-h-screen">
+          <Outlet  />
         </div>
         <div>
-          <UserFooter />
+          {/* <UserFooter /> */}
         </div>
         <Toaster/>
       </div>

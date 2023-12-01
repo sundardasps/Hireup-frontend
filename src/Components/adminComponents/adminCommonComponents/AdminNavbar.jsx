@@ -156,14 +156,16 @@ export function AdminNavbar() {
   return (
     <Navbar className="mx-auto max-w-screen-xxl px-6 py-3">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography
-          as="a"
-          href="#"
-          variant="h6"
-          className="mr-4 cursor-pointer py-1.5"
-        >
-          HirUp admin
-        </Typography>
+      <Typography
+        as="a"
+
+        variant="h4"
+        className="mr-4 cursor-pointer py-1.5"
+      >
+         <div className="font-extrabold text-2xl cursor-pointer text-blue-500  flex items-center gap-1">
+          <img src="/public/logo.png" className="min-w-fit h-10"/><span>HireUp</span>
+        </div>
+      </Typography>
         <div className="hidden lg:block">
           <NavList />
         </div>

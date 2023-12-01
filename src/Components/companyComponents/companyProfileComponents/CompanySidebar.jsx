@@ -23,7 +23,7 @@ import  {AddPostForm}  from '../companyDialogs/AddPostForm';
 function CompanySidebar() {
   const navigate = useNavigate()
   return (
-    <div className="">
+    <div >
     <Card className="flex  flex-auto h-fit mx-5 my-5  bg-white  border">
         <div className="mb-2 p-4">
           <Typography variant="h5" color="blue-gray">

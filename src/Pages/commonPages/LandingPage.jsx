@@ -9,6 +9,7 @@ function LandingPage() {
     <>
       <LandingNavbar/>
       <LandingCards />
+      {/* <UserProfileSlide/> */}
       <UserFooter/>
     </>
   );

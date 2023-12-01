@@ -30,9 +30,16 @@ function UserNavbar() {
     >
       <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
         {/* Logo section */}
-        <div className="font-extrabold text-2xl cursor-pointer text-blue-500  flex items-center gap-1">
-          <img src="/public/logo.png" className="min-w-fit h-14"/><span>HireUp</span>
+        <Typography
+        as="a"
+
+        variant="h4"
+        className="mr-4 cursor-pointer py-1.5"
+      >
+         <div className="font-extrabold text-2xl cursor-pointer text-blue-500  flex items-center gap-1">
+          <img src="/public/logo.png" className="min-w-fit h-10"/><span>HireUp</span>
         </div>
+      </Typography>
         {/* Menu icon */}
         <div
           onClick={() => setOpen(!isOpen)}

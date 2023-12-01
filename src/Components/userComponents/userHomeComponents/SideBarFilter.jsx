@@ -73,7 +73,7 @@ export function SideBarFilter() {
                 onChange={(e) => {
                   setSearch(e.target.value);
                 }}
-                icon={<MagnifyingGlassIcon className="h-5 w-5" onClick={handleSearch} />}
+                icon={<MagjnifyingGlassIcon className="h-5 w-5" onClick={handleSearch} />}
                 />
             </div>
       </div>
@@ -117,7 +117,7 @@ export function SideBarFilter() {
         ))}
       </List>
     </Card>
-
+ 
     </>
   );
 }

@@ -28,13 +28,13 @@ export const companySignUpSchema = Yup.object().shape({
 
   export const companyLoginSchema = Yup.object().shape({
     email: Yup.string().matches(/^[\w.-]+@[\w.-]+\.\w+$/,"Please enter a valid email"
-    ).email("Please enter a valid email").required("This field is required"),
+    ).email("Please enter a valid email").required("This field is required").trim(),
     password: Yup.string()
       .required("This field is required")
       .min(8, "Pasword must be 8 or more characters")
       .matches(/(?=.*[a-z])(?=.*[A-Z])\w+/, "Password ahould contain at least one uppercase and lowercase character")
       .matches(/\d/, "Password should contain at least one number")
-      .matches(/[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/, "Password should contain at least one special character"),
+      .matches(/[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/, "Password should contain at least one special character").trim(),
   });
 
 
@@ -68,8 +68,9 @@ export const companyFullDetailsEditSchema = Yup.object().shape({
   companyName: Yup.string().required("This field is required").trim(),
   companyLocation: Yup.string().required("This field is required").trim(),
   companyAddress: Yup.string().required("This field is required").trim(),
-  size: Yup.string().required("This field is required").min(1,'Add minimus size').min(1,'Please enter a valid size').max(5,'Please enter a valid size').trim(),
-  gstNumber: Yup.string().required("This field is required").max(10,'Please enter a valid gst number').trim(),
+  size: Yup.string().required("This field is required").min(1,'Please enter a valid size').max(5,'Please enter a valid size').trim(),
+  gstNumber: Yup.string().matches('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$',"Please enter a valid Gst number"
+  ).required("This field is required").trim(),
   companyRoles: Yup.string()
   .matches(/[a-zA-Z]/, "At least one alphabet character required").min(10)
   // .matches(/\*/, "At least one * symbol required")
@@ -82,7 +83,7 @@ export const companyFullDetailsEditSchema = Yup.object().shape({
 export const companyPostSchema = Yup.object().shape({
   jobPosition: Yup.string().required("This field is required").trim(),
   skills: Yup.string().required("This field is required").trim(),
-  experience: Yup.string().required("This field is required").trim(),
+  experience: Yup.string().required("This field is required").min(1,'Please enter a valid size').trim(),
   jobType: Yup.string().required("This field is required").trim(),
   responsibilities: Yup.string().required("This field is required").trim(),
   endTime:  Yup.date()

@@ -20,6 +20,7 @@ import {
 import {useQuery} from  "@tanstack/react-query"
 import { getUserList } from "../../../Api/companyApi";
 import { useEffect, useState } from "react";
+import MainLoading from "../../commonComponents/Loadings/MainLoding";
 export default function UserCards() {
 const [search,setSearch] = useState()
 const [debouncedSearch,setdebouncedSearch] = useState()
@@ -35,7 +36,7 @@ useEffect(() => {
     return () => clearTimeout(timeoutId);
   });
 
-  const {data} = useQuery({
+  const {data,isLoading} = useQuery({
      queryKey:["companyHome",{search:debouncedSearch}],
      queryFn: async ()=>{
         const respone = await getUserList({search}).then((res)=>res.data)
@@ -43,7 +44,9 @@ useEffect(() => {
      }
   })
 
-  console.log(data);
+  if(isLoading){
+    return <MainLoading/>
+  }
 
   return (
     <div >

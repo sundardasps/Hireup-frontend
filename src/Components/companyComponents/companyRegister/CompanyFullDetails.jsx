@@ -6,11 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 import { setCompanyDetails } from "../../../Redux/storeSlices/companyslice";
-import { Button } from "@material-tailwind/react";
+import { Button, Spinner } from "@material-tailwind/react";
+
 function CompanyFullDetails() {
   const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const handleLoading = ()=>setLoading((cur)=>!cur)
   const id = useSelector((state) => state.company.id);
   const initialValue = {
     companyName: "",
@@ -34,6 +36,7 @@ function CompanyFullDetails() {
     initialValues: initialValue,
     validationSchema: companyFullDetailsSchema,
     onSubmit: async (values) => {
+      handleLoading()
       const formData = new FormData();
       formData.append("companyName", values.companyName);
       formData.append("companyLocation", values.companyLocation);
@@ -45,7 +48,9 @@ function CompanyFullDetails() {
 
       const response = await addCompanyfullDetails(formData, id);
       if (response.data.updated) {
-         localStorage.setItem("companyToken", response.data.jwtToken);
+         handleLoading()
+        toast.success("Company details added successfully!");
+         localStorage.setItem("companyToken",response.data.jwtToken);
          dispatch(
           setCompanyDetails({
             id:response.data.userData._id,
@@ -55,16 +60,17 @@ function CompanyFullDetails() {
             completed:response.data.userData.is_completed,
           })
         );
-        navigate("/company");
+          window.location.reload()
+          navigate("/company/login")
       } else {
         toast.error(response.data.message);
       }
     },
   });
 
-  if (isLoading) {
-    return <h1>Loadingg........</h1>;
-  }
+
+
+
 
   return (
     <>
@@ -170,7 +176,7 @@ function CompanyFullDetails() {
                 </label>
                 <input
                   name="gstNumber"
-                  type="number"
+                  type="text"
                   min={1}
                   onBlur={handleBlur}
                   onChange={handleChange}
@@ -265,7 +271,14 @@ function CompanyFullDetails() {
                 type="submit"
                 className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
               >
-                Save
+               {isLoading === true ? (
+                  <div className="flex justify-center gap-2">
+                    <Spinner className="h-5 w-5" />
+                    <span>Proceeding..</span>
+                  </div>
+                ) : (
+                  <span>Submit</span>
+                )}
               </button>
             </div>
           </form>

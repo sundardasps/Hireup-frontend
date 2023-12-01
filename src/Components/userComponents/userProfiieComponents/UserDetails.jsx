@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import userLogo from "../../../../public/user.png";
 import banner from "../../../../public/banner.webp";
+import MainLoading from "../../commonComponents/Loadings/MainLoding";
 import {
   Button,
   Dialog,
@@ -52,8 +53,6 @@ function UserDetails() {
     skill: "",
     level: "",
   });
-
-
 
   const initialValue = {
     image: selectedImage,
@@ -157,7 +156,8 @@ function UserDetails() {
   };
 
   if (isLoading) {
-    return <h1>Lodiing.....</h1>;
+ 
+    return <MainLoading />;
   }
 
   if (error) {
@@ -349,30 +349,29 @@ function UserDetails() {
                 <div className="bg-white p-2 shadow-sm rounded-sm">
                   <div className="grid  ">
                     <div>
-
-
-                      <div className="flex justify-between items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
-                  
-
+                      <div className="flex justify-between items-center space-x-2 font-semibold text-gray-900 leading-8 ">
                         <span className="tracking-wide">Experience</span>
-                        <EditExperience addData={{data}}/>
+                        <EditExperience addData={{ data }} />
                       </div>
-                  
-                  <ul  className="list-inside space-y-2 overflow-y-scroll max-h-48">
-                  {data.exist.experience.map((value,index)=>(
-                        <li key={value} className="flex items-center justify-between border rounded-xl">
-                          <div>
-                            <div className="text-teal-600 text-sm m-1">
-                             {value}
+                      <div className="mb-2">
+                        <Typography className="text-gray-600" variant="small">Totel ({data ? data.total:""} + year experience)</Typography>
+                      </div>
+
+                      <ul className="list-inside space-y-2 overflow-y-scroll max-h-48">
+                        {data.exist.experience.map((value, index) => (
+                          <li
+                            key={value}
+                            className="flex items-center justify-between border rounded-xl"
+                          >
+                            <div>
+                              <div className="text-teal-600 text-sm m-1">
+                                {value}
+                              </div>
                             </div>
-                          </div>
-                          <EditExperience editdata={{value,index}} />
-                        </li>
+                            <EditExperience editdata={{ value, index }} />
+                          </li>
                         ))}
                       </ul>
-                    
-
-
                     </div>
                   </div>
                 </div>

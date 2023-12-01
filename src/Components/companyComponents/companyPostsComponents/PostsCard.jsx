@@ -1,32 +1,24 @@
-import {
-  Button,
-  Card,
-  CardFooter,
-  Input,
-  Tab,
-  Tabs,
-  TabsHeader,
-  Typography,
-} from "@material-tailwind/react";
-import { useEffect, useState } from "react";
-import {
-  BuildingOffice2Icon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/solid";
+import { useQuery } from "@tanstack/react-query";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 import { companyPosts } from "../../../Api/companyApi";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import {useNavigate} from "react-router-dom"
+import { useEffect, useState } from "react";
+import { BuildingOffice2Icon,MagnifyingGlassIcon} from "@heroicons/react/24/solid";
+import { Button,Card,CardFooter,Input,Tab,Tabs,TabsHeader,Typography,} from "@material-tailwind/react";
+import toast from "react-hot-toast";
+import { JobDelete } from "../companyDialogs/JobDelete";
+
+
+
+
+
 function PostsCard() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(1);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [debounsedSearch, setDebouncedSearch] = useState("");
   const TABS = [
-    {
-      label: "All",
-      value: "All",
-    },
     {
       label: "Active",
       value: "Active",
@@ -42,32 +34,30 @@ function PostsCard() {
       setDebouncedSearch(search);
     }, 1000);
     return () => clearTimeout(timeoutId);
-  },);
+  });
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["jobs", { page: page, filter, search: debounsedSearch }],
+    queryKey: ["jobs", { page: page, filter, search: debounsedSearch}],
     queryFn: () =>
       companyPosts({ page: page, filter, search: debounsedSearch }).then(
         (res) => res.data
-       
       ),
-      
-  },);
-
-
+  });
 
   const handlePage = async (newPage) => {
-    if (newPage < 1 || newPage > data.totalPage) {
+    if (newPage <= 1 || newPage > data.totalPage) {
       return;
     }
     setPage(newPage);
   };
 
+
+
   return (
-    <div>  
-         <div className="flex gap-4 md:flex-row mt-5">
+    <div>
+      <div className="flex gap-4 md:flex-row  ">
         <Tabs value="all" className="w-full md:w-max">
-          <TabsHeader >
+          <TabsHeader>
             {TABS.map(({ label, value }) => (
               <Tab onClick={() => setFilter(value)} key={value} value={value}>
                 &nbsp;&nbsp;{label}&nbsp;&nbsp;
@@ -87,51 +77,81 @@ function PostsCard() {
           />
         </div>
       </div>
-     <div className="flex flex-col items-center ">
- 
 
-      {data &&
-        data.data &&
-        data.data.map(({ _id, job_title, end_time, job_type, required_skills }) => {
-          return (
-            <Card onClick={()=>navigate(`/company/post/details`,{state : {_id}})}
-              key={job_title}
-              className="flex  sm:flex-row justify-between container m-5  h-min xl:w-[30rem] border bg-white shadow-lg rounded-md hover:scale-105 duration-500"
-            >
-              <div className="flex flex-col w-full sm:w-auto p-4">
-                <Typography color="blue" className="text-1xl font-bold mx-5">
-                  {job_title}
-                </Typography>
-                <div className="flex flex-col sm:flex-row justify-between items-start">
-                  <div className="flex items-center gap-2">
-                    <BuildingOffice2Icon className="h-6 w-6 text-teal-500" />
-                    {data.companyData.companyName}
-                    <Typography className="font-bold text-gray-700"></Typography>
+      <div className="flex flex-col items-center h-screen mb-10">
+        {data &&
+          data.data &&
+          data.data.map(
+            ({
+              _id,
+              job_title,
+              end_time,
+              job_type,
+              required_skills,
+              is_active,
+            }) => {
+              return (
+                <Card
+                  key={job_title}
+                  className="flex mr-0  sm:flex-row justify-between container my-2 mx-2  xl:w-[30rem] border bg-white  rounded-md hover:shadow-xl "
+                >
+                  <div className="m-2 mt-4 w-auto h-auto">
+                    <img
+                      src={data.companyData.image}
+                      style={{ width: "80px", height: "60px" }}
+                      className="rounded-sm"
+                    />
                   </div>
-                  <div className="flex flex-col mt-2 sm:mt-0">
-                    <Typography className="font-semibold text-gray-700">
-                      Location:
-                    </Typography>
-                    <span className="text-gray-500">
-                    {data.companyData.location}
-                    </span>
+                  <div className="flex flex-col  w-full  m-5">
+                    <div>
+                      <Typography color="blue" className="text-lg font-bold">
+                        {job_title}
+                      </Typography>
+                    </div>
+                    <div className="flex gap-1">
+                      <BuildingOffice2Icon className="h-4 w-4 text-teal-500" />
+                      <Typography className="text-sm">
+                        {data.companyData.companyName}
+                      </Typography>
+                    </div>
+                    <div className="flex flex-col sm:flex-row justify-between items-start">
+                      <div className="flex justify-center gap-2">
+                        <Typography className="font-serift text-sm text-gray-600">
+                          Location:{data.companyData.location}
+                        </Typography>
+                      </div>
+                    </div>
+                    <div className="flex justify-between">
+                      {is_active ? (
+                        <div className="text-black-500 mt-2">
+                          Ending date: {end_time}
+                        </div>
+                      ) : (
+                        <div className="text-gray-500 mt-2">
+                          Expired : {end_time}
+                        </div>
+                      )}
+                      <div
+                        className="mt-2 cursor-pointer font-light hover:underline left-0 "
+                        style={{ userSelect: "none" }}
+                       
+                      >
+                        <span  onClick={() =>navigate(`/company/post/details`, { state: { _id } })}> Show details</span>
+                      </div>
+
+                    </div>
                   </div>
-                </div>
-                <div className="text-gray-500 mt-2">
-                  Ending date: [{end_time}]
-                </div>
-              </div>
-              <CardFooter className="flex justify-end items-center p-4">
-              </CardFooter>
-            </Card>
-          );
-        })}
-
-
-    </div>
-       <div className="">
-        <Typography  color="blue-gray" className="font-normal ">
-          {/* Page {page} of {data.totalPage} */}
+                  <CardFooter>
+                    <JobDelete data={{_id}} />
+                  </CardFooter>
+                </Card>
+              );
+            }
+          )}
+      </div>
+      <div className="">
+        <Typography color="blue-gray" className="font-normal ">
+          Page {page} of {data && data.totalPage}
         </Typography>
         <div className="flex gap-2">
           <Button
@@ -141,17 +161,12 @@ function PostsCard() {
           >
             Previous
           </Button>
-          <Button
-            size="sm"
-            onClick={() => handlePage(page + 1)}
-            disabled={page === data }
-          >
+          <Button size="sm" onClick={() => handlePage(page + 1)}>
             Next
           </Button>
         </div>
       </div>
     </div>
-
   );
 }
 

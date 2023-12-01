@@ -178,7 +178,7 @@ export function EditProfile({ data }) {
                 </label>
                 <input
                   name="gstNumber"
-                  type="number"
+                  type="text"
                   min={1}
                   onBlur={handleBlur}
                   onChange={handleChange}
