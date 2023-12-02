@@ -148,9 +148,9 @@ export async function editPostDetails(values,postId) {
   }
 }
 
-export async function getUserList({search}) {
+export async function getUserList({search,filter}) {
   try {
-    const response = await companyCheck.get("/getUserList",{params:{search}})
+    const response = await companyCheck.get("/getUserList",{params:{search,filter}})
     return response;
   } catch (error) {
     console.log(error);
@@ -172,6 +172,15 @@ export async function deleteJob(id) {
   try {
     console.log(id);
     const response = await companyCheck.get(`/deleteJob/${id}`)
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function categoryDataForCompany() {
+  try {
+    const response = await companyCheck.get("/categoryDataForCompany");
     return response;
   } catch (error) {
     console.log(error);

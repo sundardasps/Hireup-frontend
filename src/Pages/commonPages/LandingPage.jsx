@@ -2,6 +2,7 @@ import LandingCards from "../../Components/commonComponents/landingPageComponent
 import UserProfileSlide from "../../Components/commonComponents/landingPageComponents/UserProfileSlide";
 import LandingNavbar from "../../Components/commonComponents/landingPageComponents/LandingNavbar";
 import UserFooter from "../../Components/userComponents/userCommonComponents/UserFooter";
+import CompaniesBanner from "../../Components/commonComponents/landingPageComponents/CompaniesBanner";
 
 
 function LandingPage() {
@@ -9,7 +10,8 @@ function LandingPage() {
     <>
       <LandingNavbar/>
       <LandingCards />
-      {/* <UserProfileSlide/> */}
+      {/* <UserProfileSlide/>  */}
+      <CompaniesBanner/>
       <UserFooter/>
     </>
   );

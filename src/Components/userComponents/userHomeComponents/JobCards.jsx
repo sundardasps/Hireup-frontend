@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionBody,
   AccordionHeader,
+  Button,
   Card,
   CardFooter,
   Input,
@@ -74,9 +75,9 @@ function JobCards() {
   };
   //-----------------------------------------------------//
 
-  const handleFilter = () => {
-    // const selectedValue = e.target.innerText;
-    // setFilter(selectedValue);
+  const handleFilter = (e) => {
+    const selectedValue = e.target.innerText;
+    setFilter(selectedValue);
   };
   //-----------------------------------------------------//
 
@@ -110,7 +111,12 @@ function JobCards() {
               />
             </div>
           </div>
-          <List>
+          <div className="p-3">
+            <Button onClick={()=>location.reload()} size="sm" variant="outlined" fullWidth> 
+              Clear
+            </Button>
+          </div>
+          <List className="overflow-y-scroll h-40 ">
             {category &&
               category.map((value, index) => (
                 <Accordion
@@ -141,7 +147,7 @@ function JobCards() {
                       </Typography>
                     </AccordionHeader>
                   </ListItem>
-                  <AccordionBody className="py-1">
+                   <AccordionBody className="py-1">
                     {value.category.map((value, index) => (
                       <List key={index}>
                         <ListItem

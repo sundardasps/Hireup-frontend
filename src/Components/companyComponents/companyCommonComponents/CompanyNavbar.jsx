@@ -238,7 +238,7 @@ function CompanyNavbar() {
   }, []);
 
   return (
-    <Navbar className="mx-auto max-w-screen-xxl px-6 py-3">
+    <Navbar className=" fixed top-0 left-0 right-0 z-50  h-auto max-w-screen-xxl px-6 py-3">
     <div className="flex items-center justify-between text-blue-gray-900">
       <Typography
         as="a"

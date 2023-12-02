@@ -1,29 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  Card,
-  Typography,
-  List,
-  ListItem,
-  ListItemPrefix,
-  ListItemSuffix,
-  Chip,
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-  Input,
-} from "@material-tailwind/react";
-import {
-  PresentationChartBarIcon,
-  ShoppingBagIcon,
-  UserCircleIcon,
-  Cog6ToothIcon,
-  InboxIcon,
-  PowerIcon,
-  MagnifyingGlassIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/24/solid";
+
 import { categoryDataForUser } from "../../../Api/userApi";
 import JobCards from "./JobCards";
+import { Accordion, AccordionBody, AccordionHeader, Button, Card, Input, List, ListItem, Typography, } from "@material-tailwind/react";
+import { ChevronDownIcon,MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 
 export function SideBarFilter() {
@@ -60,64 +40,78 @@ export function SideBarFilter() {
   return (
     <>
     
-    <Card className="h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5">
-      <div className="mb-1 p-2">
-        <Typography variant="h3" color="blue-gray">
-          Find jobs..
-        </Typography>
-      <div className="w-auto">
+    < >
+        <Card className="fixed h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5 ">
+          <div className="mb-1 p-2">
+            <Typography variant="h3" color="blue-gray">
+              Find jobs..
+            </Typography>
+            <div className="w-full ">
               <Input
-                label="Search"
-                value={search}
+                label="Search ..."
+                // placeholder="Seach job,company,place,skill.."
                 autoFocus
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                }}
-                icon={<MagjnifyingGlassIcon className="h-5 w-5" onClick={handleSearch} />}
-                />
-            </div>
-      </div>
-      <List>
-        {category&&category.map((value, index) => (
-          <Accordion
-            key={index}
-            open={open === index + 1}
-            icon={
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`mx-auto h-4 w-4 transition-transform ${
-                  open === index + 1 ? "rotate-180" : ""
-                }`}
+                value={search}
+                onChange={handleSearch}
+                icon={<MagnifyingGlassIcon className="h-5 w-5" />}
               />
-            }
-          >
-            <ListItem
-              className="p-1 hover:bg-gray-200 border "
-              selected={open === index + 1}
-            >
-              <AccordionHeader
-                onClick={() => handleOpen(index + 1)}
-                className="border-b-0 p-0"
-              >
-                <Typography color="blue-gray" className="mr-auto font-small">
-                  {value.title}
-                </Typography>
-              </AccordionHeader>
-            </ListItem>
-            <AccordionBody className="py-1">
-              {value.category.map((value, index) => (
-                <List
+            </div>
+          </div>
+          <div className="p-1">
+            <Button onClick={()=>location.reload()} variant="outlined" fullWidth> 
+              Get all
+            </Button>
+          </div>
+          <List className="overflow-y-scroll h-40 ">
+            {category &&
+              category.map((value, index) => (
+                <Accordion
                   key={index}
+                  open={open === index + 1}
+                  icon={
+                    <ChevronDownIcon
+                      strokeWidth={2.5}
+                      className={`mx-auto h-4 w-4 transition-transform ${
+                        open === index + 1 ? "rotate-180" : ""
+                      }`}
+                    />
+                  }
                 >
-                  <ListItem key={index} onClick={handleFilter}className="font-medium">{value}</ListItem>
-                </List>
+                  <ListItem
+                    className="p-1 hover:bg-gray-200 border "
+                    selected={open === index + 1}
+                  >
+                    <AccordionHeader
+                      onClick={() => handleOpen(index + 1)}
+                      className="border-b-0 p-0"
+                    >
+                      <Typography
+                        color="blue-gray"
+                        className="mr-auto font-small"
+                      >
+                        {value.title}
+                      </Typography>
+                    </AccordionHeader>
+                  </ListItem>
+                   <AccordionBody className="py-1">
+                    {value.category.map((value, index) => (
+                      <List key={index}>
+                        <ListItem
+                          key={index}
+                          onClick={handleFilter}
+                          className="border-b-0 p-0"
+                        >
+                          {value}
+                        </ListItem>
+                      </List>
+                    ))}
+                  </AccordionBody>
+                </Accordion>
               ))}
-            </AccordionBody>
-          </Accordion>
-        ))}
-      </List>
-    </Card>
- 
+          </List>
+          <List></List>
+        </Card>
+      </>
     </>
   );
 }

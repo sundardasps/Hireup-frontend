@@ -12,63 +12,86 @@ import {
   CardFooter,
   Tabs,
   TabsHeader,
-  Tab,
-  Avatar,
-  Tooltip,
-  IconButton,
+  List,
+  Accordion,
+  AccordionHeader,
+  ListItem,
+  AccordionBody,
 } from "@material-tailwind/react";
 import {useQuery} from  "@tanstack/react-query"
-import { getUserList } from "../../../Api/companyApi";
-import { useEffect, useState } from "react";
+import { categoryDataForCompany, getUserList } from "../../../Api/companyApi";
+import React, { useEffect, useState } from "react";
 import MainLoading from "../../commonComponents/Loadings/MainLoding";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 export default function UserCards() {
 const [search,setSearch] = useState()
 const [debouncedSearch,setdebouncedSearch] = useState()
+const [category, setCategory] = React.useState([]);
+const [open, setOpen] = React.useState(0);
+const [filter, setFilter] = useState();
 
-const handleSearch = (e) =>{
-    setSearch(e.target.value)
-}
 
 useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setdebouncedSearch(search);
-    }, 1000);
-    return () => clearTimeout(timeoutId);
-  });
+  const fetchCategory = async () => {
+    await categoryDataForCompany().then((res) => setCategory(res.data.data));
+  };
+
+  fetchCategory();
+  const timeoutId = setTimeout(() => {
+    setdebouncedSearch(search);
+  }, 1000);
+
+  return () => clearTimeout(timeoutId);
+}, [search]);
+
+
 
   const {data,isLoading} = useQuery({
-     queryKey:["companyHome",{search:debouncedSearch}],
+     queryKey:["companyHome",{search:debouncedSearch,filter}],
      queryFn: async ()=>{
-        const respone = await getUserList({search}).then((res)=>res.data)
+        const respone = await getUserList({search:debouncedSearch,filter}).then((res)=>res.data)
         return respone
      }
   })
+
+    //-----------------------------------------------------//
+     
+    
+  const handleOpen = (value) => {
+    setOpen(open === value ? 0 : value);
+  };
+  
+    //-----------------------------------------------------//
+  
+    const handleSearch = async (event) => {
+      setSearch(event.target.value);
+    };
+    //-----------------------------------------------------//
+  
+    const handleFilter = (e) => {
+      const selectedValue = e.target.innerText;
+      setFilter(selectedValue);
+    };
+    //-----------------------------------------------------//
+  
+
 
   if(isLoading){
     return <MainLoading/>
   }
 
   return (
-    <div >
-      <Card className="h-screen max-w-screen-lg border-1 m-5">
-        <CardHeader floated={false} shadow={false} className="rounded-none h-auto">
-          <div className="flex flex-col items-center justify-between  md:flex-row">
-            <Tabs value="all" className="w-full md:w-max">
-              <TabsHeader>
-                {/* {TABS.map(({ label, value }) => (
-                  <Tab
-                    onClick={() => setFilter(value)}
-                    key={value}
-                    value={value}
-                  >
-                    &nbsp;&nbsp;{label}&nbsp;&nbsp;
-                  </Tab>
-                ))} */}
-              </TabsHeader>
-            </Tabs>
-            <div  className="w-full md:w-72 m-3">
+    <div className="flex justify-between mt-20 " >
+     <div className="">
+        <Card className="fixed h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5 ">
+          <div className="mb-1 p-2">
+            <Typography variant="h3" color="blue-gray">
+              Find jobs..
+            </Typography>
+            <div className="w-full ">
               <Input
-                label="Search"
+                label="Search ..."
+                // placeholder="Seach job,company,place,skill.."
                 autoFocus
                 value={search}
                 onChange={handleSearch}
@@ -76,18 +99,58 @@ useEffect(() => {
               />
             </div>
           </div>
-        </CardHeader>
-        <CardBody className=" grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 overflow-y-scroll ">
+          <div className="p-1">
+            <Button onClick={()=>location.reload()} variant="outlined" fullWidth> 
+              Get all
+            </Button>
+          </div>
+          <List className="overflow-y-scroll h-40 ">
+            {category &&
+              category.map((value, index) => (
+                <Accordion
+                  key={index}
+                  open={open === index + 1}
+                  icon={
+                    <ChevronDownIcon
+                      strokeWidth={2.5}
+                      className={`mx-auto h-4 w-4 transition-transform ${
+                        open === index + 1 ? "rotate-180" : ""
+                      }`}
+                    />
+                  }
+                >
+                  <ListItem
+                    className="p-1 hover:bg-gray-200 border "
+                    selected={open === index + 1}
+                  >
+                   
+                      <Typography
+                        color="blue-gray"
+                        className="mr-auto font-small"
+                        onClick={handleFilter}
+                      >
+                        {value.title}
+                      </Typography>
+           
+                  </ListItem>
+    
+                </Accordion>
+              ))}
+          </List>
+          <List></List>
+        </Card>
+      </div>
 
-
+      <Card className="m-5 shadow-none  lg:w-9/12 p-2">
+        <CardBody className=" grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 overflow-y-scroll h-screen ">
           {data && data.userList.map((value,index)=>(
-          <Card key={index} className="max-w-[13rem] mx-auto  rounded-lg overflow-hidden shadow-lg bg-white mt-5">
-            <div className="relative">
+          <Card key={index} className="max-w-[13rem] mx-auto h-min rounded-lg overflow-hidden shadow-lg bg-white mt-5 hover:shadow-2xl outline-black">
+            <div className="relative border-b-2">
               {/* Background Image */}
               <img
                 src={value.userCoverDp?value.userCoverDp:banner}
                 alt="Background"
-                className="w-full h-28 object-fill"
+                className="w-full h-28 object-fil"
               />
               {/* Profile Image */}
               <img
@@ -129,7 +192,7 @@ useEffect(() => {
 
 
         </CardBody>
-        {/* <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+        <CardFooter className="flex items-center justify-between border-t border-blue-gray-100 p-4">
           <Typography variant="small" color="blue-gray" className="font-normal">
             Page of
           </Typography>
@@ -151,7 +214,7 @@ useEffect(() => {
               Next
             </Button>
           </div>
-        </CardFooter> */}
+        </CardFooter>
       </Card>
     </div>
   );
