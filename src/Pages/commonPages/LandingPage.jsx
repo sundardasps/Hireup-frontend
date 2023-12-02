@@ -11,7 +11,7 @@ function LandingPage() {
       <LandingNavbar/>
       <LandingCards />
       {/* <UserProfileSlide/>  */}
-      <CompaniesBanner/>
+      {/* <CompaniesBanner/> */}
       <UserFooter/>
     </>
   );

@@ -43,8 +43,8 @@ function CompanyDetails() {
   }
 
   return (
-    <d>
-      <Card className="flex justify-between container mx-2 my-2   bg-white  h-auto ">
+    <>
+      <Card className="flex justify-between container mx-2 my-2   bg-white  h-auto mt-28 ">
         <CardHeader className="flex flex-col sm:flex-row w-auto m-4 first-letter rounded shadow">
           <div className=" m-2 cursor-pointer">
             <img
@@ -156,7 +156,7 @@ function CompanyDetails() {
           />
         </CardFooter>
       </Card>
-    </d>
+    </>
   );
 }
 

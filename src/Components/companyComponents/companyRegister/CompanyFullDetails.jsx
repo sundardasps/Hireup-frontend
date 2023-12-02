@@ -48,20 +48,22 @@ function CompanyFullDetails() {
 
       const response = await addCompanyfullDetails(formData, id);
       if (response.data.updated) {
-         handleLoading()
+        handleLoading()
         toast.success("Company details added successfully!");
-         localStorage.setItem("companyToken",response.data.jwtToken);
-         dispatch(
+        dispatch(
           setCompanyDetails({
             id:response.data.userData._id,
             companyName: response.data.userData.companyName,
             email: response.data.userData.email,
             role: response.data.userData.role,
-            completed:response.data.userData.is_completed,
+            completed:1
           })
-        );
-          window.location.reload()
-          navigate("/company/login")
+          )
+          localStorage.setItem("companyToken",response.data.jwtToken);
+          setTimeout(()=>{
+            navigate('/company')
+          },1000)
+
       } else {
         toast.error(response.data.message);
       }

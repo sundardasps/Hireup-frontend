@@ -168,3 +168,12 @@ export async function experienceDelete(value){
   }
 }
 
+export async function getCompanies(){
+  try {
+    const response = await userCheck.get("/getAllCompany");
+    return response;
+  } catch (error) { 
+    console.log(error);
+  }
+}
+

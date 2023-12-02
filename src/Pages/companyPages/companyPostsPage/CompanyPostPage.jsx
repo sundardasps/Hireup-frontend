@@ -4,7 +4,7 @@ import PostsCard from "../../../Components/companyComponents/companyPostsCompone
 
 function CompanyPostPage() {
   return (
-    <div className="flex justify-between m-5 ">
+    <div className="flex justify-between m-5  ">
       <div className="">
         <PostsCard />
       </div>

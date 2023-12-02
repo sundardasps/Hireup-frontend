@@ -93,9 +93,9 @@ function JobCards() {
   }
 
   return (
-    <div className="flex justify-center ">
+    <div className="flex justify-center  ">
       <div className="">
-        <Card className="fixed h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5 ">
+        <Card className="fixed h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5  hidden lg:block">
           <div className="mb-1 p-2">
             <Typography variant="h3" color="blue-gray">
               Find jobs..
@@ -173,7 +173,7 @@ function JobCards() {
           data.data.map((data, index) => (
             <Card
               key={index}
-              className=" flex mr-0  sm:flex-row justify-between container m-5  xl:w-[30rem] border bg-white  rounded-md hover:shadow-xl  "
+              className=" flex  sm:flex-row justify-between container my-5   xl:w-[30rem] border bg-white  rounded-md hover:shadow-xl  "
             >
               <div className="m-2 mt-4 w-auto h-auto">
                 <img
@@ -236,7 +236,6 @@ function JobCards() {
         {selectedJob && (
           <JobFullDetails
             jobdata={selectedJob}
-            // onClose={() => setSelectedJob(null)}
           />
         )}
       </div>

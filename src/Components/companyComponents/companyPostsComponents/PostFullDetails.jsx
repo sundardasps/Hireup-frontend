@@ -27,7 +27,7 @@ if (error) {
 
   return (
     <div> 
-      <Card className="  container mx-2 my-5   bg-white  h-auto border">
+      <Card className="  container mx-2 my-5   bg-white  h-auto border mt-28">
         <div className='flex  flex-col  '> 
         <text className="flex justify-between text-4xl text-light-blue-700 font-bold  underline m-5">
           {data ? data.jobDetails.job_title : ""}

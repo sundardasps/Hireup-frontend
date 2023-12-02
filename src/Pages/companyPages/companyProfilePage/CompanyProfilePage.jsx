@@ -3,7 +3,7 @@ import CompanyDetails from '../../../Components/companyComponents/companyProfile
 import CompanySidebar from '../../../Components/companyComponents/companyProfileComponents/CompanySidebar'
 function CompanyProfilePage() {
   return (
-<div className='flex justify-between m-10 '>
+   <div className='flex justify-between '>
     <CompanyDetails />
     <div className=''>
     <CompanySidebar/>

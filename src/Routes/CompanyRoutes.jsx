@@ -18,16 +18,10 @@ import CompanyPostPage from '../Pages/companyPages/companyPostsPage/CompanyPostP
 import PostFullDetails from '../Components/companyComponents/companyPostsComponents/PostFullDetails'
 import PostFullDetailsPage from '../Pages/companyPages/companyPostsPage/PostFullDetailsPage'
 function CompanyRoutes(){
-   const completed = useSelector((state) =>{
-    return state.company.completed
-   })
-   useEffect(()=>{
-     console.log(completed);
-   },[completed])
+
    return (
     <div>
       <Routes>
-        
          <Route path='/companyRegister' element={<CompanyPublic><CompanyRegister/></CompanyPublic>}/>
          <Route path="/:companyId/varification/:token" element={<CompanyPublic><CompanyVarification/></CompanyPublic>}/>
          <Route path="/:companyId/resetPassword/:token" element={<CompanyPublic><CompanyResetPassword/></CompanyPublic>}/>
@@ -35,12 +29,12 @@ function CompanyRoutes(){
          <Route path='/forgotePassword' element={<CompanyPublic><CompanyForgotPass/></CompanyPublic>}/>
          
          <Route element={<CompanyProtected/>}>
+         <Route path='/fulldetails' element={<CompanyFullDetails/>}/>
          <Route element={<CompanyLayout/>} >
-         <Route path='/' element={completed  ? <CompanyHomePage/> : <CompanyFullDetails/> }/>
+         <Route path='/' element={<CompanyHomePage/>}/>
          <Route path='/profile' element={<CompanyProfilePage/>}/>
          <Route path='/posts' element={<CompanyPostPage/>}/>
          <Route path='/post/details' element={<PostFullDetailsPage/>}/>
-         
          </Route>
          </Route>
       </Routes>

@@ -1,4 +1,4 @@
-import { Bars3CenterLeftIcon, Bars3Icon, HomeIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { Bars3CenterLeftIcon, Bars3Icon, BookmarkIcon, ChatBubbleLeftRightIcon, HomeIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import {
   Avatar,
   Button,
@@ -43,23 +43,46 @@ function CompanyNavbar() {
   };
   function NavList() {
     return (
-      <ul className="my-2 flex flex-col  lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+      <ul className="my-2 flex  flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-20 ">
         <Typography
           as="li"
-          variant="h"
+          variant="small"
           color="blue-gray"
-          className="p-1 font-medium flex items-center"
+          className="font-medium"
           onClick={()=>navigate('/company')}
         >
-          <HomeIcon className="h-8 w-8 p-1 cursor-pointer"/>
+          <HomeIcon className="h-8 w-7"/>
           <a
            
-            className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
+            className="flex items-center hover:text-blue-500 transition-colors "
           >
             Home
           </a>
         </Typography>
-    
+        <a
+          onClick={()=>navigate('/user')}
+          className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
+        >
+        <Typography
+          as="li"
+          variant="small"
+          color="blue-gray"
+          className=" font-medium "
+        > <BookmarkIcon  className="h-8 w-7 "/>saved
+        </Typography>
+        </a>
+        <a
+          onClick={()=>navigate('/user')}
+          className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
+        >
+        <Typography
+          as="li"
+          variant="small"
+          color="blue-gray"
+          className=" font-medium "
+        > <ChatBubbleLeftRightIcon  className=" h-8 w-7 "/>Chat
+        </Typography>
+        </a>
 
         <Typography
           as="li"
@@ -243,10 +266,10 @@ function CompanyNavbar() {
       <Typography
         as="a"
 
-        variant="h4"
+        variant="h3"
         className="mr-4 cursor-pointer py-1.5"
       >
-         <div className="font-extrabold text-2xl cursor-pointer text-blue-500  flex items-center gap-1">
+         <div className="font-extrabold text-xl cursor-pointer text-blue-500  flex items-center gap-1">
           <img src="/public/logo.png" className="min-w-fit h-10"/><span>HireUp</span>
         </div>
       </Typography>

@@ -55,7 +55,7 @@ function PostsCard() {
 
   return (
     <div>
-      <div className="flex gap-4 md:flex-row  ">
+      <div className="flex gap-4 md:flex-row mt-28 ">
         <Tabs value="all" className="w-full md:w-max">
           <TabsHeader>
             {TABS.map(({ label, value }) => (

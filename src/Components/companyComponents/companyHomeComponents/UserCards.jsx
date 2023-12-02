@@ -144,7 +144,7 @@ useEffect(() => {
       <Card className="m-5 shadow-none  lg:w-9/12 p-2">
         <CardBody className=" grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 overflow-y-scroll h-screen ">
           {data && data.userList.map((value,index)=>(
-          <Card key={index} className="max-w-[13rem] mx-auto h-min rounded-lg overflow-hidden shadow-lg bg-white mt-5 hover:shadow-2xl outline-black">
+          <Card key={index} className="max-w-[13rem] mx-auto h-min rounded-lg overflow-hidden shadow-lg bg-white mt-5 hover:shadow-2xl ">
             <div className="relative border-b-2">
               {/* Background Image */}
               <img

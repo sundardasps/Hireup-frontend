@@ -43,7 +43,8 @@ export const companySignUpSchema = Yup.object().shape({
     companyLocation: Yup.string().required("This field is required").trim(),
     companyAddress: Yup.string().required("This field is required").trim(),
     size: Yup.string().required("This field is required").min(1,'Add minimus size').max(5,'Please enter a valid size').trim(),
-    gstNumber: Yup.string().required("This field is required").max(10,'Please enter a valid gst number').trim(),
+    gstNumber: Yup.string().matches('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$',"Please enter a valid Gst number"
+    ).required("This field is required").trim(),
     companyRoles: Yup.string()
     .matches(/[a-zA-Z]/, "At least one alphabet character required").min(10)
     // .matches(/\*/, "At least one * symbol required")

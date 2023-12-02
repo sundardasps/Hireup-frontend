@@ -24,7 +24,7 @@ function CompanySidebar() {
   const navigate = useNavigate()
   return (
     <div >
-    <Card className="flex  flex-auto h-fit mx-5 my-5  bg-white  border">
+    <Card className="flex  flex-auto h-fit mx-5 my-5  bg-white  border mt-28">
         <div className="mb-2 p-4">
           <Typography variant="h5" color="blue-gray">
             Sidebar

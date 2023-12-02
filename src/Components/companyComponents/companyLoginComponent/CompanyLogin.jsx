@@ -79,7 +79,6 @@ function CompanyLogin() {
       onSubmit: async (value) => {
         const response = await companyLogin(value);
         if (response.data.loginSuccess) {
-          console.log(response,"==================================");
           dispatch(
             setCompanyDetails({
               id: response.data.loginData._id,
