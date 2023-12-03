@@ -2,15 +2,11 @@ import { Avatar, Card, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { getCompanies } from "../../../Api/userApi";
 import toast from "react-hot-toast";
-import {
-  BuildingOffice2Icon,
-} from "@heroicons/react/24/solid";
+import MainLoading from "../../../Components/commonComponents/Loadings/MainLoding";
+import { BuildingOffice2Icon } from "@heroicons/react/24/solid";
 
 function UserProfileSlide() {
   const [avatars, setAvatars] = useState([]);
-  const [isLoading, setLoading] = useState(false);
-  const handleLoading = () => setLoading((curr) => !curr);
-
 
   const numVisibleAvatars = 5;
 
@@ -18,11 +14,8 @@ function UserProfileSlide() {
 
   useEffect(() => {
     const getAllCompanies = async () => {
-      handleLoading();
       const response = await getCompanies();
       if (response.data.fetched) {
-        handleLoading();
-
         const loopedAvatars = [
           ...response.data.companyData,
           ...response.data.companyData,
@@ -36,7 +29,7 @@ function UserProfileSlide() {
     createAvatarLoop();
     const interval = setInterval(createAvatarLoop, 5000 * numVisibleAvatars);
     return () => clearInterval(interval);
-  },[]);
+  }, []);
 
   return (
     <>
@@ -68,9 +61,9 @@ function UserProfileSlide() {
                       {data.companyName}
                     </Typography>
                   </div>
-                    <Typography className="mt-2 text-center text-xs">
-                      {data.location}
-                    </Typography>
+                  <Typography className="mt-2 text-center text-xs">
+                    {data.location}
+                  </Typography>
                 </div>
               </Card>
             ))}
@@ -78,27 +71,23 @@ function UserProfileSlide() {
         </div>
       </div>
 
- 
-
-  <div className=" text-center m-auto p-5 w-3/4">
-    <Typography variant="h4" color="blue-gray" className="mb-6 font-medium">
-      &quot;This is an excellent product, the documentation is excellent and helped me get things done more efficiently.&quot;
-    </Typography>
-    <Avatar
-      src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
-      alt="image"
-      size="lg"
-    />
-    <Typography variant="h6" className="mt-4">
-      Tania Andrew
-    </Typography>
-    <Typography color="gray" className="mb-4 font-normal">
-      Lead Frontend Developer
-    </Typography>
-  </div>
-
-
-
+      <div className=" text-center m-auto p-5 w-3/4">
+        <Typography variant="h4" color="blue-gray" className="mb-6 font-medium">
+          &quot;This is an excellent product, the documentation is excellent and
+          helped me get things done more efficiently.&quot;
+        </Typography>
+        <Avatar
+          src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
+          alt="image"
+          size="lg"
+        />
+        <Typography variant="h6" className="mt-4">
+          Tania Andrew
+        </Typography>
+        <Typography color="gray" className="mb-4 font-normal">
+          Lead Frontend Developer
+        </Typography>
+      </div>
 
       <style>
         {`

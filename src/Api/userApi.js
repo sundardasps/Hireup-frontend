@@ -177,3 +177,13 @@ export async function getCompanies(){
   }
 }
 
+export async function addEducation(eduData){
+  try {
+
+    const response = await userCheck.post("/addEducation",eduData);
+    return response;
+  } catch (error) { 
+    console.log(error);
+  }
+}
+

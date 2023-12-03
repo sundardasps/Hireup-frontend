@@ -98,3 +98,13 @@ export const userEditSchema = Yup.object().shape({
 export const userExperienceSchema = Yup.object().shape({
   experience: Yup.string().required("This field is required").trim(),
 });
+
+
+export const educationAddSchema = Yup.object().shape({
+  universityName: Yup.string().required("This field is required").trim(),
+  courseName: Yup.string().required("This field is required").trim(),
+  courseStarted:  Yup.date()
+  .required('Date is required'),
+  courseEnded:  Yup.date()
+  .required('Date is required')
+});
