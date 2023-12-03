@@ -394,17 +394,23 @@ function UserDetails() {
                       </div>
 
                       <ul className="list-inside space-y-2 overflow-y-scroll max-h-48">
-                        {data.exist.experience.map((value, index) => (
+                        {data.exist.education.map((value, index) => (
                           <li
-                            key={value}
-                            className="flex items-center justify-between border rounded-xl"
+                            key={index}
+                            className="flex items-center justify-between border p-2 rounded-xl"
                           >
                             <div>
-                              <div className="text-teal-600 text-sm m-1">
-                                {value}
+                              <div className="text-Black-600 text-base ">
+                                {value.universityName}
+                              </div>
+                              <div className="text-teal-600 text-sm ">
+                                {value.courseName}
+                              </div>
+                              <div className="text-blue-gray-300 text-sm ">
+                                {value.courseStarted} - {value.courseEnded}
                               </div>
                             </div>
-                            <Education />
+                            <Education EditData={{value}} />
                           </li>
                         ))}
                       </ul>

@@ -105,6 +105,22 @@ export const educationAddSchema = Yup.object().shape({
   courseName: Yup.string().required("This field is required").trim(),
   courseStarted:  Yup.date()
   .required('Date is required'),
-  courseEnded:  Yup.date()
-  .required('Date is required')
+  courseEnded: Yup.date()
+  .required('End date is required')
+  .test(
+    'date-validation',
+    'End date must be greater than start date',
+    function (value) {
+      const { courseStarted } = this.parent;
+      return !courseStarted || !value || new Date(value) > new Date(courseStarted);
+    }
+  )
+  .test(
+    'date-equality',
+    'Start date and end date cannot be the same',
+    function (value) {
+      const { courseStarted } = this.parent;
+      return !courseStarted || !value || new Date(value) !== new Date(courseStarted);
+    }
+  ),
 });

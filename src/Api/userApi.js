@@ -187,3 +187,21 @@ export async function addEducation(eduData){
   }
 }
 
+export async function editEducation(prevData,editData){
+  try {
+    const response = await userCheck.patch("/editEducation",{prevData,editData});
+    return response;
+  } catch (error) { 
+    console.log(error);
+  }
+}
+
+export async function deleteEducation(prevData){
+  try {
+    const response = await userCheck.put("/deleteEducation",prevData);
+    return response;
+  } catch (error) { 
+    console.log(error);
+  }
+}
+
