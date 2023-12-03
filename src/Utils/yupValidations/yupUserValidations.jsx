@@ -1,5 +1,8 @@
 import * as Yup from "yup";
 
+const MAX_FILE_SIZE = 10485760; // 10 MB in bytes (10 * 1024 * 1024)
+const imageFormats = ["image/jpeg", "image/png", "image/avif", "application/pdf"];
+
 export const userSignUpSchema = Yup.object().shape({
   userName: Yup.string().required("This field is required").trim(),
   number: Yup.string()
@@ -122,5 +125,21 @@ export const educationAddSchema = Yup.object().shape({
       const { courseStarted } = this.parent;
       return !courseStarted || !value || new Date(value) !== new Date(courseStarted);
     }
+  ),
+});
+
+
+export const resumeSchema = Yup.object().shape({
+  resume:Yup.mixed()
+  .test("is-image", "Only image files are allowed", (value) => {
+    if (value) {
+      return imageFormats.includes(value.type);
+    }
+    return true;
+  }).required("Please select resume")
+  .test(
+    "is-valid-size",
+    "Max allowed size is 10 mb",
+    (value) => value && value.size <= MAX_FILE_SIZE
   ),
 });

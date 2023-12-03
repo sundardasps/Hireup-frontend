@@ -205,3 +205,16 @@ export async function deleteEducation(prevData){
   }
 }
 
+export async function applyJob(formData){
+  try {
+    const response = await userCheck.post("/applyJOb",formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response;
+  } catch (error) { 
+    console.log(error);
+  }
+}
+

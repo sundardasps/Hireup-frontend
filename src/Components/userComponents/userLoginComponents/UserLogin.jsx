@@ -42,7 +42,6 @@ function UserLogin() {
           }
         )
         .then((res) => {
-          console.log(res);
           userLogin({ email: res.data.email, password: res.data.id }).then(
             (result) => {
               if (result.data.loginSuccess) {
@@ -52,6 +51,9 @@ function UserLogin() {
                     userName: result.data.loginData.name,
                     email: result.data.loginData.email,
                     role: "user",
+                    userTitle:result.data.loginData.userTitle,
+                    userDp:result.data.loginData.userDp,
+                    number:result.data.loginData.number
                   })
                 );
                 localStorage.setItem("token", result.data.jwtToken);
@@ -82,6 +84,9 @@ function UserLogin() {
               userName: response.data.loginData.userName,
               email: response.data.loginData.email,
               role: response.data.loginData.role,
+              userTitle:response.data.loginData.userTitle,
+              userDp:response.data.loginData.userDp,
+              number:response.data.loginData.number
             })
           );
           localStorage.setItem("token", response.data.jwtToken);

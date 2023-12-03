@@ -93,6 +93,7 @@ export const companyPostSchema = Yup.object().shape({
   salery:Yup.string().required("This field is required").trim()
 });
 
+
 export const imageEditSchema = Yup.object().shape({
   image:Yup.mixed()
   .test("is-image", "Only image files are allowed", (value) => {

@@ -78,7 +78,7 @@ export function JobFullDetails({ jobdata }) {
         <CardFooter className="">
           <Button size="sm" className="flex bg-light-blue-700">
             <CursorArrowRippleIcon className="w-4 h-4" />
-            <JobApply />
+            <JobApply data={{jobdata}} />
           </Button>
         </CardFooter>
       </Card>

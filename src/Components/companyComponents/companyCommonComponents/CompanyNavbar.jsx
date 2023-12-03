@@ -24,21 +24,22 @@ function CompanyNavbar() {
   const completed = useSelector((state) =>{
     return state.company.completed
    })
+   
 
    useEffect(()=>{
      console.log(completed);
    },[completed])
 
   const handleLogOut = () => {
-    localStorage.removeItem("companyToken");
     dispatch(
       logOutDetails2({
-        companyName: "",
+        companyName:"",
         email: "",
         role: "",
         id:""
       })
-    );
+      );
+    localStorage.removeItem("companyToken");
     navigate("/");
   };
   function NavList() {
