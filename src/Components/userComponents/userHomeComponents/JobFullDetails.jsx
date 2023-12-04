@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import  { jwtDecode } from 'jwt-decode'
 import {
   Drawer,
   Button,
@@ -22,6 +23,13 @@ import {
 import JobApply from "../userDialogs/JobApply";
 
 export function JobFullDetails({ jobdata }) {
+  const token = localStorage.getItem("token")
+  const decode = jwtDecode(token)
+  const exist = jobdata.appliedUsers.includes(decode.exist._id)
+
+  console.log(exist,"======================");
+  
+
   return (
     <div className="fixed right-7">
       <Card className="container  bg-white  w-auto   border right-0  p-1">
@@ -76,10 +84,13 @@ export function JobFullDetails({ jobdata }) {
         </div>
 
         <CardFooter className="">
-          <Button size="sm" className="flex bg-light-blue-700">
+         {exist === false ? <Button size="sm" color="blue" className="flex">
             <CursorArrowRippleIcon className="w-4 h-4" />
             <JobApply data={{jobdata}} />
-          </Button>
+          </Button>:<Button size="sm" color="green" className="flex">
+            <CursorArrowRippleIcon className="w-4 h-4" />
+            Applied
+          </Button>}
         </CardFooter>
       </Card>
     </div>

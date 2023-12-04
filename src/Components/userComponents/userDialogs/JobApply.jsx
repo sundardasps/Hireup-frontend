@@ -16,22 +16,24 @@ import {
 import { useFormik } from "formik";
 import { resumeSchema } from "../../../Utils/yupValidations/yupUserValidations";
 import { applyJob } from "../../../Api/userApi";
+import toast from "react-hot-toast";
 
 function JobApply({ data }) {
   const [open, setOpen] = React.useState(false);
   const [next, setNext] = useState(0);
-  const [file, setFile] = useState();
+  const [file, setFile] = useState("");
   const [fileType, setFileType] = useState("");
   const [isLoading, setLoading] = useState(false);
   const handleLoading = () => setLoading((cur) => !cur);
-  
+
   const handleOpen = () => {
-    setNext(0)
-    setOpen((cur) => !cur)
-    setFile("")
+    setNext(0);
+    setOpen((cur) => !cur);
   };
 
-  const handleNext = () => {setNext((cur) => (cur < 2 ? cur + 1 : 2))}
+  const handleNext = () => {
+    setNext((cur) => (cur < 2 ? cur + 1 : 2));
+  };
 
   const userData = useSelector((state) => {
     return state.company;
@@ -47,26 +49,29 @@ function JobApply({ data }) {
     setFieldValue("resume", currentFile);
     setFile(URL.createObjectURL(event.target.files[0]));
   };
-
-
-  const {
-    handleSubmit,
-    handleBlur,
-    setFieldValue,
-    errors,
-    values,
-    touched
-  } = useFormik({
-    initialValues: initialValue,
-    validationSchema: resumeSchema,
-    onSubmit: async (value) =>{
-      handleLoading()
-      const formData = new FormData()
-      formData.append("resume",value.resume)
-      formData.append("jobId",data.jobdata._id)
-      const response = await applyJob(formData)  
-    },
-  });
+  const { handleSubmit, handleBlur, setFieldValue, errors, values, touched } =
+    useFormik({
+      initialValues: initialValue,
+      validationSchema: resumeSchema,
+      onSubmit: async (value) => {
+        handleLoading();
+        const formData = new FormData();
+        formData.append("resume", value.resume);
+        formData.append("jobId", data.jobdata._id);
+        formData.append("companyId", data.jobdata.companyId);
+        const response = await applyJob(formData);
+        if (response.data.created) {
+          handleLoading();
+          handleOpen();
+          toast.success(response.data.message);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        } else {
+          toast.error(response.data.message);
+        }
+      },
+    });
 
   return (
     <div>
@@ -89,7 +94,7 @@ function JobApply({ data }) {
               <div className="flex w-full flex-col mb-5">
                 <Progress
                   value={
-                    (next ===  0   && 10) ||
+                    (next === 0 && 10) ||
                     (next === 1 && 65) ||
                     (next === 2 && 100)
                   }
@@ -140,30 +145,33 @@ function JobApply({ data }) {
                   size="lg"
                 />
               ) : (
-                <input type="file" name="resume" onChange={handleFile}  size="lg" />
+                <input
+                  type="file"
+                  name="resume"
+                  onChange={handleFile}
+                  size="lg"
+                />
               )}
 
-              {errors.resume && 
-                (<div className="m-5 font-medium text-lg   text-red-800">
+              {errors.resume && (
+                <div className="m-5 font-medium text-lg   text-red-800">
                   {errors.resume}
-                </div>)
-               }
+                </div>
+              )}
 
               <Typography className="-mb-2" variant="small">
-                 {(next === 1 && "Job Salery") ||
+                {(next === 1 && "Job Salery") ||
                   (next === 0 && "Title") ||
                   (next === 2 && "")}
               </Typography>
               {next < 2 && (
                 <Input
-              
                   value={
                     (next === 1 && data.jobdata.salery) ||
                     (next === 0 && userData.userTitle)
                   }
                   size="lg"
                 />
-                
               )}
               {file && (
                 <>
@@ -187,7 +195,6 @@ function JobApply({ data }) {
                   )}
                 </>
               )}
-             
             </CardBody>
             <CardFooter className="flex justify-end gap-2">
               <Button variant="gradient" onClick={handleOpen}>
@@ -199,13 +206,13 @@ function JobApply({ data }) {
                 color="blue"
                 onClick={handleNext}
               >
-                 {isLoading === true ? (
+                {isLoading === true ? (
                   <div className="flex justify-center gap-2">
                     <Spinner className="h-5 w-5" />
                     <span>Submiting...</span>
                   </div>
                 ) : (
-                    <span>Submit</span>
+                  <span>Submit</span>
                 )}
               </Button>
             </CardFooter>
