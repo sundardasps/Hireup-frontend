@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { TrashIcon } from "@heroicons/react/24/outline";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { companyPosts } from "../../../Api/companyApi";
 import { useEffect, useState } from "react";
-import { BuildingOffice2Icon,MagnifyingGlassIcon} from "@heroicons/react/24/solid";
-import { Button,Card,CardFooter,Input,Tab,Tabs,TabsHeader,Typography,} from "@material-tailwind/react";
+import { BuildingOffice2Icon,MagnifyingGlassIcon, UserGroupIcon} from "@heroicons/react/24/solid";
+import { Button,Card,CardFooter,Input,Tab,Tabs,TabsHeader,Tooltip,Typography,} from "@material-tailwind/react";
 import toast from "react-hot-toast";
 import { JobDelete } from "../companyDialogs/JobDelete";
 
@@ -55,7 +55,7 @@ function PostsCard() {
 
   return (
     <div>
-      <div className="flex gap-4 md:flex-row mt-28 ">
+      <div className="flex gap-4 md:flex-row mt-20 mx-36 ">
         <Tabs value="all" className="w-full md:w-max">
           <TabsHeader>
             {TABS.map(({ label, value }) => (
@@ -136,13 +136,16 @@ function PostsCard() {
                         style={{ userSelect: "none" }}
                        
                       >
-                        <span  onClick={() =>navigate(`/company/post/details`, { state: { _id } })}> Show details</span>
+                        <span  onClick={() =>navigate("/company/post/details", { state: { _id } })}> Show details</span>
                       </div>
 
                     </div>
                   </div>
-                  <CardFooter>
+                  <CardFooter >
                     <JobDelete data={{_id}} />
+                    <Tooltip content="Applied users">
+                    <UserGroupIcon className="mt-14 w-6 h-6 cursor-pointer " onClick={() =>navigate("appliedUsers", { state: { _id } })}/>
+                    </Tooltip>
                   </CardFooter>
                 </Card>
               );

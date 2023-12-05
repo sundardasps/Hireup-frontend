@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Dialog, DialogBody, DialogFooter, DialogHeader, Spinner, Typography } from "@material-tailwind/react";
+import { Button, Dialog, DialogBody, DialogFooter, DialogHeader, Spinner, Tooltip, Typography } from "@material-tailwind/react";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { deleteJob } from "../../../Api/companyApi";
 import toast, { Toaster } from "react-hot-toast";
@@ -30,7 +30,8 @@ export function JobDelete({data}) {
  
   return (
     <>
-      <TrashIcon onClick={handleOpen} className="w-5 h-5  cursor-pointer  underline">.</TrashIcon>
+       <Tooltip content="Delete post"><TrashIcon onClick={handleOpen} className="w-5 h-5  cursor-pointer  underline">.</TrashIcon></Tooltip>
+      
       <Dialog open={open} size="xs" handler={handleOpen}>
         <DialogHeader className="justify-center">
           <Typography variant="h5" color="blue-gray" >

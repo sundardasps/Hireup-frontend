@@ -298,7 +298,7 @@ function UserDetails() {
 
               <div className="w-full md:w-6/12 md:mx-2">
                 <div className="bg-white p-2 shadow-sm rounded-sm">
-                  <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+                  <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8  w-[50rem]">
                     <span className="text-green-500">
                       <svg
                         className="h-5"

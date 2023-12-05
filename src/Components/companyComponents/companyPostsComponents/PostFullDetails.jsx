@@ -1,14 +1,15 @@
-import {EllipsisVerticalIcon, BuildingOffice2Icon,CalendarDaysIcon, ChatBubbleBottomCenterTextIcon,ComputerDesktopIcon,ShoppingBagIcon, CurrencyRupeeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/solid'
+import {EllipsisVerticalIcon, BuildingOffice2Icon,CalendarDaysIcon, ChatBubbleBottomCenterTextIcon,ComputerDesktopIcon,ShoppingBagIcon, CurrencyRupeeIcon, MapPinIcon, PhoneIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'
 import { Button, Card, CardBody, CardFooter, CardHeader, Menu, MenuHandler, MenuItem, MenuList, Option, Select, Typography } from '@material-tailwind/react'
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from "react-router-dom";
 import {useQuery} from '@tanstack/react-query'
 import { postDetails } from '../../../Api/companyApi';
 import EditPost from '../companyDialogs/EditPost';
+import {useNavigate} from 'react-router-dom'
 function PostFullDetails() {
   const location = useLocation()
   const jobId = location.state._id
- 
+  const navigate = useNavigate()
 
   const {data,isLoading,error} = useQuery({
      queryKey:["jobDetails",jobId],
@@ -27,8 +28,9 @@ if (error) {
 
   return (
     <div> 
-      <Card className="  container mx-2 my-5   bg-white  h-auto border mt-28">
+      <Card className="  container mx-2 my-5   bg-white  h-auto border mt-20">
         <div className='flex  flex-col  '> 
+        <ArrowLeftIcon className='w-10 h-6 m-4 cursor-pointer' onClick={()=>navigate("/company/posts")} />
         <text className="flex justify-between text-4xl text-light-blue-700 font-bold  underline m-5">
           {data ? data.jobDetails.job_title : ""}
           <div>

@@ -130,91 +130,101 @@ export async function addSkills(skillForm) {
   }
 }
 
-
 export async function deleteSkill(skill) {
   try {
     console.log(skill);
-    const response = await userCheck.post("/deleteSkill",skill);
+    const response = await userCheck.post("/deleteSkill", skill);
     return response;
-  } catch (error) { 
+  } catch (error) {
     console.log(error);
   }
 }
 
-export async function addExperience(value){
+export async function addExperience(value) {
   try {
-    const response = await userCheck.post("/addExperience",value);
+    const response = await userCheck.post("/addExperience", value);
     return response;
-  } catch (error) { 
+  } catch (error) {
     console.log(error);
   }
 }
 
-export async function experienceEdit(value,edited){
+export async function experienceEdit(value, edited) {
   try {
-    const response = await userCheck.put("/editExperience",{value,edited});
+    const response = await userCheck.put("/editExperience", { value, edited });
     return response;
-  } catch (error) { 
+  } catch (error) {
     console.log(error);
   }
 }
 
-export async function experienceDelete(value){
+export async function experienceDelete(value) {
   try {
     const response = await userCheck.post(`/deleteExperience/${value}`);
     return response;
-  } catch (error) { 
+  } catch (error) {
     console.log(error);
   }
 }
 
-export async function getCompanies(){
+export async function getCompanies() {
   try {
     const response = await userCheck.get("/getAllCompany");
     return response;
-  } catch (error) { 
+  } catch (error) {
     console.log(error);
   }
 }
 
-export async function addEducation(eduData){
+export async function addEducation(eduData) {
   try {
-
-    const response = await userCheck.post("/addEducation",eduData);
+    const response = await userCheck.post("/addEducation", eduData);
     return response;
-  } catch (error) { 
+  } catch (error) {
     console.log(error);
   }
 }
 
-export async function editEducation(prevData,editData){
+export async function editEducation(prevData, editData) {
   try {
-    const response = await userCheck.patch("/editEducation",{prevData,editData});
+    const response = await userCheck.patch("/editEducation", {
+      prevData,
+      editData,
+    });
     return response;
-  } catch (error) { 
+  } catch (error) {
     console.log(error);
   }
 }
 
-export async function deleteEducation(prevData){
+export async function deleteEducation(prevData) {
   try {
-    const response = await userCheck.put("/deleteEducation",prevData);
+    const response = await userCheck.put("/deleteEducation", prevData);
     return response;
-  } catch (error) { 
+  } catch (error) {
     console.log(error);
   }
 }
 
-export async function applyJob(formData){
+
+export async function applyJob(formData) {
   try {
-    const response = await userCheck.post("/applyJOb",formData, {
+    const response = await userCheck.post("/applyJOb", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
     return response;
-  } catch (error) { 
+  } catch (error) {
     console.log(error);
   }
 }
 
+export async function appliedList({filter,search}) {
+  try {
+    const response = await userCheck.get("/getAppliedJobs",{params:{filter,search}});
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}

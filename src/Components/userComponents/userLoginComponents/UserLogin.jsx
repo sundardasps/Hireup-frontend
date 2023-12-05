@@ -48,8 +48,8 @@ function UserLogin() {
                 console.log(result);
                 dispatch(
                   setUserDetails({
-                    userName: result.data.loginData.name,
-                    email: result.data.loginData.email,
+                    userName: result.data.loginData.userName,
+                    email:result.data.loginData.email,
                     role: "user",
                     userTitle:result.data.loginData.userTitle,
                     userDp:result.data.loginData.userDp,
@@ -68,9 +68,7 @@ function UserLogin() {
     }
   }, [user, dispatch, navigate]);
 
-  {
-    /*  Normal login field   */
-  }
+
 
   const { handleBlur, handleChange, handleSubmit, errors, touched, values } =
     useFormik({
@@ -83,7 +81,7 @@ function UserLogin() {
             setUserDetails({
               userName: response.data.loginData.userName,
               email: response.data.loginData.email,
-              role: response.data.loginData.role,
+              role: "user",
               userTitle:response.data.loginData.userTitle,
               userDp:response.data.loginData.userDp,
               number:response.data.loginData.number

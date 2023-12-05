@@ -11,6 +11,7 @@ function LandingCards() {
           <h2 className="text-4xl font-bold tracking-tight text-black sm:text-4xl cursor-pointer mb-10 h-20">
             Welcome ,
             <br />
+            
             {/* <TypeAnimation
              cursor={false}
              sequence={['Choose Your Role Wisely', 5000, '']}

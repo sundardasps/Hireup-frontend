@@ -1,4 +1,4 @@
-import { Bars3CenterLeftIcon, Bars3Icon, BookmarkIcon, ChatBubbleLeftRightIcon, HomeIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { Bars3CenterLeftIcon, Bars3Icon, BookmarkIcon, ChatBubbleLeftRightIcon, HomeIcon, NewspaperIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import {
   Avatar,
   Button,
@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logOutDetails2 } from "../../../Redux/storeSlices/companyslice";
 import toast from "react-hot-toast";
+import { TableCellsIcon } from "@heroicons/react/24/outline";
 
 function CompanyNavbar() {
   const dispatch = useDispatch();
@@ -49,10 +50,10 @@ function CompanyNavbar() {
           as="li"
           variant="small"
           color="blue-gray"
-          className="font-medium"
+          className="font-medium cursor-pointer"
           onClick={()=>navigate('/company')}
         >
-          <HomeIcon className="h-8 w-7"/>
+          <HomeIcon className="h-8 w-7" />
           <a
            
             className="flex items-center hover:text-blue-500 transition-colors "
@@ -61,7 +62,7 @@ function CompanyNavbar() {
           </a>
         </Typography>
         <a
-          onClick={()=>navigate('/user')}
+           onClick={() => navigate("/company/posts") }
           className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
         >
         <Typography
@@ -69,7 +70,7 @@ function CompanyNavbar() {
           variant="small"
           color="blue-gray"
           className=" font-medium "
-        > <BookmarkIcon  className="h-8 w-7 "/>saved
+        > <NewspaperIcon  className="h-8 w-7 "/>Posts
         </Typography>
         </a>
         <a

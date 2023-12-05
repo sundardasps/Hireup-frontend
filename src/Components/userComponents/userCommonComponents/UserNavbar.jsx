@@ -6,7 +6,8 @@ import {
   MagnifyingGlassIcon,
   BookmarkIcon,
   ChatBubbleBottomCenterIcon,
-  ChatBubbleLeftRightIcon
+  ChatBubbleLeftRightIcon,
+  CursorArrowRippleIcon
 } from "@heroicons/react/24/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutDetails } from "../../../Redux/storeSlices/userSlice";
@@ -74,6 +75,21 @@ function UserNavbar() {
             Home
         </Typography>
           </a>
+
+          <a
+          onClick={()=>navigate('/user/appliedJobs')}
+          className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
+        >
+        <Typography
+          as="li"
+          variant="small"
+          color="blue-gray"
+          className=" font-medium  "
+        > <CursorArrowRippleIcon  className="h-8 w-7 "/>Applied
+        </Typography>
+        </a>
+
+
           <a
           onClick={()=>navigate('/user')}
           className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"

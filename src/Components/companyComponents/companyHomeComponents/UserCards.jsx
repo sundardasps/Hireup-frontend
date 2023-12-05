@@ -23,13 +23,14 @@ import { categoryDataForCompany, getUserList } from "../../../Api/companyApi";
 import React, { useEffect, useState } from "react";
 import MainLoading from "../../commonComponents/Loadings/MainLoding";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import {useNavigate} from 'react-router-dom'
 export default function UserCards() {
 const [search,setSearch] = useState()
 const [debouncedSearch,setdebouncedSearch] = useState()
 const [category, setCategory] = React.useState([]);
 const [open, setOpen] = React.useState(0);
 const [filter, setFilter] = useState();
-
+const navigate = useNavigate()
 
 useEffect(() => {
   const fetchCategory = async () => {
@@ -81,7 +82,7 @@ useEffect(() => {
   }
 
   return (
-    <div className="flex justify-between mt-20 " >
+    <div className="flex justify-between mt-20" >
      <div className="">
         <Card className="fixed h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5 ">
           <div className="mb-1 p-2">
@@ -141,22 +142,22 @@ useEffect(() => {
         </Card>
       </div>
 
-      <Card className="m-5 shadow-none  lg:w-9/12 p-2">
-        <CardBody className=" grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 overflow-y-scroll h-screen ">
+      {/* <Card className="m-5 shadow-none  lg:w-9/12 p-2"> */}
+        <CardBody className=" grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  ">
           {data && data.userList.map((value,index)=>(
-          <Card key={index} className="max-w-[13rem] mx-auto h-min rounded-lg overflow-hidden shadow-lg bg-white mt-5 hover:shadow-2xl ">
+           <Card key={index} className="max-w-[14rem] mx-auto h-min rounded-lg overflow-hidden shadow-xl bg-white mt-5  hover:shadow-2xl cursor-pointer border-2  " onClick={()=>navigate(`/company/userProfile`,{state:value._id})}>
             <div className="relative border-b-2">
               {/* Background Image */}
               <img
                 src={value.userCoverDp?value.userCoverDp:banner}
                 alt="Background"
-                className="w-full h-28 object-fil"
+                className="w-[15rem] h-28 object-fil"
               />
               {/* Profile Image */}
               <img
                src={value.userDp?value.userDp:userLogo}
                 alt="Profile"
-                className="rounded-full border-4 border-white absolute -bottom-10 left-12  w-28 h-28 outline-double  object-fill"
+                className="rounded-full border-4 border-white absolute -bottom-10 left-14  w-28 h-28 outline-double  object-fill"
               />
             </div>
             <CardBody>
@@ -169,16 +170,12 @@ useEffect(() => {
                  {data?value.userName:""}
                 </Typography>
               </div>
-              <Typography color="gray" className=" uppercase text-xs mb-5 w-auto">
+              <Typography color="gray" className="text-center uppercase text-xs mb-5 w-auto">
               {data?value.userTitle:""}
               </Typography>
               <div className="flex justify-center gap-2">
-                <Button size="sm" fullWidth={true} color="primary">
-                  Connect
-                </Button>
                 <Button
                   size="sm"
-                  fullWidth={true}
                   variant="outlined"
                   color="primary"
                 >
@@ -192,7 +189,7 @@ useEffect(() => {
 
 
         </CardBody>
-        <CardFooter className="flex items-center justify-between border-t border-blue-gray-100 p-4">
+        {/* <CardFooter className="flex items-center justify-between border-t border-blue-gray-100 p-4">
           <Typography variant="small" color="blue-gray" className="font-normal">
             Page of
           </Typography>
@@ -214,8 +211,8 @@ useEffect(() => {
               Next
             </Button>
           </div>
-        </CardFooter>
-      </Card>
+        </CardFooter> */}
+      {/* </Card> */}
     </div>
   );
 }

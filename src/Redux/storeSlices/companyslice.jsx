@@ -4,8 +4,8 @@ const initialState = {
     companyName:"",
     email:"",
     role:"",
+    completed:0,
     id:"",
-    completed:0 
 }
 
 const companySlice = createSlice({

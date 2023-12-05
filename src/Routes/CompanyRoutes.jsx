@@ -17,6 +17,8 @@ import { useEffect } from 'react'
 import CompanyPostPage from '../Pages/companyPages/companyPostsPage/CompanyPostPage'
 import PostFullDetails from '../Components/companyComponents/companyPostsComponents/PostFullDetails'
 import PostFullDetailsPage from '../Pages/companyPages/companyPostsPage/PostFullDetailsPage'
+import UserFullDetailsPage from '../Pages/companyPages/companyHomePage/UserFullDetailsPage'
+import AppliedUsersPage from '../Pages/companyPages/companyHomePage/AppliedUsersPage'
 function CompanyRoutes(){
 
    return (
@@ -35,6 +37,9 @@ function CompanyRoutes(){
          <Route path='/profile' element={<CompanyProfilePage/>}/>
          <Route path='/posts' element={<CompanyPostPage/>}/>
          <Route path='/post/details' element={<PostFullDetailsPage/>}/>
+         <Route path='/userProfile' element={<UserFullDetailsPage/>}/>
+         <Route path='/posts/appliedUsers' element={<AppliedUsersPage/>}/>
+         
          </Route>
          </Route>
       </Routes>

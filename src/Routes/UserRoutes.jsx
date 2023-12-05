@@ -12,6 +12,7 @@ import UserResetPass from "../Components/userComponents/userLoginComponents/User
 import UserForgotPass from "../Components/userComponents/userLoginComponents/UserForgotPass.jsx";
 import UserProtected from "../Utils/protected/UserProtected.jsx";
 import Profile from "../Pages/userPages/userHomePage/Profile.jsx";
+import AppliedList from "../Components/userComponents/userHomeComponents/AppliedList.jsx";
 
 function UserRoutes() {
   const [user, setUser] = useState("");
@@ -34,7 +35,7 @@ function UserRoutes() {
       <Route element={<UserLayOut/>}>
       <Route path="/" element={<UserHome/>}/>
       <Route path="/profile" element={<Profile/>}/>
-
+      <Route path="/appliedJobs" element={<AppliedList/>}/>
       </Route>
       </Route>
     </Routes>

@@ -5,7 +5,7 @@ import PostsCard from "../../../Components/companyComponents/companyPostsCompone
 function CompanyPostPage() {
   return (
     <div className="flex justify-between m-5  ">
-      <div className="">
+      <div className=" ">
         <PostsCard />
       </div>
       <CompanySidebar />

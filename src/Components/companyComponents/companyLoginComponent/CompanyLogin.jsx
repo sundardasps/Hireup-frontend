@@ -52,7 +52,7 @@ function CompanyLogin() {
                     id:result.data.loginData._id,
                     companyName: result.data.loginData.companyName,
                     email: result.data.loginData.email,
-                    role: result.data.loginData.role,
+                    role: 'company',
                     completed:result.data.loginData.is_completed,
                   })
                 );

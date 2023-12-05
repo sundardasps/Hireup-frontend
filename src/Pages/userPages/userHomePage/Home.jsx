@@ -6,8 +6,7 @@ import { SideBarFilter } from '../../../Components/userComponents/userHomeCompon
 
 function Home() {
   return (
-
-       <div >
+    <div >
         <JobCards />
     </div>
   );

@@ -186,3 +186,30 @@ export async function categoryDataForCompany() {
     console.log(error);
   }
 }
+
+export async function companyUserProfile(id) {
+  try {
+    const response = await companyCheck.get(`/getUserProfile/${id}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function jobAppliedUsers(id) {
+  try {
+    const response = await companyCheck.get(`/getAppliedUsers/${id}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getSingleUserApplication(userId,jobId) {
+  try {
+    const response = await companyCheck.put("/getSingleUserApplication",{userId,jobId});
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}

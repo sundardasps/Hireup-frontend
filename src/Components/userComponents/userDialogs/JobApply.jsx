@@ -26,8 +26,9 @@ function JobApply({ data }) {
   const [isLoading, setLoading] = useState(false);
   const handleLoading = () => setLoading((cur) => !cur);
 
+  console.log(next);
   const handleOpen = () => {
-    setNext(0);
+    setNext(()=>0);
     setOpen((cur) => !cur);
   };
 
@@ -36,8 +37,10 @@ function JobApply({ data }) {
   };
 
   const userData = useSelector((state) => {
-    return state.company;
+    return state.user;
   });
+
+  console.log(userData,"===============jobapply cmponent");
 
   const initialValue = {
     resume: "",
@@ -89,7 +92,7 @@ function JobApply({ data }) {
           <form onSubmit={handleSubmit} encType="multipart/data">
             <CardBody className="grid grid-cols-1 gap-2 ">
               <Typography variant="h6" color="blue-gray">
-                Varify for apply
+                Verify for apply
               </Typography>
               <div className="flex w-full flex-col mb-5">
                 <Progress
@@ -135,7 +138,7 @@ function JobApply({ data }) {
                   (next === 0 && "Number ") ||
                   (next === 2 && "Add Resume")}
               </Typography>
-              {next < 2 ? (
+              {next != 2 ? (
                 <Input
                   value={
                     (next === 1 && data.jobdata.responsibilities) ||
@@ -145,19 +148,22 @@ function JobApply({ data }) {
                   size="lg"
                 />
               ) : (
-                <input
+                <><input
                   type="file"
                   name="resume"
                   onChange={handleFile}
                   size="lg"
                 />
-              )}
-
-              {errors.resume && (
+                {errors.resume && 
                 <div className="m-5 font-medium text-lg   text-red-800">
                   {errors.resume}
                 </div>
+              }
+                </>
+
               )}
+
+            
 
               <Typography className="-mb-2" variant="small">
                 {(next === 1 && "Job Salery") ||
