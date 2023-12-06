@@ -82,9 +82,10 @@ useEffect(() => {
   }
 
   return (
-    <div className="flex justify-between mt-20" >
+    <>
+    <div className="flex justify-between" >
      <div className="">
-        <Card className="fixed h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5 ">
+        <Card className=" h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5 ">
           <div className="mb-1 p-2">
             <Typography variant="h3" color="blue-gray">
               Find jobs..
@@ -145,7 +146,7 @@ useEffect(() => {
       {/* <Card className="m-5 shadow-none  lg:w-9/12 p-2"> */}
         <CardBody className=" grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  ">
           {data && data.userList.map((value,index)=>(
-           <Card key={index} className="max-w-[14rem] mx-auto h-min rounded-lg overflow-hidden shadow-xl bg-white mt-5  hover:shadow-2xl cursor-pointer border-2  " onClick={()=>navigate(`/company/userProfile`,{state:value._id})}>
+           <Card key={index} className="max-w-[14rem] mx-auto h-min rounded-lg overflow-hidden shadow bg-white   hover:shadow-2xl border cursor-pointer   " onClick={()=>navigate(`/company/userProfile`,{state:value._id})}>
             <div className="relative border-b-2">
               {/* Background Image */}
               <img
@@ -175,9 +176,10 @@ useEffect(() => {
               </Typography>
               <div className="flex justify-center gap-2">
                 <Button
+                 className="bg-blue-600 rounded-3xl w-36"
                   size="sm"
                   variant="outlined"
-                  color="primary"
+                  color="white"
                 >
                   Message
                 </Button>
@@ -189,7 +191,9 @@ useEffect(() => {
 
 
         </CardBody>
-        {/* <CardFooter className="flex items-center justify-between border-t border-blue-gray-100 p-4">
+    
+    </div>
+        <CardFooter className="flex items-center justify-between border-t border-blue-gray-100 p-4">
           <Typography variant="small" color="blue-gray" className="font-normal">
             Page of
           </Typography>
@@ -211,8 +215,7 @@ useEffect(() => {
               Next
             </Button>
           </div>
-        </CardFooter> */}
-      {/* </Card> */}
-    </div>
+        </CardFooter>
+    </>
   );
 }

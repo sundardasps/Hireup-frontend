@@ -1,13 +1,15 @@
 import { Button, Card, CardBody, Typography } from '@material-tailwind/react'
 import { useQuery } from '@tanstack/react-query'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { jobAppliedUsers } from '../../../Api/companyApi'
+import { jobAppliedUsers, rejectUserApplication } from '../../../Api/companyApi'
 import {useNavigate} from 'react-router-dom'
 import banner from '../../../../public/banner.webp'
 import dp from '../../../../public/user.png'
 import toast, { Toaster } from 'react-hot-toast'
 import { AppliedUserAction } from '../companyDialogs/AppliedUserAction'
+import { ArrowRightCircleIcon } from '@heroicons/react/24/solid'
+import { ArrowLeftCircleIcon } from '@heroicons/react/24/solid'
 
 function AppliedUsersList() {
   const location = useLocation()
@@ -22,16 +24,30 @@ function AppliedUsersList() {
       }
     }) 
 
+    
+
+     const handlerejectUser = async (userId)=>{
+      try {
+        const response = await rejectUserApplication(userId,jobId)
+      } catch (error) {
+        console.log(error);
+      }
+      }
+
+
+
+
+
 
   return (
 
-        <div className=" justify-between mt-20  shadow-xl outline-1 overflow-y-scroll  bg-white" >
-        <div className='text-center border-2 shadow-md rounded-md p-3 w-auto'>
+        <div className=" justify-between  shadow-xl outline-1  rounded-xl   bg-white border border-black" >
+        <div className='text-start border  p-3 w-auto'>
         <Typography variant='h4'>Applicants</Typography>
         </div>
-        <CardBody className=" grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  ">
+        <CardBody className=" grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 h-[20rem] ">
           {data && data.usersData.map((value,index)=>(
-           <Card key={index} className="max-w-[14rem] mx-auto h-min rounded-lg overflow-hidden shadow-xl bg-white   hover:shadow-2xl cursor-pointer border-2  ">
+           <Card key={index} className="max-w-[14rem] mx-auto h-min rounded-lg overflow-hidden shadow bg-white   hover:shadow-lg cursor-pointer border  ">
             <div className="relative border-b-2">
               {/* Background Image */}
               <img
@@ -61,12 +77,24 @@ function AppliedUsersList() {
               {data?value.userTitle:""}
               </Typography>
               <div className="flex justify-center gap-2">
-                <AppliedUserAction  data={{value,jobId}}/>
+                  <Button color='red' size='sm' className='rounded-3xl' onClick={()=>handlerejectUser(value._id)}>
+                    Reject
+                  </Button>
+                 <Button color='green' size='sm' className='rounded-3xl'>
+                   Accept
+                  </Button>
+                {/* <AppliedUserAction  data={{value,jobId}}/> */}
               </div>
             </CardBody>
           </Card> ))
          } 
+
+
         </CardBody>
+        <div className='flex  justify-end   text-start   p-3 w-auto '>
+         <ArrowLeftCircleIcon  className='w-10 h-10 cursor-pointer'/>
+         <ArrowRightCircleIcon className='w-10 h-10 cursor-pointer'/>
+        </div>
         <Toaster/>
     </div>
   )

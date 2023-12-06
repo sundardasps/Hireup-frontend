@@ -5,10 +5,8 @@ function CompanyProfilePage() {
   return (
    <div className='flex justify-between '>
     <CompanyDetails />
-    <div className=''>
     <CompanySidebar/>
     </div>
-</div>
 
 
   )

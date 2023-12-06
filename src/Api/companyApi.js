@@ -213,3 +213,13 @@ export async function getSingleUserApplication(userId,jobId) {
     console.log(error);
   }
 }
+
+export async function rejectUserApplication(userId,jobId) {
+  try {
+    alert(userId)
+    const response = await companyCheck.put("/rejectUserapplication",{userId,jobId});
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}

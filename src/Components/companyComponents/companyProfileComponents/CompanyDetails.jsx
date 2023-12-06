@@ -44,7 +44,7 @@ function CompanyDetails() {
 
   return (
     <>
-      <Card className="flex justify-between container mx-2 my-2   bg-white  h-auto mt-28 ">
+      <Card className="flex justify-between container mx-2 my-2   bg-white  h-auto  ">
         <CardHeader className="flex flex-col sm:flex-row w-auto m-4 first-letter rounded shadow">
           <div className=" m-2 cursor-pointer">
             <img
@@ -138,7 +138,7 @@ function CompanyDetails() {
           </div>
         </CardHeader>
 
-        <CardBody className="flex flex-col sm:flex-row justify-between w-auto h-auto bg-white m-4 first-letter shadow-inner rounded border">
+        <CardBody className="flex flex-col sm:flex-row justify-between  h-auto bg-white m-4 first-letter shadow-inner rounded border w-11/12">
           {data.exist.company_roles}
         </CardBody>
         <CardFooter className="flex justify-end gap-2">

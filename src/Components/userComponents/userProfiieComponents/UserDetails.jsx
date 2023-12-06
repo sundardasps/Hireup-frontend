@@ -169,11 +169,11 @@ function UserDetails() {
   return (
     <>
       <div className="flex justify-center">
-        <div className="bg-gray-100 overflow-auto no-scrollbar">
+        <div className="bg-transparent overflow-auto no-scrollbar">
           <div className="container mx-auto my-5 p-5">
             <div className="md:flex no-wrap md:-mx-2 ">
               <div className="w-full md:w-6/12 md:mx-2">
-                <div className=" bg-white p-2 shadow-md">
+                <div className=" bg-white p-2 shadow-md rounded-lg">
                   <div className=" relative mb-20">
                     {/* Background Image */}
                     <div className="bgimage relative">
@@ -241,7 +241,7 @@ function UserDetails() {
 
                 <div className="my-4"></div>
 
-                <div className="bg-white p-2 hover:shadow">
+                <div className="bg-white p-2 hover:shadow rounded-lg">
                   <form action="">
                     <div className="flex justify-between  space-x-3 font-semibold text-gray-900 text-xl leading-8">
                       <span>Add skills</span>
@@ -296,8 +296,8 @@ function UserDetails() {
                 </div>
               </div>
 
-              <div className="w-full md:w-6/12 md:mx-2">
-                <div className="bg-white p-2 shadow-sm rounded-sm">
+              <div className="w-full md:w-6/12 md:mx-2 ">
+                <div className="bg-white p-2 shadow-sm rounded-lg">
                   <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8  w-[50rem]">
                     <span className="text-green-500">
                       <svg
@@ -348,7 +348,7 @@ function UserDetails() {
 
                 <div className="my-4"></div>
 
-                <div className="bg-white p-2 shadow-sm rounded-sm">
+                <div className="bg-white p-2 shadow-sm rounded-lg">
                   <div className="grid  ">
                     <div>
                       <div className="flex justify-between items-center space-x-2 font-semibold text-gray-900 leading-8 ">
@@ -382,7 +382,7 @@ function UserDetails() {
                 
 
                 
-                <div className="bg-white p-2 shadow-sm rounded-sm">
+                <div className="bg-white p-2 shadow-sm rounded-lg">
                   <div className="grid  ">
                     <div>
                       <div className="flex justify-between items-center space-x-2 font-semibold text-gray-900 leading-8 ">

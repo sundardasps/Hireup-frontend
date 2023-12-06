@@ -5,12 +5,12 @@ import { Toaster } from "react-hot-toast";
 
 function UserLayout() {
   return (
-    <>
-      <div>
+    
+      <div >
         <div className="mb-20">
           <UserNavbar />
         </div>
-        <div className="bg-gray-100 min-h-screen">
+        <div className=" min-h-screen">
           <Outlet  />
         </div>
         <div>
@@ -18,7 +18,7 @@ function UserLayout() {
         </div>
         <Toaster/>
       </div>
-    </>
+    
   );
 }
 

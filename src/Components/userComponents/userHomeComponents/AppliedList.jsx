@@ -41,6 +41,8 @@ function AppliedList() {
       return response
      }
    })
+
+   console.log(data,"====================");
  
 
   return (

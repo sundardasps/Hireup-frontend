@@ -76,8 +76,8 @@ function CompanyFullDetails() {
 
   return (
     <>
-      <div>
-        <section className="max-w-3xl p-3 mx-auto bg-blue-700 rounded-md shadow-md dark:bg-gray-800 mt-6">
+      <div className="">
+        <section className="max-w-3xl  p-3 mx-auto bg-blue-700 rounded-md shadow-md dark:bg-gray-800 m-3">
           <h1 className="text-xl font-bold text-white capitalize dark:text-white">
             Account settings
           </h1>
@@ -183,7 +183,7 @@ function CompanyFullDetails() {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.gstNumber}
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                  className="block w-full px-4 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                 />
                 {errors.gstNumber && touched.gstNumber && (
                   <div className="font-semibold  text-xs  text-red-500">
@@ -204,7 +204,7 @@ function CompanyFullDetails() {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.companyRoles}
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                  className="block w-full px-4 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                 ></textarea>
                 {errors.companyRoles && touched.companyRoles && (
                   <div className="font-semibold text-xs   text-red-500">
@@ -268,7 +268,7 @@ function CompanyFullDetails() {
               </div>
             </div>
 
-            <div className="flex justify-end mt-3">
+            <div className="flex justify-end mt-1">
               <button
                 type="submit"
                 className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"

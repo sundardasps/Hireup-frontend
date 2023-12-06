@@ -37,7 +37,7 @@ const {data} = useQuery({
       <Button variant="outlined" size="sm" onClick={handleOpen}>View application</Button>
        <Dialog size="xs" open={open} handler={handleOpen}>
         <DialogHeader className="justify-between">
-          <div>
+          <div >
             <Typography variant="h5">
             Applicant Name :  <span className="uppercase text-blue-600">{value.userName}</span>
             </Typography>
@@ -64,7 +64,7 @@ const {data} = useQuery({
             </svg>
           </IconButton>
         </DialogHeader>
-        <DialogBody className="overflow-y-scroll p-5 border-2">
+        <DialogBody className="overflow-y-scroll m-3 border border-black ">
           <div className="mb-1">
             <ul className="mt-1 -ml-2 flex flex-col  ">
             <li className="flex gap-2"><AtSymbolIcon className="w-5 h-7"/>Email:<span className="text-blue-600">{value.email}</span></li>
@@ -76,9 +76,9 @@ const {data} = useQuery({
             <Typography
               variant="paragraph"
               color="blue-gray"
-              className="py-4 font-semibold uppercase opacity-70"
+              className="m-1 font-semibold uppercase opacity-70"
             >
-              Other
+              Resume/cv
             </Typography>
             <div className=" flex flex-col  h-40  ">
                 <UserResume resume={data && data.data.jobApplication.resume} resumeType={data && data.data.resumeType} />
@@ -86,7 +86,6 @@ const {data} = useQuery({
           </div>
         </DialogBody>
         <DialogFooter className="justify-end gap-2">
-          <Button variant="gradient" color="red">Reject</Button>
           <Button variant="outlined" size="sm" className="hover:bg-blue-gray-300">
            Shedule a interview
           </Button>

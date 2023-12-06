@@ -41,7 +41,7 @@ export function EditProfile({ data }) {
       const response = await editProfileDetails(values)
       if(response.data.updated){
          handleOpen()
-         queryClient.invalidateQueries("companyProfile");
+         queryClient.invalidateQueries("companyProfile")
          toast.success(response.data.message)
         
       }else{

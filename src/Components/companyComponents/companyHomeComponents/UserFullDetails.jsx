@@ -40,12 +40,12 @@ function UserFullDetails() {
   return (
  
     <>
-    <div className="mt-20 flex justify-center">
-      <div className="bg-gray-100 overflow-auto no-scrollbar">
+    <div className="flex justify-center">
+      <div className=" overflow-auto no-scrollbar">
         <div className="container mx-auto my-5 p-5">
           <div className="md:flex no-wrap md:-mx-2 ">
-            <div className="w-full md:w-6/12 md:mx-2">
-              <div className=" bg-white p-2 shadow-md">
+            <div className="w-full md:w-6/12 md:mx-2 ">
+              <div className=" bg-white p-2 shadow-md rounded-lg">
                 <div className=" relative mb-20">
                   {/* Background Image */}
                   <div className="bgimage relative">
@@ -66,7 +66,8 @@ function UserFullDetails() {
                       />
                  </div>
                 </div>
-                <h1 className="text-gray-900 font-semibold text-3xl leading-8 my-1 ">
+                <div className="ml-5">
+                <h1 className="text-gray-900 font-medium text-2xl leading-8 my-1 uppercase">
                   {data ? data.userData.userName : ""}
                 </h1>
                 <div>
@@ -77,6 +78,7 @@ function UserFullDetails() {
                 <p className="text-sm text-gray-500 hover:text-gray-600 leading-6 cursor-pointer ">
                   {data ? data.userData.place : ""}
                 </p>
+                </div>
                 <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                   <li className="flex items-center py-3">
                     <span>Email</span>
@@ -107,7 +109,7 @@ function UserFullDetails() {
             </div>
 
             <div className="w-full md:w-6/12 md:mx-2">
-              <div className="bg-white p-2 shadow-sm rounded-sm">
+              <div className="bg-white p-2 shadow-sm  rounded-lg">
                 <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8  w-[50rem]">
                   <span className="text-green-500">
                     <svg
@@ -128,9 +130,9 @@ function UserFullDetails() {
                   <span className="tracking-wide">Skills</span>
                 </div>
 
-                <div className="flex flex-col text-gray-700 bg-blue-gray-100 rounded-xl m-2 ">
+                <div className="flex flex-col text-gray-700 bg-blue-gray-100 rounded-xl m-2 rounded-lg">
                   {data && data.userData.skills.map((value, index) => (
-                    <div key={index} className="grid md:grid-cols-1  m-2">
+                    <div key={index} className="grid md:grid-cols-1  m-2 ">
                          <div className="grid grid-cols-3">
                           <div className=" px-2 py-2  font-semibold text-xs w-72 uppercase">
                           <span >{value.skill}</span>
@@ -151,13 +153,12 @@ function UserFullDetails() {
                   ))}
                 </div>
 
-                <button className="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">
-                </button>
+             
               </div>
 
               <div className="my-4"></div>
 
-              <div className="bg-white p-2 shadow-sm rounded-sm">
+              <div className="bg-white p-2 shadow-sm rounded-lg">
                 <div className="grid  ">
                   <div>
                     <div className="flex justify-between items-center space-x-2 font-semibold text-gray-900 leading-8 ">
@@ -189,7 +190,7 @@ function UserFullDetails() {
               
 
               
-              <div className="bg-white p-2 shadow-sm rounded-sm">
+              <div className="bg-white p-2 shadow-sm rounded-lg">
                 <div className="grid  ">
                   <div>
                     <div className="flex justify-between items-center space-x-2 font-semibold text-gray-900 leading-8 ">

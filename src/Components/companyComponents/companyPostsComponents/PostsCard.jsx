@@ -45,7 +45,7 @@ function PostsCard() {
   });
 
   const handlePage = async (newPage) => {
-    if (newPage <= 1 || newPage > data.totalPage) {
+    if (newPage < 1 || newPage > data.totalPage) {
       return;
     }
     setPage(newPage);
@@ -55,7 +55,7 @@ function PostsCard() {
 
   return (
     <div>
-      <div className="flex gap-4 md:flex-row mt-20 mx-36 ">
+      <div className="flex gap-4 md:flex-row  mx-36 ">
         <Tabs value="all" className="w-full md:w-max">
           <TabsHeader>
             {TABS.map(({ label, value }) => (
@@ -78,7 +78,7 @@ function PostsCard() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center h-screen mb-10">
+      <div className="flex flex-col items-center  mb-10 h-screen ">
         {data &&
           data.data &&
           data.data.map(
@@ -151,8 +151,7 @@ function PostsCard() {
               );
             }
           )}
-      </div>
-      <div className="">
+              <div className="">
         <Typography color="blue-gray" className="font-normal ">
           Page {page} of {data && data.totalPage}
         </Typography>
@@ -169,6 +168,8 @@ function PostsCard() {
           </Button>
         </div>
       </div>
+      </div>
+  
     </div>
   );
 }
