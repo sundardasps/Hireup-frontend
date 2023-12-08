@@ -1,6 +1,4 @@
-import { checkbox } from "@material-tailwind/react";
 import { userInterseption } from "../Utils/interceptors/userRequest";
-
 const userCheck = userInterseption;
 
 export async function userSignIn(userData) {
@@ -206,7 +204,6 @@ export async function deleteEducation(prevData) {
   }
 }
 
-
 export async function applyJob(formData) {
   try {
     const response = await userCheck.post("/applyJOb", formData, {
@@ -220,11 +217,22 @@ export async function applyJob(formData) {
   }
 }
 
-export async function appliedList({filter,search}) {
+export async function appliedList({ filter, search }) {
   try {
-    const response = await userCheck.get("/getAppliedJobs",{params:{filter,search}});
+    const response = await userCheck.get("/getAppliedJobs", {
+      params: { filter, search },
+    });
     return response;
   } catch (error) {
     console.log(error);
   }
 }
+
+export async function checkJobAppliedOrNot(userId,jobId){
+     try {
+      const response = await userCheck.get("/checkJobAppliedOrNot",{params:{userId,jobId}})
+      return response
+     } catch (error) {
+      console.log(error);
+     }
+} 

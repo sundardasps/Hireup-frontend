@@ -1,5 +1,4 @@
 import { companyInterseptor } from "../Utils/interceptors/companyRequest.jsx";
-
 const companyCheck = companyInterseptor;
 
 export async function companySingup(companyData) {
@@ -126,7 +125,7 @@ export async function editProfileDetails(values) {
 
 export async function editProfileImage(formData) {
   try {
-    const response = await companyCheck.post("/changeProfileImage",formData,{
+    const response = await companyCheck.post("/changeProfileImage", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -137,8 +136,7 @@ export async function editProfileImage(formData) {
   }
 }
 
-
-export async function editPostDetails(values,postId) {
+export async function editPostDetails(values, postId) {
   try {
     console.log(postId);
     const response = await companyCheck.put(`/editPost/${postId}`, values);
@@ -148,30 +146,30 @@ export async function editPostDetails(values,postId) {
   }
 }
 
-export async function getUserList({search,filter}) {
+export async function getUserList({ search, filter }) {
   try {
-    const response = await companyCheck.get("/getUserList",{params:{search,filter}})
+    const response = await companyCheck.get("/getUserList", {
+      params: { search, filter },
+    });
     return response;
   } catch (error) {
     console.log(error);
   }
 }
-
 
 export async function checkCompleted() {
   try {
-    const response = await companyCheck.get("/checkCompleted")
+    const response = await companyCheck.get("/checkCompleted");
     return response;
   } catch (error) {
     console.log(error);
   }
 }
-
 
 export async function deleteJob(id) {
   try {
     console.log(id);
-    const response = await companyCheck.get(`/deleteJob/${id}`)
+    const response = await companyCheck.get(`/deleteJob/${id}`);
     return response;
   } catch (error) {
     console.log(error);
@@ -196,28 +194,36 @@ export async function companyUserProfile(id) {
   }
 }
 
-export async function jobAppliedUsers(id) {
+export async function jobAppliedUsers({ jobId, filter, search }) {
   try {
-    const response = await companyCheck.get(`/getAppliedUsers/${id}`);
+    const response = await companyCheck.get("/getAppliedUsers", {
+      params: { jobId, filter, search },
+    });
     return response;
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function getSingleUserApplication(userId,jobId) {
+export async function getSingleUserApplication(userId, jobId) {
   try {
-    const response = await companyCheck.put("/getSingleUserApplication",{userId,jobId});
+    const response = await companyCheck.put("/getSingleUserApplication", {
+      userId,
+      jobId,
+    });
     return response;
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function rejectUserApplication(userId,jobId) {
+export async function rejectUserApplication(userId, jobId) {
   try {
-    alert(userId)
-    const response = await companyCheck.put("/rejectUserapplication",{userId,jobId});
+    alert(userId);
+    const response = await companyCheck.put("/rejectUserapplication", {
+      userId,
+      jobId,
+    });
     return response;
   } catch (error) {
     console.log(error);

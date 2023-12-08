@@ -88,7 +88,7 @@ function JobApply({ data }) {
           unmount: { scale: 0.5, y: -100 },
         }}
       >
-        <Card>
+        <Card   className={`my-dialog ${next === 2 ? 'step-two' : ''}`}>
           <form onSubmit={handleSubmit} encType="multipart/data">
             <CardBody className="grid grid-cols-1 gap-2 ">
               <Typography variant="h6" color="blue-gray">

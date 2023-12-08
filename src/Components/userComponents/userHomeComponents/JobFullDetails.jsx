@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import  { jwtDecode } from 'jwt-decode'
 import {
   Drawer,
@@ -21,14 +21,29 @@ import {
   BuildingOffice2Icon,
 } from "@heroicons/react/20/solid";
 import JobApply from "../userDialogs/JobApply";
-
+import {useQuery} from '@tanstack/react-query'
+import { checkJobAppliedOrNot } from "../../../Api/userApi";
+import toast from "react-hot-toast";
 export function JobFullDetails({ jobdata }) {
   const token = localStorage.getItem("token")
   const decode = jwtDecode(token)
-  const exist = jobdata.appliedUsers.includes(decode.exist._id)
-
-  console.log(exist,"======================");
+  const userId = decode.exist._id
+  // const exist = jobdata.appliedUsers.includes(decode.exist._id)
   
+
+  const {data,refetch} = useQuery({
+    queryKey:["jobCheck",jobdata._id],
+    queryFn: async () =>{
+       const response = await checkJobAppliedOrNot(decode.exist._id,jobdata._id)
+       return response
+    }
+  })
+ 
+  useEffect(() => {
+    refetch();
+  },[jobdata._id]);
+  
+  console.log(data,"=====ffffff========================");
 
   return (
     <div className="fixed right-7">
@@ -84,12 +99,12 @@ export function JobFullDetails({ jobdata }) {
         </div>
 
         <CardFooter className="">
-         {exist === false ? <Button size="sm" color="blue" className="flex">
-            <CursorArrowRippleIcon className="w-4 h-4" />
-            <JobApply data={{jobdata}} />
-          </Button>:<Button size="sm" color="green" className="flex">
+         {data && data.data.exist? <Button size="sm" color="green" className="flex" onClick={()=>toast.success(<span>Selected job already applied !</span>)}>
             <CursorArrowRippleIcon className="w-4 h-4" />
             Applied
+          </Button>:<Button size="sm" color="blue" className="flex">
+            <CursorArrowRippleIcon className="w-4 h-4" />
+            <JobApply data={{jobdata}} />
           </Button>}
         </CardFooter>
       </Card>

@@ -4,12 +4,12 @@ import CompanyFooter from '../companyCommonComponents/CompanyFooter'
 import {ToastBar, Toaster} from 'react-hot-toast'
 function CompanyLayout() {
   return (
-           <div className=" bg-blue-gray-100 ">
+           <div color="">
                <CompanyNavbar/>
                <Outlet  />
                <Toaster/>
                <CompanyFooter/>
-                </div>
+              </div>
   )
 }
 

@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionBody,
   AccordionHeader,
+  Avatar,
   Button,
   Card,
   CardFooter,
@@ -25,6 +26,9 @@ import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/solid";
 import MainLoading from "../../commonComponents/Loadings/MainLoding";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import defaultDp from '../../../../public/user.png'
 
 function JobCards() {
   const [open, setOpen] = React.useState(0);
@@ -33,6 +37,13 @@ function JobCards() {
   const [filter, setFilter] = useState();
   const [selectedJob, setSelectedJob] = useState(null);
   const [debounsedSearch, setDebouncedSearch] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const user = useSelector((state)=>{
+    return state.user
+  })  
 
   //----------------------------------------Side bar data fetch----------------------------------------//
 
@@ -96,10 +107,21 @@ function JobCards() {
     <div className="flex justify-center  ">
       <div className="">
         <Card className="fixed h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5  hidden lg:block">
-          <div className="mb-1 p-2">
-            <Typography variant="h3" color="blue-gray">
+          <div className="grid justify-center  m-3 border-b-2 p-2">
+           <div className="flex justify-center mb-2 ">
+            <Avatar src={user.userDp ? user.userDp : defaultDp } className=" shadow-sm shadow-black cursor-pointer " alt="avatar" size="lg" onClick={() => navigate("/user/profile")} />
+           </div>
+          <Typography className="text-center font-bold"  variant="lead">
+             {user.userName}
+          </Typography>
+          <Typography className="text-center" variant="small">
+             {user.userTitle}
+          </Typography>
+          </div>
+          <div className="mb-1 p-1">
+            {/* <Typography variant="h3" color="blue-gray">
               Find jobs..
-            </Typography>
+            </Typography> */}
             <div className="w-full ">
               <Input
                 label="Search ..."
@@ -111,7 +133,7 @@ function JobCards() {
               />
             </div>
           </div>
-          <div className="p-3">
+          <div className="p-1">
             <Button onClick={()=>location.reload()} size="sm" variant="outlined" fullWidth> 
               Clear
             </Button>

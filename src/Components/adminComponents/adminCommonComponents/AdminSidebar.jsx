@@ -7,16 +7,8 @@ import {
   ListItem,
   ListItemPrefix,
   ListItemSuffix,
-  Chip,
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
 } from "@material-tailwind/react";
 import {
-  PresentationChartBarIcon,
-  ShoppingBagIcon,
-  UserCircleIcon,
-  Cog6ToothIcon,
   InboxIcon,
   PowerIcon,
   UserGroupIcon,

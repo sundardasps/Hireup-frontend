@@ -53,7 +53,8 @@ function UserNavbar() {
             isOpen ? "top-12" : "hidden md:top-0 md:flex"
           }`}
         >
-          <li className="md:ml-8 md:my-0 my-7 font-semibold">
+          <li className="md:ml-8 md:my-0 my-7 font-normal">
+           <span className="m-1">Already Registered?</span>
             <Menu>
               <MenuHandler>
                 <Button className="border shadow" color="white">
@@ -81,6 +82,7 @@ function UserNavbar() {
                 </MenuItem>
               </MenuList>
             </Menu>
+            <span className="m-1">here.</span>
           </li>
         </ul>
         {/* Button */}

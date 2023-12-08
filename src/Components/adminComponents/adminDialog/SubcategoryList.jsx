@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
-  Button,
   Dialog,
   DialogHeader,
   DialogBody,
-  DialogFooter,
   IconButton,
   Typography,
   MenuItem,
@@ -12,41 +10,37 @@ import {
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { useQueryClient } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
-import { subCategoryDelete } from "../../../Api/adminApi"
+import { subCategoryDelete } from "../../../Api/adminApi";
 
-
-
-export function SubcategoryList({Subcategories}) {
+export function SubcategoryList({ Subcategories }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
-  const queryClint = useQueryClient()
-
-
-
+  const queryClint = useQueryClient();
 
   async function handleDeleteSkill(value) {
     try {
-      const response = await subCategoryDelete(value,Subcategories._id);
-      if(response.data.update){
-        handleOpen()
+      const response = await subCategoryDelete(value, Subcategories._id);
+      if (response.data.update) {
+        handleOpen();
         toast.success(response.data.message);
-      }else{
+      } else {
         toast.error(response.data.message);
-         
       }
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   }
 
   return (
     <>
-    <p onClick={handleOpen} className="cursor-pointer">{Subcategories.title}</p>
+      <p onClick={handleOpen} className="cursor-pointer">
+        {Subcategories.title}
+      </p>
       <Dialog size="xs" open={open} handler={handleOpen}>
         <DialogHeader className="justify-between">
           <div>
             <Typography variant="h5" color="blue-gray">
-            {Subcategories.title}
+              {Subcategories.title}
             </Typography>
           </div>
           <IconButton
@@ -86,14 +80,14 @@ export function SubcategoryList({Subcategories}) {
                     </Typography>
                     <TrashIcon
                       className=" w-5 h-5"
-                      onClick={()=>handleDeleteSkill(value)}
+                      onClick={() => handleDeleteSkill(value)}
                     />
                   </MenuItem>
                 </ul>
               </div>
             ))}
         </DialogBody>
-      <Toaster/>
+        <Toaster />
       </Dialog>
     </>
   );

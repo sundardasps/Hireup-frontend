@@ -20,9 +20,9 @@ export function Dialogue({ data }) {
   const quaryClint = useQueryClient();
   const handleOpen = () => setOpen(!open);
 
-//---------------- user block or unblock -------------------//
+  //---------------- user block or unblock -------------------//
 
-console.log(data);
+  console.log(data);
   const handleActionUser = async () => {
     try {
       const response = await userblockOrUnBlock(data.id);
@@ -37,8 +37,7 @@ console.log(data);
     }
   };
 
-//---------------- company block or unblock -------------------//
-
+  //---------------- company block or unblock -------------------//
 
   const handleActionCompany = async () => {
     try {
@@ -54,8 +53,7 @@ console.log(data);
     }
   };
 
-//---------------- category block or unblock -------------------//
-
+  //---------------- category block or unblock -------------------//
 
   const handleActionCategory = async () => {
     try {
@@ -70,8 +68,6 @@ console.log(data);
       console.error(error);
     }
   };
-
-
 
   return (
     <>

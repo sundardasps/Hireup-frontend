@@ -28,6 +28,7 @@ export async function usersData({ search, filter, page }) {
   }
 }
 
+
 export async function userblockOrUnBlock(id) {
   try {
     const response = await adminCheck.put(`/userBlockOrUnblock/${id}`);
@@ -54,6 +55,7 @@ export async function companiesData({ search, filter, page }) {
   }
 }
 
+
 export async function companyblockOrUnBlock(id) {
   try {
     const response = await adminCheck.post(`/companyBlockOrUnblock/${id}`);
@@ -74,6 +76,7 @@ export async function categoryTitleAdd(title) {
   }
 }
 
+
 export async function addCategory(data) {
   try {
     console.log(data);
@@ -84,6 +87,7 @@ export async function addCategory(data) {
   }
 }
 
+
 export async function getCategoryTitle() {
   try {
     const response = adminCheck.get("/getTitle");
@@ -92,6 +96,7 @@ export async function getCategoryTitle() {
     console.error(error);
   }
 }
+
 
 export async function categoryData({ search, filter, page }) {
   try {
@@ -108,6 +113,7 @@ export async function categoryData({ search, filter, page }) {
   }
 }
 
+
 export async function categoryblockOrUnBlock(id) {
   try {
     const response = await adminCheck.put(`/catgoryBlockOrUnblock/${id}`);
@@ -118,10 +124,9 @@ export async function categoryblockOrUnBlock(id) {
 }
 
 
-export async function subCategoryDelete(value,id) {
+export async function subCategoryDelete(value, id) {
   try {
-
-    const response = await adminCheck.post("/deleteSubcategory",{value,id});
+    const response = await adminCheck.post("/deleteSubcategory", { value, id });
     return response;
   } catch (error) {
     console.error(error);

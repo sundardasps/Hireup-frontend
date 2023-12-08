@@ -146,7 +146,7 @@ useEffect(() => {
       {/* <Card className="m-5 shadow-none  lg:w-9/12 p-2"> */}
         <CardBody className=" grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  ">
           {data && data.userList.map((value,index)=>(
-           <Card key={index} className="max-w-[14rem] mx-auto h-min rounded-lg overflow-hidden shadow bg-white   hover:shadow-2xl border cursor-pointer   " onClick={()=>navigate(`/company/userProfile`,{state:value._id})}>
+           <Card key={index} className="max-w-[14rem] mx-auto h-min  overflow-hidden  bg-white shadow-sm rounded-lg shadow-blue-gray-200  hover:shadow-xl border cursor-pointer   " onClick={()=>navigate(`/company/userProfile`,{state:value._id})}>
             <div className="relative border-b-2">
               {/* Background Image */}
               <img

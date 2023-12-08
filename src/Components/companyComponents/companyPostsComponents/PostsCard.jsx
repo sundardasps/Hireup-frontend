@@ -54,8 +54,8 @@ function PostsCard() {
 
 
   return (
-    <div>
-      <div className="flex gap-4 md:flex-row  mx-36 ">
+    <div className="shadow-sm  rounded-lg shadow-blue-gray-200 p-3 w-[40rem]" >
+      <div className="flex   gap-4 md:flex-row  mx-16 ">
         <Tabs value="all" className="w-full md:w-max">
           <TabsHeader>
             {TABS.map(({ label, value }) => (
@@ -78,7 +78,8 @@ function PostsCard() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center  mb-10 h-screen ">
+      <div className="flex flex-col items-center  mb-10  ">
+        <div className="h-screen">
         {data &&
           data.data &&
           data.data.map(
@@ -151,7 +152,8 @@ function PostsCard() {
               );
             }
           )}
-              <div className="">
+          </div>
+         <div className="">
         <Typography color="blue-gray" className="font-normal ">
           Page {page} of {data && data.totalPage}
         </Typography>

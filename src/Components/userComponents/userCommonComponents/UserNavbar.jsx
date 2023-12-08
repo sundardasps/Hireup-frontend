@@ -26,6 +26,7 @@ import {
 import React, { useState } from "react";
 
 
+
 function UserNavbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -61,6 +62,15 @@ function UserNavbar() {
     
       <ul className="my-2 flex  flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-20 ">
           
+          <div className=" w-auto ">
+          <Input
+                label="Search ..."
+                autoFocus
+                icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+              />
+          </div>
+
+
         <a
           onClick={()=>navigate('/user')}
           className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
@@ -126,12 +136,15 @@ function UserNavbar() {
         
             <Menu>
               <MenuHandler>
+                <div className="flex  p-2 shadow-sm rounded-lg shadow-blue-gray-200 hover:shadow-lg border cursor-pointer">
                 <Avatar
                   variant="circular"
                   alt="tania andrew"
-                  className="cursor-pointer"
+                  className="cursor-pointer w-6 h-6"
                   src={userDp?userDp:defaultDp}
                 />
+                <Bars3Icon className="w-6 h-6"/>
+                </div>
               </MenuHandler>
               <MenuList>
                 <MenuItem className="flex items-center gap-2">

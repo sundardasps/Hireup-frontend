@@ -11,25 +11,20 @@ import {
   MenuItem,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
- 
+
 function NavList() {
-
-
-
-
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
- 
- <Menu>
-                  <MenuHandler>
-                    <Avatar
-                      variant="circular"
-                      alt="tania andrew"
-                      className="cursor-pointer"
-                      src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-                    />
-                  </MenuHandler>
-                  {/* <MenuList>
+      <Menu>
+        <MenuHandler>
+          <Avatar
+            variant="circular"
+            alt="tania andrew"
+            className="cursor-pointer"
+            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+          />
+        </MenuHandler>
+        {/* <MenuList>
                     <MenuItem className="flex items-center gap-2">
                       <svg
                         width="16"
@@ -134,38 +129,34 @@ function NavList() {
                       </Typography>
                     </MenuItem>
                   </MenuList> */}
-                </Menu>
+      </Menu>
     </ul>
   );
 }
- 
+
 export function AdminNavbar() {
   const [openNav, setOpenNav] = React.useState(false);
- 
+
   const handleWindowResize = () =>
     window.innerWidth >= 960 && setOpenNav(false);
- 
+
   React.useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
- 
+
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
- 
+
   return (
     <Navbar className="mx-auto max-w-screen-xxl px-6 py-3">
       <div className="flex items-center justify-between text-blue-gray-900">
-      <Typography
-        as="a"
-
-        variant="h4"
-        className="mr-4 cursor-pointer py-1.5"
-      >
-         <div className="font-extrabold text-2xl cursor-pointer text-blue-500  flex items-center gap-1">
-          <img src="/public/logo.png" className="min-w-fit h-10"/><span>HireUp</span>
-        </div>
-      </Typography>
+        <Typography as="a" variant="h4" className="mr-4 cursor-pointer py-1.5">
+          <div className="font-extrabold text-2xl cursor-pointer text-blue-500  flex items-center gap-1">
+            <img src="/public/logo.png" className="min-w-fit h-10" />
+            <span>HireUp</span>
+          </div>
+        </Typography>
         <div className="hidden lg:block">
           <NavList />
         </div>
