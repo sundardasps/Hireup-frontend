@@ -34,7 +34,7 @@ const {data} = useQuery({
 
   return (
     <>
-      <Button variant="outlined" size="sm" onClick={handleOpen}>View application</Button>
+      <p  onClick={handleOpen}  className="p-3 hover:caret-light-blue-700 ">Details</p>
        <Dialog size="xs" open={open} handler={handleOpen}>
         <DialogHeader className="justify-between">
           <div >

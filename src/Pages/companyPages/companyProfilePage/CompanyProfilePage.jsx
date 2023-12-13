@@ -5,7 +5,9 @@ function CompanyProfilePage() {
   return (
    <div className='flex justify-between '>
     <CompanyDetails />
-    <CompanySidebar/>
+    <div className='hidden lg:block'>
+    <CompanySidebar />
+    </div>
     </div>
 
 

@@ -164,7 +164,6 @@ function JobApply({ data }) {
               )}
 
             
-
               <Typography className="-mb-2" variant="small">
                 {(next === 1 && "Job Salery") ||
                   (next === 0 && "Title") ||

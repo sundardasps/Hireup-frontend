@@ -146,10 +146,10 @@ export async function editPostDetails(values, postId) {
   }
 }
 
-export async function getUserList({ search, filter }) {
+export async function getUserList({ search, filter , page}) {
   try {
     const response = await companyCheck.get("/getUserList", {
-      params: { search, filter },
+      params: { search, filter,page },
     });
     return response;
   } catch (error) {
@@ -219,7 +219,6 @@ export async function getSingleUserApplication(userId, jobId) {
 
 export async function rejectUserApplication(userId, jobId) {
   try {
-    alert(userId);
     const response = await companyCheck.put("/rejectUserapplication", {
       userId,
       jobId,

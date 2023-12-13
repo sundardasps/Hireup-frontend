@@ -7,7 +7,9 @@ function AppliedUsersPage() {
          <div className='w-screen'>
          <AppliedUsersList/>
          </div>
+         <div className='hidden lg:block'>
          <CompanySidebar/>
+         </div>
     </div>
   )
 }

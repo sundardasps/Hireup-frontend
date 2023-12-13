@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { appliedList } from '../../../Api/userApi'
 import { Accordion, AccordionBody, AccordionHeader, Button, Card, CardFooter, Input, List, ListItem, Option, Select, Typography } from '@material-tailwind/react'
 import { BookmarkIcon, BookmarkSlashIcon, BuildingOffice2Icon, CheckCircleIcon, ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-
+import  AppliedJobStatus from '../userDialogs/AppliedJobStatus' 
 function AppliedList() {
   const [category, setCategory] = React.useState([]);
   const [search, setSearch] = useState("");
@@ -42,7 +42,7 @@ function AppliedList() {
      }
    })
 
-   console.log(data,"====================");
+
  
 
   return (
@@ -129,11 +129,12 @@ function AppliedList() {
                     </div>
                   )}
                   <div
-                    className="mt-2 cursor-pointer font-light hover:underline left-0 "
+                    className="mt-2 cursor-pointer font-light hover:shadow-lg left-0 "
                     style={{ userSelect: "none" }}
                     // onClick={() => handleShowDetails(data)}
                   >
-                    <span> Show details</span>
+                     <AppliedJobStatus jobData={data}/>
+
                   </div>
                 </div>
               </div>

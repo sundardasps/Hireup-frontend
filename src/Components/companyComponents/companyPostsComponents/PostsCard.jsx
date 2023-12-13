@@ -54,7 +54,7 @@ function PostsCard() {
 
 
   return (
-    <div className="shadow-sm  rounded-lg shadow-blue-gray-200 p-3 w-[40rem]" >
+    <div className="shadow-sm  rounded-lg shadow-blue-gray-200 p-3 w-auto" >
       <div className="flex   gap-4 md:flex-row  mx-16 ">
         <Tabs value="all" className="w-full md:w-max">
           <TabsHeader>

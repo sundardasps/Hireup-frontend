@@ -236,3 +236,13 @@ export async function checkJobAppliedOrNot(userId,jobId){
       console.log(error);
      }
 } 
+
+export async function checkJobAppliedStatus(userId,jobId){
+  try {
+   const response = await userCheck.get("/checkJobAppliedStatus",{params:{userId,jobId}})
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+} 
+

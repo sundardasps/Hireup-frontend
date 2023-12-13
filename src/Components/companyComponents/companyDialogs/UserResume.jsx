@@ -24,7 +24,7 @@ export function UserResume(resume) {
   return (
     <>
       <Card
-        className="h-64 w-96 cursor-pointer overflow-hidden transition-opacity hover:opacity-90"
+        className="h-64 w-96 cursor-pointer overflow-hidden transition-opacity hover:opacity-90 cursor-pointer"
         onClick={handleOpen}
       >
         {resume.resumeType === "pdf" ? (

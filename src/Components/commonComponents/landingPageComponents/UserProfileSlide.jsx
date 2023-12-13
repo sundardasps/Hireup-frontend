@@ -6,17 +6,16 @@ import MainLoading from "../../../Components/commonComponents/Loadings/MainLodin
 import { BuildingOffice2Icon } from "@heroicons/react/24/solid";
 
 function UserProfileSlide() {
+  
   const [avatars, setAvatars] = useState([]);
 
-  const numVisibleAvatars = 5;
 
-  const createAvatarLoop = () => {};
 
   useEffect(() => {
     const getAllCompanies = async () => {
       const response = await getCompanies();
       if (response.data.fetched) {
-        const loopedAvatars = [
+       const loopedAvatars = [
           ...response.data.companyData,
           ...response.data.companyData,
         ];
@@ -26,9 +25,6 @@ function UserProfileSlide() {
       }
     };
     getAllCompanies();
-    createAvatarLoop();
-    const interval = setInterval(createAvatarLoop, 5000 * numVisibleAvatars);
-    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -36,7 +32,7 @@ function UserProfileSlide() {
       <div className="flex lg:mx-10 lg:mt-16 lg:m-10 ">
         <div className="border  border-blue-600 p-5 hidden lg:block rounded-tr-3xl rounded-bl-3xl bg-indigo-600">
           <Typography variant="h1" color="white" className="font-sans">
-            Our <br /> Hiring comapanies...
+            Top <br /> Hiring companies...
           </Typography>
         </div>
 
@@ -54,10 +50,10 @@ function UserProfileSlide() {
                     className="rounded-sm shadow"
                   />
                 </div>
-                <div className="  justify-center m-5">
-                  <div className="flex justify-center  gap-1">
+                <div className=" m-5 flex-col ">
+                  <div className="flex justify-center   gap-1 ">
                     <BuildingOffice2Icon className="h-4 w-4 text-teal-500" />
-                    <Typography className="text-sm text-center">
+                    <Typography className="text-xs  text-center">
                       {data.companyName}
                     </Typography>
                   </div>
@@ -71,25 +67,23 @@ function UserProfileSlide() {
         </div>
       </div>
 
-      <div className=" text-center m-auto p-5 w-3/4">
+      {/* <div className=" text-center m-auto p-5 w-3/4">
         <Typography variant="h4" color="blue-gray" className="mb-6 font-medium">
           &quot;This is an excellent product, the documentation is excellent and
           helped me get things done more efficiently.&quot;
         </Typography>
-        <Avatar
-          src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
-          alt="image"
-          size="lg"
-        />
         <Typography variant="h6" className="mt-4">
           Tania Andrew
         </Typography>
         <Typography color="gray" className="mb-4 font-normal">
           Lead Frontend Developer
         </Typography>
-      </div>
+      </div> */}
 
-      <style>
+
+
+
+<style>
         {`
           .avatar-flow-container {
             display: flex;
@@ -112,7 +106,9 @@ function UserProfileSlide() {
             }
           }
         `}
-      </style>
+</style>
+
+
     </>
   );
 }

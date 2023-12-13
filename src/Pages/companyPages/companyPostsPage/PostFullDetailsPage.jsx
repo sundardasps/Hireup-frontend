@@ -6,10 +6,10 @@ function PostFullDetailsPage() {
 
     return (
         <div className='flex justify-between m-10 '>
-          <div className=''>
           <PostFullDetails/>
-          </div>
+          <div className='hidden lg:block'>
           <CompanySidebar/>
+          </div>
       </div>
         )
       }

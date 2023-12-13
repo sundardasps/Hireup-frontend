@@ -41,15 +41,11 @@ function AppliedUsersList() {
     const TABS = [
       {
         label: "All",
-        value: "",
-      },
-      {
-        label: "Accepted",
-        value: "Accepted",
+        value: "" ,
       },
       {
         label: "Rejected",
-        value: "Rejected",
+        value: "rejected",
       },
     ];
     
@@ -69,19 +65,16 @@ function AppliedUsersList() {
       }
       }
 
-
-  
-
-
-
+      
   return (
 
-        <div className=" justify-between  shadow-sm shadow-blue-gray-200 outline-1  rounded-xl   bg-white " >
-        <div className='flex justify-between   text-start border-b shadow-sm  p-3 w-auto text-sm'>
-        <div className='m-2'>
-         <Typography variant='lead'  className='text-blue-gray-400 text-base'>Applicants for <span className='text-light-blue-800 font-thin shadow-sm border m-1 p-2 rounded-xl shadow-blue-gray-200 '>{data && data.jobTitle}</span></Typography>
+        <div className="shadow-sm shadow-blue-gray-200 outline-1  rounded-xl   bg-white " >
+        <div className='flex  text-start border-b shadow-sm  p-3 w-auto text-sm flex-col md:flex-row'>
+        <div className='flex w-1/3 m-2'>
+         <Typography variant='lead' className='text-blue-gray-400 text-base m-2   md:flex-row'>Position :</Typography>
+         <span className='text-light-blue-800 font-bold shadow-sm  p-2 rounded-xl shadow-blue-gray-200 w-auto text-center'>{data && data.jobTitle}</span>
         </div>
-        <div className="w-full md:w-72">
+        <div className="w-full md:w-72 m-2">
               <Input
                 label="Search title"
                 value={search}
@@ -92,7 +85,7 @@ function AppliedUsersList() {
                 icon={<MagnifyingGlassIcon className="h-5 w-5" />}
               />
             </div>
-        <Tabs value="all" className="w-full md:w-max ">
+        <Tabs value="all" className="w-full md:w-max m-2">
               <TabsHeader>
                 {TABS.map(({ label, value }) => (
                   <Tab
@@ -106,9 +99,9 @@ function AppliedUsersList() {
               </TabsHeader>
             </Tabs>
         </div>
-        <CardBody className=" grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 h-[21rem] ">
+        <CardBody className=" grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 h-[25rem] overflow-x-scroll ">
           {data && data.usersData.map((value,index)=>(
-           <Card key={index} className="max-w-[14rem] mx-auto h-min rounded-lg overflow-hidden shadow bg-white   hover:shadow-xl cursor-pointer border  ">
+           <Card key={index} className="max-w-[14rem] mx-auto h-min rounded-lg overflow-hidden shadow bg-white   hover:shadow-xl cursor-pointer border ">
             <div className="relative border-b-2">
               {/* Background Image */}
               <img
@@ -137,14 +130,22 @@ function AppliedUsersList() {
               <Typography color="gray" className="text-center uppercase text-xs mb-5 w-auto">
               {data?value.userTitle:""}
               </Typography>
-              <div className="flex justify-center gap-2">
-                  <Button color='red' size='sm' className='rounded-3xl' onClick={()=>handlerejectUser(value._id)}>
+              <div className="flex justify-center gap-2 ">
+                  {filter != "rejected"?
+                  <>
+                  <Button variant='text' color='red' className='rounded-3xl font-normal  text-sm ' onClick={()=>handlerejectUser(value._id)}>
                     Reject
                   </Button>
-                 <Button color='green' size='sm' className='rounded-3xl'>
-                   Accept
-                  </Button>
-                {/* <AppliedUserAction  data={{value,jobId}}/> */}
+                 <AppliedUserAction  data={{value,jobId}}/></>:
+                    <Button
+                      className="bg-blue-600 rounded-3xl w-36"
+                      size="sm"
+                      variant="outlined"
+                      color="white"
+                    >
+                      Message
+                    </Button>
+                  }
               </div>
             </CardBody>
           </Card> ))
