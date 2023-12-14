@@ -55,7 +55,7 @@ function PostsCard() {
 
   return (
     <div className="shadow-sm  rounded-lg shadow-blue-gray-200 p-3 w-auto" >
-      <div className="flex   gap-4 md:flex-row  mx-16 ">
+      <div className="flex   gap-4 md:flex-row  ">
         <Tabs value="all" className="w-full md:w-max">
           <TabsHeader>
             {TABS.map(({ label, value }) => (
@@ -94,7 +94,7 @@ function PostsCard() {
               return (
                 <Card
                   key={job_title}
-                  className="flex mr-0  sm:flex-row justify-between container my-2 mx-2  xl:w-[30rem] border bg-white  rounded-md hover:shadow-xl "
+                  className="flex mr-0  sm:flex-row justify-between container my-2 mx-2  xl:w-[28rem] border bg-white  rounded-md hover:shadow-xl "
                 >
                   <div className="m-2 mt-4 w-auto h-auto">
                     <img

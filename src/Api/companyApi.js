@@ -228,3 +228,14 @@ export async function rejectUserApplication(userId, jobId) {
     console.log(error);
   }
 }
+
+export async function scheduleInterview(data) {
+  try {
+    console.log(data);
+    const response = await companyCheck.post("/scheduleInterview",data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+

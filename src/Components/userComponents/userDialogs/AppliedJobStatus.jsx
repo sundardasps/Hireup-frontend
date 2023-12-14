@@ -11,6 +11,7 @@ import {
 } from "@material-tailwind/react";
 import {
   BuildingLibraryIcon,
+  CheckCircleIcon,
   ClipboardDocumentCheckIcon,
   ClockIcon,
   CloudArrowUpIcon,
@@ -59,10 +60,11 @@ export default function AppliedJobStatus(jobdata) {
         Status
         <QuestionMarkCircleIcon className="w-5 h-4 " />
       </Button>
-      <Dialog size="md" open={open} handler={handleOpen} className="flex flex-col items-center   border-2 border-black ">
-        <DialogHeader className="border-b-2 m-5 p-0">Application Status</DialogHeader>
+      <Dialog size="xs" open={open} handler={handleOpen} className="">
+        <div className="flex flex-col items-center ">
+        <DialogHeader className="border-b-2 m-5 p-0 font-light">Application Status</DialogHeader>
           <Stepper
-            style={{width:"50%",height:"2rem"}}
+            style={{width:"50%"}}
             activeStep={data && data.data.status === "submitted"&& 0 || data && data.data.status === "rejected" && 1 ||data && data.data.status === "viewed" && 1}
           >
             <Step>
@@ -110,9 +112,14 @@ export default function AppliedJobStatus(jobdata) {
               )}
             </Step>
           </Stepper>
-          <div className="mt-32 flex justify-between">
           </div>
-
+          <div className="mt-10 p-5 border "  >
+            <Typography variant="h6" className="flex justify-center text-center text-blue-gray-400 font-thin">
+              {data && data.data.status === "submitted"&& (<><CheckCircleIcon className="h-5 w-7 m-1 " />The applications submitted</>)}
+              {data && data.data.status === "viewed"&& (<><EyeIcon className="h-5 w-7 m-1" />The applications you've reviewed</>)}
+              {data && data.data.status === "rejected"&& (<><ExclamationCircleIcon color="" className="w-5 h-7 "/>Your application rejected !</>)}
+            </Typography>
+          </div>
       </Dialog>
     </>
   );

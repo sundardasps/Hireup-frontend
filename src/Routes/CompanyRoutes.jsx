@@ -19,6 +19,7 @@ import PostFullDetails from '../Components/companyComponents/companyPostsCompone
 import PostFullDetailsPage from '../Pages/companyPages/companyPostsPage/PostFullDetailsPage'
 import UserFullDetailsPage from '../Pages/companyPages/companyHomePage/UserFullDetailsPage'
 import AppliedUsersPage from '../Pages/companyPages/companyHomePage/AppliedUsersPage'
+import CompanyPayment from '../Pages/companyPages/companyPaymentPage/CompanyPayment'
 function CompanyRoutes(){
 
    return (
@@ -39,7 +40,8 @@ function CompanyRoutes(){
          <Route path='/post/details' element={<PostFullDetailsPage/>}/>
          <Route path='/userProfile' element={<UserFullDetailsPage/>}/>
          <Route path='/posts/appliedUsers' element={<AppliedUsersPage/>}/>
-         
+         <Route path='/payment' element={<CompanyPayment/>}/>
+        
          </Route>
          </Route>
       </Routes>
