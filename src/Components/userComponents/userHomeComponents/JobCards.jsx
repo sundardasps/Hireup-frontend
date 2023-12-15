@@ -246,10 +246,10 @@ function JobCards() {
                   </div>
                 </div>
               </div>
-              <CardFooter className=" ">
+              {/* <CardFooter className=" ">
                 <BookmarkIcon className="w-5 h-5  cursor-pointer  underline" />
                 <BookmarkSlashIcon className="w-5 h-5  cursor-pointer  underline" />
-              </CardFooter>
+              </CardFooter> */}
             </Card>
           ))}
       </div>

@@ -157,7 +157,6 @@ export function EditProfile({ data }) {
                 <input
                   name="size"
                   type="number"
-                  min={1}
                   onBlur={handleBlur}
                   onChange={handleChange}
                   value={values.size}

@@ -9,7 +9,7 @@ function LandingCards() {
       <div className=" md:flex  p-5 pt-10 justify-center relative  md:gap-10 sm:gap-10 overflow-p-10">
         <div className=" relative  mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left h-40 mb-24">
           <h2 className="text-4xl font-bold tracking-tight text-black sm:text-4xl cursor-pointer mb-10 h-20">
-            {/* Welcome ,
+            Welcome ,
             <br />
             
             <TypeAnimation
@@ -18,7 +18,7 @@ function LandingCards() {
              wrapper="h2"
              repeat={Infinity}
              
-            /> */}
+            />
              
           </h2>
           <p className="mt-5 text-lg leading-8 text-gray-500 ">

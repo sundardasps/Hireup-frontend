@@ -21,6 +21,7 @@ import { UserResume } from "./UserResume";
 import { useFormik } from "formik";
 import { interviewSchema } from "../../../Utils/yupValidations/yupCompanyvalidations";
 import { object } from "prop-types";
+import toast, { Toaster } from "react-hot-toast";
 export function AppliedUserAction({ data: { value, jobId } }) {
   const [open, setOpen] = React.useState(false);
   const [next, setNext] = useState(0);
@@ -55,6 +56,16 @@ export function AppliedUserAction({ data: { value, jobId } }) {
     validationSchema: interviewSchema,
     onSubmit: async (values) => {
        const response  = await scheduleInterview({values,userId:value._id, jobId})
+       if(response.data.created){
+         handleOpen()
+         toast.success(response.data.message)
+         setTimeout(()=>{
+          window.location.reload()
+         },1000)
+       }else{
+        toast.error(response.data.message)
+        window.location.reload()
+       }
     },
   });
 
@@ -228,6 +239,7 @@ export function AppliedUserAction({ data: { value, jobId } }) {
             </Button>
           </DialogFooter>
         </form>
+        <Toaster/>
       </Dialog>
     </>
   );

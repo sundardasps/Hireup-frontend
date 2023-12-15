@@ -20,6 +20,8 @@ import PostFullDetailsPage from '../Pages/companyPages/companyPostsPage/PostFull
 import UserFullDetailsPage from '../Pages/companyPages/companyHomePage/UserFullDetailsPage'
 import AppliedUsersPage from '../Pages/companyPages/companyHomePage/AppliedUsersPage'
 import CompanyPayment from '../Pages/companyPages/companyPaymentPage/CompanyPayment'
+import InterviewList from '../Pages/companyPages/companyHomePage/InterviewList'
+
 function CompanyRoutes(){
 
    return (
@@ -41,7 +43,8 @@ function CompanyRoutes(){
          <Route path='/userProfile' element={<UserFullDetailsPage/>}/>
          <Route path='/posts/appliedUsers' element={<AppliedUsersPage/>}/>
          <Route path='/payment' element={<CompanyPayment/>}/>
-        
+         <Route path='/interviewsList' element={<InterviewList/>}/>   
+
          </Route>
          </Route>
       </Routes>

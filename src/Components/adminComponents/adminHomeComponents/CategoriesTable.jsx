@@ -248,7 +248,7 @@ export function CategoriesTable() {
               variant="outlined"
               size="sm"
               onClick={() => handlePage(page + 1)}
-              disabled={page === data.data.totalPage}
+              disabled={page === data.totalPage}
             >
               Next
             </Button>

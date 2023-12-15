@@ -54,7 +54,7 @@ function CompanySidebar() {
           </ListItem>
           <ListItem key={"schedule"} 
             onClick={() => {
-              
+              navigate("/company/interviewsList")
             }}
           >
             <ListItemPrefix>

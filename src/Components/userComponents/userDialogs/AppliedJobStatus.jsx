@@ -41,7 +41,7 @@ export default function AppliedJobStatus(jobdata) {
   const userId = decode.exist._id
 
   const {data} = useQuery({
-    queryKey:["appliedStatus"],
+    queryKey:["appliedStatus",{jobId:jobdata.jobData._id}],
     queryFn:async () =>{
       const response = await checkJobAppliedStatus(userId,jobdata.jobData._id)
       return response
@@ -116,7 +116,7 @@ export default function AppliedJobStatus(jobdata) {
           <div className="mt-10 p-5 border "  >
             <Typography variant="h6" className="flex justify-center text-center text-blue-gray-400 font-thin">
               {data && data.data.status === "submitted"&& (<><CheckCircleIcon className="h-5 w-7 m-1 " />The applications submitted</>)}
-              {data && data.data.status === "viewed"&& (<><EyeIcon className="h-5 w-7 m-1" />The applications you've reviewed</>)}
+              {data && data.data.status === "viewed"&& (<><EyeIcon className="h-5 w-7 m-1" />The application  reviewed</>)}
               {data && data.data.status === "rejected"&& (<><ExclamationCircleIcon color="" className="w-5 h-7 "/>Your application rejected !</>)}
             </Typography>
           </div>

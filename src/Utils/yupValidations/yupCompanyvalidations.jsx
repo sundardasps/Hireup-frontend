@@ -69,7 +69,7 @@ export const companyFullDetailsEditSchema = Yup.object().shape({
   companyName: Yup.string().required("This field is required").trim(),
   companyLocation: Yup.string().required("This field is required").trim(),
   companyAddress: Yup.string().required("This field is required").trim(),
-  size: Yup.string().required("This field is required").min(1,'Please enter a valid size').max(5,'Please enter a valid size').trim(),
+  size: Yup.string().required("This field is required").matches(/^\d+$/, 'Please enter a valid size (non-negative integer)').min(1, 'Please enter a valid size').max(5, 'Please enter a valid size').trim(),
   gstNumber: Yup.string().matches('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$',"Please enter a valid Gst number"
   ).required("This field is required").trim(),
   companyRoles: Yup.string()

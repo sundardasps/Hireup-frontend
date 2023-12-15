@@ -239,3 +239,13 @@ export async function scheduleInterview(data) {
   }
 }
 
+export async function scheduleInterviewList() {
+  try {
+
+    const response = await companyCheck.get("/getscheduleInterview");
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
