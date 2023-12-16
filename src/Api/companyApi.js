@@ -1,3 +1,4 @@
+
 import { companyInterseptor } from "../Utils/interceptors/companyRequest.jsx";
 const companyCheck = companyInterseptor;
 
@@ -231,7 +232,6 @@ export async function rejectUserApplication(userId, jobId) {
 
 export async function scheduleInterview(data) {
   try {
-    console.log(data);
     const response = await companyCheck.post("/scheduleInterview",data);
     return response;
   } catch (error) {
@@ -241,8 +241,16 @@ export async function scheduleInterview(data) {
 
 export async function scheduleInterviewList() {
   try {
-
     const response = await companyCheck.get("/getscheduleInterview");
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function interviewReSchedule(data) {
+  try {
+    const response = await companyCheck.patch("/reScheduleInterview",data);
     return response;
   } catch (error) {
     console.log(error);

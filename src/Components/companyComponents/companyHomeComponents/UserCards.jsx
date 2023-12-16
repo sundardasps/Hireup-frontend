@@ -158,14 +158,31 @@ export default function UserCards() {
                     className="p-1 hover:bg-gray-200 border "
                     selected={open === index + 1}
                   >
-                    <Typography
-                      color="blue-gray"
-                      className="mr-auto font-small"
-                      onClick={handleFilter}
+                    <AccordionHeader
+                      onClick={() => handleOpen(index + 1)}
+                      className="border-b-0 p-0"
                     >
-                      {value.title}
-                    </Typography>
+                      <Typography
+                        color="blue-gray"
+                        className="mr-auto font-small"
+                      >
+                        {value.title}
+                      </Typography>
+                    </AccordionHeader>
                   </ListItem>
+                   <AccordionBody className="py-1">
+                    {value.category.map((value, index) => (
+                      <List key={index}>
+                        <ListItem
+                          key={index}
+                          onClick={handleFilter}
+                          className="border-b-0 p-0"
+                        >
+                          {value}
+                        </ListItem>
+                      </List>
+                    ))}
+                  </AccordionBody>
                 </Accordion>
               ))}
           </List>

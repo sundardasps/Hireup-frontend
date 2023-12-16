@@ -15,7 +15,10 @@ import {
 } from "@material-tailwind/react";
 import { AtSymbolIcon, PhoneIcon, UserIcon } from "@heroicons/react/24/solid";
 import { MapPinIcon } from "@heroicons/react/24/outline";
-import { getSingleUserApplication, scheduleInterview } from "../../../Api/companyApi";
+import {
+  getSingleUserApplication,
+  scheduleInterview,
+} from "../../../Api/companyApi";
 import { useQuery } from "@tanstack/react-query";
 import { UserResume } from "./UserResume";
 import { useFormik } from "formik";
@@ -55,17 +58,21 @@ export function AppliedUserAction({ data: { value, jobId } }) {
     initialValues: initialValue,
     validationSchema: interviewSchema,
     onSubmit: async (values) => {
-       const response  = await scheduleInterview({values,userId:value._id, jobId})
-       if(response.data.created){
-         handleOpen()
-         toast.success(response.data.message)
-         setTimeout(()=>{
-          window.location.reload()
-         },1000)
-       }else{
-        toast.error(response.data.message)
-        window.location.reload()
-       }
+      const response = await scheduleInterview({
+        values,
+        userId: value._id,
+        jobId,
+      });
+      if (response.data.created) {
+        handleOpen();
+        toast.success(response.data.message);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        toast.error(response.data.message);
+        window.location.reload();
+      }
     },
   });
 
@@ -154,66 +161,73 @@ export function AppliedUserAction({ data: { value, jobId } }) {
             ) : (
               <>
                 <Typography>Schedule interview</Typography>
-                <div className="flex gap-2 mb-1 mt-2">
-                  <div>
-                    <Input
-                      name="interviewer"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.interviewer}
-                      label="Interviewer"
-                    />
-                    {touched.interviewer && errors.interviewer && (
-                      <div className="text-red-500 text-xs ">
-                        {errors.interviewer}
-                      </div>
-                    )}
+                <div className="flex flex-col gap-2 mt-2">
+                  <div className="flex gap-2">
+                    <div className="flex-1">
+                      <Input
+                        name="interviewer"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.interviewer}
+                        label="Interviewer"
+                      />
+                      {touched.interviewer && errors.interviewer && (
+                        <div className="text-red-500 text-xs">
+                          {errors.interviewer}
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1">
+                      <Select
+                        name="type"
+                        onBlur={handleBlur}
+                        value={values.type}
+                        label="Interview type"
+                        onChange={(selectedvalue) => {
+                          setFieldValue("type", selectedvalue);
+                        }}
+                      >
+                        <Option value="online">Online</Option>
+                        <Option value="offline">Offline</Option>
+                      </Select>
+                      {touched.type && errors.type && (
+                        <div className="text-red-500 text-xs">
+                          {errors.type}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    <Select
-                      name="type"
-                      onBlur={handleBlur}
-                      value={values.type}
-                      label="Interview type"
-                      onChange={(selectedvalue) => {
-                        setFieldValue("type", selectedvalue);
-                      }}
-                    >
-                      <Option value="online">Online</Option>
-                      <Option value="offline">offline</Option>
-                    </Select>
-                    {touched.type && errors.type && (
-                      <div className="text-red-500 text-xs ">{errors.type}</div>
-                    )}
-                  </div>
-                </div>
-                <div className=" mb-1 mt-2">
-                  <div className="m-3">
-                    <Input
-                      name="date"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.date}
-                      type="date"
-                      label="date"
-                    />
-                    {touched.date && errors.date && (
-                      <div className="text-red-500 text-xs ">{errors.date}</div>
-                    )}
-                  </div>
-                  <div>
-                    <Textarea
-                      name="requirement"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.requirement}
-                      label="Requirements"
-                    />
-                    {touched.requirement && errors.requirement && (
-                      <div className="text-red-500 text-xs ">
-                        {errors.requirement}
-                      </div>
-                    )}
+
+                  <div className="flex gap-2 mt-2">
+                    <div className="flex-1">
+                      <Input
+                        name="date"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.date}
+                        type="date"
+                        label="Date"
+                      />
+                      {touched.date && errors.date && (
+                        <div className="text-red-500 text-xs">
+                          {errors.date}
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <Textarea
+                        name="requirement"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.requirement}
+                        label="Requirements"
+                      />
+                      {touched.requirement && errors.requirement && (
+                        <div className="text-red-500 text-xs ">
+                          {errors.requirement}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </>
@@ -239,7 +253,7 @@ export function AppliedUserAction({ data: { value, jobId } }) {
             </Button>
           </DialogFooter>
         </form>
-        <Toaster/>
+        <Toaster />
       </Dialog>
     </>
   );

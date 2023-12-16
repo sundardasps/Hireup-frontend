@@ -1,51 +1,43 @@
+import React from "react";
 import {
-  Card,
-  CardHeader,
-  CardBody,
+  Button,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
   CardFooter,
   Typography,
-  Button,
+  CardBody,
+  CardHeader,
+  Card,
 } from "@material-tailwind/react";
+import { CheckIcon } from "@heroicons/react/24/solid";
 
-function CheckIcon() {
+export default function SelectPayment() {
+    const [open, setOpen] = React.useState(false);
+ 
+    const handleOpen = () => setOpen(!open);
+   
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={2}
-      stroke="currentColor"
-      className="h-3 w-3"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M4.5 12.75l6 6 9-13.5"
-      />
-    </svg>
-  );
-}
 
-export function PriceCards() {
-  return (
-    <div className=" p-5">
-         <div className="w-full h-[5rem] m-5">
-          <Typography color="white" variant="h1" className="text-center font-medium">
-            Choose a payment option and continue .
-          </Typography>
-        </div>
-      <div className="flex justify-center gap-5 h-screen">
+       <>
+      <p onClick={handleOpen}>
+       Add post
+      </p>
+      <Dialog size="xxl" open={open} handler={handleOpen} >
+       <DialogHeader>Select payment</DialogHeader>
+      <div className="flex justify-center gap-5 bg">
      
         <Card
           color="blue"
           variant="gradient"
-          className="w-full max-w-[19rem] h-[30rem] p-5 border "
+          className="w-full max-w-[19rem] h-[24rem] p-5 border "
         >
           <CardHeader
             floated={false}
             shadow={false}
             color="transparent"
-            className="m-0 mb-8 rounded-none border-b border-white/10 pb-8 text-center"
+            className="m-0  rounded-none border-b border-white/10 pb-4 text-center"
           >
             <Typography
               variant="small"
@@ -57,14 +49,14 @@ export function PriceCards() {
             <Typography
               variant="h1"
               color="white"
-              className="mt-6 flex justify-center gap-1 text-7xl font-normal"
+              className="mt-1 flex justify-center gap-1 text-7xl font-normal"
             >
-              <span className="mt-2 text-4xl">₹</span>200{" "}
-              <span className="self-end text-4xl">1/m</span>
+              <span className="mt-1 text-lg">₹</span>200{" "}
+              <span className="self-end text-xl">1/m</span>
             </Typography>
           </CardHeader>
           <CardBody className="p-0">
-            <ul className="flex flex-col gap-4">
+            <ul className="flex flex-col gap-2">
               <li className="flex items-center gap-4">
                 <span className="rounded-full border border-white/20 bg-white/20 p-1">
                   <CheckIcon />
@@ -103,7 +95,7 @@ export function PriceCards() {
               </li>
             </ul>
           </CardBody>
-          <CardFooter className="mt-12 p-0">
+          <CardFooter className="mt-10 p-0">
             <Button
               size="lg"
               color="white"
@@ -119,32 +111,32 @@ export function PriceCards() {
         <Card
           color="blue"
           variant="gradient"
-          className="w-full max-w-[19rem] h-[30rem] p-5 border"
+          className="w-full max-w-[19rem] h-[24rem] p-5 border "
         >
           <CardHeader
             floated={false}
             shadow={false}
             color="transparent"
-            className="m-0 mb-8 rounded-none border-b border-white/10 pb-8 text-center"
+            className="m-0  rounded-none border-b border-white/10 pb-4 text-center"
           >
             <Typography
               variant="small"
               color="white"
               className="font-normal uppercase"
             >
-              standard
+              basic
             </Typography>
             <Typography
               variant="h1"
               color="white"
-              className="mt-6 flex justify-center gap-1 text-7xl font-normal"
+              className="mt-1 flex justify-center gap-1 text-7xl font-normal"
             >
-              <span className="mt-2 text-4xl">₹</span>999{" "}
-              <span className="self-end text-4xl">6/m</span>
+              <span className="mt-1 text-lg">₹</span>999{" "}
+              <span className="self-end text-xl">6/m</span>
             </Typography>
           </CardHeader>
           <CardBody className="p-0">
-            <ul className="flex flex-col gap-4">
+            <ul className="flex flex-col gap-2">
               <li className="flex items-center gap-4">
                 <span className="rounded-full border border-white/20 bg-white/20 p-1">
                   <CheckIcon />
@@ -183,7 +175,7 @@ export function PriceCards() {
               </li>
             </ul>
           </CardBody>
-          <CardFooter className="mt-12 p-0">
+          <CardFooter className="mt-10 p-0">
             <Button
               size="lg"
               color="white"
@@ -199,32 +191,32 @@ export function PriceCards() {
         <Card
           color="blue"
           variant="gradient"
-          className="w-full max-w-[19rem] h-[30rem] p-5 border"
+          className="w-full max-w-[19rem] h-[24rem] p-5 border "
         >
           <CardHeader
             floated={false}
             shadow={false}
             color="transparent"
-            className="m-0 mb-8 rounded-none border-b border-white/10 pb-8 text-center"
+            className="m-0  rounded-none border-b border-white/10 pb-4 text-center"
           >
             <Typography
               variant="small"
               color="white"
               className="font-normal uppercase"
             >
-              premium
+              basic
             </Typography>
             <Typography
               variant="h1"
               color="white"
-              className="mt-6 flex justify-center gap-1 text-7xl font-normal"
+              className="mt-1 flex justify-center gap-1 text-7xl font-normal"
             >
-              <span className="mt-2 text-4xl">₹</span>2199{" "}
-              <span className="self-end text-4xl">1/y</span>
+              <span className="mt-1 text-lg">₹</span>2199{" "}
+              <span className="self-end text-xl">1/y</span>
             </Typography>
           </CardHeader>
           <CardBody className="p-0">
-            <ul className="flex flex-col gap-4">
+            <ul className="flex flex-col gap-2">
               <li className="flex items-center gap-4">
                 <span className="rounded-full border border-white/20 bg-white/20 p-1">
                   <CheckIcon />
@@ -263,7 +255,7 @@ export function PriceCards() {
               </li>
             </ul>
           </CardBody>
-          <CardFooter className="mt-12 p-0">
+          <CardFooter className="mt-10 p-0">
             <Button
               size="lg"
               color="white"
@@ -276,7 +268,9 @@ export function PriceCards() {
           </CardFooter>
         </Card>
       </div>
-      <div></div>
-    </div>
-  );
+   
+      </Dialog>
+    </>
+
+  )
 }

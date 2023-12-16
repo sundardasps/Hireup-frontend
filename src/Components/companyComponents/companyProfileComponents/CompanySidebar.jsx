@@ -19,9 +19,11 @@ import {
   UserIcon
 } from "@heroicons/react/24/solid";
 import  {AddPostForm}  from '../companyDialogs/AddPostForm';
-
+import { useSelector } from 'react-redux';
+import SelectPayment from '../../../Components/companyComponents/companyDialogs/SelectPayment'
 function CompanySidebar() {
   const navigate = useNavigate()
+  const payment = useSelector((state)=>{return state.company.payment})
   return (
     <div >
     <Card className=" flex  flex-auto h-fit mx-5 my-5  bg-white  border  ">
@@ -50,7 +52,7 @@ function CompanySidebar() {
             <ListItemPrefix>
               <PlusCircleIcon className="h-5 w-5" />
             </ListItemPrefix>
-            <AddPostForm />
+            {payment === 1 ? <AddPostForm />:<SelectPayment/>}
           </ListItem>
           <ListItem key={"schedule"} 
             onClick={() => {

@@ -46,7 +46,6 @@ function CompanyLogin() {
            companyLogin({ email: res.data.email, password: res.data.id }).then(
             (result) => {
               if (result.data.loginSuccess) {
-                console.log(result.data.loginData.is_completed);
                 dispatch(
                   setCompanyDetails({
                     id:result.data.loginData._id,
@@ -54,6 +53,7 @@ function CompanyLogin() {
                     email: result.data.loginData.email,
                     role: 'company',
                     completed:result.data.loginData.is_completed,
+                    payment:result.data.loginData.is_payment
                   })
                 );
                 localStorage.setItem("companyToken",result.data.jwtToken);
@@ -86,6 +86,7 @@ function CompanyLogin() {
               email: response.data.loginData.email,
               role: response.data.loginData.role,
               completed:response.data.loginData.is_completed,
+              payment:response.data.loginData.is_payment
 
             })
           );
