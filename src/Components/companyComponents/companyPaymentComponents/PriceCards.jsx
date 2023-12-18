@@ -1,3 +1,4 @@
+import { CheckIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
@@ -6,277 +7,152 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
-
-function CheckIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={2}
-      stroke="currentColor"
-      className="h-3 w-3"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M4.5 12.75l6 6 9-13.5"
-      />
-    </svg>
-  );
-}
+import { useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import { stripePayment } from "../../../Api/companyApi";
+import  CheckoutForm from './CheckoutForm'
+//publishable API
+const stripePromise = loadStripe("pk_test_51OOFpzSAq5W4cCoEZxzRl9eGeYg6Ba2HsZBNYQB4Gr2xjZceXIaZwVABJepkFCKkmCnlaYsuYuaj9A2xM3mKgug800evGCsmSy");
 
 export function PriceCards() {
+  const location = useLocation()
+  const {price,type} = location.state
+  const [clientSecret, setClientSecret] = useState("");
+
+  useEffect(() => {
+
+      const stripeInstsane = async ()=>{
+          try {
+            const response =  await stripePayment({price,duration:"1month"})
+            return response
+          } catch (error) {
+            console.log(error);
+          }
+      }
+      stripeInstsane().then((data) =>  {setClientSecret(data.data.clientSecret)});
+      
+
+  }, [price]);
+
+  const appearance = {
+    theme: 'stripe',
+    variables: {
+      fontFamily: 'Sohne, system-ui, sans-serif',
+      fontWeightNormal: '500',
+      borderRadius: '8px',
+      colorBackground: '#0A2540',
+      colorPrimary: '#EFC078',
+      accessibleColorOnColorPrimary: '#1A1B25',
+      colorText: 'black',
+      colorTextSecondary: 'white',
+      colorTextPlaceholder: '#727F96',
+      tabIconColor: 'white',
+      logoColor: 'dark'
+    },
+    rules: {
+      '.Input, .Block': {
+        backgroundColor: 'transparent',
+        border: '1.5px solid var(--colorPrimary)'
+      }
+    }
+  };
+  const options = {
+    clientSecret,
+    appearance,
+  };
   return (
-    <div className=" p-5">
-         <div className="w-full h-[5rem] m-5">
-          <Typography color="white" variant="h1" className="text-center font-medium">
-            Choose a payment option and continue .
-          </Typography>
-        </div>
-      <div className="flex justify-center gap-5 h-screen">
-     
-        <Card
-          color="blue"
-          variant="gradient"
-          className="w-full max-w-[19rem] h-[30rem] p-5 border "
-        >
-          <CardHeader
-            floated={false}
-            shadow={false}
-            color="transparent"
-            className="m-0 mb-8 rounded-none border-b border-white/10 pb-8 text-center"
+    <div className="flex justify-center gap-10 p-5">
+      <div className="">
+         <Card className="rounded-none border shadow-lg w-[30rem] ">
+          <CardBody>
+           <Typography variant="h4" className="font-semibold m-5">
+            Selected payment
+           </Typography>
+          <Card
+            color="blue"
+            variant="gradient"
+            className="w-full max-w-full h-[24rem] p-5 border "
           >
-            <Typography
-              variant="small"
-              color="white"
-              className="font-normal uppercase"
+            <CardHeader
+              floated={false}
+              shadow={false}
+              color="transparent"
+              className="m-0  rounded-none border-b border-white/10 pb-4 text-center"
             >
-              basic
-            </Typography>
-            <Typography
-              variant="h1"
-              color="white"
-              className="mt-6 flex justify-center gap-1 text-7xl font-normal"
-            >
-              <span className="mt-2 text-4xl">₹</span>200{" "}
-              <span className="self-end text-4xl">1/m</span>
-            </Typography>
-          </CardHeader>
-          <CardBody className="p-0">
-            <ul className="flex flex-col gap-4">
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">5 team members</Typography>
-              </li>
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">200+ components</Typography>
-              </li>
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">
-                  40+ built-in pages
-                </Typography>
-              </li>
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">
-                  1 year free updates
-                </Typography>
-              </li>
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">
-                  Life time technical support
-                </Typography>
-              </li>
-            </ul>
+              <Typography
+                variant="small"
+                color="white"
+                className="font-normal uppercase"
+              >
+                {type}
+              </Typography>
+              <Typography
+                variant="h1"
+                color="white"
+                className="mt-1 flex justify-center gap-1 text-7xl font-normal"
+              >
+                <span className="mt-1 text-lg">₹</span>{price}{" "}
+                <span className="self-end text-xl">{type=="Basic"&&"1/m"||type=="Standerd"&&"6/m"||type=="Premium"&&"1/y"}</span>
+              </Typography>
+            </CardHeader>
+            <CardBody className="p-0">
+              <ul className="flex flex-col gap-2">
+                <li className="flex items-center gap-4">
+                  <span className="rounded-full border border-white/20 bg-white/20 p-1">
+                    <CheckIcon />
+                  </span>
+                  <Typography className="font-normal">
+                    5 team members
+                  </Typography>
+                </li>
+                <li className="flex items-center gap-4">
+                  <span className="rounded-full border border-white/20 bg-white/20 p-1">
+                    <CheckIcon />
+                  </span>
+                  <Typography className="font-normal">
+                    200+ components
+                  </Typography>
+                </li>
+                <li className="flex items-center gap-4">
+                  <span className="rounded-full border border-white/20 bg-white/20 p-1">
+                    <CheckIcon />
+                  </span>
+                  <Typography className="font-normal">
+                    40+ built-in pages
+                  </Typography>
+                </li>
+                <li className="flex items-center gap-4">
+                  <span className="rounded-full border border-white/20 bg-white/20 p-1">
+                    <CheckIcon />
+                  </span>
+                  <Typography className="font-normal">
+                    1 year free updates
+                  </Typography>
+                </li>
+                <li className="flex items-center gap-4">
+                  <span className="rounded-full border border-white/20 bg-white/20 p-1">
+                    <CheckIcon />
+                  </span>
+                  <Typography className="font-normal">
+                    Life time technical support
+                  </Typography>
+                </li>
+              </ul>
+            </CardBody>
+          </Card>
           </CardBody>
-          <CardFooter className="mt-12 p-0">
-            <Button
-              size="lg"
-              color="white"
-              className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100"
-              ripple={false}
-              fullWidth={true}
-            >
-              Buy Now
-            </Button>
-          </CardFooter>
-        </Card>
-
-        <Card
-          color="blue"
-          variant="gradient"
-          className="w-full max-w-[19rem] h-[30rem] p-5 border"
-        >
-          <CardHeader
-            floated={false}
-            shadow={false}
-            color="transparent"
-            className="m-0 mb-8 rounded-none border-b border-white/10 pb-8 text-center"
-          >
-            <Typography
-              variant="small"
-              color="white"
-              className="font-normal uppercase"
-            >
-              standard
-            </Typography>
-            <Typography
-              variant="h1"
-              color="white"
-              className="mt-6 flex justify-center gap-1 text-7xl font-normal"
-            >
-              <span className="mt-2 text-4xl">₹</span>999{" "}
-              <span className="self-end text-4xl">6/m</span>
-            </Typography>
-          </CardHeader>
-          <CardBody className="p-0">
-            <ul className="flex flex-col gap-4">
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">5 team members</Typography>
-              </li>
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">200+ components</Typography>
-              </li>
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">
-                  40+ built-in pages
-                </Typography>
-              </li>
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">
-                  1 year free updates
-                </Typography>
-              </li>
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">
-                  Life time technical support
-                </Typography>
-              </li>
-            </ul>
-          </CardBody>
-          <CardFooter className="mt-12 p-0">
-            <Button
-              size="lg"
-              color="white"
-              className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100"
-              ripple={false}
-              fullWidth={true}
-            >
-              Buy Now
-            </Button>
-          </CardFooter>
-        </Card>
-
-        <Card
-          color="blue"
-          variant="gradient"
-          className="w-full max-w-[19rem] h-[30rem] p-5 border"
-        >
-          <CardHeader
-            floated={false}
-            shadow={false}
-            color="transparent"
-            className="m-0 mb-8 rounded-none border-b border-white/10 pb-8 text-center"
-          >
-            <Typography
-              variant="small"
-              color="white"
-              className="font-normal uppercase"
-            >
-              premium
-            </Typography>
-            <Typography
-              variant="h1"
-              color="white"
-              className="mt-6 flex justify-center gap-1 text-7xl font-normal"
-            >
-              <span className="mt-2 text-4xl">₹</span>2199{" "}
-              <span className="self-end text-4xl">1/y</span>
-            </Typography>
-          </CardHeader>
-          <CardBody className="p-0">
-            <ul className="flex flex-col gap-4">
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">5 team members</Typography>
-              </li>
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">200+ components</Typography>
-              </li>
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">
-                  40+ built-in pages
-                </Typography>
-              </li>
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">
-                  1 year free updates
-                </Typography>
-              </li>
-              <li className="flex items-center gap-4">
-                <span className="rounded-full border border-white/20 bg-white/20 p-1">
-                  <CheckIcon />
-                </span>
-                <Typography className="font-normal">
-                  Life time technical support
-                </Typography>
-              </li>
-            </ul>
-          </CardBody>
-          <CardFooter className="mt-12 p-0">
-            <Button
-              size="lg"
-              color="white"
-              className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100"
-              ripple={false}
-              fullWidth={true}
-            >
-              Buy Now
-            </Button>
-          </CardFooter>
-        </Card>
+         </Card>
       </div>
-      <div></div>
+      <div className="flex justify-center gap-5 ">
+      {clientSecret && (
+              <Elements options={options} stripe={stripePromise}>
+              <CheckoutForm clientSecret={clientSecret} />
+               </Elements>
+              )}
+     </div>
+    
     </div>
   );
 }

@@ -3,7 +3,7 @@ import AppliedList from '../../../Components/userComponents/userHomeComponents/A
 
 export default function AppliedJobs() {
   return (
-    <div>
+     <div>
       <AppliedList/>
     </div>
   )

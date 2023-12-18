@@ -257,3 +257,12 @@ export async function interviewReSchedule(data) {
   }
 }
 
+export async function stripePayment(item) {
+  try {
+    const response = await companyCheck.post("/create-payment-intent",item,{headers: { "Content-Type": "application/json" }});
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+

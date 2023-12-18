@@ -13,6 +13,7 @@ import UserForgotPass from "../Components/userComponents/userLoginComponents/Use
 import UserProtected from "../Utils/protected/UserProtected.jsx";
 import Profile from "../Pages/userPages/userHomePage/Profile.jsx";
 import AppliedList from "../Components/userComponents/userHomeComponents/AppliedList.jsx";
+import UserChat from "../Pages/userPages/userChatPage/UserChat.jsx";
 
 function UserRoutes() {
   const [user, setUser] = useState("");
@@ -36,6 +37,7 @@ function UserRoutes() {
       <Route path="/" element={<UserHome/>}/>
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/appliedJobs" element={<AppliedList/>}/>
+      <Route path="/chat" element={<UserChat/>}/>
       </Route>
       </Route>
     </Routes>

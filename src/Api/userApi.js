@@ -246,3 +246,34 @@ export async function checkJobAppliedStatus(userId,jobId){
   }
 } 
 
+//--------------------------------User chat-----------------------------------//
+
+export async function userChats (){
+   try {
+    const response = await userCheck.get("/chat")
+    return response
+   } catch (error) {
+    console.log(error);
+   }
+}
+
+export async function  getSingleCompany (companyId){
+  try {
+
+   const response = await userCheck.get(`/getSingleCompany/${companyId}`)
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+}
+
+export async function  getMessages(chatId){
+  try {
+   const response = await userCheck.get(`/getMessage/${chatId}`)
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+}
+
+

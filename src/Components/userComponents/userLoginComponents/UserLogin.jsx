@@ -53,7 +53,8 @@ function UserLogin() {
                     role: "user",
                     userTitle:result.data.loginData.userTitle,
                     userDp:result.data.loginData.userDp,
-                    number:result.data.loginData.number
+                    number:result.data.loginData.number,
+                    userId:result.data.loginData._id
                   })
                 );
                 localStorage.setItem("token", result.data.jwtToken);
@@ -84,7 +85,8 @@ function UserLogin() {
               role: "user",
               userTitle:response.data.loginData.userTitle,
               userDp:response.data.loginData.userDp,
-              number:response.data.loginData.number
+              number:response.data.loginData.number,
+              userId:response.data.loginData._id
             })
           );
           localStorage.setItem("token", response.data.jwtToken);

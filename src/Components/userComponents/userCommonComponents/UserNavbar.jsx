@@ -41,9 +41,13 @@ function UserNavbar() {
   const handleLogOut = () => {
     dispatch(
       logOutDetails({
-        userName: "",
-        email: "",
-        role: "",
+        userName:"",
+        email : "",
+        role :"",
+        userTitle:"",
+        userDp :"",
+        number:"",
+        userId:"",
       })
       );
       localStorage.removeItem("token");
@@ -113,7 +117,7 @@ function UserNavbar() {
         </Typography>
         </a> */}
         <a
-          onClick={()=>navigate('/user')}
+          onClick={()=>navigate('/user/chat')}
           className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
         >
         <Typography

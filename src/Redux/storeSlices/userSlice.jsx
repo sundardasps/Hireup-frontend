@@ -7,6 +7,7 @@ const initialState ={
     userTitle:"",
     userDp:"",
     number:"",
+    userId:""
 
 }
 
@@ -21,6 +22,7 @@ const userSlice = createSlice({
             state.userTitle = action.payload.userTitle
             state.userDp = action.payload.userDp
             state.number = action.payload.number
+            state.userId = action.payload.userId
         },
         logOutDetails:(state)=>{
             state.userName = ""
@@ -29,7 +31,7 @@ const userSlice = createSlice({
             state.userTitle=""
             state.userDp =""
             state.number =""
-
+            state.userId=""
         }
     }
 })

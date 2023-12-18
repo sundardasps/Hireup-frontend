@@ -3,7 +3,7 @@ import  { PriceCards } from '../../../Components/companyComponents/companyPaymen
 import PaymentStatus from '../../../Components/companyComponents/companyPaymentComponents/PaymentStatus'
 export default function CompanyPayment() {
   return (
-    <div className='bg-blue-600'>
+    <div className=''>
       <PriceCards/>
     </div>
   )
