@@ -10,7 +10,7 @@ function UserLayout() {
         <div className="mb-20">
           <UserNavbar />
         </div>
-        <div className=" min-h-screen">
+        <div className="min-h-screen ">
           <Outlet  />
         </div>
         <div>

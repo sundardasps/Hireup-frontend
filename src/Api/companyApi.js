@@ -266,3 +266,40 @@ export async function stripePayment(item) {
   }
 }
 
+//--------------------------------Company chat-----------------------------------//
+
+export async function companyChats (currentUser){
+  try {
+   const response = await companyCheck.get(`/chat/${currentUser}`)
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+}
+
+export async function  getSingleUser(userId){
+ try {
+  const response = await companyCheck.get(`/getSingleUser/${userId}`)
+  return response
+ } catch (error) {
+  console.log(error);
+ }
+}
+
+export async function  companyGetMessages(chatId){
+ try {
+  const response = await companyCheck.get(`/companyGetMessages/${chatId}`)
+  return response
+ } catch (error) {
+  console.log(error);
+ }
+}
+
+export async function  companyAddMessage(newMessage){
+ try {
+  const response = await companyCheck.post("/companyAddMessage",newMessage)
+  return response
+ } catch (error) {
+  console.log(error);
+ }
+}

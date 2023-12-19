@@ -1,25 +1,25 @@
 import { Card, Input } from "@material-tailwind/react";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { userChats } from "../../../Api/userApi";
-import UserConversation from "./UserConversation";
+import { companyChats } from "../../../Api/companyApi";
+import CompanyConversations from "./CompanyConverSation";
 import ChatBox from "./ChatBox";
 import { io } from "socket.io-client";
-function UserChat() {
+function CompanyChat() {
   const [chats, setChats] = useState([]);
   const [onlineUsers, setOnlineUsers] = useState(null);
   const [currentChat, setCurrentChat] = useState(null);
   const [sendMessage, setSendMessage] = useState(null);
-  const [RecieveMessage, setRecieveMessage] = useState(null);
+  const [RecieveMessage, setRecieveMessage] = useState(null)
   const currentUser = useSelector((state) => {
-    return state.user.userId;
+    return state.company.id;
   });
   const socket = useRef();
 
   useEffect(() => {
     const getChats = async () => {
       try {
-        const { data } = await userChats(currentUser);
+        const { data } = await companyChats(currentUser);
         setChats(data);
       } catch (error) {
         console.log(error);
@@ -28,8 +28,9 @@ function UserChat() {
     getChats();
   }, [currentUser]);
 
+
   useEffect(() => {
-    socket.current = io("http://localhost:5000/user");
+    socket.current = io("http://localhost:5000/company");
     socket.current.emit("new-user-add", currentUser);
     socket.current.on("get-users", (users) => {
       setOnlineUsers(users);
@@ -39,17 +40,19 @@ function UserChat() {
   // send message to the socket server
   useEffect(() => {
     if (sendMessage !== null) {
-      socket.current.emit("send-message",sendMessage);
+      console.log("Sending message:", sendMessage);
+      socket.current.emit("send-message", sendMessage);
     }
-  }, [sendMessage]);
+  },[sendMessage]);
 
   // recive message from the socket server
   useEffect(() => {
-    // Listen for incoming messages from the server
     socket.current.on("receive-message", (data) => {
+      console.log("Received message:", data);
       setRecieveMessage(data);
     });
-  }, []);
+  },[]);
+
 
   const checkOnlineStatus = (chat) => {
     const chatMembers = chat.members.find((member) => member !== currentUser);
@@ -65,7 +68,7 @@ function UserChat() {
         <div className="">
           {chats.map((chat, index) => (
             <div key={index} onClick={() => setCurrentChat(chat)}>
-              <UserConversation
+              <CompanyConversations
                 data={chat}
                 currentUser={currentUser}
                 online={checkOnlineStatus(chat)}
@@ -88,4 +91,4 @@ function UserChat() {
   );
 }
 
-export default UserChat;
+export default CompanyChat;

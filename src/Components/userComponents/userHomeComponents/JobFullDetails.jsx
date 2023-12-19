@@ -83,7 +83,7 @@ export function JobFullDetails({ jobdata }) {
             </text>
           </div>
 
-          <div className="flex flex-col h-40 w-80 overflow-y-scroll ">
+          <div className="flex flex-col h-40 w-80 scrollable ">
             <div className="mx-4">
               <p className="bg-blue-gray-100">Skills required</p>
               <span className="text-sm ">

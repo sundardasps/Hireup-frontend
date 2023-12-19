@@ -74,7 +74,7 @@ function CompanyNavbar() {
         </Typography>
         </a>
         <a
-          onClick={()=>navigate('/user')}
+          onClick={()=>navigate('/company/chat')}
           className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
         >
         <Typography

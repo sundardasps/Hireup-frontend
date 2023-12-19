@@ -248,9 +248,20 @@ export async function checkJobAppliedStatus(userId,jobId){
 
 //--------------------------------User chat-----------------------------------//
 
-export async function userChats (){
+export async function  createChat(ids){
+  try {
+
+   const response = await userCheck.post("/createChat",ids)
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+}
+
+export async function userChats (currentUser){
    try {
-    const response = await userCheck.get("/chat")
+
+    const response = await userCheck.get(`/chat${currentUser}`)
     return response
    } catch (error) {
     console.log(error);
@@ -259,7 +270,6 @@ export async function userChats (){
 
 export async function  getSingleCompany (companyId){
   try {
-
    const response = await userCheck.get(`/getSingleCompany/${companyId}`)
    return response
   } catch (error) {
@@ -270,6 +280,15 @@ export async function  getSingleCompany (companyId){
 export async function  getMessages(chatId){
   try {
    const response = await userCheck.get(`/getMessage/${chatId}`)
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+}
+
+export async function  addMessage(newMessage){
+  try {
+   const response = await userCheck.post("/addMessage",newMessage)
    return response
   } catch (error) {
    console.log(error);

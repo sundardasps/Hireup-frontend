@@ -169,7 +169,7 @@ function UserDetails() {
   return (
     <>
       <div className="flex justify-center">
-        <div className="bg-transparent overflow-auto no-scrollbar">
+        <div className="bg-transparent overflow-auto scrollbar">
           <div className="container mx-auto my-5 p-5">
             <div className="md:flex no-wrap md:-mx-2 ">
               <div className="w-full md:w-6/12 md:mx-2">
@@ -359,7 +359,7 @@ function UserDetails() {
                         <Typography className="text-gray-600" variant="small">Totel ({data ? data.total:""} + year experience)</Typography>
                       </div>
 
-                      <ul className="list-inside space-y-2 overflow-y-scroll max-h-48">
+                      <ul className="list-inside space-y-2 scrollable max-h-48">
                         {data.exist.experience.map((value, index) => (
                           <li
                             key={value}
@@ -393,7 +393,7 @@ function UserDetails() {
                         {/* <Typography className="text-gray-600" variant="small">Totel ({data ? data.total:""} + year experience)</Typography> */}
                       </div>
 
-                      <ul className="list-inside space-y-2 overflow-y-scroll max-h-48">
+                      <ul className="list-inside space-y-2 scrollable max-h-48">
                         {data.exist.education.map((value, index) => (
                           <li
                             key={index}

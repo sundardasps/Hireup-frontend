@@ -15,5 +15,23 @@
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
       }
+
+      .scrollable {
+        max-height: 100%;
+        overflow-y: scroll;
+      }
+      
+      /* Hide the scrollbar for WebKit browsers (Chrome, Safari) */
+      .scrollable::-webkit-scrollbar {
+        width: 0.5em;
+      }
+      
+      .scrollable::-webkit-scrollbar-thumb {
+        background-color: transparent;
+      }
+      
+      .scrollable::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
     }
   }

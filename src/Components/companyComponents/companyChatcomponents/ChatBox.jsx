@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  addMessage,
-  getMessages,
-  getSingleCompany,
-} from "../../../Api/userApi";
+  companyAddMessage,
+  companyGetMessages,
+  getSingleUser,
+} from "../../../Api/companyApi";
 import { Avatar, Button, Card, Typography } from "@material-tailwind/react";
 import userLogo from "../../../../public/user.png";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
 
-function ChatBox({ chat, currentUser, setSendMessage,RecieveMessage }) {
+function ChatBox({ chat, currentUser, setSendMessage, RecieveMessage }) {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -19,10 +19,10 @@ function ChatBox({ chat, currentUser, setSendMessage,RecieveMessage }) {
   };
 
   useEffect(() => {
-    const companyId = chat?.members?.find((id) => id !== currentUser);
+    const userId = chat?.members?.find((id) => id !== currentUser);
     const userData = async () => {
       try {
-        const { data } = await getSingleCompany(companyId);
+        const { data } = await getSingleUser(userId);
         setUserData(data);
       } catch (error) {
         console.log(error);
@@ -36,7 +36,7 @@ function ChatBox({ chat, currentUser, setSendMessage,RecieveMessage }) {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const { data } = await getMessages(chat._id);
+        const { data } = await companyGetMessages(chat._id);
         setMessages(data);
       } catch (error) {
         console.log(error);
@@ -44,8 +44,6 @@ function ChatBox({ chat, currentUser, setSendMessage,RecieveMessage }) {
     };
     if (chat != null) fetchMessages();
   }, [chat]);
-
-
 
    //always scroll to the lastmessage
    useEffect(()=>{
@@ -64,17 +62,13 @@ function ChatBox({ chat, currentUser, setSendMessage,RecieveMessage }) {
     setSendMessage({ ...messages, recieverId });
     // send message to database
     try {
-      const { data } = await addMessage(message);
+      const { data } = await companyAddMessage(message);
       setMessages([...messages, data]);
       setNewMessage("");
     } catch (error) {
       console.log(error);
     }
-
-    
   };
-
-
 
   useEffect(() => {
     if (RecieveMessage !== null && RecieveMessage.chatId === chat._id) {
@@ -92,11 +86,11 @@ function ChatBox({ chat, currentUser, setSendMessage,RecieveMessage }) {
             <div className="p-1    rounded-sm">
               <div className="flex gap-5">
                 <Avatar
-                  src={userData ? userData.image : userLogo}
+                  src={userData ? userData.userDp : userLogo}
                   className=""
                 />
                 <Typography className="flex flex-col mt-1">
-                  {userData?.companyName}
+                  {userData?.userName}
                 </Typography>
               </div>
             </div>
@@ -106,8 +100,9 @@ function ChatBox({ chat, currentUser, setSendMessage,RecieveMessage }) {
           <div className="h-screen scrollable">
             {messages.map((message) => (
               <>
-                <div ref={scroll}
-                key={message.text}
+                <div
+                  ref={scroll}
+                  key={message._id}
                   className={
                     message.senderId === currentUser
                       ? "flex justify-end "

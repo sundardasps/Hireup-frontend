@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { getSingleCompany } from "../../../Api/userApi";
+import { getSingleUser } from "../../../Api/companyApi";
 import { Avatar, Typography } from "@material-tailwind/react";
 import userLogo from '../../../../public/user.png'
-export default function UserConversation({ data, currentUser ,online}) {
+export default function CompanyConverSation({ data, currentUser ,online}) {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    const companyId = data.members.find((id) => id != currentUser);
+    const userId = data.members.find((id) => id != currentUser);
     const userData = async () => {
       try {
-        const { data } = await getSingleCompany(companyId);
+        const { data } = await getSingleUser(userId);
         setUserData(data);
       } catch (error) {
         console.log(error);
@@ -22,8 +22,8 @@ export default function UserConversation({ data, currentUser ,online}) {
     <>  
     <div className=" mt-2 hover:bg-blue-gray-100 rounded-sm w-[15rem] border-b cursor-pointer">
      <div className="flex gap-5">
-     <Avatar src={userData?userData.image:userLogo} className=""/>
-     <Typography className="flex flex-col mt-1">{userData?.companyName}<span className="text-xs ml-1">{online?"Online":"Offline"}</span></Typography>
+     <Avatar src={userData?userData.userDp:userLogo} className=""/>
+     <Typography className="flex flex-col mt-1">{userData?.userName}<span className="text-xs ml-1">{online?"Online":"Offline"}</span></Typography>
      </div>
      </div>
      <hr />

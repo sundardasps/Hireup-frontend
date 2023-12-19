@@ -138,7 +138,7 @@ function JobCards() {
               Clear
             </Button>
           </div>
-          <List className="overflow-y-scroll h-40 ">
+          <List className="scrollable h-40 ">
             {category &&
               category.map((value, index) => (
                 <Accordion
