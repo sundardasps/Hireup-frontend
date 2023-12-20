@@ -24,11 +24,12 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
-import { categoryDataForCompany, getUserList } from "../../../Api/companyApi";
+import { categoryDataForCompany, companyCreateChat, getUserList } from "../../../Api/companyApi";
 import React, { useEffect, useState } from "react";
 import MainLoading from "../../commonComponents/Loadings/MainLoding";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useNavigate } from "react-router-dom";
+import {useSelector} from 'react-redux'
 export default function UserCards() {
   const [search, setSearch] = useState();
   const [debouncedSearch, setdebouncedSearch] = useState();
@@ -38,7 +39,11 @@ export default function UserCards() {
   const navigate = useNavigate();
   const [active, setActive] = React.useState(1);
 
-  useEffect(() => {
+  const currentUser = useSelector((state) => {
+    return state.company.id;
+  });
+
+   useEffect(() => {
     const fetchCategory = async () => {
       await categoryDataForCompany().then((res) => setCategory(res.data.data));
     };
@@ -106,6 +111,19 @@ export default function UserCards() {
   };
 
   //-----------------------------------------------------//
+
+  const tapToChat = async (ids)=>{
+    
+    try {
+      const response = await companyCreateChat(ids)
+      if(response){
+        navigate("/company/chat")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
   if (isLoading) {
     return <MainLoading />;
@@ -252,9 +270,7 @@ export default function UserCards() {
               <Card
                 key={index}
                 className="max-w-[14rem] mx-auto h-min  overflow-hidden  bg-white shadow-sm rounded-lg shadow-blue-gray-200 hover:shadow-xl  cursor-pointer   "
-                onClick={() =>
-                  navigate(`/company/userProfile`, { state: value._id })
-                }
+               
               >
                 <div className="relative border-b-2 ">
                   {/* Background Image */}
@@ -268,6 +284,9 @@ export default function UserCards() {
                     src={value.userDp ? value.userDp : userLogo}
                     alt="Profile"
                     className="rounded-full border-4 border-white absolute -bottom-10 left-14  w-28 h-28 outline-double  outline-gray-50  object-fill"
+                    onClick={() =>
+                      navigate(`/company/userProfile`, { state: value._id })
+                    }
                   />
                 </div>
                 <CardBody>
@@ -292,6 +311,7 @@ export default function UserCards() {
                       size="sm"
                       variant="outlined"
                       color="white"
+                      onClick={()=>tapToChat({companyId:currentUser,userId:value._id})}
                     >
                       Message
                     </Button>

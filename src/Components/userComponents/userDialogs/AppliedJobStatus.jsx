@@ -50,7 +50,7 @@ export default function AppliedJobStatus(jobdata) {
     }
   })
  
-  console.log(jobdata,"=====ddjonbdata");
+
 
   const tapToChat =async ()=>{
     try {

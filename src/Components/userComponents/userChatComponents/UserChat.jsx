@@ -46,8 +46,7 @@ function UserChat() {
     }
   }, [sendMessage]);
 
-  // recive message from the socket server
-  // recive message from the socket server
+
   useEffect(() => {
     const handlerecievedMess = async (data) => {
       console.log("Received message:", data.msg);
@@ -63,7 +62,7 @@ function UserChat() {
     return online ? true : false;
   };
   return (
-    <div className="flex gap-1 ">
+    <div className="flex gap-1">
       <Card className="w-min p-3 h-screen shadow-md border">
         <div className="flex gap-3">
           <Input type="search" label="Search company" />

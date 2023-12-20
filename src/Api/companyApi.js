@@ -268,6 +268,16 @@ export async function stripePayment(item) {
 
 //--------------------------------Company chat-----------------------------------//
 
+export async function  companyCreateChat(ids){
+  try {
+
+   const response = await companyCheck.post("/companyCreateChat",ids)
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+}
+
 export async function companyChats (currentUser){
   try {
    const response = await companyCheck.get(`/chat/${currentUser}`)

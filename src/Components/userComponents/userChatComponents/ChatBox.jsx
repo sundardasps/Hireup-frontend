@@ -8,6 +8,7 @@ import { Avatar, Button, Card, Typography } from "@material-tailwind/react";
 import userLogo from "../../../../public/user.png";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
+import {PaperAirplaneIcon, PlusIcon} from "@heroicons/react/24/solid"
 
 function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
   const [userData, setUserData] = useState(null);
@@ -96,7 +97,7 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
             <hr />
           </div>
 
-          <div className="h-screen scrollable">
+          <div className="h-screen scrollable ">
             {messages?.map((message, i) => (
               <>
                 <div
@@ -119,11 +120,13 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
             ))}
           </div>
 
-          <div className="flex m-5">
-            <div>+</div>
-            <InputEmoji value={newMessage} onChange={handleMessage} />
-            <div className="m-1">
-              <Button onClick={handleSend}>send</Button>
+          <div className="flex p-3 h-[5rem] rounded-b-md " style={{backgroundColor:"#687864"}}>
+            <div className="p-2 rounded-lg m-2  " style={{backgroundColor:"white",color:"#687864"}}>
+              <PlusIcon className="w-5 h-5"/>
+            </div>
+            <InputEmoji  value={newMessage} onChange={handleMessage} />
+            <div className="py-2">
+              <PaperAirplaneIcon color="white" className="w-10 h-10" onClick={handleSend}  />
             </div>
           </div>
         </>
