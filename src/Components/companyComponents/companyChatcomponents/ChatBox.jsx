@@ -9,11 +9,10 @@ import userLogo from "../../../../public/user.png";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
 
-function ChatBox({ chat, currentUser, setSendMessage, RecieveMessage }) {
+function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
   const [userData, setUserData] = useState(null);
-  const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const scroll = useRef()
+  const scroll = useRef();
   const handleMessage = (newMessage) => {
     setNewMessage(newMessage);
   };
@@ -45,10 +44,10 @@ function ChatBox({ chat, currentUser, setSendMessage, RecieveMessage }) {
     if (chat != null) fetchMessages();
   }, [chat]);
 
-   //always scroll to the lastmessage
-   useEffect(()=>{
-    scroll.current?.scrollIntoView({behavior:"smooth"})
-  },[messages])
+  //always scroll to the lastmessage
+  useEffect(() => {
+    scroll.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const handleSend = async (e) => {
     e.preventDefault();
@@ -61,9 +60,12 @@ function ChatBox({ chat, currentUser, setSendMessage, RecieveMessage }) {
     const recieverId = chat.members.find((id) => id !== currentUser);
     setSendMessage({ ...messages, recieverId });
     // send message to database
+    // send message to database
     try {
       const { data } = await companyAddMessage(message);
-      setMessages([...messages, data]);
+      const msg = [...messages, data];
+      setMessages(msg);
+      setSendMessage({ msg, recieverId });
       setNewMessage("");
     } catch (error) {
       console.log(error);
@@ -71,12 +73,10 @@ function ChatBox({ chat, currentUser, setSendMessage, RecieveMessage }) {
   };
 
   useEffect(() => {
-    if (RecieveMessage !== null && RecieveMessage.chatId === chat._id) {
-      setMessages([...messages, RecieveMessage]);
+    if (messages !== null && messages.chatId === chat?._id) {
+      setMessages([...messages, messages]);
     }
-  }, [RecieveMessage]);
-
- 
+  }, [messages]);
 
   return (
     <>
@@ -98,11 +98,11 @@ function ChatBox({ chat, currentUser, setSendMessage, RecieveMessage }) {
           </div>
 
           <div className="h-screen scrollable">
-            {messages.map((message) => (
+            {messages.map((message, i) => (
               <>
                 <div
                   ref={scroll}
-                  key={message._id}
+                  key={i}
                   className={
                     message.senderId === currentUser
                       ? "flex justify-end "

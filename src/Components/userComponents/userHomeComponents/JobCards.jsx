@@ -13,7 +13,7 @@ import {
 } from "@material-tailwind/react";
 import { BuildingOffice2Icon } from "@heroicons/react/20/solid";
 import { useQuery } from "@tanstack/react-query";
-import { categoryDataForUser, getAllJobs } from "../../../Api/userApi";
+import { categoryDataForUser, getAllJobs, saveJobs } from "../../../Api/userApi";
 import {
   CheckCircleIcon,
   BookmarkIcon,
@@ -29,6 +29,7 @@ import MainLoading from "../../commonComponents/Loadings/MainLoding";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import defaultDp from '../../../../public/user.png'
+import toast from "react-hot-toast";
 
 function JobCards() {
   const [open, setOpen] = React.useState(0);
@@ -95,6 +96,19 @@ function JobCards() {
   const handleShowDetails = (jobData) => {
     setSelectedJob(jobData);
   };
+
+  const handleSaveJob = async (jobId)=>{
+       try {
+        const response = await saveJobs(jobId)
+        if(response.data.saved){
+          toast.success(response.data.message)
+        }else{
+          toast.error(response.data.message)
+        }
+       } catch (error) {
+        console.log(error);
+       }
+  }
 
   if (isLoading || !selectedJob) {
     if (data && data.data && data.data.length > 0 && !selectedJob) {
@@ -246,10 +260,10 @@ function JobCards() {
                   </div>
                 </div>
               </div>
-              {/* <CardFooter className=" ">
-                <BookmarkIcon className="w-5 h-5  cursor-pointer  underline" />
+              <CardFooter className=" ">
+                <BookmarkIcon  className="w-5 h-5  cursor-pointer  underline" onClick={()=>handleSaveJob(data._id)} />
                 <BookmarkSlashIcon className="w-5 h-5  cursor-pointer  underline" />
-              </CardFooter> */}
+              </CardFooter>
             </Card>
           ))}
       </div>

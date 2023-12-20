@@ -251,7 +251,7 @@ export default function UserCards() {
             data.userList.map((value, index) => (
               <Card
                 key={index}
-                className="max-w-[14rem] mx-auto h-min  overflow-hidden  bg-white shadow-sm rounded-lg shadow-blue-gray-200  hover:shadow-xl border cursor-pointer   "
+                className="max-w-[14rem] mx-auto h-min  overflow-hidden  bg-white shadow-sm rounded-lg shadow-blue-gray-200 hover:shadow-xl  cursor-pointer   "
                 onClick={() =>
                   navigate(`/company/userProfile`, { state: value._id })
                 }

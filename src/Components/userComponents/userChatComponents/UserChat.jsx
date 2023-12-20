@@ -10,12 +10,13 @@ function UserChat() {
   const [onlineUsers, setOnlineUsers] = useState(null);
   const [currentChat, setCurrentChat] = useState(null);
   const [sendMessage, setSendMessage] = useState(null);
-  const [RecieveMessage, setRecieveMessage] = useState(null);
+  const [messages, setMessages] = useState([]);
+
   const currentUser = useSelector((state) => {
     return state.user.userId;
   });
-  const socket = useRef();
 
+  const socket = useRef();
   useEffect(() => {
     const getChats = async () => {
       try {
@@ -29,7 +30,9 @@ function UserChat() {
   }, [currentUser]);
 
   useEffect(() => {
-    socket.current = io("http://localhost:5000/user");
+    socket.current = io("http://localhost:5000", {
+      withCredentials: true,
+    });
     socket.current.emit("new-user-add", currentUser);
     socket.current.on("get-users", (users) => {
       setOnlineUsers(users);
@@ -39,16 +42,19 @@ function UserChat() {
   // send message to the socket server
   useEffect(() => {
     if (sendMessage !== null) {
-      socket.current.emit("send-message",sendMessage);
+      socket.current.emit("send-message", sendMessage);
     }
   }, [sendMessage]);
 
   // recive message from the socket server
+  // recive message from the socket server
   useEffect(() => {
-    // Listen for incoming messages from the server
-    socket.current.on("receive-message", (data) => {
-      setRecieveMessage(data);
-    });
+    const handlerecievedMess = async (data) => {
+      console.log("Received message:", data.msg);
+      setMessages(data.msg);
+    };
+
+    socket.current.on("receive-message", handlerecievedMess);
   }, []);
 
   const checkOnlineStatus = (chat) => {
@@ -81,7 +87,8 @@ function UserChat() {
           chat={currentChat}
           currentUser={currentUser}
           setSendMessage={setSendMessage}
-          RecieveMessage={RecieveMessage}
+          messages={messages}
+          setMessages={setMessages}
         />
       </Card>
     </div>

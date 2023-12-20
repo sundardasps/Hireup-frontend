@@ -26,7 +26,7 @@ import {
   UserIcon,
 } from "@heroicons/react/20/solid";
 import {useQuery} from '@tanstack/react-query'
-import { checkJobAppliedStatus, createChat } from "../../../Api/userApi";
+import { checkJobAppliedStatus, createChat, getSingleJobData } from "../../../Api/userApi";
 import { jwtDecode } from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
 export default function AppliedJobStatus(jobdata) {
@@ -49,6 +49,8 @@ export default function AppliedJobStatus(jobdata) {
       return response
     }
   })
+ 
+  console.log(jobdata,"=====ddjonbdata");
 
   const tapToChat =async ()=>{
     try {
@@ -139,7 +141,7 @@ export default function AppliedJobStatus(jobdata) {
             >
               <div className="m-2 mt-4 w-auto h-auto">
                 <img
-                  src="../../../../public/user.png"
+                  src={jobdata?.jobData.companyImage}
                   style={{ width: "80px", height: "50px" }}
                   className="rounded-sm"
                 />
@@ -147,19 +149,19 @@ export default function AppliedJobStatus(jobdata) {
               <div className="flex flex-col  w-full  m-5">
                 <div className="">
                   <Typography color="blue" className="text-lg font-bold ">
-                      front end
+                      {jobdata?.jobData?.job_title}
                   </Typography>
                 </div>
                 <div className="flex gap-1">
                   <BuildingOffice2Icon className="h-4 w-4 text-teal-500" />
                   <Typography className="text-sm">
-                   tech emirates
+                  {jobdata?.jobData?.companyName}
                   </Typography>
                 </div>
                 <div className="flex flex-col sm:flex-row justify-between items-start">
                   <div className="flex justify-center gap-2 ">
                     <Typography className="font-serift text-sm text-gray-600">
-                      delhi(fdsfs)
+                    {jobdata?.jobData?.companyLocation}
                     </Typography>
                   </div>
                   <div className="flex flex-col mt-2 sm:mt-0">

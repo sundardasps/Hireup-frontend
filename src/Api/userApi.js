@@ -246,6 +246,15 @@ export async function checkJobAppliedStatus(userId,jobId){
   }
 } 
 
+export async function getSingleJobData(jobId){
+  try {
+   const response = await userCheck.get(`/checkJobAppliedStatus/${jobId}`,)
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+} 
+
 //--------------------------------User chat-----------------------------------//
 
 export async function  createChat(ids){
@@ -260,7 +269,6 @@ export async function  createChat(ids){
 
 export async function userChats (currentUser){
    try {
-
     const response = await userCheck.get(`/chat${currentUser}`)
     return response
    } catch (error) {
@@ -295,4 +303,22 @@ export async function  addMessage(newMessage){
   }
 }
 
+//------------------------------job save---------------------------------//
 
+export async function  saveJobs(jobId){
+  try {
+   const response = await userCheck.put(`/saveJobs/${jobId}`)
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+}
+
+export async function  getSavedJobs(){
+  try {
+   const response = await userCheck.get("/getSavedJobs/")
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+}

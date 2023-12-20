@@ -64,7 +64,7 @@ function UserNavbar() {
      
       
     
-      <ul className="my-2 flex  flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-20 ">
+      <ul className="my-2 flex  flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-10 ">
           
           <div className=" w-auto ">
           <Input
@@ -104,7 +104,7 @@ function UserNavbar() {
         </a>
 
 
-          {/* <a
+        <a
           onClick={()=>navigate('/user')}
           className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
         >
@@ -115,7 +115,7 @@ function UserNavbar() {
           className=" font-medium "
         > <BookmarkIcon  className="h-8 w-7 "/>saved
         </Typography>
-        </a> */}
+        </a>
         <a
           onClick={()=>navigate('/user/chat')}
           className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
