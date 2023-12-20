@@ -22,6 +22,8 @@ import AppliedUsersPage from '../Pages/companyPages/companyHomePage/AppliedUsers
 import CompanyPayment from '../Pages/companyPages/companyPaymentPage/CompanyPayment'
 import InterviewList from '../Pages/companyPages/companyHomePage/InterviewList'
 import CompanyChatPage from '../Pages/companyPages/companyChatPage/CompanyChatPage'
+import PaymentSuccessPage from '../Pages/companyPages/companyPaymentPage/SuccessPage'
+import PaymentFailuerPage from '../Pages/companyPages/companyPaymentPage/FailuerPage'
 
 function CompanyRoutes(){
 
@@ -45,7 +47,11 @@ function CompanyRoutes(){
          <Route path='/posts/appliedUsers' element={<AppliedUsersPage/>}/>
          <Route path='/payment' element={<CompanyPayment/>}/>
          <Route path='/interviewsList' element={<InterviewList/>}/> 
-         <Route path='/chat' element={<CompanyChatPage/>}/>   
+         <Route path='/chat' element={<CompanyChatPage/>}/>
+         <Route path='/paymentSuccess' element={<PaymentSuccessPage/>}/>
+         <Route path='/paymentfailed' element={<PaymentFailuerPage/>}/>   
+
+
          </Route>
          </Route>
       </Routes>

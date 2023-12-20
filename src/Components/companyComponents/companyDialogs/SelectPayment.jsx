@@ -14,13 +14,51 @@ import {
 } from "@material-tailwind/react";
 import { CheckIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
-
+import { stripePayment } from "../../../Api/companyApi";
+import { loadStripe } from "@stripe/stripe-js";
+import { useSelector } from "react-redux";
 export default function SelectPayment() {
   const [open, setOpen] = React.useState(false);
-
   const handleOpen = () => setOpen(!open);
 
-  const navigate = useNavigate();
+  let stripePromise;
+  const getstrip = () => {
+    if (!stripePromise) {
+      stripePromise = loadStripe(
+        "pk_test_51OOFpzSAq5W4cCoEZxzRl9eGeYg6Ba2HsZBNYQB4Gr2xjZceXIaZwVABJepkFCKkmCnlaYsuYuaj9A2xM3mKgug800evGCsmSy"
+      );
+    }
+    return stripePromise;
+  };
+
+  const prices = [
+    {
+      id: "price_1OPVJPSAq5W4cCoE0yVyrnrI",
+      amount: 200,
+      interval: "month",
+    },
+    {
+      id: "price_1OPVKfSAq5W4cCoEUvGfOZ4p",
+      amount: 999,
+      interval: "month",
+    },
+    {
+      id: "price_1OPVLcSAq5W4cCoEwmw7Spvw",
+      amount: 1999,
+      interval: "year",
+    },
+  ];
+
+  const handlePayment = async (price) => {
+    try {
+      const res = await stripePayment(price);
+      if (res.status === 200) {
+        window.location.href = res?.data?.session.url;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -32,8 +70,8 @@ export default function SelectPayment() {
         className="bg-blue-500 overflow-y-scroll"
       >
         <DialogHeader className="flex justify-center gap-10 ">
-          <Typography variant="h2" color="white" >
-          Reachout 7.9 Million+ job seekers 
+          <Typography variant="h2" color="white">
+            Reachout 7.9 Million+ job seekers
           </Typography>
           <IconButton
             color="white"
@@ -137,11 +175,7 @@ export default function SelectPayment() {
                 className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100"
                 ripple={false}
                 fullWidth={true}
-                onClick={() =>
-                  navigate("/company/payment", {
-                    state: { price: 200, type: "Basic" },
-                  })
-                }
+                onClick={() => handlePayment(prices[0])}
               >
                 Buy Now
               </Button>
@@ -226,11 +260,7 @@ export default function SelectPayment() {
                 className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100"
                 ripple={false}
                 fullWidth={true}
-                onClick={() =>
-                  navigate("/company/payment", {
-                    state: { price: 999, type: "Standerd" },
-                  })
-                }
+                onClick={() => handlePayment(prices[1])}
               >
                 Buy Now
               </Button>
@@ -253,7 +283,7 @@ export default function SelectPayment() {
                 color="white"
                 className="font-normal uppercase"
               >
-                basic
+                Premium
               </Typography>
               <Typography
                 variant="h1"
@@ -315,11 +345,7 @@ export default function SelectPayment() {
                 className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100"
                 ripple={false}
                 fullWidth={true}
-                onClick={() =>
-                  navigate("/company/payment", {
-                    state: { price: 2199, type: "Premium" },
-                  })
-                }
+                onClick={() => handlePayment(prices[2])}
               >
                 Buy Now
               </Button>
@@ -327,10 +353,10 @@ export default function SelectPayment() {
           </Card>
         </div>
         <div className="flex justify-center mt-5 p-4 ">
-           <Card className=" bg-transparent w-[30rem] border p-5">
+          <Card className=" bg-transparent w-[30rem] border p-5">
             <img src="../../../../public/secureImage.png" alt="" />
             <Typography variant="h1" className="text-center">
-             with <span className="text-white ">Stripe</span> 
+              with <span className="text-white ">Stripe</span>
             </Typography>
           </Card>
         </div>

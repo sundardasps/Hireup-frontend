@@ -4,7 +4,7 @@ export default function Success() {
   return (
     <div>
       <Card className ="rounded-none border shadow-lg w-[30rem]">
-         
+         Success
       </Card>
     </div>
   )

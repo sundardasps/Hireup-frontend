@@ -1,4 +1,3 @@
-
 import { companyInterseptor } from "../Utils/interceptors/companyRequest.jsx";
 const companyCheck = companyInterseptor;
 
@@ -147,10 +146,10 @@ export async function editPostDetails(values, postId) {
   }
 }
 
-export async function getUserList({ search, filter , page}) {
+export async function getUserList({ search, filter, page }) {
   try {
     const response = await companyCheck.get("/getUserList", {
-      params: { search, filter,page },
+      params: { search, filter, page },
     });
     return response;
   } catch (error) {
@@ -232,7 +231,7 @@ export async function rejectUserApplication(userId, jobId) {
 
 export async function scheduleInterview(data) {
   try {
-    const response = await companyCheck.post("/scheduleInterview",data);
+    const response = await companyCheck.post("/scheduleInterview", data);
     return response;
   } catch (error) {
     console.log(error);
@@ -250,16 +249,18 @@ export async function scheduleInterviewList() {
 
 export async function interviewReSchedule(data) {
   try {
-    const response = await companyCheck.patch("/reScheduleInterview",data);
+    const response = await companyCheck.patch("/reScheduleInterview", data);
     return response;
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function stripePayment(item) {
+export async function stripePayment(price) {
   try {
-    const response = await companyCheck.post("/create-payment-intent",item,{headers: { "Content-Type": "application/json" }});
+    const response = await companyCheck.post("/create-payment-intent", {
+      price,
+    });
     return response;
   } catch (error) {
     console.log(error);
@@ -268,48 +269,47 @@ export async function stripePayment(item) {
 
 //--------------------------------Company chat-----------------------------------//
 
-export async function  companyCreateChat(ids){
+export async function companyCreateChat(ids) {
   try {
-
-   const response = await companyCheck.post("/companyCreateChat",ids)
-   return response
+    const response = await companyCheck.post("/companyCreateChat", ids);
+    return response;
   } catch (error) {
-   console.log(error);
+    console.log(error);
   }
 }
 
-export async function companyChats (currentUser){
+export async function companyChats(currentUser) {
   try {
-   const response = await companyCheck.get(`/chat/${currentUser}`)
-   return response
+    const response = await companyCheck.get(`/chat/${currentUser}`);
+    return response;
   } catch (error) {
-   console.log(error);
+    console.log(error);
   }
 }
 
-export async function  getSingleUser(userId){
- try {
-  const response = await companyCheck.get(`/getSingleUser/${userId}`)
-  return response
- } catch (error) {
-  console.log(error);
- }
+export async function getSingleUser(userId) {
+  try {
+    const response = await companyCheck.get(`/getSingleUser/${userId}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-export async function  companyGetMessages(chatId){
- try {
-  const response = await companyCheck.get(`/companyGetMessages/${chatId}`)
-  return response
- } catch (error) {
-  console.log(error);
- }
+export async function companyGetMessages(chatId) {
+  try {
+    const response = await companyCheck.get(`/companyGetMessages/${chatId}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-export async function  companyAddMessage(newMessage){
- try {
-  const response = await companyCheck.post("/companyAddMessage",newMessage)
-  return response
- } catch (error) {
-  console.log(error);
- }
+export async function companyAddMessage(newMessage) {
+  try {
+    const response = await companyCheck.post("/companyAddMessage", newMessage);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 }
