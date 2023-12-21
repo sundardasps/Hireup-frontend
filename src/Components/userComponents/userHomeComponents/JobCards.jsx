@@ -262,7 +262,6 @@ function JobCards() {
               </div>
               <CardFooter className=" ">
                 <BookmarkIcon  className="w-5 h-5  cursor-pointer  underline" onClick={()=>handleSaveJob(data._id)} />
-                <BookmarkSlashIcon className="w-5 h-5  cursor-pointer  underline" />
               </CardFooter>
             </Card>
           ))}

@@ -316,7 +316,16 @@ export async function  saveJobs(jobId){
 
 export async function  getSavedJobs(){
   try {
-   const response = await userCheck.get("/getSavedJobs/")
+   const response = await userCheck.get("/getSavedJobs")
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+}
+
+export async function  unsaveJobs(jobId){
+  try {
+   const response = await userCheck.get(`/unsaveJobs/${jobId}`)
    return response
   } catch (error) {
    console.log(error);

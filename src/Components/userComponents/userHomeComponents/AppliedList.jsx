@@ -83,6 +83,7 @@ function AppliedList() {
         <div className=" mx-auto ">
         {data &&
           data.appliedJobData &&
+          data.appliedJobData.length > 0 ? (
           data.appliedJobData.map((data, index) => (
             <Card
               key={index}
@@ -143,7 +144,12 @@ function AppliedList() {
                 <BookmarkSlashIcon className="w-5 h-5  cursor-pointer  underline" />
               </CardFooter> */}
             </Card>
-          ))}
+          )
+          
+          )):<Typography className="text-center text-gray-600 my-5">
+          No applied jobs found.
+        </Typography>
+        }
       </div>
     </div>
     

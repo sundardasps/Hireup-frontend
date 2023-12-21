@@ -105,7 +105,7 @@ function UserNavbar() {
 
 
         <a
-          onClick={()=>navigate('/user')}
+          onClick={()=>navigate('/user/savedJobs')}
           className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
         >
         <Typography
