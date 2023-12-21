@@ -25,7 +25,7 @@ export default function SelectPayment() {
   const getstrip = () => {
     if (!stripePromise) {
       stripePromise = loadStripe(
-        "pk_test_51OOFpzSAq5W4cCoEZxzRl9eGeYg6Ba2HsZBNYQB4Gr2xjZceXIaZwVABJepkFCKkmCnlaYsuYuaj9A2xM3mKgug800evGCsmSy"
+        "pk_test_51OPm1SSEvDV8XVWTfK2X8ECVdBlEbO2diz7Q03vMTeRu5NTRBWUXao9A30CWLB81ksqLwbbFGOsgYhLHdYrYxp9600iTX6StsD"
       );
     }
     return stripePromise;
@@ -33,18 +33,18 @@ export default function SelectPayment() {
 
   const prices = [
     {
-      id: "price_1OPVJPSAq5W4cCoE0yVyrnrI",
-      amount: 200,
+      id: "price_1OPmTkSEvDV8XVWTbQkNKkTS",
+      amount:199,
       interval: "month",
     },
     {
-      id: "price_1OPVKfSAq5W4cCoEUvGfOZ4p",
-      amount: 999,
-      interval: "month",
+      id: "price_1OPmUmSEvDV8XVWTjXjI1ybY",
+      amount:999,
+      interval: "every 6 months",
     },
     {
-      id: "price_1OPVLcSAq5W4cCoEwmw7Spvw",
-      amount: 1999,
+      id: "price_1OPmWISEvDV8XVWT0Br2Rvvt",
+      amount:1999,
       interval: "year",
     },
   ];
@@ -120,7 +120,7 @@ export default function SelectPayment() {
                 color="white"
                 className="mt-1 flex justify-center gap-1 text-7xl font-normal"
               >
-                <span className="mt-1 text-lg">₹</span>200{" "}
+                <span className="mt-1 text-lg">₹</span>199{" "}
                 <span className="self-end text-xl">1/m</span>
               </Typography>
             </CardHeader>
@@ -290,7 +290,7 @@ export default function SelectPayment() {
                 color="white"
                 className="mt-1 flex justify-center gap-1 text-7xl font-normal"
               >
-                <span className="mt-1 text-lg">₹</span>2199{" "}
+                <span className="mt-1 text-lg">₹</span>1199{" "}
                 <span className="self-end text-xl">1/y</span>
               </Typography>
             </CardHeader>

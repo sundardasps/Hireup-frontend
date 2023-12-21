@@ -258,7 +258,7 @@ export async function interviewReSchedule(data) {
 
 export async function stripePayment(price) {
   try {
-    const response = await companyCheck.post("/create-payment-intent", {
+    const response = await companyCheck.post("/create-checkout-session", {
       price,
     });
     return response;

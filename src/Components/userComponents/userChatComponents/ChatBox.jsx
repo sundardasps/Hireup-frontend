@@ -50,8 +50,11 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
     scroll.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSend = async (e) => {
+  const handleSend = async (e) => { 
     e.preventDefault();
+    if(newMessage.trim()===""){
+      return
+    }
     const message = {
       chatId: chat._id,
       senderId: currentUser,
@@ -59,7 +62,7 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
     };
     //sending message to socket server
     const recieverId = chat.members.find((id) => id !== currentUser);
-
+    
     // send message to database
     try {
       const { data } = await addMessage(message);
@@ -126,7 +129,7 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
             </div>
             <InputEmoji  value={newMessage} onChange={handleMessage} />
             <div className="py-2">
-              <PaperAirplaneIcon color="white" className="w-10 h-10" onClick={handleSend}  />
+              {newMessage  && <PaperAirplaneIcon color="white" className="w-10 h-10" onClick={handleSend}  />}
             </div>
           </div>
         </>

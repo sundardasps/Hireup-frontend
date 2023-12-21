@@ -37,7 +37,7 @@ function CompanyChat() {
     socket.current.on("get-users", (users) => {
       setOnlineUsers(users);
     });
-  }, [currentUser]);
+  }, [currentUser]);   
 
   // send message to the socket server
   useEffect(() => {

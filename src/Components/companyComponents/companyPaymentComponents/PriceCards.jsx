@@ -12,7 +12,7 @@ import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { stripePayment } from "../../../Api/companyApi";
-import CheckoutForm from "./CheckoutForm";
+
 //publishable API
 
 export function PriceCards() {
@@ -136,13 +136,7 @@ export function PriceCards() {
           </CardBody>
         </Card>
       </div>
-      <div className="flex justify-center gap-5 ">
-        {clientSecret && (
-          <Elements options={options} stripe={stripePromise}>
-            <CheckoutForm clientSecret={clientSecret} />
-          </Elements>
-        )}
-      </div>
+   
     </div>
   );
 }

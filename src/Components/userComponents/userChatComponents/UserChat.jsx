@@ -38,7 +38,7 @@ function UserChat() {
       setOnlineUsers(users);
     });
   }, [currentUser]);
-
+ 
   // send message to the socket server
   useEffect(() => {
     if (sendMessage !== null) {
