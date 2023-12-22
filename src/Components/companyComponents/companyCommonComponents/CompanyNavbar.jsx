@@ -45,7 +45,7 @@ function CompanyNavbar() {
   };
   function NavList() {
     return (
-      <ul className="my-2 flex  flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-20">
+      <ul className="my-2 flex  flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-10 ">
         <Typography
           as="li"
           variant="small"
@@ -169,7 +169,7 @@ function CompanyNavbar() {
             </Menu>
           )}
         </Typography>
-      </ul>
+      </ul> 
     );
   }
 
@@ -187,8 +187,8 @@ function CompanyNavbar() {
   },[]);
 
   return (
-    <Navbar className=" top-0 left-0 right-0 z-50  h-auto max-w-screen-xxl px-6 py-3 rounded-none  ">
-    <div className="flex items-center justify-between text-blue-gray-900">
+    <Navbar className=" fixed top-0 left-0 right-0 z-50  h-auto max-w-screen-xxl px-6 py-3 rounded-none">
+     <div className="flex items-center justify-between text-blue-gray-900">
       <Typography
         as="a"
 

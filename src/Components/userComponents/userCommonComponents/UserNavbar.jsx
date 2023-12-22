@@ -280,7 +280,7 @@ function UserNavbar() {
   }, []);
   return (
     <div >
- 
+  
 
 
     <Navbar className="fixed top-0 left-0 right-0 z-50  h-auto max-w-screen-xxl px-6 py-3 rounded-none ">

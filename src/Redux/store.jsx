@@ -5,6 +5,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import  userReducer  from './storeSlices/userSlice'
 import  companyReducer from './storeSlices/companyslice'
 
+
 const persistConfig = {
     key:'root',
     storage,
@@ -19,6 +20,7 @@ const Store = configureStore({
     reducer:{
         user:userPersisted,
         company:companyPersisted,
+
     }
 })
 

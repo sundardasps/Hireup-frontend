@@ -8,11 +8,28 @@ import { Avatar, Button, Card, Typography } from "@material-tailwind/react";
 import userLogo from "../../../../public/user.png";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
-import {PaperAirplaneIcon, PlusIcon} from "@heroicons/react/24/solid"
+import {
+  PaperAirplaneIcon,
+  PaperClipIcon,
+  PlusIcon,
+} from "@heroicons/react/24/solid";
+import { useSelector } from "react-redux";
 
-function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
+function ChatBox({
+  chat,
+  currentUser,
+  setSendMessage,
+  messages,
+  setMessages,
+  ownMessage,
+}) {
   const [userData, setUserData] = useState(null);
   const [newMessage, setNewMessage] = useState("");
+
+  const currentUserDp = useSelector((state) => {
+    return state.user.userDp;
+  });
+
   const scroll = useRef();
   const handleMessage = (newMessage) => {
     setNewMessage(newMessage);
@@ -50,10 +67,10 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
     scroll.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSend = async (e) => { 
+  const handleSend = async (e) => {
     e.preventDefault();
-    if(newMessage.trim()===""){
-      return
+    if (newMessage.trim() === "") {
+      return;
     }
     const message = {
       chatId: chat._id,
@@ -62,7 +79,7 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
     };
     //sending message to socket server
     const recieverId = chat.members.find((id) => id !== currentUser);
-    
+
     // send message to database
     try {
       const { data } = await addMessage(message);
@@ -86,13 +103,13 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
       {chat != null ? (
         <>
           <div className="chat">
-            <div className="p-1    rounded-sm">
-              <div className="flex gap-5">
+            <div className="p-1 rounded-sm">
+              <div className="flex gap-2">
                 <Avatar
                   src={userData ? userData.image : userLogo}
-                  className=""
+                  className="m-1"
                 />
-                <Typography className="flex flex-col mt-1">
+                <Typography className="flex flex-col mt-1 text-lg">
                   {userData?.companyName}
                 </Typography>
               </div>
@@ -112,24 +129,49 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
                       : "flex justify-start"
                   }
                 >
-                  <Card className="grid p-2 m-5 rounded-md bg-light-blue-400 text-white text-xl  max-w-xs  rounded-tr-none rounded-br-md shadow-sm border">
-                    <span>{message.text}</span>
-                    <span className="font-extralight text-xs text-blue-gray-900">
-                      {format(message.createdAt)}
+                  <div className="mb-5">
+                    <span
+                      className={
+                        message.senderId === currentUser
+                          ? "text-center text-xs "
+                          : "ml-7 text-center text-xs"
+                      }
+                    >
+                      {new Date(message.createdAt).toLocaleTimeString("en-US", {
+                        timeStyle: "short",
+                      })}
                     </span>
-                  </Card>
+                    <Card
+                      className={`grid p-2  rounded-md text-xl  max-w-xs ${
+                        message.senderId === currentUser
+                          ? " rounded-br-none rounded-tr-xl  bg-blue-500 text-white shadow-gray-200 mr-5"
+                          : "rounded-bl-none rounded-tl-xl  bg-blue-gray-50 text-black shadow-gray-200 ml-5"
+                      } shadow-blue-gray-300  shadow-sm `}
+                    >
+                      <span>{message.text}</span>
+                      <span className="font-extralight text-xs text-blue-gray-900">
+                        {format(message.createdAt)}
+                      </span>
+                    </Card>
+                  </div>
                 </div>
               </>
             ))}
           </div>
 
-          <div className="flex p-3 h-[5rem] rounded-b-md " style={{backgroundColor:"#687864"}}>
-            <div className="p-2 rounded-lg m-2  " style={{backgroundColor:"white",color:"#687864"}}>
-              <PlusIcon className="w-5 h-5"/>
+          <div className="flex p-3 h-[4rem] rounded-b-md ">
+            <InputEmoji value={newMessage} onChange={handleMessage} />
+            <div className="p-2 rounded-lg   ">
+              <PaperClipIcon className="w-6 h-6 cursor-pointer" color="black" />
             </div>
-            <InputEmoji  value={newMessage} onChange={handleMessage} />
-            <div className="py-2">
-              {newMessage  && <PaperAirplaneIcon color="white" className="w-10 h-10" onClick={handleSend}  />}
+            <div className="py-1 mr-4">
+              {newMessage && (
+                <PaperAirplaneIcon
+                  color="black"
+                  className="w-8 h-8 cursor-pointer"
+                  onClick={handleSend}
+                />
+              )}
             </div>
           </div>
         </>

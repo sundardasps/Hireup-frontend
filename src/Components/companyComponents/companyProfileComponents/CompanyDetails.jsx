@@ -44,7 +44,7 @@ function CompanyDetails() {
 
   return (
     <>
-      <Card className=" flex justify-between container mx-2 my-2   bg-white  h-auto  shadow-sm rounded-lg shadow-blue-gray-200 ">
+      <Card className=" flex justify-between container mx-2 my-5   bg-white  h-auto  shadow-sm rounded-lg shadow-blue-gray-200 ">
         <CardHeader className="flex flex-col sm:flex-row w-auto m-4 first-letter rounded-lg shadow first-letter:uppercase ">
           <div className=" m-2 cursor-pointer">
             <img

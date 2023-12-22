@@ -12,26 +12,20 @@ export default function CompanyConverSation({ data, currentUser, online }) {
         const { data } = await getSingleUser(userId);
         setUserData(data);
       } catch (error) {
-        console.log(error);
+        console.log(error); 
       }
-    };
+    }; 
     userData();
   }, []);
 
   return (
-    <>
-      <div className=" mt-2 hover:bg-blue-gray-100 rounded-sm w-[15rem] border-b cursor-pointer">
-        <div className="flex gap-5">
-          <Avatar src={userData ? userData.userDp : userLogo} className="" />
-          <Typography className="flex flex-col mt-1">
-            {userData?.userName}
-            <span className="text-xs ml-1">
-              {online ? "Online" : "Offline"}
-            </span>
-          </Typography>
-        </div>
+ 
+      <div className=" mt-2 bg-white  rounded-lg shadow-lg cursor-pointer p-2">
+      <div className="flex gap-5">
+      <Avatar src={userData?userData.userDp:userLogo} className=""/>
+      <Typography className="flex flex-col mt-1 text-black font-medium">{userData?.userName}<span className="text-xs ml-1 text-blue-gray-500">{online?"Online":"Offline"}</span></Typography>
       </div>
-      <hr />
-    </>
+      </div>
+
   );
 }

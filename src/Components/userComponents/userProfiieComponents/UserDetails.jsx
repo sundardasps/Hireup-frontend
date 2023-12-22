@@ -170,7 +170,7 @@ function UserDetails() {
     <>
       <div className="flex justify-center">
         <div className="bg-transparent overflow-auto scrollbar">
-          <div className="container mx-auto my-5 p-5">
+          <div className="container mx-auto my-5 ">
             <div className="md:flex no-wrap md:-mx-2 ">
               <div className="w-full md:w-6/12 md:mx-2">
                 <div className=" bg-white p-2 shadow-sm rounded-lg shadow-blue-gray-200">

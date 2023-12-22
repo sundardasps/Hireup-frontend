@@ -4,12 +4,18 @@ import CompanyFooter from '../companyCommonComponents/CompanyFooter'
 import {ToastBar, Toaster} from 'react-hot-toast'
 function CompanyLayout() {
   return (
-           <div >
-               <CompanyNavbar/>
-               <Outlet  />
-               <Toaster/>
-               <CompanyFooter/>
-              </div>
+    <div >
+    <div className="mb-16">
+      <CompanyNavbar />
+    </div>
+    <div className="min-h-screen p-0.5">
+      <Outlet  />
+    </div>
+    <div>
+      <CompanyFooter />
+    </div>
+    <Toaster/>
+  </div>
   )
 }
 

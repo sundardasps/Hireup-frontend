@@ -11,7 +11,9 @@ function UserChat() {
   const [currentChat, setCurrentChat] = useState(null);
   const [sendMessage, setSendMessage] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [ownMessage, setownMessage] = useState(0);
 
+  
   const currentUser = useSelector((state) => {
     return state.user.userId;
   });
@@ -21,6 +23,7 @@ function UserChat() {
     const getChats = async () => {
       try {
         const { data } = await userChats(currentUser);
+        console.log(data,"oooooooooooooooooooooouuuuuuuuuuuuuu");
         setChats(data);
       } catch (error) {
         console.log(error);
@@ -43,6 +46,7 @@ function UserChat() {
   useEffect(() => {
     if (sendMessage !== null) {
       socket.current.emit("send-message", sendMessage);
+      setownMessage(1)
     }
   }, [sendMessage]);
 
@@ -51,23 +55,27 @@ function UserChat() {
     const handlerecievedMess = async (data) => {
       console.log("Received message:", data.msg);
       setMessages(data.msg);
+      setownMessage(0)
+
     };
 
     socket.current.on("receive-message", handlerecievedMess);
-  }, []);
+  }, []); 
 
   const checkOnlineStatus = (chat) => {
     const chatMembers = chat.members.find((member) => member !== currentUser);
     const online = onlineUsers?.find((user) => user.userId === chatMembers);
     return online ? true : false;
   };
-  return (
-    <div className="flex gap-1">
-      <Card className="w-min p-3 h-screen shadow-md border">
+  return ( 
+    
+    <div  className="flex  justify-center  ">
+     <div className="flex gap-1  w-[70rem]">
+      <Card className="w-min p-3 h-screen shadow-md border bg-blue-500" >
         <div className="flex gap-3">
-          <Input type="search" label="Search company" />
+          <Input color="white" type="search" label="Search company" />
         </div>
-        <div className="">
+        <div className="h-[17rem] scrollable border-b-2 border-blue-gray-200">
           {chats.map((chat, index) => (
             <div key={index} onClick={() => setCurrentChat(chat)}>
               <UserConversation
@@ -75,10 +83,10 @@ function UserChat() {
                 currentUser={currentUser}
                 online={checkOnlineStatus(chat)}
               />
-            </div>
+            </div> 
           ))}
         </div>
-      </Card>
+      </Card> 
 
       <Card className="h-screen border w-full ">
         <div></div>
@@ -88,8 +96,10 @@ function UserChat() {
           setSendMessage={setSendMessage}
           messages={messages}
           setMessages={setMessages}
+          ownMessage={ownMessage === 1 &&true}
         />
       </Card>
+    </div>
     </div>
   );
 }
