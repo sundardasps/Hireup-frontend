@@ -85,7 +85,7 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
     if (messages !== null && messages.chatId === chat?._id) {
       setMessages([...messages, messages]);
     }
-  }, [messages]);
+  }, []);
 
   return (
     <>

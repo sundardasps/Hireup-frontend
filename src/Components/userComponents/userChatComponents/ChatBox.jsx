@@ -40,7 +40,7 @@ function ChatBox({
     const userData = async () => {
       try {
         const { data } = await getSingleCompany(companyId);
-        setUserData(data);
+        setUserData(data.companyData);
       } catch (error) {
         console.log(error);
       }
@@ -72,13 +72,14 @@ function ChatBox({
     if (newMessage.trim() === "") {
       return;
     }
+    //sending message to socket server
+    const recieverId = chat.members.find((id) => id !== currentUser);
     const message = {
       chatId: chat._id,
       senderId: currentUser,
       text: newMessage,
+      recieverId
     };
-    //sending message to socket server
-    const recieverId = chat.members.find((id) => id !== currentUser);
 
     // send message to database
     try {
