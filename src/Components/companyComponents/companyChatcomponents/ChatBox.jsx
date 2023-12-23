@@ -8,6 +8,7 @@ import { Avatar, Button, Card, Typography } from "@material-tailwind/react";
 import userLogo from "../../../../public/user.png";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
+import chatImage from '../../../../public/chat_image.png'
 import {
   PaperAirplaneIcon,
   PaperClipIcon,
@@ -60,13 +61,14 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
     if (newMessage.trim() === "") {
       return;
     }
+    //sending message to socket server
+    const recieverId = chat.members.find((id) => id !== currentUser);
     const message = {
       chatId: chat._id,
       senderId: currentUser,
       text: newMessage,
+      recieverId,
     };
-    //sending message to socket server
-    const recieverId = chat.members.find((id) => id !== currentUser);
     // setSendMessage({ ...messages, recieverId });
     // send message to database
     // send message to database
@@ -87,6 +89,7 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
     }
   }, []);
 
+
   return (
     <>
       {chat != null ? (
@@ -95,7 +98,7 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
             <div className="p-1 rounded-sm">
               <div className="flex gap-2">
                 <Avatar
-                  src={userData ? userData.userDp : userLogo}
+                  src={userData ? userData?.companyData?.userDp : userLogo}
                   className="m-1"
                 />
                 <Typography className="flex flex-col mt-1 text-lg">
@@ -149,7 +152,7 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
           </div>
 
           <div className="flex p-3 h-[4rem] rounded-b-md ">
-            <InputEmoji value={newMessage} onChange={handleMessage} />
+            <InputEmoji value={newMessage} onChange={handleMessage}  />
             <div className="p-2 rounded-lg   ">
               <PaperClipIcon className="w-6 h-6 cursor-pointer" color="black" />
             </div>
@@ -165,7 +168,12 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
           </div>
         </>
       ) : (
-        <span className="text-center mt-10">Tap to start.........</span>
+        <div className="flex flex-col bg-blue-gray-50 object-cover h-screen  items-center rounded-xl justify-center ">
+        <img src={chatImage} alt="" className="w-36 h-36 object-cover" />
+        <span className="text-center ml-4  text-lg font-normal text-blue-gray-500">
+          Tap to start...
+        </span>
+      </div>
       )}
     </>
   );

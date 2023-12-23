@@ -14,6 +14,8 @@ import {
   PlusIcon,
 } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
+import chatImage from '../../../../public/chat_image.png'
+
 
 function ChatBox({
   chat,
@@ -100,7 +102,7 @@ function ChatBox({
   }, []);
 
   return (
-    <>
+    <> 
       {chat != null ? (
         <>
           <div className="chat">
@@ -114,7 +116,7 @@ function ChatBox({
                   {userData?.companyName}
                 </Typography>
               </div>
-            </div>
+            </div> 
             <hr />
           </div>
 
@@ -177,7 +179,12 @@ function ChatBox({
           </div>
         </>
       ) : (
-        <span className="text-center mt-10">Tap to start.........</span>
+        <div className="flex flex-col bg-blue-gray-50 object-cover h-screen  items-center rounded-xl justify-center ">
+        <img src={chatImage} alt="" className="w-36 h-36 object-cover " />
+          <span className="text-center ml-4  text-lg font-normal text-blue-gray-500">
+          Tap to start...
+        </span>
+      </div>
       )}
     </>
   );

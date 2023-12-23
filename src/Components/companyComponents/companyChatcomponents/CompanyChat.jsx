@@ -17,7 +17,7 @@ function CompanyChat() {
   });
   const socket = useRef();
 
-  useEffect(() => { 
+  useEffect(() => {
     const getChats = async () => {
       try {
         const { data } = await companyChats(currentUser);
@@ -37,7 +37,7 @@ function CompanyChat() {
     socket.current.on("get-users", (users) => {
       setOnlineUsers(users);
     });
-  }, [currentUser]);   
+  }, [currentUser]);
 
   // send message to the socket server
   useEffect(() => {
@@ -50,8 +50,7 @@ function CompanyChat() {
   // recive message from the socket server
   useEffect(() => {
     const handlerecievedMess = async (data) => {
-      console.log("Received message:------------23e4r", data);
-      setMessages(data.msg); 
+      setMessages(data.msg);
     };
     socket.current.on("receive-message", handlerecievedMess);
   }, []);
@@ -62,36 +61,37 @@ function CompanyChat() {
     return online ? true : false;
   };
   return (
-    <div  className="flex  justify-center mt-5">
-    <div className="flex gap-1  w-[70rem]">
-      <Card className="w-min p-3 h-screen shadow-md border bg-blue-500">
-        <div className="flex gap-3">
-          <Input color="white" type="search" label="Search company" />
-        </div>
-        <div className="h-[17rem] scrollable border-b-2 border-blue-gray-200  "> 
-          {chats.map((chat, index) => (
-            <div key={index} onClick={() => setCurrentChat(chat)}>
-              <CompanyConversations
-                data={chat}
-                currentUser={currentUser}
-                online={checkOnlineStatus(chat)}
-              />
-            </div> 
-          ))}
-        </div>
-      </Card>
+    <div className="flex  justify-center mt-5">
+      <div className="flex gap-1  w-[70rem]">
+        <Card className="w-min p-3 h-screen shadow-md border bg-blue-500">
+          <div className="flex gap-3">
+            <Input color="white" type="search" label="Search company" />
+          </div>
+          <div className="h-[17rem] scrollable border-b-2 border-blue-gray-200  ">
+            {chats.map((chat, index) => (
+              <div key={index} onClick={() => setCurrentChat(chat)}>
+                <CompanyConversations
+                  data={chat}
+                  currentUser={currentUser}
+                  online={checkOnlineStatus(chat)}
+                  messages={messages}
+                />
+              </div>
+            ))}
+          </div>
+        </Card>
 
-      <Card className="h-screen border w-full ">
-        <div></div>
-        <ChatBox
-          chat={currentChat}
-          currentUser={currentUser}
-          setSendMessage={setSendMessage}
-          messages={messages}
-          setMessages={setMessages}
-        />
-      </Card>
-    </div>
+        <Card className="h-screen border w-full ">
+          <div></div>
+          <ChatBox
+            chat={currentChat}
+            currentUser={currentUser}
+            setSendMessage={setSendMessage}
+            messages={messages}
+            setMessages={setMessages}
+          />
+        </Card>
+      </div>
     </div>
   );
 }
