@@ -1,7 +1,7 @@
 import * as Yup  from 'yup'
 
 const MAX_FILE_SIZE = 10485760; // 10 MB in bytes (10 * 1024 * 1024)
-const imageFormats = ["image/jpeg", "image/png", "image/avif"];
+const imageFormats =  ["image/jpeg", "image/png", "image/avif", "application/pdf"];
 
 
 

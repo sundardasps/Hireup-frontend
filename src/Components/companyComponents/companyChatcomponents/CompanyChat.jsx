@@ -63,11 +63,13 @@ function CompanyChat() {
   return (
     <div className="flex  justify-center mt-5">
       <div className="flex gap-1  w-[70rem]">
-        <Card className="w-min p-3 h-screen shadow-md border bg-blue-500">
+        <Card className="w-[20rem] p-3 h-screen shadow-md border bg-blue-500">
           <div className="flex gap-3">
             <Input color="white" type="search" label="Search company" />
           </div>
-          <div className="h-[17rem] scrollable border-b-2 border-blue-gray-200  ">
+          
+          <div className="pb-5 border-b-2">
+          <div className="h-[17rem] scrollable  border-blue-gray-200  ">
             {chats.map((chat, index) => (
               <div key={index} onClick={() => setCurrentChat(chat)}>
                 <CompanyConversations
@@ -78,6 +80,7 @@ function CompanyChat() {
                 />
               </div>
             ))}
+          </div>
           </div>
         </Card>
 

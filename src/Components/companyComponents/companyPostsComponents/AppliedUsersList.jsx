@@ -84,15 +84,16 @@ function AppliedUsersList() {
 
   return (
     <div className="shadow-sm shadow-blue-gray-200 outline-1  rounded-xl   bg-white ">
-      <div className="flex  text-start border-b shadow-sm  p-3 w-auto text-sm flex-col md:flex-row">
+      <div className="flex  text-start border-b shadow-sm bg-blue-500 rounded-t-lg  p-3 w-auto text-sm flex-col md:flex-row">
         <div className="flex w-1/3 m-2">
           <Typography
             variant="lead"
-            className="text-blue-gray-400 text-base m-2   md:flex-row"
+            color="white"
+            className="text-base m-2   md:flex-row"
           >
-            Job title :
+            Position :
           </Typography>
-          <span className="text-light-blue-800 font-bold shadow-sm  p-2 rounded-xl shadow-blue-gray-200 w-auto text-center">
+          <span className="text-black font-bold border  p-2 rounded-xl border-white w-auto text-center">
             {data && data.jobTitle}
           </span>
         </div>
@@ -104,7 +105,8 @@ function AppliedUsersList() {
             onChange={(e) => {
               setSearch(e.target.value);
             }}
-            icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+            color="white"
+            icon={<MagnifyingGlassIcon className="h-5 w-5" color="white"/>}
           />
         </div>
         <Tabs value="all" className="w-full md:w-max m-2">

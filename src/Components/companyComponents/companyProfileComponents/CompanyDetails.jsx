@@ -57,13 +57,13 @@ function CompanyDetails() {
 
           <div className=" w-auto rounded-lg">
             <div className=" mb-4 sm:mb-0">
-              <text className="text-4xl text-light-blue-700 font-bold underline m-1">
+              <text className="text-4xl text-light-blue-700 font-bold  m-5">
                 {data.exist.companyName}
               </text>
             </div>
 
             <div className="ml-5">
-              <div className="flex gap-2 w-auto my-2">
+              <div className="flex gap-2 w-auto">
                 <MapPinIcon className="w-5 h-5" />
                 <div className="flex flex-col">
                   <text className="mb-2 text-sm">
@@ -75,7 +75,7 @@ function CompanyDetails() {
                 </div>
               </div>
               
-              <div className="flex gap-2 w-auto my-2">
+              <div className="flex gap-2 w-auto ">
                 <BuildingOffice2Icon className="w-5 h-5" />
                 <div className="flex flex-col">
                   <text className="mb-2 text-sm">
@@ -87,7 +87,7 @@ function CompanyDetails() {
                 </div>
               </div>
              
-              <div className="flex gap-2 w-auto my-2">
+              <div className="flex gap-2 w-auto ">
                 <CurrencyRupeeIcon className="w-5 h-5" />
                 <div className="flex flex-col">
                   <text className="mb-2 text-sm">
@@ -99,7 +99,7 @@ function CompanyDetails() {
                 </div>
               </div>
               
-              <div className="flex gap-2 w-auto my-2">
+              <div className="flex gap-2 w-auto ">
                 <ChatBubbleBottomCenterTextIcon className="w-5 h-5" />
                 <div className="flex flex-col">
                   <text className="mb-2 text-sm">
@@ -111,7 +111,7 @@ function CompanyDetails() {
                 </div>
               </div>
 
-              <div className="flex gap-2 w-auto my-2">
+              <div className="flex gap-2 w-auto ">
                 <PhoneIcon className="w-5 h-5" />
                 <div className="flex flex-col">
                   <text className="mb-2 text-sm">
@@ -123,7 +123,7 @@ function CompanyDetails() {
                 </div>
               </div>
 
-              <div className="flex gap-2 w-auto my-2">
+              <div className="flex gap-2 w-auto ">
                 <PhoneIcon className="w-5 h-5" />
                 <div className="flex flex-col">
                   <text className="mb-2 text-sm">

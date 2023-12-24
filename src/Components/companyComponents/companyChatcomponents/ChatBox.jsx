@@ -94,15 +94,15 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
     <>
       {chat != null ? (
         <>
-          <div className="chat">
+          <div className="chat shadow-md bg-blue-500 rounded-t-lg">
             <div className="p-1 rounded-sm">
               <div className="flex gap-2">
                 <Avatar
                   src={userData ? userData?.companyData?.userDp : userLogo}
                   className="m-1"
                 />
-                <Typography className="flex flex-col mt-1 text-lg">
-                  {userData?.userName}
+                <Typography color="white" className="flex flex-col mt-4 text-base  capitalize">
+                  {userData?.companyData?.userName}
                 </Typography>
               </div>
             </div>

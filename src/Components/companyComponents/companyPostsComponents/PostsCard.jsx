@@ -54,8 +54,8 @@ function PostsCard() {
 
 
   return (
-    <div className="shadow-sm  rounded-lg shadow-blue-gray-200 p-3 w-auto w-screen " >
-      <div className="flex justify-center   gap-4 md:flex-row  ">
+    <div className="shadow-sm  shadow-blue-gray-200  rounded-lg w-screen " >
+      <div className="flex    gap-4 md:flex-row bg-blue-500 p-3 rounded-t-lg">
         <Tabs value="all" className="w-full md:w-max">
           <TabsHeader>
             {TABS.map(({ label, value }) => (
@@ -69,11 +69,12 @@ function PostsCard() {
           <Input
             label="Search title"
             value={search}
+            color="white"
             autoFocus
             onChange={(e) => {
               setSearch(e.target.value);
             }}
-            icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+            icon={<MagnifyingGlassIcon className="h-5 w-5" color="white" />}
           />
         </div>
       </div>

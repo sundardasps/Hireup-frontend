@@ -26,31 +26,36 @@ function CompanySidebar() {
   const payment = useSelector((state)=>{return state.company.payment})
   return (
     <div >
-    <Card className=" flex  flex-auto h-fit mx-5 my-5  bg-white  border  ">
+    <Card className=" flex  flex-auto h-fit mx-5 my-5  bg-blue-500  border  ">
         <div className="mb-2 p-4">
-          <Typography variant="h5" color="blue-gray">
+          <Typography variant="h5" color="white">
             Sidebar
           </Typography>
           <hr className="my-2 border-blue-gray-50" />
         </div>
         <List>
-        <ListItem key={"profile"} onClick={() => navigate("/company/profile") }>
+          <ListItem key={"profile"} onClick={() => navigate("/company/profile")  } >
             <ListItemPrefix>
-              <UserIcon className="h-5 w-5" />
+              <UserIcon className="h-5 w-5" color='white' />
             </ListItemPrefix >
+            <Typography variant="paragraph" color="white">
             Profile
+          </Typography>
           </ListItem>
           <ListItem key={"post"}  onClick={() => navigate("/company/posts") }>
             <ListItemPrefix>
-              <TableCellsIcon className="h-5 w-5" />
+              <TableCellsIcon className="h-5 w-5" color='white'/>
             </ListItemPrefix>
+            
+            <Typography variant="paragraph" color="white">
             Posts
+          </Typography>
           
           </ListItem>
           <ListItem key={"addpost"} 
           >
             <ListItemPrefix>
-              <PlusCircleIcon className="h-5 w-5" />
+              <PlusCircleIcon className="h-5 w-5" color='white'/>
             </ListItemPrefix>
             {payment === 1 ? <AddPostForm />:<SelectPayment/>}
           </ListItem>
@@ -60,9 +65,12 @@ function CompanySidebar() {
             }}
           >
             <ListItemPrefix>
-              <ClockIcon className="h-5 w-5" />
+              <ClockIcon className="h-5 w-5" color='white' />
             </ListItemPrefix>
+            
+            <Typography variant="paragraph" color="white">
             Sheduled interviews
+          </Typography>
           </ListItem>
         </List>
       </Card>

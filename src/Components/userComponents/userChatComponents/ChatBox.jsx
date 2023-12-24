@@ -105,14 +105,14 @@ function ChatBox({
     <> 
       {chat != null ? (
         <>
-          <div className="chat">
+          <div className="chat shadow-md bg-blue-500 rounded-t-lg">
             <div className="p-1 rounded-sm">
               <div className="flex gap-2">
                 <Avatar
                   src={userData ? userData.image : userLogo}
                   className="m-1"
                 />
-                <Typography className="flex flex-col mt-1 text-lg">
+                <Typography color="white" className="flex flex-col mt-4 text-base  capitalize">
                   {userData?.companyName}
                 </Typography>
               </div>

@@ -331,3 +331,25 @@ export async function  unsaveJobs(jobId){
    console.log(error);
   }
 }
+
+export async function  addResume(formData){
+  try {
+   const response = await userCheck.post("/addResume",formData,{headers:{
+    "Content-Type": "multipart/form-data",
+   }})
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+}
+
+export async function  resumeDelete(id){
+  try {
+   const response = await userCheck.delete(`/deleteResume/${id}`)
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+}
+
+

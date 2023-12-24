@@ -71,7 +71,8 @@ function UserNavbar() {
                 label="Search ..."
                 autoFocus
                 icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-              />
+          />
+          
           </div>
 
 

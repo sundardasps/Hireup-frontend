@@ -19,7 +19,7 @@ import {
   Progress,
   IconButton,
 } from "@material-tailwind/react";
-import { PencilIcon, XMarkIcon } from "@heroicons/react/20/solid";
+import { ArchiveBoxArrowDownIcon, PencilIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import UserProfileEdit from "../userDialogs/UserProfileEdit";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { addSkills, editUserDp, getProfile } from "../../../Api/userApi";
@@ -27,10 +27,13 @@ import { useFormik } from "formik";
 import toast, { ToastBar, Toaster } from "react-hot-toast";
 import { imageEditSchema } from "../../../Utils/yupValidations/yupCompanyvalidations";
 import { UserBgImg } from "../userDialogs/UserBgImg";
-import { PlusIcon } from "@heroicons/react/24/solid";
+import { DocumentIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { AllSkills } from "../userDialogs/AllSkills";
 import { EditExperience } from "../userDialogs/EditExperience";
 import { Education } from "../userDialogs/Education";
+import { Resume } from "../userDialogs/Resume";
+import { Delete } from "../userDialogs/Delete";
+
 
 function UserDetails() {
   const queryClient = useQueryClient();
@@ -132,7 +135,7 @@ function UserDetails() {
           toast.error(response.data.message);
         }
       },
-    });
+    },);
 
   //-----------------------------------------User Skills updation ----------------------------------------//
 
@@ -147,7 +150,7 @@ function UserDetails() {
       if (response.data.updated) {
         toast.success(response.data.message);
         setTimeout(() => {
-          window.location.reload();
+          queryClient.invalidateQueries("userProfile");
         }, 100);
       } else {
         toast.error(response.data.message);
@@ -168,8 +171,8 @@ function UserDetails() {
 
   return (
     <>
-      <div className="flex justify-center">
-        <div className="bg-transparent overflow-auto scrollbar">
+      <div className="flex justify-center bg-blue-gray-50">
+        <div className="bg-transparent scrollable p-2">
           <div className="container mx-auto my-5 ">
             <div className="md:flex no-wrap md:-mx-2 ">
               <div className="w-full md:w-6/12 md:mx-2">
@@ -417,12 +420,43 @@ function UserDetails() {
                     </div>
                   </div>
                 </div>
+                
+                <div className="my-4"></div>
+
+                <div className="bg-white p-2 shadow-sm rounded-lg shadow-blue-gray-200">
+                  <div className="grid  ">
+                    <div>
+                      <div className="flex justify-between items-center space-x-2 font-semibold text-gray-900 leading-8 ">
+                        <span className="tracking-wide">Resume</span>
+                        < Resume />
+                      </div>
+                 
+
+                      <ul className="grid lg:grid-cols-2  scrollable w-auto border">
+                        {data.resume.map((value, index) => (
+                          <li
+                            key={index}
+                            className="flex items-center  p-2 rounded-xl"
+                          >
+                            <div className="flex">
+                              <div className="flex gap-1 text-white text-base border p-1 rounded-md bg-blue-500">
+                              <DocumentIcon className="w-5 h-5"/><a href={value.resume}>{value.resumeName}</a>
+                              </div>
+                              <Delete   data={value}/>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
                
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <Dialog size="xs" open={open} className="bg-transparent shadow-none">
         <Card className="mx-auto w-full max-w-[25rem]   ">
           <IconButton

@@ -31,7 +31,7 @@ if (error) {
       <Card className="  container mx-2 my-5   bg-white  h-auto border ">
         <div className='flex  flex-col  '> 
         <ArrowLeftIcon className='w-10 h-6 m-4 cursor-pointer' onClick={()=>navigate("/company/posts")} />
-        <text className="flex justify-between text-4xl text-light-blue-700 font-bold  underline m-5">
+        <text className="flex justify-between text-4xl text-blue-gray-600 font-bold mx-5">
           {data ? data.jobDetails.job_title : ""}
           <div>
             <EllipsisVerticalIcon className='w-8 h-8 cursor-pointer ' />

@@ -66,16 +66,17 @@ function UserChat() {
     const chatMembers = chat.members.find((member) => member !== currentUser);
     const online = onlineUsers?.find((user) => user.userId === chatMembers);
     return online ? true : false;
-  };
+  }; 
   return ( 
     
     <div  className="flex  justify-center  ">
      <div className="flex gap-1  w-[70rem]">
-      <Card className="w-min p-3 h-screen shadow-md border bg-blue-500" >
+      <Card className="w-[20rem] p-3 h-screen shadow-md border bg-blue-500" >
         <div className="flex gap-3">
           <Input color="white" type="search" label="Search company" />
         </div>
-        <div className="h-[17rem] scrollable border-b-2 border-blue-gray-200">
+        <div  className="pb-5 border-b-2">
+        <div className="h-[17rem] scrollable  border-blue-gray-200">
           {chats.map((chat, index) => (
             <div key={index} onClick={() => setCurrentChat(chat)}>
               <UserConversation
@@ -86,6 +87,7 @@ function UserChat() {
               />
             </div> 
           ))}
+        </div>
         </div>
       </Card> 
 

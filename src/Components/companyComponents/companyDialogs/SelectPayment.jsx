@@ -62,7 +62,7 @@ export default function SelectPayment() {
 
   return (
     <>
-      <p onClick={handleOpen}>Add post</p>
+      <Typography onClick={handleOpen} color="white">Add post</Typography>
       <Dialog
         size="xxl"
         open={open}
