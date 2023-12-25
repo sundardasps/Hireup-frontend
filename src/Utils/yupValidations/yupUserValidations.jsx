@@ -143,3 +143,7 @@ export const resumeSchema = Yup.object().shape({
     (value) => value && value.size <= MAX_FILE_SIZE
   ),
 });
+
+export const resumeUploadedSchema = Yup.object().shape({
+  resume:Yup.string().required("Please choose a resume").trim(),
+});

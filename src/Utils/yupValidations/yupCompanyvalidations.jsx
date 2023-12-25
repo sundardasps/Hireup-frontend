@@ -87,6 +87,7 @@ export const companyPostSchema = Yup.object().shape({
   experience: Yup.string().required("This field is required").min(1,'Please enter a valid size').trim(),
   jobType: Yup.string().required("This field is required").trim(),
   responsibilities: Yup.string().required("This field is required").trim(),
+  field:Yup.string().required("This field is required").trim(),
   endTime:  Yup.date()
   .required('Date is required')
   .min(new Date(), 'Date must be in the future'),

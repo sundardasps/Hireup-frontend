@@ -10,8 +10,8 @@ function LandingPage() {
     <>
       <LandingNavbar/>
       <LandingCards />
-      {/* <UserProfileSlide/>  */}
-      {/* <CompaniesBanner/> */}
+      <UserProfileSlide/> 
+      <CompaniesBanner/>
       <UserFooter/>
     </>
   );

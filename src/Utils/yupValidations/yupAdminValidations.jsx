@@ -7,5 +7,5 @@ export const titleValidationSchema = Yup.object().shape({
 
 export const categoryValidationSchema =  Yup.object().shape({
     title: Yup.string().required("This field is required"),
-    category:Yup.string().required("This field is required").min(1).max(15).trim()
+    category:Yup.string().required("This field is required").min(1).max(25).trim()
 })

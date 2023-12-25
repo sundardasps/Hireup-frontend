@@ -353,3 +353,12 @@ export async function  resumeDelete(id){
 }
 
 
+export async function  getUserResumes(){
+  try {
+   const response = await userCheck.get("/getUserResumes")
+   return response
+  } catch (error) {
+   console.log(error);
+  }
+}
+

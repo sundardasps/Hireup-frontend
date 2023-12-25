@@ -11,7 +11,7 @@ import {
   ListItem,
   Typography,
 } from "@material-tailwind/react";
-import { BuildingOffice2Icon } from "@heroicons/react/20/solid";
+import { BuildingOffice2Icon, CursorArrowRippleIcon } from "@heroicons/react/20/solid";
 import { useQuery } from "@tanstack/react-query";
 import { categoryDataForUser, getAllJobs, saveJobs } from "../../../Api/userApi";
 import {
@@ -118,9 +118,9 @@ function JobCards() {
   }
 
   return (
-    <div className="flex justify-center  ">
+    <div className="flex gap-5">
       <div className="">
-        <Card className="fixed h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5  hidden lg:block">
+        <Card className=" h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5  hidden lg:block">
           <div className="grid justify-center  m-3 border-b-2 p-2">
            <div className="flex justify-center mb-2 ">
             <Avatar src={user.userDp ? user.userDp : defaultDp } className=" shadow-sm shadow-black cursor-pointer " alt="avatar" size="lg" onClick={() => navigate("/user/profile")} />
@@ -133,9 +133,31 @@ function JobCards() {
           </Typography>
           </div>
           <div className="mb-1 p-1">
-            {/* <Typography variant="h3" color="blue-gray">
-              Find jobs..
-            </Typography> */}
+          <Typography
+          variant="paragraph"
+          color="white"
+          className="flex justify-center border mb-3 rounded-lg p-1 cursor-pointer bg-blue-500"
+          onClick={() => navigate("/user/profile")}
+          > View profile
+          </Typography>
+
+          <Typography
+          onClick={()=>navigate('/user/appliedJobs')}
+          variant="paragraph"
+          color="white"
+          className="flex justify-center border mb-3 rounded-lg p-1 cursor-pointer bg-blue-500"
+          > Applied
+          </Typography>
+          <Typography
+          onClick={()=>navigate('/user/savedJobs')}
+          variant="paragraph"
+          color="white"
+          className="flex justify-center border mb-3 rounded-lg p-1 cursor-pointer bg-blue-500"
+          > Saved
+          </Typography>
+          <Typography  className="text-center m-2">
+           Search & Filter
+          </Typography>
             <div className="w-full ">
               <Input
                 label="Search ..."
@@ -147,11 +169,7 @@ function JobCards() {
               />
             </div>
           </div>
-          <div className="p-1">
-            <Button onClick={()=>location.reload()} size="sm" variant="outlined" fullWidth> 
-              Clear
-            </Button>
-          </div>
+          
           <List className="scrollable h-40 ">
             {category &&
               category.map((value, index) => (
@@ -199,11 +217,16 @@ function JobCards() {
                 </Accordion>
               ))}
           </List>
+          <div className="p-1">
+            <Button onClick={()=>location.reload()} size="sm" variant="outlined" fullWidth> 
+              Clear
+            </Button>
+          </div>
           <List></List>
         </Card>
       </div>
 
-      <div className=" mx-auto ">
+      <div className=" ">
         {data &&
           data.data &&
           data.data.map((data, index) => (

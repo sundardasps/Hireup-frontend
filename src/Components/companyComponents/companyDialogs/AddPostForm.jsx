@@ -16,8 +16,8 @@ import {
 import { useFormik} from 'formik' 
 import {Toaster, toast} from 'react-hot-toast'
 import { companyPostSchema } from "../../../Utils/yupValidations/yupCompanyvalidations";
-import React, { useState } from 'react';
-import { addCompanyPost } from '../../../Api/companyApi';
+import React, { useEffect, useState } from 'react';
+import { addCompanyPost, categoryDataForCompany } from '../../../Api/companyApi';
 import {useNavigate} from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query';
 export function AddPostForm() {
@@ -25,6 +25,8 @@ export function AddPostForm() {
   function handleOpen(){setOpen(!open)}
   const navigate = useNavigate()
   const quaryClint = useQueryClient();
+  const [category, setCategory] = React.useState([]);
+
   const jobType = [
     "Remote",
     "Hybrid",
@@ -38,6 +40,7 @@ export function AddPostForm() {
     responsibilities: "",
     endTime: "",
     salery: "",
+    field:""
   };
  
  
@@ -72,10 +75,20 @@ export function AddPostForm() {
       setFieldValue("jobType",selectedValue)
    }
 
+   const handleFieldChange = (selectedValue) =>{
+    setFieldValue("field",selectedValue)
+ }
 
-    
+
+   useEffect(() => {
+    const fetchCategory = async () => {
+      await categoryDataForCompany().then((res) => setCategory(res.data.data));
+    };
+
+    fetchCategory();
+  },[])
   
- 
+ console.log(category,"pppppppp");
   return (
     <>
     <p  onClick={handleOpen} className='cursor-pointer'>
@@ -145,7 +158,22 @@ export function AddPostForm() {
               <div className="text-red-500 text-xs ">{errors.responsibilities}</div>
             )}
 
-            
+           <div className="flex gap-2">
+           <Select
+                onChange={handleFieldChange}
+                value={values.title}
+                name="field"
+                label="Field"
+                onBlur={handleBlur}
+              >
+                {category?.map((item) => (
+                  <Option value={item.title} key={item}>{item.title}</Option>
+                ))}
+              </Select>
+              {touched.field && errors.field && (
+              <div className="text-red-500 text-xs ">{errors.field}</div>
+              )}
+
             <Input
               label="salery"
               name="salery"
@@ -158,7 +186,11 @@ export function AddPostForm() {
             />
             {touched.salery && errors.salery && (
               <div className="text-red-500 text-xs ">{errors.salery}</div>
+              
             )}
+           </div>
+
+
 
             <div className="flex gap-2">
               <Select
@@ -174,7 +206,7 @@ export function AddPostForm() {
               </Select>
               {touched.jobType && errors.jobType && (
               <div className="text-red-500 text-xs ">{errors.jobType}</div>
-            )}
+              )}
 
            <Input
               label="endTime"

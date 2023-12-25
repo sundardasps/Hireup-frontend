@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { DocumentIcon, PlusIcon } from "@heroicons/react/24/solid";
+
 import {
   Button,
   Dialog,
@@ -14,10 +16,10 @@ import {
   Spinner,
 } from "@material-tailwind/react";
 import { useFormik } from "formik";
-import { resumeSchema } from "../../../Utils/yupValidations/yupUserValidations";
-import { applyJob } from "../../../Api/userApi";
+import { resumeSchema, resumeUploadedSchema } from "../../../Utils/yupValidations/yupUserValidations";
+import { applyJob, getUserResumes } from "../../../Api/userApi";
 import toast from "react-hot-toast";
-
+import {useQuery} from '@tanstack/react-query'
 function JobApply({ data }) {
   const [open, setOpen] = React.useState(false);
   const [next, setNext] = useState(0);
@@ -25,9 +27,10 @@ function JobApply({ data }) {
   const [fileType, setFileType] = useState("");
   const [isLoading, setLoading] = useState(false);
   const handleLoading = () => setLoading((cur) => !cur);
-
+  const [userResumes,setUserResumes] = useState([])
   console.log(next);
   const handleOpen = () => {
+    setFile("")
     setNext(()=>0);
     setOpen((cur) => !cur);
   };
@@ -40,11 +43,24 @@ function JobApply({ data }) {
     return state.user;
   });
 
-  console.log(userData,"===============jobapply cmponent");
 
   const initialValue = {
     resume: "",
   };
+
+
+  useEffect(()=>{
+     const getUserResume = async ()=>{
+        const response = await getUserResumes()
+        if(response.status === 200){
+          setUserResumes(response.data)
+        }
+     }
+     getUserResume()
+  },[])
+
+  console.log(userResumes,"kkkkkkkkkk");
+
 
   const handleFile = (event) => {
     const currentFile = event.currentTarget.files[0];
@@ -52,10 +68,15 @@ function JobApply({ data }) {
     setFieldValue("resume", currentFile);
     setFile(URL.createObjectURL(event.target.files[0]));
   };
+
+  const handleResume = (resume)=>{
+    setFieldValue("resume",resume );
+  }
+
   const { handleSubmit, handleBlur, setFieldValue, errors, values, touched } =
     useFormik({
       initialValues: initialValue,
-      validationSchema: resumeSchema,
+      validationSchema: userResumes.length > 0 ? resumeUploadedSchema : resumeSchema,
       onSubmit: async (value) => {
         handleLoading();
         const formData = new FormData();
@@ -148,17 +169,44 @@ function JobApply({ data }) {
                   size="lg"
                 />
               ) : (
-                <><input
+
+                <>
+                 {userResumes.length > 0 ?<>
+                 <div className="border h-[5rem] scrollable bg-blue-gray-100">
+                  {userResumes&&userResumes.map((resume,index)=>(
+                      <li
+                      key={index}
+                      className="flex items-center  p-2 rounded-xl"
+                    >
+                      <div className="flex cursor-pointer" onClick={()=>handleResume(resume.resume)}>
+                        <div className="flex gap-1 text-white text-base border p-1 rounded-md bg-blue-500">
+                        <DocumentIcon className="w-5 h-5"/><span  >{resume.resumeName}</span>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </div>
+                {errors.resume && 
+                <div className="m-5 font-medium text-sm   text-red-800">
+                  {errors.resume}
+                </div>}
+                </>
+                 :
+                <>       
+                <input
                   type="file"
                   name="resume"
                   onChange={handleFile}
                   size="lg"
+                  className="  block    cursor-pointer rounded border border-solid border-neutral-300 bg-clip-padding py-[0.32rem] text-xs font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary"
                 />
                 {errors.resume && 
-                <div className="m-5 font-medium text-lg   text-red-800">
+                <div className="m-5 font-medium text-sm   text-red-800">
                   {errors.resume}
                 </div>
-              }
+                }
+                 </>}
+
                 </>
 
               )}
@@ -184,10 +232,10 @@ function JobApply({ data }) {
                     <iframe
                       src={file}
                       width="100%"
-                      height="100px"
+                      height="70px"
                       loading="lazy"
                       title="PDF-file"
-                      className=""
+                      className="border-2 scrollable "
                     ></iframe>
                   ) : (
                     <div className="w-24 h-auto border-2 ">

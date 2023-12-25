@@ -1,94 +1,137 @@
-import { Card, Carousel, IconButton, Typography } from '@material-tailwind/react'
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Typography,
+  Avatar,
+  Tooltip,
+} from "@material-tailwind/react";
 import React from 'react'
 import company from '../../../../public/office.jpg'
 
 function CompaniesBanner() {
   return (
     <>
-        
-        <Card className='flex justify-between w-auto  h-1/3 m-10 shadow-none '>
-            <div className='flex justify-center m-4'>
-
-              <Typography variant='h3'className='text-3xl text-black-100'>Easy to use</Typography>
-
-            </div>
-       <div className='w-96 h-80'>
-            <Carousel
-      className="rounded-xl"
-      prevArrow={({ handlePrev }) => (
-        <IconButton
-          variant="text"
-          color="white"
-          size="lg"
-          onClick={handlePrev}
-          className="!absolute top-2/4 left-4 -translate-y-2/4"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="h-6 w-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+    
+         <Typography variant="h2" className="text-center">Features</Typography>
+    
+    <div className="flex justify-center gap-5 p-5">
+    <Card className="max-w-[18rem] overflow-hidden">
+      <CardHeader
+        floated={false}
+        shadow={false}
+        color="transparent"
+        className="m-0 rounded-none"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+          alt="ui/ux review check"
+        />
+      </CardHeader>
+      <CardBody>
+        <Typography variant="h4" color="blue-gray">
+          UI/UX Review Check
+        </Typography>
+        <Typography variant="lead" color="gray" className="mt-3 font-normal">
+          Because it&apos;s about motivating the doers. Because I&apos;m here to
+          follow my dreams and inspire others.
+        </Typography>
+      </CardBody>
+      <CardFooter className="flex items-center justify-between">
+        <div className="flex items-center -space-x-3">
+          <Tooltip content="Natali Craig">
+            <Avatar
+              size="sm"
+              variant="circular"
+              alt="natali craig"
+              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1061&q=80"
+              className="border-2 border-white hover:z-10"
             />
-          </svg>
-        </IconButton>
-      )}
-      nextArrow={({ handleNext }) => (
-        <IconButton
-          variant="text"
-          color="white"
-          size="lg"
-          onClick={handleNext}
-          className="!absolute top-2/4 !right-4 -translate-y-2/4"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="h-6 w-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+          </Tooltip>
+          <Tooltip content="Tania Andrew">
+            <Avatar
+              size="sm"
+              variant="circular"
+              alt="tania andrew"
+              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+              className="border-2 border-white hover:z-10"
             />
-          </svg>
-        </IconButton>
-      )}
-    >
-      <img
-        src={company}
-        alt="image 1"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
-        alt="image 2"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-        alt="image 3"
-        className="h-full w-full object-cover"
-      />
-    </Carousel>
-            </div>
-        
-                <div>
-                    <Typography variant='h2' className='text-4xl'>
-                        Get hired by top mnc companies
-                    </Typography>
-                </div>
-           
-        </Card>
+          </Tooltip>
+        </div>
+        <Typography className="font-normal">January 10</Typography>
+      </CardFooter>
+    </Card>
+
+    <Card className="max-w-[18rem]  overflow-hidden">
+      <CardHeader
+        floated={false}
+        shadow={false}
+        color="transparent"
+        className="m-0 rounded-none"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+          alt="ui/ux review check"
+        />
+      </CardHeader>
+      <CardBody>
+        <Typography variant="h4" color="blue-gray">
+          UI/UX Review Check
+        </Typography>
+        <Typography variant="lead" color="gray" className="mt-1 font-normal">
+          Because it&apos;s about motivating the doers. Because I&apos;m here to
+          follow my dreams and inspire others.
+        </Typography>
+      </CardBody>
+    </Card>
+
+    <Card className="max-w-[18rem] overflow-hidden">
+      <CardHeader
+        floated={false}
+        shadow={false}
+        color="transparent"
+        className="m-0 rounded-none"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
+          alt="ui/ux review check"
+        />
+      </CardHeader>
+      <CardBody>
+        <Typography variant="h4" color="blue-gray">
+          UI/UX Review Check
+        </Typography>
+        <Typography variant="lead" color="gray" className="mt-3 font-normal">
+          Because it&apos;s about motivating the doers. Because I&apos;m here to
+          follow my dreams and inspire others.
+        </Typography>
+      </CardBody>
+      <CardFooter className="flex items-center justify-between">
+        <div className="flex items-center -space-x-3">
+          <Tooltip content="Natali Craig">
+            <Avatar
+              size="sm"
+              variant="circular"
+              alt="natali craig"
+              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1061&q=80"
+              className="border-2 border-white hover:z-10"
+            />
+          </Tooltip>
+          <Tooltip content="Tania Andrew">
+            <Avatar
+              size="sm"
+              variant="circular"
+              alt="tania andrew"
+              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+              className="border-2 border-white hover:z-10"
+            />
+          </Tooltip>
+        </div>
+        <Typography className="font-normal">January 10</Typography>
+      </CardFooter>
+    </Card> 
+    </div>
     </>
   )
 }
