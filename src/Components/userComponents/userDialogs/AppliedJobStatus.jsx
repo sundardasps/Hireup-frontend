@@ -78,7 +78,7 @@ export default function AppliedJobStatus(jobdata) {
         <div className="flex flex-col items-center ">
         <Typography className="border-b-2 m-5 p-0 font-semibold">Application Status</Typography>
           <Stepper
-            style={{width:"50%"}}
+            style={{width:"30%"}}
             activeStep={data && data.data.status === "submitted"&& 0 || data && data.data.status === "rejected" && 1 ||data && data.data.status === "viewed" && 1||data && data.data.status === "sheduled" && 2}
           >
             <Step>
@@ -108,23 +108,7 @@ export default function AppliedJobStatus(jobdata) {
                 </>
               )}
             </Step>
-            <Step>
-              {activeStep === 2 && (
-                <>
-                  <ExclamationCircleIcon className="h-5 w-5" />
-                  <ClipboardDocumentCheckIcon c className="h-5 w-5" />
-
-                  <div className="absolute -bottom-[2rem] w-max text-center">
-                    <Typography
-                      variant="small"
-                      color={activeStep === 2 ? "blue-gray" : "gray"}
-                    >
-                      Step 3
-                    </Typography>
-                  </div>
-                </>
-              )}
-            </Step>
+       
           </Stepper>
           </div>
           <div className="mt-10 p-5 border "  >

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 import { setCompanyDetails } from "../../../Redux/storeSlices/companyslice";
-import { Button, Spinner } from "@material-tailwind/react";
+import { Button, Spinner, Typography } from "@material-tailwind/react";
 
 function CompanyFullDetails() {
   const dispatch = useDispatch();
@@ -75,9 +75,12 @@ function CompanyFullDetails() {
 
 
   return (
-    <>
-      <div className="">
-        <section className="max-w-3xl  p-3 mx-auto bg-blue-700 rounded-md shadow-md dark:bg-gray-800 m-3">
+   
+      <div className="flex  bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 p-5 ">
+        <div className="p-5 w-[20rem]">
+        <Typography color="white" variant="h1" className="text-center ">Provide all company details and move forward. </Typography>
+        </div>
+        <section className="lg:w-[50rem]  p-3 mx-auto bg-transparent border rounded-md  m-3  shadow-md shadow-black">
           <h1 className="text-xl font-bold text-white capitalize dark:text-white">
             Account settings
           </h1>
@@ -285,9 +288,9 @@ function CompanyFullDetails() {
             </div>
           </form>
         </section>
+        <Toaster />
       </div>
-      <Toaster />
-    </>
+   
   );
 }
 

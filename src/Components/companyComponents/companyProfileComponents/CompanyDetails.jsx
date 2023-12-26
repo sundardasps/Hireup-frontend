@@ -44,13 +44,13 @@ function CompanyDetails() {
 
   return (
     <>
-      <Card className=" flex justify-between container mx-2 my-5   bg-white  h-auto  shadow-sm rounded-lg shadow-blue-gray-200 ">
-        <CardHeader className="flex flex-col sm:flex-row w-auto m-4 first-letter rounded-lg shadow first-letter:uppercase ">
+      <Card className=" flex justify-between container mx-5 my-5   bg-white rounded-none h-auto   shadow-sm  shadow-blue-gray-500 ">
+        <CardHeader className="flex flex-col sm:flex-row w-auto m-4 first-letter rounded-none  shadow first-letter:uppercase ">
           <div className=" m-2 cursor-pointer">
             <img
               src={data.exist.image ? data.exist.image : ""}
               alt=""
-              className="max-h-44 w-full object-cover rounded sm:w-60"
+              className="max-h-44 w-full object-fill rounded sm:w-60"
             />
             <ProfileImageEdit datas={{ image: data.exist.image, size: "xs" }} />
           </div>
@@ -61,7 +61,7 @@ function CompanyDetails() {
                 {data.exist.companyName}
               </text>
             </div>
-
+           
             <div className="ml-5">
               <div className="flex gap-2 w-auto">
                 <MapPinIcon className="w-5 h-5" />
@@ -138,7 +138,7 @@ function CompanyDetails() {
           </div>
         </CardHeader>
 
-        <CardBody className="flex flex-col sm:flex-row justify-between  h-auto bg-white m-4 first-letter shadow-inner rounded border w-11/12">
+        <CardBody className="flex flex-col sm:flex-row justify-between  h-auto bg-white mx-4 first-letter shadow-inner rounded border w-11/12">
           {data.exist.company_roles}
         </CardBody>
         <CardFooter className="flex justify-end gap-2">

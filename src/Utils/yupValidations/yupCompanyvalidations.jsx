@@ -119,3 +119,12 @@ export const interviewSchema = Yup.object().shape({
   .min(new Date(), 'Date must be in the future'),
   requirement:Yup.string().required("This field is required!")
 })
+
+export const reInterviewSchema = Yup.object().shape({
+  interviewer:Yup.string().required("This field is required!"),
+  type:Yup.string().required("This field is required!"),
+  date:  Yup.date()
+  .required('Date is required')
+  .min(new Date(), 'Date must be in the future'),
+  requirement:Yup.string().required("This field is required!")
+})

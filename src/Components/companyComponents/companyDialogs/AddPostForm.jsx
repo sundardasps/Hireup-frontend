@@ -88,7 +88,7 @@ export function AddPostForm() {
     fetchCategory();
   },[])
   
- console.log(category,"pppppppp");
+
   return (
     <>
     <p  onClick={handleOpen} className='cursor-pointer'>
@@ -126,7 +126,7 @@ export function AddPostForm() {
               onChange={handleChange}
               onBlur={handleBlur}
               size="lg"
-              min={0}
+              
             />
             {touched.experience && errors.experience && (
               <div className="text-red-500 text-xs ">{errors.experience}</div>

@@ -46,20 +46,20 @@ if (error) {
         <div className='flex flex-col gap-3 m-5 '>
 
           <text className='flex '>
-          <ShoppingBagIcon className='w-5 h-5 mx-1'/>
+          <ShoppingBagIcon className='w-5 h-5 '/>
           {data ? data.jobDetails.job_type : ""}
           </text>
           <text className='flex '>
-          <ComputerDesktopIcon className='w-5 h-5 mx-1'/>
+          <ComputerDesktopIcon className='w-5 h-5 '/>
           {data ? data.jobDetails.experience : ""} year experience needed
           </text>
           <text className='flex '>
-          <CurrencyRupeeIcon className='w-5 h-5 mx-1'/>
+          <CurrencyRupeeIcon className='w-5 h-5 '/>
           Salary : {''}
           {data ? data.jobDetails.salery : ""} /-
           </text>
           <text className='flex '>
-          <CalendarDaysIcon className='w-5 h-5 mx-1'/>
+          <CalendarDaysIcon className='w-5 h-5 '/>
           Application will closes on {''}
           {data ? data.jobDetails. end_time : ""} 
           </text>

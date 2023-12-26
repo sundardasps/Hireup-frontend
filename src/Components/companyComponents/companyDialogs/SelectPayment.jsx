@@ -1,4 +1,7 @@
 import React from "react";
+import stripeImg from '../../../../public/Stripe.jpeg'
+import secureImg from '../../../../public/secureImage.png'
+
 import {
   Button,
   Dialog,
@@ -67,7 +70,7 @@ export default function SelectPayment() {
         size="xxl"
         open={open}
         handler={handleOpen}
-        className="bg-blue-500 overflow-y-scroll"
+        className="bg-blue-500 overflow-y-scroll "
       >
         <DialogHeader className="flex justify-center gap-10 ">
           <Typography variant="h2" color="white">
@@ -77,7 +80,7 @@ export default function SelectPayment() {
             color="white"
             size="lg"
             variant="text"
-            className=""
+            className="border"
             onClick={handleOpen}
           >
             <svg
@@ -352,13 +355,13 @@ export default function SelectPayment() {
             </CardFooter>
           </Card>
         </div>
-        <div className="flex justify-center mt-5 p-4 ">
-          <Card className=" bg-transparent w-[30rem] border p-5">
-            <img src="../../../../public/secureImage.png" alt="" />
-            <Typography variant="h1" className="text-center">
-              with <span className="text-white ">Stripe</span>
-            </Typography>
+        <div className="flex justify-center gap-3 mt-5 p-4  ">
+          <Card className=" bg-transparent w-[30rem] border p-5 ">
+            <img src={secureImg} alt="" />
           </Card>
+           <Typography variant="h3" color="white" className="text-center mt-auto mb-auto ">With</Typography>
+            <img src={stripeImg} alt="" className="w-50 h-48 mt-1 rounded-md object-cover" />
+          
         </div>
       </Dialog>
     </>
