@@ -29,6 +29,7 @@ function SavedJobsCards() {
     try {
       const response = await unsaveJobs(jobId)
       if(response.status === 200){
+        setSelectedJob(null)
         toast.success('Unsaved.')
         queryClient.invalidateQueries("userProfile");
       }else{

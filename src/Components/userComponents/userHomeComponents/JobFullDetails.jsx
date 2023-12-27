@@ -44,10 +44,9 @@ export function JobFullDetails({ jobdata }) {
     refetch();
   },[jobdata._id]);
   
-  console.log(data,"=====ffffff========================");
 
   return (
-    <div className="fixed right-7">
+    <div className="fixed right-7 ">
       <Card className="container  bg-white  w-auto   border right-0  p-1">
         <div className="flex  flex-col w-auto m-1 ">
           <text className="flex justify-between text-xl  text-light-blue-700 font-bold   m-1">

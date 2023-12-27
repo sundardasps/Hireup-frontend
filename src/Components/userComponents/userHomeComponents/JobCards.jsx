@@ -14,12 +14,14 @@ import {
 import { BuildingOffice2Icon, CursorArrowRippleIcon } from "@heroicons/react/20/solid";
 import { useQuery } from "@tanstack/react-query";
 import { categoryDataForUser, getAllJobs, saveJobs } from "../../../Api/userApi";
+import  InfiniteScrollComponent  from "react-infinite-scroll-component";
+
 import {
   CheckCircleIcon,
   BookmarkIcon,
 } from "@heroicons/react/24/outline";
 import { JobFullDetails } from "./JobFullDetails";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   BookmarkSlashIcon,
   ChevronDownIcon,
@@ -38,6 +40,9 @@ function JobCards() {
   const [filter, setFilter] = useState();
   const [selectedJob, setSelectedJob] = useState(null);
   const [debounsedSearch, setDebouncedSearch] = useState("");
+  const [scrolls, setScrolls] = React.useState(1);
+  const [hasMore, setHAsMore] = useState(true)
+  const scrollRef = useRef(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -64,16 +69,39 @@ function JobCards() {
   //----------------------------------------Jobcard data fetch----------------------------------------//
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["userHome", { filter, search: debounsedSearch }],
+    queryKey: ["userHome", { filter, search: debounsedSearch ,scroll:scrolls}],
     queryFn: async () => {
-      const response = await getAllJobs({
+       const response = await getAllJobs({
         search: debounsedSearch,
-        filter,
-      }).then((res) => res.data);
+        filter,scroll:scrolls
+      }).then((res) => res.data)
 
       return response;
     },
   });
+
+
+  useEffect(() => {
+ 
+      window.scrollTo({
+        top: scrollRef.offsetTop,
+        left: 0,
+        behavior: "smooth",
+      });
+    
+  }, [data]);
+  
+
+  //-----------------------------------------------------//
+
+  const fetchDataTrigger = () => {
+    if (scrolls < data.totalScrolls) {
+      setScrolls((prevScrolls) => prevScrolls + 1);
+    } else {
+      setHAsMore(false);
+    }
+  };
+  
 
   //-----------------------------------------------------//
 
@@ -83,7 +111,9 @@ function JobCards() {
   //-----------------------------------------------------//
 
   const handleSearch = async (event) => {
+ 
     setSearch(event.target.value);
+    
   };
   //-----------------------------------------------------//
 
@@ -110,6 +140,10 @@ function JobCards() {
        }
   }
 
+ 
+  
+
+
   if (isLoading || !selectedJob) {
     if (data && data.data && data.data.length > 0 && !selectedJob) {
       setSelectedJob(data.data[0]);
@@ -117,9 +151,11 @@ function JobCards() {
     return <MainLoading />;
   }
 
+ 
+
   return (
-    <div className="flex gap-5">
-      <div className="">
+    <div className="flex gap-11 " >
+      <div className="" >
         <Card className=" h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5  hidden lg:block">
           <div className="grid justify-center  m-3 border-b-2 p-2">
            <div className="flex justify-center mb-2 ">
@@ -226,11 +262,25 @@ function JobCards() {
         </Card>
       </div>
 
-      <div className=" ">
+      <div   >
+        <InfiniteScrollComponent dataLength={data.data.length}
+         //This is important field to render the next data
+            className=" mt-4"
+            next={fetchDataTrigger}
+            hasMore={hasMore}
+            loader={<h4>Loading...</h4>}
+            endMessage={
+              <p className="m-10 text-center" >
+                <b>Yay! You have seen it all</b>
+              </p>
+            } 
+            ref={scrollRef}
+  >
         {data &&
           data.data &&
           data.data.map((data, index) => (
             <Card
+            
               key={index}
               className=" flex  sm:flex-row justify-between container my-5   xl:w-[30rem] border bg-white  rounded-md hover:shadow-xl  "
             >
@@ -288,6 +338,7 @@ function JobCards() {
               </CardFooter>
             </Card>
           ))}
+          </InfiniteScrollComponent>
       </div>
 
       <div className="  m-5  hidden lg:block ">

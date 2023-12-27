@@ -64,10 +64,10 @@ export async function categoryDataForUser() {
   }
 }
 
-export async function getAllJobs({ search, filter }) {
+export async function getAllJobs({ search, filter ,scroll}) {
   try {
     const response = await userCheck.get("/getAllJobs", {
-      params: { search, filter },
+      params: { search, filter ,scroll},
     });
     return response;
   } catch (error) {

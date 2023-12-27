@@ -131,7 +131,7 @@ export default function UserCards() {
 
   return (
     <>
-      <div className="flex justify-between h-auto">
+      <div className="flex justify-around h-auto">
         <Card className="hidden lg:block h-[22rem]  p-1 shadow-xl shadow-blue  border m-5 ">
           <div className="mb-1 p-2">
             <Typography variant="h3" color="blue-gray">
@@ -148,16 +148,9 @@ export default function UserCards() {
               />
             </div>
           </div>
-          <div className="p-1">
-            <Button
-              onClick={() => location.reload()}
-              variant="outlined"
-              fullWidth
-            >
-              Get all
-            </Button>
-          </div>
-          <List className="overflow-y-scroll h-40 ">
+  
+          <p className="text-center">Search & filter</p>
+          <List className="scrollable h-40 ">
             {category &&
               category.map((value, index) => (
                 <Accordion
@@ -204,6 +197,15 @@ export default function UserCards() {
                 </Accordion>
               ))}
           </List>
+          <div className="p-1">
+            <Button
+              onClick={() => location.reload()}
+              variant="outlined"
+              fullWidth
+            >
+              Get all
+            </Button>
+          </div>
           <List></List>
         </Card>
 
@@ -269,7 +271,7 @@ export default function UserCards() {
             data.userList.map((value, index) => (
               <Card
                 key={index}
-                className="max-w-[14rem] mx-auto h-min  overflow-hidden  bg-white shadow-sm rounded-lg shadow-blue-gray-200 hover:shadow-xl  cursor-pointer   "
+                className="max-w-[12rem] mx-auto h-min  overflow-hidden  bg-white shadow-sm rounded-lg shadow-blue-gray-200 hover:shadow-xl  cursor-pointer   "
                
               >
                 <div className="relative border-b-2 ">
@@ -283,14 +285,14 @@ export default function UserCards() {
                   <img
                     src={value.userDp ? value.userDp : userLogo}
                     alt="Profile"
-                    className="rounded-full border-4 border-white absolute -bottom-10 left-14  w-28 h-28 outline-double  outline-gray-50  object-fill"
+                    className="rounded-full border-4 border-white absolute -bottom-10 left-11  w-28 h-28 outline-double  outline-gray-50  object-fill"
                     onClick={() =>
                       navigate(`/company/userProfile`, { state: value._id })
                     }
                   />
                 </div>
                 <CardBody>
-                  <div className="my-5 flex items-center justify-center">
+                  <div className="my-3 flex items-center justify-center">
                     <Typography
                       variant="h6"
                       color="blue-gray"
@@ -301,7 +303,7 @@ export default function UserCards() {
                   </div>
                   <Typography
                     color="gray"
-                    className="text-center uppercase text-xs mb-5 w-auto"
+                    className="text-center uppercase text-[0.60em]  mb-3 w-auto"
                   >
                     {data ? value.userTitle : ""}
                   </Typography>
