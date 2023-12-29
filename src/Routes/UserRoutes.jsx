@@ -15,7 +15,7 @@ import Profile from "../Pages/userPages/userHomePage/Profile.jsx";
 import AppliedList from "../Components/userComponents/userHomeComponents/AppliedList.jsx";
 import UserChat from "../Pages/userPages/userChatPage/UserChat.jsx";
 import SavedJobsPage from "../Pages/userPages/savedJobsPage/SavedJobsPage.jsx";
-
+import UserVideoChatpage from '../Pages/userPages/userChatPage/UserVideoChat.jsx'
 function UserRoutes() {
   const [user, setUser] = useState("");
   useEffect(() => {
@@ -40,7 +40,8 @@ function UserRoutes() {
       <Route path="/appliedJobs" element={<AppliedList/>}/>
       <Route path="/chat" element={<UserChat/>}/>
       <Route path="/savedJobs" element={<SavedJobsPage/>}/>
-
+      <Route path='/room/:recieverId' element={<UserVideoChatpage/>}/>
+      
       </Route>
       </Route>
     </Routes>

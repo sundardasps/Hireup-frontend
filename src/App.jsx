@@ -17,7 +17,6 @@ function App() {
          <Route path="/user/*" element={<UserRoutes/>}/>
          <Route path="/company/*" element={<CompanyRoutes/>}/>
          <Route path="/admin/*" element={<AdminRoutes/>}/>
-   
       </Routes>
     </Router>
   )

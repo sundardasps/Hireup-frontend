@@ -7,10 +7,12 @@ export default function Success() {
   let [message, setMessage] = useState('');
   let [success, setSuccess] = useState(false);
   let [sessionId, setSessionId] = useState('');
+  
+  const query = new URLSearchParams(window.location.search);
+  console.log(query.get('success'),'issss working');
 
   useEffect(() => {
-    console.log("0000000000");
-    const query = new URLSearchParams(window.location.search);
+
     if (query.get('success')) {
       setSuccess(true);
       setSessionId(query.get('session_id'));

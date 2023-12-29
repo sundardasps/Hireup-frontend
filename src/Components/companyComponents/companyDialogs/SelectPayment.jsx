@@ -59,7 +59,7 @@ export default function SelectPayment() {
         window.location.href = res?.data?.session.url;
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 

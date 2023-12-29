@@ -24,7 +24,7 @@ import InterviewList from '../Pages/companyPages/companyHomePage/InterviewList'
 import CompanyChatPage from '../Pages/companyPages/companyChatPage/CompanyChatPage'
 import PaymentSuccessPage from '../Pages/companyPages/companyPaymentPage/SuccessPage'
 import PaymentFailuerPage from '../Pages/companyPages/companyPaymentPage/FailuerPage'
-
+import CompanyVideoChatPage from '../Pages/companyPages/companyChatPage/CompanyVideoChatPage'
 function CompanyRoutes(){
 
    return (
@@ -49,6 +49,8 @@ function CompanyRoutes(){
          <Route path='/interviewsList' element={<InterviewList/>}/> 
          <Route path='/chat' element={<CompanyChatPage/>}/>
          <Route path='/status' element={<PaymentSuccessPage/>}/>
+         <Route path='/room' element={<CompanyVideoChatPage/>}/>
+
 
 
 

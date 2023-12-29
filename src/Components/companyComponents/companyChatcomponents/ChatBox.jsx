@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   companyAddMessage,
   companyGetMessages,
@@ -8,18 +8,24 @@ import { Avatar, Button, Card, Typography } from "@material-tailwind/react";
 import userLogo from "../../../../public/user.png";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
-import chatImage from '../../../../public/chat_image.png'
+import chatImage from "../../../../public/chat_image.png";
 import {
   PaperAirplaneIcon,
   PaperClipIcon,
   PlusIcon,
+  VideoCameraIcon,
 } from "@heroicons/react/24/solid";
+import { useNavigate } from "react-router-dom";
+import VideoCall from "../companyVideoComponents/VideoCall";
 
 function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [newMessage, setNewMessage] = useState("");
+  const [roomUrl, setroomUrl] = useState("");
 
   const scroll = useRef();
+
   const handleMessage = (newMessage) => {
     setNewMessage(newMessage);
   };
@@ -56,32 +62,32 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
     scroll.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleSend = async (e) => {
-    e.preventDefault();
-    if (newMessage.trim() === "") {
+  const handleSend = async () => {
+    if (newMessage.trim() === "" && roomUrl.trim() === "") {
       return;
     }
     //sending message to socket server
     const recieverId = chat.members.find((id) => id !== currentUser);
+
+
     const message = {
       chatId: chat._id,
       senderId: currentUser,
-      text: newMessage,
+      text: (newMessage && newMessage) || (roomUrl && roomUrl),
       recieverId,
     };
-    // setSendMessage({ ...messages, recieverId });
-    // send message to database
-    // send message to database
+
     try {
       const { data } = await companyAddMessage(message);
       const msg = [...messages, data];
       setMessages(msg);
       setSendMessage({ msg, recieverId });
       setNewMessage("");
+      setroomUrl("")
     } catch (error) {
       console.log(error);
     }
-  };
+  }; 
 
   useEffect(() => {
     if (messages !== null && messages.chatId === chat?._id) {
@@ -89,22 +95,44 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
     }
   }, []);
 
+  const handleJoinRoom = () => {
+    const recieverId = chat.members.find((id) => id !== currentUser);
+    const joinId = `http://localhost:5173/user/room/${recieverId}`;
+    setroomUrl(joinId);
+    setTimeout(()=>{
+      navigate(`/company/room`,{state:{recieverId}})
+  },500)
+  };
+
+  useEffect(() => {
+    if (roomUrl) {
+      handleSend();
+    }
+  }, [roomUrl]);
 
   return (
     <>
       {chat != null ? (
         <>
           <div className="chat shadow-md bg-blue-500 rounded-t-lg">
-            <div className="p-1 rounded-sm">
+            <div className="flex justify-between p-1 rounded-sm">
               <div className="flex gap-2">
                 <Avatar
                   src={userData ? userData?.companyData?.userDp : userLogo}
                   className="m-1"
                 />
-                <Typography color="white" className="flex flex-col mt-4 text-base  capitalize">
+                <Typography
+                  color="white"
+                  className="flex flex-col mt-4 text-base  capitalize"
+                >
                   {userData?.companyData?.userName}
                 </Typography>
               </div>
+              <VideoCameraIcon
+                onClick={handleJoinRoom}
+                color="white"
+                className="w-7 h-7 m-5 cursor-pointer"
+              />
             </div>
             <hr />
           </div>
@@ -152,7 +180,7 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
           </div>
 
           <div className="flex p-3 h-[4rem] rounded-b-md ">
-            <InputEmoji value={newMessage} onChange={handleMessage}  />
+            <InputEmoji value={newMessage} onChange={handleMessage} />
             <div className="p-2 rounded-lg   ">
               <PaperClipIcon className="w-6 h-6 cursor-pointer" color="black" />
             </div>
@@ -169,11 +197,11 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
         </>
       ) : (
         <div className="flex flex-col bg-blue-gray-50 object-cover h-screen  items-center rounded-xl justify-center ">
-        <img src={chatImage} alt="" className="w-36 h-36 object-cover" />
-        <span className="text-center ml-4  text-lg font-normal text-blue-gray-500">
-          Tap to start...
-        </span>
-      </div>
+          <img src={chatImage} alt="" className="w-36 h-36 object-cover" />
+          <span className="text-center ml-4  text-lg font-normal text-blue-gray-500">
+            Tap to start...
+          </span>
+        </div>
       )}
     </>
   );
