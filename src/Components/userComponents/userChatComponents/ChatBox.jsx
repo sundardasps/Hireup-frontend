@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import {useNavigate} from 'react-router-dom'
-import HireupLogo from '../../../../public/logo.png'
+import { useNavigate } from "react-router-dom";
+import HireupLogo from "../../../../public/logo.png";
 import {
   addMessage,
   getMessages,
@@ -15,8 +15,9 @@ import {
   PaperClipIcon,
   PlusIcon,
 } from "@heroicons/react/24/solid";
-import { useSelector} from "react-redux";
-import chatImage from '../../../../public/chat_image.png'
+import { useSelector } from "react-redux";
+import chatImage from "../../../../public/chat_image.png";
+import toast from "react-hot-toast";
 
 function ChatBox({
   chat,
@@ -26,35 +27,12 @@ function ChatBox({
   setMessages,
   ownMessage,
 }) {
-
   const [userData, setUserData] = useState(null);
   const [newMessage, setNewMessage] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const currentUserDetails = useSelector((state) => {
     return state.user;
   });
-
-  // const myMeeting = (element) =>{
-  //   const appID = '859733393';
-  //   const serverSecret ="be8d2040b643c2b1b04cfea9b93876bb";
-  //   const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID,serverSecret,roomId,Date.now().toString(),currentUserDetails.userName)
-  //   const zc = ZegoUIKitPrebuilt.create(kitToken)
-  //   zc.joinRoom({
-  //     container:element,
-  //     sharedLinks:[
-  //       {
-  //         name:"Copy Link",
-  //         url:`http://localhost:5173/room/${roomId}`
-  //       }
-  //     ],
-  //     scenario:{
-  //       mode:ZegoUIKitPrebuilt.OneONoneCall,
-  //     },
-  //     showScreenSharingButton:true
-  //   })
-  // }
-
- 
 
   const scroll = useRef();
   const handleMessage = (newMessage) => {
@@ -109,7 +87,7 @@ function ChatBox({
       chatId: chat._id,
       senderId: currentUser,
       text: newMessage,
-      recieverId
+      recieverId,
     };
 
     // send message to database
@@ -130,12 +108,17 @@ function ChatBox({
     }
   }, []);
 
- 
- 
- 
+  const validateVideoChat = (sendedId) => {
+    const id = sendedId.includes(currentUser);
+    if (id) {
+      navigate(`/user/room/${currentUser}`);
+    } else {
+      toast.error("Invalid chat link!");
+    }
+  };
 
   return (
-    <> 
+    <>
       {chat != null ? (
         <>
           <div className="chat shadow-md bg-blue-500 rounded-t-lg">
@@ -145,11 +128,14 @@ function ChatBox({
                   src={userData ? userData.image : userLogo}
                   className="m-1"
                 />
-                <Typography color="white" className="flex flex-col mt-4 text-base  capitalize">
+                <Typography
+                  color="white"
+                  className="flex flex-col mt-4 text-base  capitalize"
+                >
                   {userData?.companyName}
                 </Typography>
               </div>
-            </div> 
+            </div>
             <hr />
           </div>
 
@@ -157,7 +143,6 @@ function ChatBox({
             {messages?.map((message, i) => (
               <>
                 <div
-
                   key={i}
                   className={
                     message.senderId === currentUser
@@ -178,24 +163,49 @@ function ChatBox({
                       })}
                     </span>
                     <Card
-                    ref={scroll}
+                      ref={scroll}
                       className={`grid p-2  rounded-md text-sm  max-w-[36rem] h-auto ${
                         message.senderId === currentUser
                           ? " rounded-br-none rounded-tr-xl  bg-blue-500 text-white shadow-gray-200 mr-5"
                           : "rounded-bl-none rounded-tl-xl  bg-blue-gray-50 text-black shadow-gray-200 ml-5"
                       } shadow-blue-gray-300  shadow-sm `}
-                     >
-                       {isURL(message.text)?<span className="text-blue-300 cursor-pointer hover:text-green-500">
-                        <div className="flex border bg-blue-gray-500 rounded-md">
-                         <img src={userData ? userData.image : userLogo} className="w-14 h-14 rounded-l-md  bg-blue-gray-100" alt="logo"/>
-                         <div className="pl-1">
-                          <Typography variant="lead" color="white">HirupChat</Typography>
-                          <Typography color="white" variant="small">Realtime chat by hireup,hosting by {userData?.companyName}</Typography>
-                         </div>
-                        </div>
-                        <span className="text-black ">Please click the link to join</span><br/>
-                        <span className="underline" onClick={()=>navigate(`/user/room/${currentUser}`)}>{message.text}</span></span>:<span>{message.text}</span>}
-                        <span className="font-extralight text-xs text-blue-gray-900">
+                    >
+                      {isURL(message.text) ? (
+                        <span className="text-blue-300 cursor-pointer hover:text-green-500">
+                          <div className="flex border bg-blue-gray-500 rounded-md">
+                            <img
+                              src={userData ? userData.image : userLogo}
+                              className="w-14 h-14 rounded-l-md  bg-blue-gray-100"
+                              alt="logo"
+                            />
+                            <div className="pl-1">
+                              <Typography variant="lead" color="white">
+                                HirupChat
+                              </Typography>
+                              <Typography color="white" variant="small">
+                                Realtime chat by hireup,hosting by{" "}
+                                {userData?.companyName}
+                              </Typography>
+                            </div>
+                          </div>
+                          <span className="text-black ">
+                            Please click the link to join
+                          </span>
+                          <br />
+                          <span
+                            className="underline"
+                            onClick={() =>
+                              // navigate(`/user/room/${currentUser}`)
+                              validateVideoChat(message.text)
+                            }
+                          >
+                            {message.text}
+                          </span>
+                        </span>
+                      ) : (
+                        <span>{message.text}</span>
+                      )}
+                      <span className="font-extralight text-xs text-blue-gray-900">
                         {format(message.createdAt)}
                       </span>
                     </Card>
@@ -223,11 +233,11 @@ function ChatBox({
         </>
       ) : (
         <div className="flex flex-col bg-blue-gray-50 object-cover h-screen  items-center rounded-xl justify-center ">
-        <img src={chatImage} alt="" className="w-36 h-36 object-cover " />
+          <img src={chatImage} alt="" className="w-36 h-36 object-cover " />
           <span className="text-center ml-4  text-lg font-normal text-blue-gray-500">
-          Tap to start...
-        </span>
-      </div>
+            Tap to start...
+          </span>
+        </div>
       )}
     </>
   );

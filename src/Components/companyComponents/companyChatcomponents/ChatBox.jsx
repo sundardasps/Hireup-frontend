@@ -69,7 +69,6 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
     //sending message to socket server
     const recieverId = chat.members.find((id) => id !== currentUser);
 
-
     const message = {
       chatId: chat._id,
       senderId: currentUser,
@@ -83,11 +82,11 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
       setMessages(msg);
       setSendMessage({ msg, recieverId });
       setNewMessage("");
-      setroomUrl("")
+      setroomUrl("");
     } catch (error) {
       console.log(error);
     }
-  }; 
+  };
 
   useEffect(() => {
     if (messages !== null && messages.chatId === chat?._id) {
@@ -99,10 +98,15 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
     const recieverId = chat.members.find((id) => id !== currentUser);
     const joinId = `http://localhost:5173/user/room/${recieverId}`;
     setroomUrl(joinId);
-    setTimeout(()=>{
-      navigate(`/company/room`,{state:{recieverId}})
-  },500)
+    setTimeout(() => {
+      navigate(`/company/room`, { state: { recieverId } });
+    }, 500);
   };
+
+  function isURL(text) {
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+    return urlRegex.test(text);
+  }
 
   useEffect(() => {
     if (roomUrl) {
@@ -162,13 +166,32 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
                       })}
                     </span>
                     <Card
-                      className={`grid p-2  rounded-md text-xl  max-w-xs ${
+                      className={`grid p-2  rounded-md text-sm  max-w-[36rem] h-auto  ${
                         message.senderId === currentUser
                           ? " rounded-br-none rounded-tr-xl  bg-blue-500 text-white shadow-gray-200 mr-5"
                           : "rounded-bl-none rounded-tl-xl  bg-blue-gray-50 text-black shadow-gray-200 ml-5"
                       } shadow-blue-gray-300  shadow-sm `}
                     >
-                      <span>{message.text}</span>
+                      {isURL(message.text) ? (
+                        <span className="text-blue-300 cursor-pointer hover:text-green-500">
+                          <div className="flex border bg-blue-gray-500 rounded-md">
+                            <div className="p-1">
+                              <Typography variant="lead" color="white">
+                                HirupChat
+                              </Typography>
+                              <Typography color="white" variant="paragraph">
+                                Realtime chat by hireup,hosting by you
+                              </Typography>
+                            </div>
+                          </div>
+                          <span className="text-black ">
+                            Video chat link sended.
+                          </span>
+                          <br />
+                        </span>
+                      ) : (
+                        <span>{message.text}</span>
+                      )}
                       <span className="font-extralight text-xs text-blue-gray-900">
                         {format(message.createdAt)}
                       </span>
