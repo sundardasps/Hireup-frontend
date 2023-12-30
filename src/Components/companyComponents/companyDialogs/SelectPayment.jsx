@@ -24,21 +24,23 @@ export default function SelectPayment() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
 
-  let stripePromise;
-  const getstrip = () => {
-    if (!stripePromise) {
-      stripePromise = loadStripe(
-        "pk_test_51OPm1SSEvDV8XVWTfK2X8ECVdBlEbO2diz7Q03vMTeRu5NTRBWUXao9A30CWLB81ksqLwbbFGOsgYhLHdYrYxp9600iTX6StsD"
-      );
-    }
-    return stripePromise;
-  };
+  // let stripePromise;
+  // const getstrip = () => {
+
+  //   if (!stripePromise) {
+  //     stripePromise = loadStripe(
+  //       "pk_test_51OPm1SSEvDV8XVWTfK2X8ECVdBlEbO2diz7Q03vMTeRu5NTRBWUXao9A30CWLB81ksqLwbbFGOsgYhLHdYrYxp9600iTX6StsD"
+  //     );
+  //   }
+  //   return stripePromise;
+  // };
 
   const prices = [
     {
       id: "price_1OPmTkSEvDV8XVWTbQkNKkTS",
-      amount:199,
+      amount:199,   
       interval: "month",
+      
     },
     {
       id: "price_1OPmUmSEvDV8XVWTjXjI1ybY",
@@ -46,14 +48,17 @@ export default function SelectPayment() {
       interval: "every 6 months",
     },
     {
-      id: "price_1OPmWISEvDV8XVWT0Br2Rvvt",
+      id: "price_1OSxGZSEvDV8XVWTxnVXNSjY",
       amount:1999,
       interval: "year",
     },
   ];
 
+
+
   const handlePayment = async (price) => {
     try {
+
       const res = await stripePayment(price);
       if (res.status === 200) {
         window.location.href = res?.data?.session.url;

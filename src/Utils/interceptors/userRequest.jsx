@@ -1,7 +1,6 @@
 import axios from "axios";
 import {toast} from 'react-hot-toast'
-const baseURL =  "http://localhost:5000/user"
-
+const baseURL =  import.meta.env.VITE_USER_BASE_URL;
 export const userInterseption = axios.create({
   baseURL:baseURL,
 });

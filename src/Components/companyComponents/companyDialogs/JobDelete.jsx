@@ -18,7 +18,7 @@ export function JobDelete({data}) {
            toast.success(respone.data.message)
            handleLoading()
            handleOpen()
-          window.location.reload()
+          // window.location.reload()
        }else{
         toast.error(respone.data.message)
        }

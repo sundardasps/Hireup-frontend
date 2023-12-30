@@ -179,10 +179,10 @@ function ChatBox({
                               alt="logo"
                             />
                             <div className="pl-1">
-                              <Typography variant="lead" color="white">
+                              <Typography variant="paragraph" color="white">
                                 HirupChat
                               </Typography>
-                              <Typography color="white" variant="small">
+                              <Typography color="white" className="text-[0.8em]">
                                 Realtime chat by hireup,hosting by{" "}
                                 {userData?.companyName}
                               </Typography>

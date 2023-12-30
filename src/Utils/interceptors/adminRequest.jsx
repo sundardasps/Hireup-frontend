@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/admin";
+const url = import.meta.env.VITE_ADMIN_BASE_URL;
 
 export  const adminInterseptor = axios.create({
   baseURL: url,

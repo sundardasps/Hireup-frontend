@@ -70,7 +70,7 @@ function UserChat() {
   return ( 
     
     <div  className="flex  justify-center  ">
-     <div className="flex gap-1  w-[70rem]">
+     <div className="flex gap-1  w-[60rem]">
       <Card className="w-[20rem] p-3 h-screen shadow-md border bg-blue-500" >
         <div className="flex gap-3">
           <Input color="white" type="search" label="Search company" />

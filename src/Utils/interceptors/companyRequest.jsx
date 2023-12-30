@@ -1,8 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 
-const baseurl = "http://localhost:5000/company";
-
+const baseurl = import.meta.env.VITE_COMPANY_BASE_URL;
 export const companyInterseptor = axios.create({
   baseURL: baseurl,
 });

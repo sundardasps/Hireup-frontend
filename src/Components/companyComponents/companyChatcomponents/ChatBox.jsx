@@ -174,12 +174,12 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
                     >
                       {isURL(message.text) ? (
                         <span className="text-blue-300 cursor-pointer hover:text-green-500">
-                          <div className="flex border bg-blue-gray-500 rounded-md">
+                          <div className="flex border  rounded-md">
                             <div className="p-1">
-                              <Typography variant="lead" color="white">
+                              <Typography variant="paragraph" color="white">
                                 HirupChat
                               </Typography>
-                              <Typography color="white" variant="paragraph">
+                              <Typography color="white" className="text-[0.8em]">
                                 Realtime chat by hireup,hosting by you
                               </Typography>
                             </div>

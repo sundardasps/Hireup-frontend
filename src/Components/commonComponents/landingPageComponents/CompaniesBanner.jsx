@@ -12,7 +12,7 @@ import company from "../../../../public/office.jpg";
 
 function CompaniesBanner() {
   return (
-    <div className="pt-4">
+    <div className="pt-4 bg-blue-gray-0 ">
       <Typography variant="h2" className="text-center">
         Why Choose Us?
       </Typography>
@@ -23,85 +23,77 @@ function CompaniesBanner() {
           companies seeking skilled professionals.
         </Typography>
       </div>
-      <div className="lg:flex justify-center gap-10 p-5">
-        <Card className="max-w-[18rem] h-[24rem] overflow-hidden mb-3">
-          <CardHeader
-            floated={false}
-            shadow={false}
-            color="transparent"
-            className="m-0 rounded-none"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-              alt="ui/ux review check"
-            />
-          </CardHeader>
+      <div className="lg:flex justify-center gap-20 p-5">
+        <Card className="max-w-[18rem] h-[18rem] overflow-hidden mb-3 bg-white shadow-md shadow-blue-gray-200 border">
           <CardBody>
-            <Typography variant="h4" color="blue-gray">
-              UI/UX Review Check
+            <Typography variant="h5" color="blue-gray" className="mb-4">
+              User-Friendly Design
             </Typography>
-            <Typography
-              variant="paragraph"
-              color="gray"
-              className=" font-normal"
-            >
-              Because it&apos;s about motivating the doers. Because I&apos;m
-              here to follow my dreams and inspire others.
-            </Typography>
+            <div className="text-sm">
+              <ul className="list-disc pl-5">
+                <li className="mb-2">
+                  Intuitive Navigation: Ensure easy and straightforward access
+                  to information.
+                </li>
+                <li className="mb-2">
+                  Search and Filter Options: Implement robust search and
+                  filtering for efficient job.
+                </li>
+                <li>
+                  Responsive Design: Optimize the platform for seamless use
+                  across various devices.
+                </li>
+              </ul>
+            </div>
           </CardBody>
         </Card>
 
-        <Card className="max-w-[18rem] h-[24rem] overflow-hidden mb-3">
-          <CardHeader
-            floated={false}
-            shadow={false}
-            color="transparent"
-            className="m-0 rounded-none"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-              alt="ui/ux review check"
-            />
-          </CardHeader>
-          <CardBody>
-            <Typography variant="h4" color="blue-gray">
-              UI/UX Review Check
+        <Card className="max-w-[18rem] h-[18rem] overflow-hidden mb-3 bg-white shadow-blue-gray-200 border">
+
+          <CardBody className="p-4">
+            <Typography variant="h5" color="blue-gray" className="mb-4">
+              Advanced Job Matching
             </Typography>
-            <Typography
-              variant="paragraph"
-              color="gray"
-              className=" font-normal"
-            >
-              Because it&apos;s about motivating the doers. Because I&apos;m
-              here to follow my dreams and inspire others.
-            </Typography>
+            <div className="text-sm">
+              <ul className="list-disc pl-5">
+                <li class="mb-2">
+                  Intuitive Navigation: Ensure easy and straightforward access
+                  to information.
+                </li>
+                <li class="mb-2">
+                  Search and Filter Options: Implement robust search and
+                  filtering for efficient job.
+                </li>
+                <li>
+                  Responsive Design: Optimize the platform for seamless use
+                  across various devices.
+                </li>
+              </ul>
+            </div>
           </CardBody>
         </Card>
 
-        <Card className="max-w-[18rem] h-[24rem] overflow-hidden mb-3">
-          <CardHeader
-            floated={false}
-            shadow={false}
-            color="transparent"
-            className="m-0 rounded-none"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-              alt="ui/ux review check"
-            />
-          </CardHeader>
+        <Card className="max-w-[18rem] h-[18rem] overflow-hidden mb-3 bg-white shadow-blue-gray-200 border">
           <CardBody>
-            <Typography variant="h4" color="blue-gray">
-              UI/UX Review Check
+            <Typography variant="h5" color="blue-gray" className="mb-4">
+              Security and Privacy
             </Typography>
-            <Typography
-              variant="paragraph"
-              color="gray"
-              className=" font-normal"
-            >
-              Because it&apos;s about motivating the doers. Because I&apos;m
-              here to follow my dreams and inspire others.
-            </Typography>
+            <div className="text-sm">
+              <ul className="list-disc pl-5">
+                <li className="mb-2">
+                  Intuitive Navigation: Ensure easy and straightforward access
+                  to information.
+                </li>
+                <li className="mb-2">
+                  Search and Filter Options: Implement robust search and
+                  filtering for efficient job.
+                </li>
+                <li>
+                  Responsive Design: Optimize the platform for seamless use
+                  across various devices.
+                </li>
+              </ul>
+            </div>
           </CardBody>
         </Card>
       </div>
