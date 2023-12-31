@@ -62,71 +62,59 @@ function UserNavbar() {
   function NavList() {
     return (
      
-      
-    
-      <ul className="my-2 flex  flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-10 ">
-          
-          <div className=" w-auto ">
-          <Input
-                label="Search ..."
-                autoFocus
-                icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-          />
-          
-          </div>
-
-
+      <ul className=" flex justify-center   lg:gap-5   lg:mb-0 lg:mt-0 lg:flex-row lg:items-center  ">
+        <>
         <a
           onClick={()=>navigate('/user')}
-          className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
+          className="flex justify-center p-2 w-[4rem]  hover:bg-blue-gray-50 rounded-md  transition-colors cursor-pointer "
         >
         <Typography
           as="li"
           variant="small"
           color="blue-gray"
-          className=" font-medium "
+          className=""
         >
-          <HomeIcon className="h-8 w-7 "/>
+          <HomeIcon className="h-5 w-5 mx-auto "/>
             Home
         </Typography>
           </a>
 
           <a
           onClick={()=>navigate('/user/appliedJobs')}
-          className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
+          className="flex justify-center p-2  w-[4rem]  hover:bg-blue-gray-50 rounded-md  transition-colors cursor-pointer "
         >
         <Typography
           as="li"
           variant="small"
           color="blue-gray"
-          className=" font-medium  "
-        > <CursorArrowRippleIcon  className="h-8 w-7 "/>Applied
+          className=" "
+        > <CursorArrowRippleIcon  className="h-5 w-5 mx-auto "/>Applied
         </Typography>
         </a>
 
 
         <a
           onClick={()=>navigate('/user/savedJobs')}
-          className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
+          className="flex justify-center p-2  w-[4rem]  hover:bg-blue-gray-50 rounded-md  transition-colors cursor-pointer "
         >
         <Typography
           as="li"
           variant="small"
           color="blue-gray"
-          className=" font-medium "
-        > <BookmarkIcon  className="h-8 w-7 "/>saved
+          className=""
+        > <BookmarkIcon  className="h-5 w-5 mx-auto  "/>saved
         </Typography>
         </a>
         <a
           onClick={()=>navigate('/user/chat')}
-          className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
+          className="flex justify-center p-2  w-[4rem]  hover:bg-blue-gray-50 rounded-md  transition-colors cursor-pointer "
         >
         <Typography
           as="li"
           variant="small"
           color="blue-gray"
-          className=" font-medium "
-        > <ChatBubbleLeftRightIcon  className=" h-8 w-7 "/>Chat
+          className=" "
+        > <ChatBubbleLeftRightIcon  className=" h-5 w-5 mx-auto "/>Chat
         </Typography>
         </a>
 
@@ -136,7 +124,7 @@ function UserNavbar() {
           as="li"
           variant="small"
           color="blue-gray"
-          className="p-1 font-medium"
+          className="m-auto "
         >
         
             <Menu>
@@ -262,6 +250,7 @@ function UserNavbar() {
               </MenuList>
             </Menu>
         </Typography>
+        </> 
       </ul>
     );
   }
@@ -284,7 +273,7 @@ function UserNavbar() {
   
 
 
-    <Navbar className="fixed top-0 left-0 right-0 z-50  h-auto max-w-screen-xxl px-6 py-3 rounded-none ">
+    <Navbar className="fixed top-0 left-0 right-0 z-50  h-auto max-w-screen-xxl px-6 py-2 rounded-none  ">
       <div className="flex items-center justify-between text-blue-gray-900">
       <Typography
         as="a"

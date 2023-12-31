@@ -9,6 +9,7 @@ import {
   Input,
   List,
   ListItem,
+  Spinner,
   Typography,
 } from "@material-tailwind/react";
 import {
@@ -36,6 +37,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import defaultDp from "../../../../public/user.png";
 import toast from "react-hot-toast";
+import { format } from "timeago.js";
 
 function JobCards() {
   const [open, setOpen] = React.useState(0);
@@ -46,7 +48,7 @@ function JobCards() {
   const [debounsedSearch, setDebouncedSearch] = useState("");
   const [scrolls, setScrolls] = React.useState(1);
   const [hasMore, setHAsMore] = useState(true);
-  const scrollRef = useRef(null);
+  const [initialFetch, setInitialFetch] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,8 +56,6 @@ function JobCards() {
   const user = useSelector((state) => {
     return state.user;
   });
-
-  //----------------------------------------Side bar data fetch----------------------------------------//
 
   //----------------------------------------Jobcard data fetch----------------------------------------//
 
@@ -69,7 +69,7 @@ function JobCards() {
         search: debounsedSearch,
         filter,
         scroll: scrolls,
-      }).then((res) => res.data);
+      }).then((res) => res.data, setInitialFetch(true));
 
       return response;
     },
@@ -99,7 +99,9 @@ function JobCards() {
 
   const fetchDataTrigger = () => {
     if (scrolls < data.totalScrolls) {
-      setScrolls((prevScrolls) => prevScrolls + 1);
+      setTimeout(() => {
+        setScrolls((prevScrolls) => prevScrolls + 1);
+      }, 1000);
     } else {
       setHAsMore(false);
     }
@@ -144,13 +146,13 @@ function JobCards() {
     if (data && data.data && data.data.length > 0 && !selectedJob) {
       setSelectedJob(data.data[0]);
     }
-    return <MainLoading />;
+    return initialFetch != true && <MainLoading />;
   }
 
   return (
-    <div className="flex gap-11 ">
+    <div className="flex  ">
       <div className="">
-        <Card className=" h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5  hidden lg:block">
+        <Card className=" h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5   hidden md:block ">
           <div className="grid justify-center  m-3 border-b-2 p-2">
             <div className="flex justify-center mb-2 ">
               <Avatar
@@ -271,92 +273,109 @@ function JobCards() {
         </Card>
       </div>
 
-      <div>
-        <InfiniteScrollComponent
-          dataLength={data.data.length}
-          //This is important field to render the next data
-          className=" mt-4"
-          next={fetchDataTrigger}
-          hasMore={hasMore}
-          loader={<h4>Loading...</h4>}
-          endMessage={
-            <p className="mt-10 text-center">
-              <b>Yay! You have seen it all</b>
-            </p>
-          }
-        >
-          <div
-            style={{ maxHeight: "500px", overflowY: "auto" }}
-            className="no-scrollbar"
-          >
-            {data &&
-              data.data &&
-              data.data.map((data, index) => (
-                <Card
-                  key={index}
-                  className=" flex  sm:flex-row justify-between container my-5   xl:w-[30rem] border bg-white  rounded-md hover:shadow-xl  "
-                >
-                  <div className="m-2 mt-4 w-auto h-auto">
-                    <img
-                      src={data.companyImage}
-                      style={{ width: "80px", height: "50px" }}
-                      className="rounded-sm"
-                    />
-                  </div>
-                  <div className="flex flex-col  w-full  m-5">
-                    <div className="">
-                      <Typography color="blue" className="text-lg font-bold ">
-                        {data.job_title}
-                      </Typography>
-                    </div>
-                    <div className="flex gap-1">
-                      <BuildingOffice2Icon className="h-4 w-4 text-teal-500" />
-                      <Typography className="text-sm">
-                        {data.companyName}
-                      </Typography>
-                    </div>
-                    <div className="flex flex-col sm:flex-row justify-between items-start">
-                      <div className="flex justify-center gap-2 ">
-                        <Typography className="font-serift text-sm text-gray-600">
-                          {data.companyLocation}({data.job_type})
-                        </Typography>
-                      </div>
-                      <div className="flex flex-col mt-2 sm:mt-0">
-                        <Typography className="font-semibold text-gray-700"></Typography>
-                        <span className="text-gray-500"></span>
-                      </div>
-                    </div>
-                    <div className="flex justify-between">
-                      {data.is_active ? (
-                        <div className=" flex text-green-400 mt-2 font-normal ">
-                          <CheckCircleIcon className="w-5 h-5 mt-1 " /> Actively
-                          recruiting
-                        </div>
-                      ) : (
-                        <div className=" flex  mt-2 font-normal "></div>
-                      )}
-                      <div
-                        className="mt-2 cursor-pointer font-light hover:underline left-0 "
-                        style={{ userSelect: "none" }}
-                        onClick={() => handleShowDetails(data)}
-                      >
-                        <span> Show details</span>
-                      </div>
-                    </div>
-                  </div>
-                  <CardFooter className=" ">
-                    <BookmarkIcon
-                      className="w-5 h-5  cursor-pointer  underline"
-                      onClick={() => handleSaveJob(data._id)}
-                    />
-                  </CardFooter>
-                </Card>
-              ))}
+      <InfiniteScrollComponent
+        dataLength={data.data.length}
+        //This is important field to render the next data
+        className="mt-4 scrollable"
+        next={fetchDataTrigger}
+        hasMore={hasMore}
+        loader={
+          <div className="flex justify-center gap-2">
+            <>
+              <Spinner className="h-5 w-5" />
+            </>
           </div>
-        </InfiniteScrollComponent>
-      </div>
+        }
+        endMessage={
+          <p className="mt-10 text-center">
+            {data.data.length > 0 ? (
+              <b>Yay! You have seen it all</b>
+            ) : (
+              <b>No data found!</b>
+            )}
+          </p>
+        }
+      >
+        {data &&
+          data.data &&
+          data.data.map((data, index) => (
+            <Card
+              onClick={(e) => {
+                e.stopPropagation(),
+                  navigate("/user/jobDetails", {
+                    state: { jobId: data._id },
+                  });
+              }}
+              key={index}
+              className={`flex flex-row justify-between container my-5 cursor-pointer  border bg-white  rounded-md hover:shadow-xl custom-sm sm:w-[25rem]  sm:ml-10  md:w-[25rem] md:h-[8rem]  xl:w-[30rem] ${
+                selectedJob._id === data._id && "bg-blue-gray-50"
+              } `}
+            >
+              <div className="m-2 mt-4 w-auto h-auto">
+                <img
+                  src={data.companyImage}
+                  style={{ width: "80px", height: "50px" }}
+                  className="rounded-sm"
+                />
+              </div>
+              <div className="flex flex-col  w-full  m-5">
+                <div className="">
+                  <Typography
+                    color="blue"
+                    className="text-sm font-bold   md:text-base"
+                  >
+                    {data.job_title}
+                  </Typography>
+                </div>
+                <div className="flex gap-1">
+                  <BuildingOffice2Icon className="h-4 w-4 text-teal-500" />
+                  <Typography className="text-sm md:text-xs">
+                    {data.companyName}
+                  </Typography>
+                </div>
+                <div className="flex flex-col sm:flex-row justify-between items-start">
+                  <div className="flex justify-center gap-2 ">
+                    <Typography className="font-serift text-sm text-gray-600 md:text-xs">
+                      {data.companyLocation}({data.job_type})
+                    </Typography>
+                  </div>
+                </div>
+                <div className="flex justify-between">
+                  <Typography className="text-xs mt-auto">
+                    {format(data.createdAt)}
+                  </Typography>
+                  {data.is_active ? (
+                    <div className=" flex text-green-400 mt-2 font-normal text-xs md:text-sm">
+                      <CheckCircleIcon className="w-4 h-4 mt-auto" /> Actively
+                      recruiting
+                    </div>
+                  ) : (
+                    <div className=" flex  mt-2 font-normal "></div>
+                  )}
+                  <div
+                    className="mt-2 cursor-pointer font-light hover:underline left-0  text-xs  md:text-sm "
+                    style={{ userSelect: "none" }}
+                    onClick={(e) => {
+                      e.stopPropagation(), handleShowDetails(data);
+                    }}
+                  >
+                    <span className="sm:block hidden "> Show details</span>
+                  </div>
+                </div>
+              </div>
+              <CardFooter className=" ">
+                <BookmarkIcon
+                  className="w-5 h-5  cursor-pointer  underline"
+                  onClick={(e) => {
+                    e.stopPropagation(), handleSaveJob(data._id);
+                  }}
+                />
+              </CardFooter>
+            </Card>
+          ))}
+      </InfiniteScrollComponent>
 
-      <div className="  m-5  hidden lg:block ">
+      <div className="  m-5  hidden lg:block hidden-lg-at-1024 ">
         {selectedJob && <JobFullDetails jobdata={selectedJob} />}
       </div>
     </div>

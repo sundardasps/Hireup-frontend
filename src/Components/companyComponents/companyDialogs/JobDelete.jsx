@@ -3,13 +3,14 @@ import { Button, Dialog, DialogBody, DialogFooter, DialogHeader, Spinner, Toolti
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { deleteJob } from "../../../Api/companyApi";
 import toast, { Toaster } from "react-hot-toast";
+import { useQueryClient} from '@tanstack/react-query'
 
 export function JobDelete({data}) {
   const [open, setOpen] = React.useState(false);
   const [isLoading,setLoading] =  useState(false)
   const handleLoading = () => setLoading((curr)=>!curr);
   const handleOpen = () => setOpen(!open);
-
+  const queryClient = useQueryClient()
   const handledelete = async () => {
     try {
         handleLoading()
@@ -19,6 +20,7 @@ export function JobDelete({data}) {
            handleLoading()
            handleOpen()
           // window.location.reload()
+          queryClient.invalidateQueries("jobs")
        }else{
         toast.error(respone.data.message)
        }

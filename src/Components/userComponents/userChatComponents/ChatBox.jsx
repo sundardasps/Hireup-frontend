@@ -182,7 +182,10 @@ function ChatBox({
                               <Typography variant="paragraph" color="white">
                                 HirupChat
                               </Typography>
-                              <Typography color="white" className="text-[0.8em]">
+                              <Typography
+                                color="white"
+                                className="text-[0.8em]"
+                              >
                                 Realtime chat by hireup,hosting by{" "}
                                 {userData?.companyName}
                               </Typography>

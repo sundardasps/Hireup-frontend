@@ -30,7 +30,7 @@ function CompanyChat() {
   }, [currentUser]);
 
   useEffect(() => {
-    socket.current = io("http://localhost:5000", {
+    socket.current = io(import.meta.env.VITE_SOCKET_BASE_URL, {
       withCredentials: true,
     });
     socket.current.emit("new-user-add", currentUser);

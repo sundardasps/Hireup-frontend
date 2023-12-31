@@ -23,6 +23,8 @@ import {
 import { applyJob, getUserResumes } from "../../../Api/userApi";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
+import { useQueryClient} from '@tanstack/react-query'
+
 function JobApply({ data }) {
   const [open, setOpen] = React.useState(false);
   const [next, setNext] = useState(0);
@@ -31,7 +33,7 @@ function JobApply({ data }) {
   const [isLoading, setLoading] = useState(false);
   const handleLoading = () => setLoading((cur) => !cur);
   const [userResumes, setUserResumes] = useState([]);
-
+  const queryClient = useQueryClient()
   const initialValue = {
     resume: "",
   };
@@ -82,7 +84,7 @@ function JobApply({ data }) {
           handleOpen();
           toast.success(response.data.message);
           setTimeout(() => {
-            window.location.reload();
+            queryClient.invalidateQueries("userHome")
           }, 1000);
         } else {
           toast.error(response.data.message);
@@ -162,7 +164,7 @@ function JobApply({ data }) {
               <Typography className="-mb-2" variant="small">
                 {(next === 1 && "Job Responsibilities") ||
                   (next === 0 && "Number ") ||
-                  (next === 2 && "Add Resume")}
+                  (next === 2 && "Select Resume")}
               </Typography>
               {next != 2 ? (
                 <Input
@@ -177,7 +179,7 @@ function JobApply({ data }) {
                 <>
                   {userResumes.length > 0 ? (
                     <>
-                      <div className="border h-[5rem] scrollable bg-blue-gray-100">
+                      <div className="border shadow-inner  h-[5rem] scrollable  rounded-lg ">
                         {userResumes &&
                           userResumes.map((resume, index) => (
                             <li
@@ -188,7 +190,7 @@ function JobApply({ data }) {
                                 className="flex cursor-pointer"
                                 onClick={() => handleResume(resume.resume)}
                               >
-                                <div className="flex gap-1 text-white text-base border p-1 rounded-md bg-blue-500">
+                                <div className="flex gap-1 text-white text-base border p-1 rounded-md bg-blue-500 shadow-md">
                                   <DocumentIcon className="w-5 h-5" />
                                   <span>{resume.resumeName}</span>
                                 </div>

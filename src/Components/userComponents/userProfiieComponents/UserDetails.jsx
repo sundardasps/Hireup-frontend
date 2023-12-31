@@ -299,7 +299,7 @@ function UserDetails() {
                 </div>
               </div>
 
-              <div className="w-full md:w-6/12 md:mx-2 ">
+              <div className="w-full mt-5 md:w-6/12  md:mx-2 lg:mt-0">
                 <div className="bg-white p-2 shadow-sm rounded-lg shadow-blue-gray-200">
                   <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8  w-[50rem]">
                     <span className="text-green-500">
@@ -354,7 +354,7 @@ function UserDetails() {
                 <div className="bg-white p-2 shadow-sm rounded-lg shadow-blue-gray-200">
                   <div className="grid  ">
                     <div>
-                      <div className="flex justify-between items-center space-x-2 font-semibold text-gray-900 leading-8 ">
+                      <div className="flex justify-between  items-center space-x-2 font-semibold text-gray-900 leading-8 ">
                         <span className="tracking-wide">Experience</span>
                         <EditExperience addData={{ data }} />
                       </div>

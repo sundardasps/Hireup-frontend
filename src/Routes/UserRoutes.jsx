@@ -16,6 +16,7 @@ import AppliedList from "../Components/userComponents/userHomeComponents/Applied
 import UserChat from "../Pages/userPages/userChatPage/UserChat.jsx";
 import SavedJobsPage from "../Pages/userPages/savedJobsPage/SavedJobsPage.jsx";
 import UserVideoChatpage from '../Pages/userPages/userChatPage/UserVideoChat.jsx'
+import JobFullDetilsSeperateDiv from '../Components/userComponents/userHomeComponents/JobFullDetailsSeparate.jsx'
 function UserRoutes() {
   const [user, setUser] = useState("");
   useEffect(() => {
@@ -41,6 +42,7 @@ function UserRoutes() {
       <Route path="/chat" element={<UserChat/>}/>
       <Route path="/savedJobs" element={<SavedJobsPage/>}/>
       <Route path='/room/:recieverId' element={<UserVideoChatpage/>}/>
+      <Route path="/jobDetails" element={<JobFullDetilsSeperateDiv/>}/>
       
       </Route>
       </Route>

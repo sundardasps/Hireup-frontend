@@ -30,19 +30,28 @@ export function JobFullDetails({ jobdata }) {
   const decode = jwtDecode(token)
   const userId = decode.exist._id
 
-  
+
 
   const {data,refetch} = useQuery({
-    queryKey:["jobCheck",jobdata._id],
+    queryKey:["jobCheck",jobdata?._id],
     queryFn: async () =>{
-       const response = await checkJobAppliedOrNot(userId,jobdata._id)
-       return response
+      try {
+        
+        const response = await checkJobAppliedOrNot(userId,jobdata._id)
+        if (response === undefined) {
+          throw new Error("Query function returned undefined.");
+        }
+        return response;
+      } catch (error) {
+        console.error("Error in query function:", error);
+        throw error; // Rethrow the error to let React Query handle it
+      }
     }
   })
  
-  useEffect(() => {
-    refetch();
-  },[jobdata._id]);
+  // useEffect(() => {
+  //   refetch();
+  // },[jobdata?._id,refetch]);
   
 
   return (

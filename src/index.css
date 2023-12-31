@@ -33,5 +33,20 @@
       .scrollable::-webkit-scrollbar-track {
         background-color: transparent;
       }
+
+      
+    }
+    @media (max-width: 1024px) {
+      .hidden-lg-at-1024 {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .custom-sm{
+        width: 22rem;
+        height: 8rem;
+        margin-left: 5px;
+      }
     }
   }

@@ -362,3 +362,11 @@ export async function  getUserResumes(){
   }
 }
 
+export async function jobDetails(id) {
+  try {
+    const response = await userCheck.get(`/jobDetails/${id}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}

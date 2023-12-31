@@ -96,7 +96,7 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
 
   const handleJoinRoom = () => {
     const recieverId = chat.members.find((id) => id !== currentUser);
-    const joinId = `http://localhost:5173/user/room/${recieverId}`;
+    const joinId = `${import.meta.env.VITE_COMPANY_ROOM_USER_BASE_URL}${recieverId}`;
     setroomUrl(joinId);
     setTimeout(() => {
       navigate(`/company/room`, { state: { recieverId } });
