@@ -48,7 +48,7 @@ export function Education({ EditData }) {
           ? editEducation(EditData.value, values)
           : addEducation(values));
         if (response.data.created || response.data.updated) {
-          window.location.reload();
+          queryClient.invalidateQueries("userProfile");
           toast.success(response.data.message);
           handleOpen();
         } else {
@@ -61,7 +61,7 @@ export function Education({ EditData }) {
     try {
       const response = await deleteEducation(EditData.value);
       if (response.data.delete) {
-        window.location.reload();
+        queryClient.invalidateQueries("userProfile");
         handleOpen();
         toast.success(response.data.message);
       }

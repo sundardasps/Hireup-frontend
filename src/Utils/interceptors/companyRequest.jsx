@@ -24,6 +24,8 @@ companyInterseptor.interceptors.response.use(
           setTimeout(()=>{
              window.location.reload()
           },1000)
+      }else if(error.response.status === 404){
+        window.location = '/error'
       }
     return Promise.reject(error);
   }

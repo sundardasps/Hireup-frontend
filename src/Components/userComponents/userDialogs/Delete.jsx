@@ -21,9 +21,8 @@ async function deleteResume(){
     try {
         const response = await resumeDelete(data._id)
         if(response.data.deleted){
-            
+          queryClient.invalidateQueries("userProfile");
             toast.success(response.data.message)
-             queryClient.invalidateQueries('userProfile')
         }else{
             toast.error(response.data.message)
         }

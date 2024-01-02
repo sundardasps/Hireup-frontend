@@ -17,7 +17,10 @@ import UserChat from "../Pages/userPages/userChatPage/UserChat.jsx";
 import SavedJobsPage from "../Pages/userPages/savedJobsPage/SavedJobsPage.jsx";
 import UserVideoChatpage from '../Pages/userPages/userChatPage/UserVideoChat.jsx'
 import JobFullDetilsSeperateDiv from '../Components/userComponents/userHomeComponents/JobFullDetailsSeparate.jsx'
+import ErrorComponent from '../Components/commonComponents/errorHandling/ErrorComponent.jsx'
 function UserRoutes() {
+
+
   const [user, setUser] = useState("");
   useEffect(() => {
     setUser(localStorage.getItem('token'));
@@ -43,9 +46,11 @@ function UserRoutes() {
       <Route path="/savedJobs" element={<SavedJobsPage/>}/>
       <Route path='/room/:recieverId' element={<UserVideoChatpage/>}/>
       <Route path="/jobDetails" element={<JobFullDetilsSeperateDiv/>}/>
+      <Route path="*" element={<ErrorComponent/>}/>
+      </Route>
+      </Route>
       
-      </Route>
-      </Route>
+
     </Routes>
   );
 }

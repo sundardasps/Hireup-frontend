@@ -62,7 +62,7 @@ function UserNavbar() {
   function NavList() {
     return (
      
-      <ul className=" flex justify-center   lg:gap-5   lg:mb-0 lg:mt-0 lg:flex-row lg:items-center  ">
+      <ul className=" flex justify-center  lg:gap-5   lg:mb-0 lg:mt-0 lg:flex-row lg:items-center  ">
         <>
         <a
           onClick={()=>navigate('/user')}
@@ -124,7 +124,7 @@ function UserNavbar() {
           as="li"
           variant="small"
           color="blue-gray"
-          className="m-auto "
+          className="my-auto"
         >
         
             <Menu>

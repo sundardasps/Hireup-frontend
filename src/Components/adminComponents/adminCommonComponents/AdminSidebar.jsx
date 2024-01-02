@@ -7,6 +7,7 @@ import {
   ListItem,
   ListItemPrefix,
   ListItemSuffix,
+  Avatar,
 } from "@material-tailwind/react";
 import {
   InboxIcon,
@@ -37,6 +38,17 @@ export function AdminSidebar() {
         </Typography>
         <hr className="my-2 border-blue-gray-50" />
       </div>
+           <div className="flex justify-around border-b-2 pb-3  items-center">
+          <Avatar
+            variant="circular"
+            alt="tania andrew"
+            size="xl"
+            className=" cursor-pointer "
+            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+          />
+          <Typography>dsfjshf</Typography>
+           </div>
+
       <List>
         {/* <hr className="my-2 border-blue-gray-50" /> */}
         <ListItem onClick={() => navigate("/admin/")}>

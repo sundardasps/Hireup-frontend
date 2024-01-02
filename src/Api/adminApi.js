@@ -132,3 +132,15 @@ export async function subCategoryDelete(value, id) {
     console.error(error);
   }
 }
+
+//-----------------------------------------------dashboard section----------------------------------------//
+
+export async function getDashboard() {
+  try {
+    const response = await adminCheck.get("/getDashboard");
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+

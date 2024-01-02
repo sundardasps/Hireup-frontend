@@ -18,14 +18,14 @@ import { useFormik } from "formik";
 import { userExperienceSchema } from "../../../Utils/yupValidations/yupUserValidations";
 import { addExperience, experienceDelete, experienceEdit } from "../../../Api/userApi";
 import toast, { Toaster } from "react-hot-toast";
- 
+import {useQueryClient} from '@tanstack/react-query' 
 export function EditExperience({editdata}) {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
   const handleOpen = () => setOpen((cur) => !cur);
   const handleLoading = () => setLoading((cur) => !cur);
-
+  const queryClient = useQueryClient();
 
   const initialValue = {
     experience: editdata ? editdata.value : ""
@@ -43,7 +43,7 @@ export function EditExperience({editdata}) {
         handleLoading()
          const response = await( editdata ?  experienceEdit(editdata.value,values.experience) : addExperience(values) )
         if(response.data.created || response.data.updated  ){
-        window.location.reload()
+          queryClient.invalidateQueries("userProfile");
         handleLoading()
         handleOpen()
         toast.success(response.data.message)
@@ -59,7 +59,7 @@ export function EditExperience({editdata}) {
     try {
       const response = await experienceDelete(editdata.value)
       if(response.data.update){
-        window.location.reload()
+        queryClient.invalidateQueries("userProfile");
         handleLoading()
         handleOpen()
         toast.success(response.data.message)

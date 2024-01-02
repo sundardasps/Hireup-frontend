@@ -25,6 +25,7 @@ import CompanyChatPage from '../Pages/companyPages/companyChatPage/CompanyChatPa
 import PaymentSuccessPage from '../Pages/companyPages/companyPaymentPage/SuccessPage'
 import PaymentFailuerPage from '../Pages/companyPages/companyPaymentPage/FailuerPage'
 import CompanyVideoChatPage from '../Pages/companyPages/companyChatPage/CompanyVideoChatPage'
+import ErrorComponent from '../Components/commonComponents/errorHandling/ErrorComponent'
 function CompanyRoutes(){
 
    return (
@@ -50,6 +51,8 @@ function CompanyRoutes(){
          <Route path='/chat' element={<CompanyChatPage/>}/>
          <Route path='/status' element={<PaymentSuccessPage/>}/>
          <Route path='/room' element={<CompanyVideoChatPage/>}/>
+         <Route path='*' element={<ErrorComponent/>}/>
+
 
 
 
