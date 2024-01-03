@@ -370,3 +370,5 @@ export async function jobDetails(id) {
     console.log(error);
   }
 }
+
+

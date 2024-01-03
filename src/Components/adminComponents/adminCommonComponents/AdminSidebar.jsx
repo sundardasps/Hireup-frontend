@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import { jwtDecode } from "jwt-decode";
+import userDefalt from "../../../../public/user.png";
 import {
   Card,
   Typography,
@@ -24,6 +26,9 @@ export function AdminSidebar() {
   const handleOpen = (value) => {
     setOpen(open === value ? 0 : value);
   };
+  const adminToken = localStorage.getItem("adminToken");
+  const decoded = jwtDecode(adminToken);
+  console.log(decoded, "kkkkkkkkk");
 
   const handleLogOut = () => {
     localStorage.removeItem("adminToken");
@@ -31,23 +36,24 @@ export function AdminSidebar() {
   };
 
   return (
-    <Card className="h-screen w-full max-w-[20rem] p-4 shadow-xl shadow-blue  border-2">
-      <div className="mb-2 p-4">
-        <Typography variant="h5" color="blue-gray">
-          Sidebar
+    <Card className="h-screen w-full max-w-[20rem]  shadow-xl shadow-blue  border-2">
+
+      <div className="flex justify-around  bg-blue-gray-50 p-5  items-center rounded-md">
+        <img
+          alt="tania andrew"
+          className=" cursor-pointer w-16 h-14 rounded-lg "
+          src={
+            (decoded.exist.userDp && decoded.exist.userDp) ||
+            (decoded.exist.image && decoded.exist.image) ||
+            userDefalt
+          }
+        />
+        <Typography>
+          {(decoded.exist.userName && decoded.exist.userName) ||
+            (decoded.exist.companyName && decoded.exist.companyName)}
         </Typography>
-        <hr className="my-2 border-blue-gray-50" />
+        
       </div>
-           <div className="flex justify-around border-b-2 pb-3  items-center">
-          <Avatar
-            variant="circular"
-            alt="tania andrew"
-            size="xl"
-            className=" cursor-pointer "
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-          />
-          <Typography>dsfjshf</Typography>
-           </div>
 
       <List>
         {/* <hr className="my-2 border-blue-gray-50" /> */}

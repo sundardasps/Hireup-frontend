@@ -75,14 +75,14 @@ function JobFullDetailsSeparate() {
 
   return (
     <div className="flex justify-center">
-      <Card className="  container mx-2 my-5 max-w-3xl   bg-white  h-auto border  rounded-none">
-        <div className="flex  flex-col bg-blue-gray-200  ">
+      <Card  className="  container  my-3 w-screen   bg-white  h-auto border  rounded-none">
+        <div className="flex  flex-col bg-blue-500  ">
           <div className="flex justify-between ">
             <ArrowLeftIcon
               className="w-10 h-6 m-4 cursor-pointer"
               onClick={() => navigate("/user")}
             />
-            <text className="flex justify-around text-4xl m-2 text-blue-gray-600 font-bold mx-5 ">
+            <text className="flex justify-around text-4xl m-2 text-white font-bold mx-5 ">
               {data ? data.data.jobDetails.job_title : ""}
             </text>
             <Menu>
@@ -95,7 +95,7 @@ function JobFullDetailsSeparate() {
                     handleSaveJob(jobId);
                   }}
                 >
-                  Save job
+                  Save 
                 </MenuItem>
                 <MenuItem>Cancel</MenuItem>
               </MenuList>

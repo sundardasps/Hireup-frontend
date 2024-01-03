@@ -135,7 +135,6 @@ export default function UserCards() {
         <Card className="hidden lg:block h-[22rem]  p-1 shadow-xl shadow-blue  border m-5 ">
           <div className="mb-1 p-2">
             <Typography variant="h3" color="blue-gray">
-              Find jobs..
             </Typography>
             <div className="w-full ">
               <Input
@@ -148,7 +147,6 @@ export default function UserCards() {
               />
             </div>
           </div>
-  
           <p className="text-center">Search & filter</p>
           <List className="scrollable h-40 ">
             {category &&
@@ -209,7 +207,7 @@ export default function UserCards() {
           <List></List>
         </Card>
 
-        <CardBody className=" grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  ">
+        <CardBody className=" grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  ">
           <Card className=" lg:hidden md:block h-[18rem] w-min  p-1 shadow-xl shadow-blue  border ">
             <div className="mb-1 p-2">
               <Typography variant="h3" color="blue-gray">

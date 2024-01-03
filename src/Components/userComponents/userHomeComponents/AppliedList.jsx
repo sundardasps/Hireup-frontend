@@ -4,13 +4,18 @@ import { appliedList } from '../../../Api/userApi'
 import { Accordion, AccordionBody, AccordionHeader, Button, Card, CardFooter, Input, List, ListItem, Option, Select, Typography } from '@material-tailwind/react'
 import { BookmarkIcon, BookmarkSlashIcon, BuildingOffice2Icon, CheckCircleIcon, ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import  AppliedJobStatus from '../userDialogs/AppliedJobStatus' 
+import { JobFullDetails } from './JobFullDetails';
 function AppliedList() {
   const [category, setCategory] = React.useState([]);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
   const [debounsedSearch, setDebouncedSearch] = useState("");
   const [open, setOpen] = React.useState(0);
+  const [selectedJob, setSelectedJob] = useState(null);
   
+  const handleShowDetails = (jobData) => {
+    setSelectedJob(jobData);
+  };
 
   useEffect(() => {
 
@@ -51,7 +56,7 @@ function AppliedList() {
       <Card className="fixed h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5  hidden lg:block">
           <div className="mb-1 p-2">
             <Typography variant="h3" color="blue-gray">
-              Find jobs..
+              Applied jobs
             </Typography>
             <div className="w-full ">
               <Input
@@ -87,7 +92,12 @@ function AppliedList() {
           data.appliedJobData.map((data, index) => (
             <Card
               key={index}
-              className=" flex  sm:flex-row justify-between container my-5   xl:w-[30rem] border bg-white  rounded-md hover:shadow-xl  "
+              onClick={(e) => {
+                e.stopPropagation(), handleShowDetails(data);
+              }}
+              className={`flex flex-row justify-between container my-5 cursor-pointer  border bg-white  rounded-md hover:shadow-xl custom-sm sm:w-[25rem]  sm:ml-10  md:w-[25rem] md:h-[8rem]  xl:w-[30rem] ${
+                selectedJob?._id === data?._id && "bg-blue-gray-50"
+              } `}
             >
               <div className="m-2 mt-4 w-auto h-auto">
                 <img
@@ -130,27 +140,32 @@ function AppliedList() {
                     </div>
                   )}
                   <div
-                    className="mt-2 cursor-pointer font-light hover:shadow-lg left-0 "
+                    className=" cursor-pointer font-light hover:text-blue-500 left-0 "
                     style={{ userSelect: "none" }}
                     // onClick={() => handleShowDetails(data)}
                   >
                      <AppliedJobStatus jobData={data}/>
 
                   </div>
+                  
                 </div>
+                
+                
               </div>
-              {/* <CardFooter className=" ">
-                <BookmarkIcon className="w-5 h-5  cursor-pointer  underline" />
-                <BookmarkSlashIcon className="w-5 h-5  cursor-pointer  underline" />
-              </CardFooter> */}
+              
             </Card>
+            
           )
+          
           
           )):<Typography className="text-center text-gray-600 my-5">
           No applied jobs found.
         </Typography>
         }
       </div>
+      <div className="  m-5  hidden lg:block hidden-lg-at-1024 ">
+               {selectedJob && <JobFullDetails jobdata={selectedJob} />}
+                </div>
     </div>
     
 

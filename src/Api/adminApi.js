@@ -133,6 +133,16 @@ export async function subCategoryDelete(value, id) {
   }
 }
 
+
+export async function companyApprovel(companyid){
+    try {
+      const response = await adminCheck.put(`/companyApprovel/${companyid}`)
+      return response 
+    } catch (error) {
+      console.log(error);
+    }
+}
+
 //-----------------------------------------------dashboard section----------------------------------------//
 
 export async function getDashboard() {

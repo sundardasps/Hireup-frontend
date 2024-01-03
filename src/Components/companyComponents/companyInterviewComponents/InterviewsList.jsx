@@ -6,20 +6,43 @@ import {
   CardFooter,
   CardHeader,
   Chip,
+  Input,
   Menu,
   MenuHandler,
   MenuItem,
   MenuList,
+  Tab,
+  Tabs,
+  TabsHeader,
   Textarea,
   Typography,
 } from "@material-tailwind/react";
-import { EllipsisVerticalIcon, UserIcon } from "@heroicons/react/24/solid";
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import { scheduleInterviewList } from "../../../Api/companyApi";
+import { EllipsisVerticalIcon, MagnifyingGlassIcon, UserIcon } from "@heroicons/react/24/solid";
+import React, { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { cancelInterview, scheduleInterviewList } from "../../../Api/companyApi";
 import userLogo from "../../../../public/user.png";
 import RescheduleInterview from "../companyDialogs/RescheduleInterview";
+import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 export default function InterviewsList() {
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("");
+  const [page, setPage] = useState(1);
+  const navigate = useNavigate();
+  const [debounsedSearch, setDebouncedSearch] = useState("");
+  const queryClient = useQueryClient()
+  const TABS = [
+    {
+      label: "Active",
+      value: "Active",
+    },
+    {
+      label: "Expired",
+      value: "Expired",
+    },
+  ];
+
   const { data } = useQuery({
     queryKey: ["interviewList"],
     queryFn: async () => {
@@ -28,13 +51,46 @@ export default function InterviewsList() {
     },
   });
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 1000);
+    return () => clearTimeout(timeoutId);
+  });
+
+
+  const handleCancelInterview =async (id) =>{
+     try {
+       const response = await cancelInterview(id)
+       if(response.data.canceled){
+        toast.success(response.data.message)
+          queryClient.invalidateQueries("interviewList")
+       }
+     } catch (error) {
+      console.log(error);
+     }
+  }
   
 
   return (
     <>
-      <Card className="h-screen w-full shadow border mx-5 my-5 py-4">
-        <CardBody className="overflow-y-scroll px-0 h-full">
-          <div className="">
+      <Card className="h-screen w-full shadow border  my-5">
+        <div className="flex    gap-4 md:flex-row bg-blue-500 p-3 rounded-t-lg">
+        <div className="w-full md:w-72">
+          <Input
+            label="Search title"
+            value={search}
+            color="white"
+            autoFocus
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+            icon={<MagnifyingGlassIcon className="h-5 w-5" color="white" />}
+          />
+        </div>
+      </div>
+        <CardBody className="overflow-y-scroll  h-full">
+          <div className="mt-2 overflow-hidden">
             <ul className=" -ml-2 flex flex-col gap-4 items-center">
               {data &&
                 data.data.list.map((value, index) => (
@@ -82,7 +138,7 @@ export default function InterviewsList() {
                       </MenuHandler>
                       <MenuList>
                         <RescheduleInterview details={{value}}/>
-                        <MenuItem>Cancel</MenuItem>
+                        <MenuItem onClick={()=>handleCancelInterview(value._id)}>Cancel</MenuItem>
                       </MenuList>
                     </Menu>
                   </MenuItem>
@@ -90,30 +146,8 @@ export default function InterviewsList() {
             </ul>
           </div>
         </CardBody>
-        <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-          <Typography variant="small" color="blue-gray" className="font-normal">
-            {/* Page {page} of {data.totalPage} */}
-          </Typography>
-          <div className="flex gap-2">
-            <Button
-              variant="outlined"
-              size="sm"
-              //   disabled={page === 1}
-              //   onClick={() => handlePage(page - 1)}
-            >
-              Previous
-            </Button>
-            <Button
-              variant="outlined"
-              size="sm"
-              //   onClick={() => handlePage(page + 1)}
-              //   disabled={page === data.data.totalPage}
-            >
-              Next
-            </Button>
-          </div>
-        </CardFooter>
       </Card>
+      <Toaster/>
     </>
   );
 }

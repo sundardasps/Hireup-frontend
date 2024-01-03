@@ -65,17 +65,17 @@ export default function AppliedJobStatus(jobdata) {
 
   return (
     <>
-      <Button
+      <p
         size="sm"
-        className="flex p-1"
+        className="flex p-1 underline"
         onClick={handleOpen}
-        variant="outlined"
+        
       >
-        Status
-        <QuestionMarkCircleIcon className="w-5 h-4 " />
-      </Button>
-      <Dialog size="xs" open={open} handler={handleOpen} className="">
-        <div className="flex flex-col items-center ">
+        Application Status
+       
+      </p>
+      <Dialog size="xs"  open={open} handler={handleOpen} className="bg-blue-gray-50">
+        <div className="flex flex-col items-center">
         <Typography className="border-b-2 m-5 p-0 font-semibold">Application Status</Typography>
           <Stepper
             style={{width:"30%"}}

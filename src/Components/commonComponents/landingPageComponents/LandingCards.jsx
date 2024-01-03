@@ -36,7 +36,7 @@ function LandingCards() {
             navigate("/company/companyRegister");
           }}
           shadow={false}
-          className="animated-image relative md:h-[20rem] md:max-w-[20rem] mt-4   h-[23rem] w-full max-w-[23rem] items-end justify-center  p-10 overflow-hidden shadow-2xl border  inline-flex border-blue-600  hover:scale-105 duration-500 "
+          className="animated-image relative md:h-[18rem] md:max-w-[18rem] mt-4   h-[23rem] w-full max-w-[23rem] items-end justify-center  p-10 overflow-hidden shadow-2xl border  inline-flex border-blue-600  hover:scale-105 duration-500 "
         >
           <CardHeader
             floated={false}
@@ -68,7 +68,7 @@ function LandingCards() {
 
         <Card
           shadow={false}
-          className="animated-image-top relative  mt-10 grid h-[23rem] w-full max-w-[23rem] items-end justify-center  p-10 overflow-hidden shadow-2xl border  inline-flex border-blue-600 border hover:scale-105 duration-500 md:h-[20rem] md:max-w-[20rem]"
+          className="animated-image-top relative  mt-10 grid h-[23rem] w-full max-w-[23rem] items-end justify-center  p-10 overflow-hidden shadow-2xl border   border-blue-600  hover:scale-105 duration-500 md:h-[18rem] md:max-w-[18rem]"
           onClick={() => {
             navigate("/user/register");
           }}

@@ -313,3 +313,12 @@ export async function companyAddMessage(newMessage) {
     console.log(error);
   }
 }
+
+export async function cancelInterview(interviewId) {
+  try {
+    const response = await companyCheck.put(`/cancelInterview/${interviewId}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}

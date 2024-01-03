@@ -155,7 +155,7 @@ export function CompanyListComponent() {
               {data &&
                 data.data &&
                 data.data.map(
-                  ({ _id, companyName, is_blocked, email, number ,role,image,gst_number,jobs,address,company_roles,location}, index) => {
+                  ({ _id, companyName, is_blocked, email, number ,role,image,gst_number,jobs,address,company_roles,location,is_approved}, index) => {
                     const isLast = index === data.data.length - 1;
                     const classes = isLast
                       ? "p-4"
@@ -176,7 +176,7 @@ export function CompanyListComponent() {
                                 color="blue-gray"
                                 className="font-normal"
                               >
-                                <UserFulldetails companyData={{ _id, companyName, is_blocked, email, number ,role,image,gst_number,jobs,address,company_roles,location}}/>
+                                <UserFulldetails companyData={{ _id, companyName, is_blocked, email, number ,role,image,gst_number,jobs,address,company_roles,location,is_approved}}/>
                               </Typography>
                               {/* <Typography
                             variant="small"

@@ -1,7 +1,7 @@
 import React from "react";
 import banner from "../../../../public/banner.webp";
 import dp from "../../../../public/user.png";
-
+import {useQueryClient} from '@tanstack/react-query'
 import {
   Button,
   Dialog,
@@ -14,19 +14,35 @@ import {
   Select,
   Option,
 } from "@material-tailwind/react";
-
+import { companyApprovel } from "../../../Api/adminApi";
+import {toast,Toaster} from 'react-hot-toast'
 export function UserFulldetails({ userData,companyData }) {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen(!open);
-  console.log(userData);
+  const quaryClient = useQueryClient()
+  const companyApprovelHandling = async () =>{
+    try {
+      const response = await companyApprovel(companyData._id)
+      if(response.data.approved){
+       toast.success(response.data.message)
+         quaryClient.invalidateQueries("company")
+      }else{
+       toast.success(response.data.message)
+       quaryClient.invalidateQueries("company")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <p onClick={handleOpen}  className="cursor-pointer">
         {userData?userData.userName:companyData.companyName}
       </p>
 
-      {userData && <Dialog size="xs" open={open} handler={handleOpen}>
+      {userData && <Dialog size="xl"  open={open} handler={handleOpen}>
         <div className="w-full ">
           <div className="bg-white  shadow-md">
             <div className="relative mb-20">
@@ -66,7 +82,7 @@ export function UserFulldetails({ userData,companyData }) {
                   {userData ? userData.place : ""}
                 </p>
               </div>
-              <div className="flex justify-between gap-5 p-3 w-min ">
+              {/* <div className="flex justify-between gap-5 p-3 w-min ">
                 <Select size="md" label="Skills " name="title">
                   {userData.skills.map((value, index) => (
                     <Option key={index}>{value.skill}</Option>
@@ -81,7 +97,7 @@ export function UserFulldetails({ userData,companyData }) {
                     ))}
                   </Option>
                 </Select>
-              </div>
+              </div> */}
             </div>
 
             <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3  divide-y rounded shadow-sm">
@@ -100,10 +116,11 @@ export function UserFulldetails({ userData,companyData }) {
             </ul>
           </div>
         </div>
+     <Toaster/>
       </Dialog>}
 
      
-      {companyData && <Dialog size="xs" open={open} handler={handleOpen} >
+      {companyData && <Dialog size="xl" className="scrollable" open={open}  handler={handleOpen} >
         <div className="w-full ">
           <div className="bg-white  shadow-md">
             <div className="relative mb-20">
@@ -111,9 +128,11 @@ export function UserFulldetails({ userData,companyData }) {
               <div className="bgimage relative">
                 <img
                   src={ banner}
-                  className="inline-block w-full h-48 border-2 border-white  object-cover object-center"
+                  className="inline-block w-full h-32 border-2 border-white  object-cover object-center"
                   alt="Background"
                 />
+            
+
                 <div className="absolute bottom-4 right-5 rounded-lg cursor-pointer">
                   {/* Any content you want to add inside the absolute positioned div */}
                 </div>
@@ -129,6 +148,7 @@ export function UserFulldetails({ userData,companyData }) {
                 </a>
               </div>
             </div>
+               
             <div>
               <div className="m-1">
                 <h1 className="text-gray-900 font-semibold text-3xl leading-8 my-1">
@@ -174,11 +194,16 @@ export function UserFulldetails({ userData,companyData }) {
                   </span>
                 </span>
               </li>
+              
+            <div className="flex justify-center p-3">
+            <Button variant="gradient" color={companyData.is_approved === true ?"red":"green"} onClick={()=>companyApprovelHandling()} >{companyData.is_approved === true?"Cancel approvel":"Approve"}</Button>
+            </div>
             </ul>
           </div>
         </div>
-      </Dialog>}
+     <Toaster/>
 
+      </Dialog>}
 
     </>
   );

@@ -15,10 +15,10 @@ export default function DashboardGraphs() {
     }
   }) 
 
-  console.log(data,"LLLLLLllllllllllll");
+ 
 
   const [chartData, setChartData] = useState({
-    series: [44, 55, 41, 17, 15],
+    series: [data?.data?.activecompaniesCount, data?.data?.activeJobs, data?.data?.applications, data?.data?.activeUsers],
     options: {
       chart: {
         width: 380,
@@ -38,11 +38,16 @@ export default function DashboardGraphs() {
       },
       legend: {
         formatter: function (val, opts) {
-          return val + " - " + opts.w.globals.series[opts.seriesIndex];
+          const categories = ['active companies','Total users','active jobs','activeUsers'];
+          return (
+            categories[opts.seriesIndex] +
+            " - " +
+            opts.w.globals.series[opts.seriesIndex]
+          );
         },
-      },
+      }, // Correct placement of the closing curly brace
       title: {
-        text: "Gradient Donut with custom Start-angle",
+        text: "Total view",
       },
       responsive: [
         {
@@ -59,14 +64,15 @@ export default function DashboardGraphs() {
       ],
     },
   });
+  
 
 
  
 
 
   return (
-    <div className="p-1 ">
-      <div className="flex justify-around  mb-14 ">
+    <div className="">
+      <div className="flex justify-between  mb-14 ">
         <div className="border  p-1 w-[12rem] text-white  h-[6rem] shadow-md shadow-blue-gray-200  bg-light-blue-300">
           <div className="flex flex-col items-center ">
             <Typography variant="h5">Active companies</Typography>
@@ -97,12 +103,6 @@ export default function DashboardGraphs() {
             type="donut"
             width="400"
           />
-        </div>
-      </div>
-
-      <div className="row bg-blue-gray-300">
-        <div className="mixed-chart">
-fffffff
         </div>
       </div>
     </div>
