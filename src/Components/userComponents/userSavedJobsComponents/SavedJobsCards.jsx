@@ -7,10 +7,11 @@ import { getSavedJobs, unsaveJobs } from '../../../Api/userApi';
 import { JobFullDetails } from '../userHomeComponents/JobFullDetails';
 import toast from 'react-hot-toast';
 import MainLoadinig from '../../../Components/commonComponents/Loadings/MainLoding'
+import { useNavigate } from 'react-router-dom';
 function SavedJobsCards() {
   const [selectedJob, setSelectedJob] = useState(null);
     const queryClient = useQueryClient();
-  
+    const navigate = useNavigate();
 
 
   const {data,error, isLoading} = useQuery({
@@ -66,8 +67,16 @@ function SavedJobsCards() {
         data.data.length > 0 ?
         (data.data.map((data, index) => (
           <Card
+          onClick={(e) => {
+            e.stopPropagation(),
+              navigate("/user/jobDetails", {
+                state: { jobId: data._id },
+              });
+          }}
             key={index}
-            className=" flex  sm:flex-row justify-between container my-5   xl:w-[30rem] border bg-white  rounded-md hover:shadow-xl  "
+            className={`flex flex-row justify-between container my-5 cursor-pointer  border bg-white  rounded-md hover:shadow-xl custom-sm sm:w-[25rem]  sm:ml-10  md:w-[25rem] md:h-[8rem]  xl:w-[30rem] ${
+              selectedJob?._id === data._id && "bg-blue-gray-50"
+            } `}
           >
             <div className="m-2 mt-4 w-auto h-auto">
               <img
@@ -112,7 +121,7 @@ function SavedJobsCards() {
                 <div
                   className="mt-2 cursor-pointer font-light hover:underline left-0 "
                   style={{ userSelect: "none" }}
-                  onClick={() => handleShowDetails(data)}
+                  onClick={(e) =>{e.stopPropagation(), handleShowDetails(data)}}
                 >
                   <span> Show details</span>
                 </div>
@@ -120,7 +129,7 @@ function SavedJobsCards() {
             </div>
             <CardFooter className=" ">
               <BookmarkSlashIcon
-              onClick={()=>handleUnsaveJobs(data._id)}
+              onClick={(e)=>{e.stopPropagation(),handleUnsaveJobs(data._id)}}
               className="w-5 h-5  cursor-pointer  underline" />
             </CardFooter>
           </Card>

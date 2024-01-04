@@ -10,7 +10,6 @@ import {
   Typography,
   Card,
 } from "@material-tailwind/react";
-import { Document, Page } from "react-pdf";
 
 export function UserResume(resume) {
   const [open, setOpen] = React.useState(false);
@@ -19,12 +18,12 @@ export function UserResume(resume) {
   const handleOpen = () => setOpen((cur) => !cur);
   const handleIsFavorite = () => setIsFavorite((cur) => !cur);
 
-  console.log(resume, "========resume page");
+
 
   return (
     <>
       <Card
-        className="h-64 w-96 cursor-pointer overflow-hidden transition-opacity hover:opacity-90 cursor-pointer"
+        className="h-64 w-96 cursor-pointer overflow-hidden transition-opacity hover:opacity-90 "
         onClick={handleOpen}
       >
         {resume.resumeType === "pdf" ? (
@@ -36,6 +35,7 @@ export function UserResume(resume) {
             className=""
             onError={(e) => console.error("Error loading PDF:", e)}
           ></iframe>
+          
         ) : (
           <img
             alt="nature"

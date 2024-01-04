@@ -12,7 +12,7 @@ import company from "../../../../public/office.jpg";
 
 function CompaniesBanner() {
   return (
-    <div className=" bg-blue-gray-0 ">
+    <div className=" bg-blue-gray-0 mt-10">
       <Typography variant="h4" className="text-center">
         Why Choose Us?
       </Typography>
@@ -23,7 +23,7 @@ function CompaniesBanner() {
           companies seeking skilled professionals.
         </Typography>
       </div>
-      <div className=" flex flex-col sm:flex-row justify-around lg:mx-10 lg:mt-16 lg:m-10 ">
+      <div className=" flex flex-col sm:flex-row justify-around lg:mx-10  ">
         <Card className="max-w-[18rem] h-[18rem] overflow-hidden mb-3 bg-white shadow-md shadow-blue-gray-200 border m-auto mt-4">
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-4">

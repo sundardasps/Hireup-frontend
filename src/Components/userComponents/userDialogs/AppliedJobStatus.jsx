@@ -79,7 +79,7 @@ export default function AppliedJobStatus(jobdata) {
         <Typography className="border-b-2 m-5 p-0 font-semibold">Application Status</Typography>
           <Stepper
             style={{width:"30%"}}
-            activeStep={data && data.data.status === "submitted"&& 0 || data && data.data.status === "rejected" && 1 ||data && data.data.status === "viewed" && 1||data && data.data.status === "sheduled" && 2}
+            activeStep={data && data.data.status === "submitted"&& 0 || data && data.data.status === "rejected" && 1 ||data && data.data.status === "viewed" && 1||data && data.data.status === "scheduled" && 2}
           >
             <Step>
             <CloudArrowUpIcon className="h-5 w-5 " />
@@ -115,11 +115,13 @@ export default function AppliedJobStatus(jobdata) {
             <Typography variant="h6" className="flex justify-center text-center text-blue-gray-400 font-thin">
               {data && data.data.status === "submitted"&& (<><CheckCircleIcon className="h-5 w-7 m-1 " />The applications submitted</>)}
               {data && data.data.status === "viewed"&& (<><EyeIcon className="h-5 w-7 m-1" />The application  reviewed</>)}
-              {data && data.data.status === "rejected"&& (<><ExclamationCircleIcon color="" className="w-5 h-7 "/>Your application rejected !</>)}
-              {data && data.data.status === "sheduled"&& (<><ExclamationCircleIcon color="" className="w-5 h-7 "/>Your interview schedule !</>)}
+              {data && data.data.status === "rejected"&& (<><ExclamationCircleIcon color="red" className="w-5 h-7 "/>Your application rejected !</>)}
+              {data && data.data.status === "scheduled"&& (<><ExclamationCircleIcon color="" className="w-5 h-7 "/>Your interview schedule !</>)}
+              {data && data.data.status === "Interview canceled"&& (<><ExclamationCircleIcon color="red" className="w-5 h-7 "/>Your interview canceled !</>)}
+
             </Typography>
 
-            { data&&data.data.status === "sheduled" &&
+            { data&&data.data.status === "scheduled" &&
             <Card
               className=" flex  sm:flex-row justify-between container  xl:w-[30rem] border bg-white  rounded-md hover:shadow-xl  "
             >

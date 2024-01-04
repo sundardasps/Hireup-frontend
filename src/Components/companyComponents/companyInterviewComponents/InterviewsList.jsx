@@ -64,7 +64,7 @@ export default function InterviewsList() {
        const response = await cancelInterview(id)
        if(response.data.canceled){
         toast.success(response.data.message)
-          queryClient.invalidateQueries("interviewList")
+        queryClient.invalidateQueries("interviewList")
        }
      } catch (error) {
       console.log(error);
@@ -94,6 +94,7 @@ export default function InterviewsList() {
             <ul className=" -ml-2 flex flex-col gap-4 items-center">
               {data &&
                 data.data.list.map((value, index) => (
+                  <>
                   <MenuItem
                     key={index}
                     className="flex shadow-md border sm:w-full lg:w-[44rem] h-[9rem] text-black rounded-md p-4 "
@@ -105,11 +106,12 @@ export default function InterviewsList() {
                           alt="Applicant Avatar"
                           className="w-12 h-12 rounded-full object-cover mr-3"
                         />
-                        <div className="text-sm border-r-2 p-1 ">
+                        <div className="text-sm border-r-2 p-2 ">
                           <div>
                             Applicant:{" "}
                             <span className="font-bold">{value.userName}</span>{" "}
                           </div>
+                         
                           <div>{value.userTitle}</div>
                           <div>Email: {value.userEmail}</div>
                           <div>Number: {value.userNumber}</div>
@@ -117,12 +119,14 @@ export default function InterviewsList() {
                       </div>
                     </div>
                     <div className="flex flex-col sm:flex-row justify-between ">
-                      <div className="flex items-center mb-2 sm:mb-0 sm:mr-4">
-                        <div className="text-sm">
+                      <div className="flex items-center mb-2 sm:mb-0 sm:mr-4 border-r-2 p-2 ">
+                        <div className="text-sm ">
                           <div>Interviewer: {value.interviewer}</div>
                           <div>Date: {value.date}</div>
                           <div>Type: {value.type}</div>
-                          {/* Assuming there is a type field */}
+                          <div>
+                            Job title:{value.jobTitle}
+                          </div>
                         </div>
                       </div>
                       <div className="flex flex-col mt-2 sm:mt-0">
@@ -142,6 +146,7 @@ export default function InterviewsList() {
                       </MenuList>
                     </Menu>
                   </MenuItem>
+                  </>
                 ))}
             </ul>
           </div>

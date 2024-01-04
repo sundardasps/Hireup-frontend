@@ -13,13 +13,18 @@ import {
   Option,
   Textarea,
 } from "@material-tailwind/react";
-import { AtSymbolIcon, PhoneIcon, UserIcon } from "@heroicons/react/24/solid";
+import {
+  AtSymbolIcon,
+  DocumentIcon,
+  PhoneIcon,
+  UserIcon,
+} from "@heroicons/react/24/solid";
 import { MapPinIcon } from "@heroicons/react/24/outline";
 import {
   getSingleUserApplication,
   scheduleInterview,
 } from "../../../Api/companyApi";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { UserResume } from "./UserResume";
 import { useFormik } from "formik";
 import { interviewSchema } from "../../../Utils/yupValidations/yupCompanyvalidations";
@@ -28,6 +33,8 @@ import toast, { Toaster } from "react-hot-toast";
 export function AppliedUserAction({ data: { value, jobId } }) {
   const [open, setOpen] = React.useState(false);
   const [next, setNext] = useState(0);
+  const queryclient = useQueryClient()
+  const [applicationData,setApplicaionData] =  useState([])
   const handleOpen = () => {
     setOpen((cur) => !cur), setNext(0);
   };
@@ -66,34 +73,49 @@ export function AppliedUserAction({ data: { value, jobId } }) {
       if (response.data.created) {
         handleOpen();
         toast.success(response.data.message);
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+          queryclient.invalidateQueries("singleUserApplication")
+      
       } else {
+        handleOpen();
         toast.error(response.data.message);
-        window.location.reload();
+        queryclient.invalidateQueries('companyAppliedUsers')
       }
     },
   });
 
-  const { data } = useQuery({
-    queryKey: ["singleUserApplication", value._id, jobId],
-    queryFn: async () => {
-      const response = await getSingleUserApplication(value._id, jobId);
-      return response;
-    },
-  });
 
+  useEffect(()=>{
+    const fetchSingleUserApplication = async ()=>{
+        try {
+          const response = await getSingleUserApplication(value._id, jobId);
+          if(response.data.fetched){
+            setApplicaionData(response.data.jobApplication)
+          }
+        } catch (error) {
+          console.log(error);
+        }
+    }
+     {open && fetchSingleUserApplication()}
+  },[value._id, jobId,open])
+
+
+
+ 
   return (
     <>
       <p onClick={handleOpen} className="p-3 hover:caret-light-blue-700 ">
         Details
       </p>
-      <Dialog size="xs" open={open} handler={handleOpen}>
+      <Dialog
+        size="xs"
+        className="p-3  bg-blue-gray-50 "
+        open={open}
+        handler={handleOpen}
+      >
         <form action="" onSubmit={handleSubmit}>
-          <DialogHeader className="justify-between">
+          <DialogHeader className="justify-between border-b-2 border-white">
             <div>
-              <Typography variant="h5">
+              <Typography variant="h6">
                 Applicant Name :{" "}
                 <span className="uppercase text-blue-600">
                   {value.userName}
@@ -122,23 +144,25 @@ export function AppliedUserAction({ data: { value, jobId } }) {
               </svg>
             </IconButton>
           </DialogHeader>
-          <DialogBody className="overflow-y-scroll m-3 border border-black ">
+          <DialogBody className="">
             {next === 0 ? (
               <>
                 <div className="mb-1">
-                  <ul className="mt-1 -ml-2 flex flex-col  ">
+                  <ul className="mt-1 -ml-2 flex flex-col">
                     <li className="flex gap-2">
                       <AtSymbolIcon className="w-5 h-7" />
-                      Email:<span className="text-blue-600">{value.email}</span>
+                      Email:{" "}
+                      <span className="text-blue-600">{value.email}</span>
                     </li>
                     <li className="flex gap-2">
                       <PhoneIcon className="w-5 h-7" />
-                      Number:
+                      Number:{" "}
                       <span className="text-blue-600">{value.number}</span>
                     </li>
                     <li className="flex gap-2">
                       <MapPinIcon className="w-5 h-7" />
-                      Place:<span className="text-blue-600">{value.place}</span>
+                      Place:{" "}
+                      <span className="text-blue-600">{value.place}</span>
                     </li>
                   </ul>
                 </div>
@@ -150,87 +174,83 @@ export function AppliedUserAction({ data: { value, jobId } }) {
                   >
                     Resume/cv
                   </Typography>
-                  <div className=" flex flex-col  h-40  ">
-                    <UserResume
-                      resume={data && data.data.jobApplication.resume}
-                      resumeType={data && data.data.resumeType}
-                    />
+                  <div className="flex flex-col h-30 border shadow-inner bg-white ">
+                    <div className="flex m-5">
+                      <div className="flex gap-1 text-white text-base border p-1 rounded-md bg-blue-500">
+                        <DocumentIcon className="w-5 h-5" />
+                        <a href={applicationData?.resume}>
+                          View resume
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </>
             ) : (
               <>
-                <Typography>Schedule interview</Typography>
-                <div className="flex flex-col gap-2 mt-2">
-                  <div className="flex gap-2">
-                    <div className="flex-1">
-                      <Input
-                        name="interviewer"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.interviewer}
-                        label="Interviewer"
-                      />
-                      {touched.interviewer && errors.interviewer && (
-                        <div className="text-red-500 text-xs">
-                          {errors.interviewer}
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <Select
-                        name="type"
-                        onBlur={handleBlur}
-                        value={values.type}
-                        label="Interview type"
-                        onChange={(selectedvalue) => {
-                          setFieldValue("type", selectedvalue);
-                        }}
-                      >
-                        <Option value="online">Online</Option>
-                        <Option value="offline">Offline</Option>
-                      </Select>
-                      {touched.type && errors.type && (
-                        <div className="text-red-500 text-xs">
-                          {errors.type}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="flex gap-2 mt-2">
-                    <div className="flex-1">
-                      <Input
-                        name="date"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.date}
-                        type="date"
-                        label="Date"
-                      />
-                      {touched.date && errors.date && (
-                        <div className="text-red-500 text-xs">
-                          {errors.date}
-                        </div>
-                      )}
-                    </div>
-                    <div>
-                      <Textarea
-                        name="requirement"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.requirement}
-                        label="Requirements"
-                      />
-                      {touched.requirement && errors.requirement && (
-                        <div className="text-red-500 text-xs ">
-                          {errors.requirement}
-                        </div>
-                      )}
-                    </div>
-                  </div>
+              <Typography className="text-2xl font-bold mb-4">Schedule Interview</Typography>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="mb-4">
+                  <Input
+                    name="interviewer"
+                    onChange={handleChange}
+                    className="bg-white"
+                    onBlur={handleBlur}
+                    value={values.interviewer}
+                    label="Interviewer"
+                  />
+                  {touched.interviewer && errors.interviewer && (
+                    <div className="text-red-500 text-xs">{errors.interviewer}</div>
+                  )}
                 </div>
-              </>
+                <div className="mb-4">
+                  <Select
+                    name="type"
+                    onBlur={handleBlur}
+                    className="bg-white"
+                    value={values.type}
+                    label="Interview type"
+                    onChange={(selectedvalue) => {
+                      setFieldValue("type", selectedvalue);
+                    }}
+                  >
+                    <Option value="online">Online</Option>
+                    <Option value="offline">Offline</Option>
+                  </Select>
+                  {touched.type && errors.type && (
+                    <div className="text-red-500 text-xs">{errors.type}</div>
+                  )}
+                </div>
+                <div className="mb-4">
+                  <Input
+                    name="date"
+                    className="bg-white"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.date}
+                    type="date"
+                    label="Date"
+                  />
+                  {touched.date && errors.date && (
+                    <div className="text-red-500 text-xs">{errors.date}</div>
+                  )}
+                </div>
+                <div className="mb-4">
+                  <Textarea
+                    name="requirement"
+                    className="bg-white"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.requirement}
+                    label="Requirements"
+                  />
+                  {touched.requirement && errors.requirement && (
+                    <div className="text-red-500 text-xs ">{errors.requirement}</div>
+                  )}
+                </div>
+              </div>
+            </>
+            
             )}
           </DialogBody>
           <DialogFooter className="justify-end gap-2">

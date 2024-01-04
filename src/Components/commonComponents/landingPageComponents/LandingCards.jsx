@@ -1,25 +1,22 @@
 import { Card, CardHeader, CardBody } from "@material-tailwind/react";
-import { TypeAnimation } from 'react-type-animation';
+import { TypeAnimation } from "react-type-animation";
 import { useNavigate } from "react-router-dom";
 
 function LandingCards() {
   const navigate = useNavigate();
   return (
     <>
-      <div className=" md:flex  p-5 pt-10 justify-center relative  md:gap-10 sm:gap-10 overflow-p-10">
+      <div className=" md:flex  p-5 pt-10 justify-center relative  md:gap-7 sm:gap-10 overflow-p-10">
         <div className=" relative  mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left h-40 mb-24">
           <h2 className="text-4xl font-bold tracking-tight text-black sm:text-4xl cursor-pointer mb-10 h-20">
             Welcome ,
             <br />
-            
             <TypeAnimation
-             cursor={false}
-             sequence={['Choose Your Role Wisely', 5000, '']}
-             wrapper="h2"
-             repeat={Infinity}
-             
+              cursor={false}
+              sequence={["Choose Your Role Wisely", 5000, ""]}
+              wrapper="h2"
+              repeat={Infinity}
             />
-             
           </h2>
           <p className="mt-5 text-lg leading-8 text-gray-500 ">
             Connecting Opportunity Seekers with Opportunity Creators Where
@@ -36,7 +33,7 @@ function LandingCards() {
             navigate("/company/companyRegister");
           }}
           shadow={false}
-          className="animated-image relative md:h-[18rem] md:max-w-[18rem] mt-4   h-[23rem] w-full max-w-[23rem] items-end justify-center  p-10 overflow-hidden shadow-2xl border  inline-flex border-blue-600  hover:scale-105 duration-500 "
+          className="animated-image relative md:h-[18rem] md:max-w-[18rem] mt-4   h-[18rem] w-full max-w-[18rem] items-end justify-center  p-10 overflow-hidden shadow-2xl border  inline-flex border-blue-600  hover:scale-105 duration-500 "
         >
           <CardHeader
             floated={false}
@@ -68,7 +65,7 @@ function LandingCards() {
 
         <Card
           shadow={false}
-          className="animated-image-top relative  mt-10 grid h-[23rem] w-full max-w-[23rem] items-end justify-center  p-10 overflow-hidden shadow-2xl border   border-blue-600  hover:scale-105 duration-500 md:h-[18rem] md:max-w-[18rem]"
+          className="animated-image-top relative  mt-10 grid h-[18rem] w-full max-w-[18rem] items-end justify-center  p-10 overflow-hidden shadow-2xl border   border-blue-600  hover:scale-105 duration-500 md:h-[18rem] md:max-w-[18rem]"
           onClick={() => {
             navigate("/user/register");
           }}
@@ -89,7 +86,6 @@ function LandingCards() {
         </Card>
 
         {/* style for renedering effect */}
-
         <style>
           {`
      .animated-image {
@@ -108,7 +104,7 @@ function LandingCards() {
       }
     }    
         `}
-        
+
           {`.animated-image-top {
             animation: slideAndFadeInTop 1s ease-in-out;
             transform-origin: center top; /* Set the transform origin to the top center */

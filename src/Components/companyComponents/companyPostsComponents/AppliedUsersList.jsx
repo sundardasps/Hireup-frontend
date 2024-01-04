@@ -8,7 +8,7 @@ import {
   TabsHeader,
   Typography,
 } from "@material-tailwind/react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery ,useQueryClient} from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import {
@@ -34,7 +34,7 @@ function AppliedUsersList() {
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(1);
   const [debounsedSearch, setDebouncedSearch] = useState("");
-
+  const queryClient = useQueryClient()
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setDebouncedSearch(search);
@@ -73,7 +73,7 @@ function AppliedUsersList() {
       const response = await rejectUserApplication(userId, jobId);
       if (response.data.reject) {
         toast.success(response.data.message);
-        window.location.reload();
+        queryClient.invalidateQueries('companyAppliedUsers')
       } else {
         toast.success(response.data.message);
       }
@@ -81,6 +81,7 @@ function AppliedUsersList() {
       console.log(error);
     }
   };
+
 
   return (
     <div className="shadow-sm shadow-blue-gray-200 outline-1  rounded-xl   bg-white ">
@@ -178,6 +179,7 @@ function AppliedUsersList() {
                       >
                         Reject
                       </Button>
+                      
                       <AppliedUserAction data={{ value, jobId }} />
                     </>
                   )}
