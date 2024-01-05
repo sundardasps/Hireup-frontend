@@ -25,6 +25,7 @@ import { CategoryDialog } from "./CategoryDialog";
 import { CategoryTitleDialog } from "./CategoryTitleDialog";
 import { useNavigate } from "react-router-dom";
 import { SubcategoryList } from "../adminDialog/SubcategoryList";
+import MainLoading from "../../../Components/commonComponents/Loadings/MainLoding"
 
 const TABS = [
   {
@@ -78,12 +79,9 @@ export function CategoriesTable() {
     setPage(newPage);
   };
 
-  if (isLoading) {
-    return (
-      <div>
-        <Typography variant="h1">loading...</Typography>
-      </div>
-    );
+  if (isLoading ) {
+  
+    return  <MainLoading />;
   }
 
   if (error) {

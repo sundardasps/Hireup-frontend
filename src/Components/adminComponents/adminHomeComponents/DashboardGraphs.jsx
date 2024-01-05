@@ -4,18 +4,16 @@ import dayjs from "dayjs";
 import { Typography } from "@material-tailwind/react";
 import { getDashboard } from "../../../Api/adminApi";
 import {useQuery} from "@tanstack/react-query"
-
+import MainLoading from "../../../Components/commonComponents/Loadings/MainLoding"
 export default function DashboardGraphs() {
 
-  const {data} = useQuery({
+  const {data,isLoading} = useQuery({
     queryKey:["admindashboard"],
     queryFn: async () =>{
       const response = await  getDashboard()
       return response 
     }
   }) 
-
- 
 
   const [chartData, setChartData] = useState({
     series: [data?.data?.activecompaniesCount, data?.data?.activeJobs, data?.data?.applications, data?.data?.activeUsers],
@@ -67,7 +65,9 @@ export default function DashboardGraphs() {
   
 
 
- 
+  if (isLoading ) {
+    return  <MainLoading />;
+  }
 
 
   return (

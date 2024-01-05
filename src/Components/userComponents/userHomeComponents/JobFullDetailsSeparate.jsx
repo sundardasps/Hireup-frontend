@@ -28,6 +28,7 @@ import {
 import JobApply from "../userDialogs/JobApply";
 import toast from "react-hot-toast";
 import { jwtDecode } from "jwt-decode";
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
 
 function JobFullDetailsSeparate() {
   const location = useLocation();
@@ -83,7 +84,7 @@ function JobFullDetailsSeparate() {
               onClick={() => navigate("/user")}
             />
             <text className="flex justify-around text-4xl m-2 text-white font-bold mx-5 ">
-              {data ? data.data.jobDetails.job_title : ""}
+              {data ? data.data.jobDetails.job_title : ""}{data?.data?.isApproved&& <CheckCircleIcon className="w-5 h-5 m-auto mx-2 "  />}
             </text>
             <Menu>
               <MenuHandler>
@@ -104,23 +105,28 @@ function JobFullDetailsSeparate() {
         </div>
 
         <div className="flex flex-col gap-1 m-5 mb-3 ">
-          <text className="flex ">
+          <text className="flex bg-blue-gray-50 p-2 ">
             <ShoppingBagIcon className="w-5 h-5 " />
             {data ? data.data.jobDetails.job_type : ""}
           </text>
-          <text className="flex ">
+          <text className="flex p-2">
             <ComputerDesktopIcon className="w-5 h-5 " />
             {data ? data.data.jobDetails.experience : ""} year experience needed
           </text>
-          <text className="flex ">
+          <text className="flex bg-blue-gray-50 p-2">
             <CurrencyRupeeIcon className="w-5 h-5 " />
             Salary : {""}
             {data ? data.data.jobDetails.salery : ""} /-
           </text>
-          <text className="flex ">
-            <CalendarDaysIcon className="w-5 h-5 " />
+          <text className="flex p-2 ">
+            <CalendarDaysIcon className="w-5 h-5  " />
             Application will closes on {""}
             {data ? data.data.jobDetails.end_time : ""}
+          </text>
+           <text className="flex bg-blue-gray-50 p-2 ">
+            <CalendarDaysIcon className="w-5 h-5 " />
+            Total applied: {""}
+            {data ? data?.data?.count : ""}
           </text>
         </div>
 

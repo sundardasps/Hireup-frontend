@@ -1,4 +1,4 @@
-import { Bars3CenterLeftIcon, Bars3Icon, BookmarkIcon, ChatBubbleLeftRightIcon, HomeIcon, NewspaperIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { Bars3CenterLeftIcon, Bars3Icon, BookmarkIcon, ChatBubbleLeftRightIcon, ClockIcon, HomeIcon, NewspaperIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import {
   Avatar,
   Button,
@@ -85,6 +85,19 @@ function CompanyNavbar() {
         > <ChatBubbleLeftRightIcon  className=" h-8 w-7 "/>Chat
         </Typography>
         </a>
+        <a
+          onClick={()=>navigate('/company/interviewsList')}
+          className="flex items-center hover:text-blue-500 transition-colors cursor-pointer"
+        >
+        <Typography
+          as="li"
+          variant="small"
+          color="blue-gray"
+          className=" font-medium "
+        > <ClockIcon className="h-7 w-7 mx-auto" />interviews
+        </Typography>
+        </a>
+        
 
         <Typography
           as="li"

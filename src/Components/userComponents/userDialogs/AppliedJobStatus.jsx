@@ -50,7 +50,7 @@ export default function AppliedJobStatus(jobdata) {
     }
   })
  
-
+console.log(data);
 
   const tapToChat =async ()=>{
     try {
@@ -150,11 +150,11 @@ export default function AppliedJobStatus(jobdata) {
                     {jobdata?.jobData?.companyLocation}
                     </Typography>
                   </div>
-                  <div className="flex flex-col mt-2 sm:mt-0">
-                    <Typography className="font-semibold text-gray-700"></Typography>
-                    <span className="text-gray-500"></span>
-                  </div>
+               
                 </div>
+                <div>  <span className="text-sm from-blue-gray-50">Interview Date</span> - {data&&data.data.interviewDate}</div>
+                <div><span className="text-sm from-blue-gray-50 bg-blue-gray-50 p-1">Please connect for more details</span></div>
+                
                 <div className="flex justify-end">
                   <div
                     className=" cursor-pointer font-light hover:underline  "

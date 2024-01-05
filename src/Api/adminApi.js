@@ -154,3 +154,12 @@ export async function getDashboard() {
   }
 }
 
+export async function getjobdetails(id) {
+  try {
+    const response = await adminCheck.get(`/jobDetails/${id}`);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+

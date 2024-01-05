@@ -97,7 +97,7 @@ export default function InterviewsList() {
                   <>
                   <MenuItem
                     key={index}
-                    className="flex shadow-md border sm:w-full lg:w-[44rem] h-[9rem] text-black rounded-md p-4 "
+                    className="flex  shadow-md border sm:w-full lg:w-[44rem] h-[9rem] text-black rounded-md p-4 "
                   >
                     <div className="flex flex-col sm:flex-row justify-between mx-3">
                       <div className="flex items-center mb-2 sm:mb-0 sm:mr-4">

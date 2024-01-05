@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Spinner } from "@material-tailwind/react";
+import { Accordion, AccordionBody, AccordionHeader, List, ListItem, Option, Select, Spinner, Typography } from "@material-tailwind/react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import PropTypes from "prop-types"; // Import prop-types library
 import {
@@ -13,19 +13,21 @@ import { editProfileImage } from "../../../Api/companyApi";
 import { useFormik } from "formik";
 import { imageEditSchema } from "../../../Utils/yupValidations/yupCompanyvalidations";
 import toast, { Toaster } from "react-hot-toast";
-import { PencilIcon } from "@heroicons/react/20/solid";
+import { ChevronDownIcon, PencilIcon } from "@heroicons/react/20/solid";
 import { userEditSchema } from "../../../Utils/yupValidations/yupUserValidations";
-import { editUserProfile } from "../../../Api/userApi";
+import { categoryDataForUser, editUserProfile } from "../../../Api/userApi";
 
 export default function UserProfileEdit({ profileData }) {
   const [open, setOpen] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+
   const [loading, setLoading] = useState(false);
   const handleOpen = () => {
     setOpen(!open), setFile("");
   };
   const [file, setFile] = useState("");
   const queryClient = useQueryClient();
-
+  const [category, setCategory] = React.useState([]);
 
   const userInitialData = {
     name: profileData.data.exist.userName,
@@ -38,11 +40,22 @@ export default function UserProfileEdit({ profileData }) {
     setLoading((currentLoading)=>!currentLoading)
   }
  
+    useEffect(() => {
+    const fetchCategory = async () => {
+      await categoryDataForUser().then((res) => setCategory(res.data.data));
+    };
 
-
+    //always scroll up ref
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+    fetchCategory();
+  }, []);
   //-----------------------------------Profile  edit--------------------------------//
 
-  const { handleBlur, handleChange, handleSubmit, errors, touched, values } =
+  const { handleBlur, handleChange, handleSubmit, errors, touched, values ,setFieldValue} =
     useFormik({
       initialValues: userInitialData,
       validationSchema: userEditSchema,
@@ -59,6 +72,12 @@ export default function UserProfileEdit({ profileData }) {
         }
       },
     });
+
+
+    
+  const handleOpen2 = (value) => {
+    setOpen2(open2 === value ? 0 : value);
+  };
 
   return (
     <>
@@ -135,10 +154,62 @@ export default function UserProfileEdit({ profileData }) {
                     name="title"
                     type="text"
                     onBlur={handleBlur}
-                    onChange={handleChange}
+                    // onChange={handleChange}
                     value={values.title}
                     className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                   />
+             <Typography className="text-white p-1">Select title</Typography>
+            <List className="scrollable h-40 bg-white">
+            {category &&
+              category.map((value, index) => (
+                <Accordion
+                  key={index}
+                  open={open2 === index + 1}
+                  icon={
+                    <ChevronDownIcon
+                      strokeWidth={2.5}
+                      className={`mx-auto h-4 w-4 transition-transform ${
+                        open === index + 1 ? "rotate-180" : ""
+                      }`}
+                    />
+                  }
+                >
+                  <ListItem
+                    className="p-1 hover:bg-gray-200 border "
+                    selected={open === index + 1}
+                  >
+                    <AccordionHeader
+                      onClick={() => handleOpen2(index + 1)}
+                      className="border-b-0 p-0"
+                    >
+                      <Typography
+                        color="blue-gray"
+                        className="mr-auto font-small"
+                      >
+                        {value.title}
+                      </Typography>
+                    </AccordionHeader>
+                  </ListItem>
+                  <AccordionBody className="py-1">
+                    {value.category.map((value, index) => (
+                      <List key={index}>
+                        <ListItem
+                          key={index}
+                          onClick={(e)=>{
+                             const selectedValue = e.target.innerText
+                             setFieldValue("title",selectedValue)
+                          }}
+                          className="border-b-0 p-0"
+                        >
+                          {value}
+                        </ListItem>
+                      </List>
+                    ))}
+                  </AccordionBody>
+                </Accordion>
+              ))}
+          </List>
+
                   {errors.title && touched.title && (
                     <div className="font-medium text-sm   text-red-800">
                       {errors.title}
@@ -166,28 +237,6 @@ export default function UserProfileEdit({ profileData }) {
                     </div>
                   )}
                 </div>
-                {/* <div>
-                  <label
-                    className="text-white dark:text-gray-200"
-                    htmlFor="emailAddress"
-                  >
-                    Email
-                  </label>
-                  <input
-                    name="email"
-                    type="email"
-                    min={1}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.email}
-                    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                  />
-                  {errors.email && touched.email && (
-                    <div className="font-medium text-sm    text-red-800">
-                      {errors.email}
-                    </div>
-                  )}
-                </div> */}
               </div>
 
               <div className="flex justify-end mt-3">

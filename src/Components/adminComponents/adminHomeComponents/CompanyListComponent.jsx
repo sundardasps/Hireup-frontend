@@ -22,7 +22,7 @@ import React, { useEffect, useState } from "react";
 import { companiesData } from "../../../Api/adminApi";
 import { Dialogue } from "../adminCommonComponents/Dialogue";
 import { UserFulldetails } from "../adminDialog/UserFulldetails";
-
+import MainLoading from "../../../Components/commonComponents/Loadings/MainLoding"
 const TABS = [
   {
     label: "All",
@@ -78,21 +78,12 @@ export function CompanyListComponent() {
     setPage(newPage);
   };
 
-  if (isLoading) {
-    return (
-      <div>
-        <Typography variant="h1">loading...</Typography>
-      </div>
-    );
+  if (isLoading ) {
+  
+    return  <MainLoading />;
   }
 
-  if (error) {
-    return (
-      <div>
-        <Typography>errororo</Typography>
-      </div>
-    );
-  }
+ 
   return (
     <>
       <Card className="h-full w-full border-2 border-black">

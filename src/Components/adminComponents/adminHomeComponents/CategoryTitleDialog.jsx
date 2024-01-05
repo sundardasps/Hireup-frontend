@@ -17,6 +17,7 @@ import { titleValidationSchema } from "../../../Utils/yupValidations/yupAdminVal
 import { categoryTitleAdd } from "../../../Api/adminApi";
 import { toast, Toaster } from "react-hot-toast";
 
+
 export function CategoryTitleDialog() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen((cur) => !cur);

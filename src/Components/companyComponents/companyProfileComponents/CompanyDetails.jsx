@@ -17,6 +17,7 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
+  Typography,
 } from "@material-tailwind/react";
 
 import { companyProfile } from "../../../Api/companyApi";
@@ -61,7 +62,7 @@ function CompanyDetails() {
                 {data.exist.companyName}
               </text>
             </div>
-           
+
             <div className="ml-5">
               <div className="flex gap-2 w-auto">
                 <MapPinIcon className="w-5 h-5" />
@@ -74,39 +75,39 @@ function CompanyDetails() {
                   </text>
                 </div>
               </div>
-              
+
               <div className="flex gap-2 w-auto ">
                 <BuildingOffice2Icon className="w-5 h-5" />
                 <div className="flex flex-col">
                   <text className="mb-2 text-sm">
-                  Comapany Size:{" "}
-                  <span className="text-gray-900 font-semibold w-auto">
-                    {data.exist.size}
-                  </span>
+                    Comapany Size:{" "}
+                    <span className="text-gray-900 font-semibold w-auto">
+                      {data.exist.size}
+                    </span>
                   </text>
                 </div>
               </div>
-             
+
               <div className="flex gap-2 w-auto ">
                 <CurrencyRupeeIcon className="w-5 h-5" />
                 <div className="flex flex-col">
                   <text className="mb-2 text-sm">
-                  Gst: {""}
-                  <span className="text-gray-900 font-semibold w-auto">
-                    {data.exist.gst_number}
-                  </span>
+                    Gst: {""}
+                    <span className="text-gray-900 font-semibold w-auto">
+                      {data.exist.gst_number}
+                    </span>
                   </text>
                 </div>
               </div>
-              
+
               <div className="flex gap-2 w-auto ">
                 <ChatBubbleBottomCenterTextIcon className="w-5 h-5" />
                 <div className="flex flex-col">
                   <text className="mb-2 text-sm">
-                  Email: {""}
-                  <span className="text-gray-900 font-semibold w-auto">
-                    {data.exist.email}
-                  </span>
+                    Email: {""}
+                    <span className="text-gray-900 font-semibold w-auto">
+                      {data.exist.email}
+                    </span>
                   </text>
                 </div>
               </div>
@@ -115,10 +116,10 @@ function CompanyDetails() {
                 <PhoneIcon className="w-5 h-5" />
                 <div className="flex flex-col">
                   <text className="mb-2 text-sm">
-                  Mobile: {""}
-                  <span className="text-gray-900 font-semibold w-auto">
-                    {data.exist.number}
-                  </span>
+                    Mobile: {""}
+                    <span className="text-gray-900 font-semibold w-auto">
+                      {data.exist.number}
+                    </span>
                   </text>
                 </div>
               </div>
@@ -127,20 +128,25 @@ function CompanyDetails() {
                 <PhoneIcon className="w-5 h-5" />
                 <div className="flex flex-col">
                   <text className="mb-2 text-sm">
-                  Address: {""}
-                  <span className="text-gray-900 font-semibold w-auto">
-                    {data.exist.address}
-                  </span>
+                    Address: {""}
+                    <span className="text-gray-900 font-semibold w-auto">
+                      {data.exist.address}
+                    </span>
                   </text>
                 </div>
               </div>
             </div>
           </div>
         </CardHeader>
-
-        <CardBody className="flex flex-col sm:flex-row justify-between  h-auto bg-white mx-4 first-letter shadow-inner rounded border w-11/12">
-          {data.exist.company_roles}
-        </CardBody>
+        <div className="p-4">
+          <Typography className="m-1">Company roles</Typography>
+          <textarea
+            name="companyRoles"
+            type="text"
+            value={data.exist.company_roles}
+            className=" block w-full px-4 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring scrollable"
+          ></textarea>
+        </div>
         <CardFooter className="flex justify-end gap-2">
           <EditProfile
             data={{

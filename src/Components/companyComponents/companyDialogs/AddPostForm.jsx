@@ -91,7 +91,7 @@ export function AddPostForm() {
 
   return (
     <>
-    <p  onClick={handleOpen} className='cursor-pointer'>
+    <p  onClick={handleOpen} className='cursor-pointer text-white'>
       Add post 
     </p>
 

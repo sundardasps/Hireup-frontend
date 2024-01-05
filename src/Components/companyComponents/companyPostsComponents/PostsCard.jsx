@@ -7,7 +7,7 @@ import { BuildingOffice2Icon,MagnifyingGlassIcon, UserGroupIcon} from "@heroicon
 import { Button,Card,CardFooter,Input,Tab,Tabs,TabsHeader,Tooltip,Typography,} from "@material-tailwind/react";
 import toast from "react-hot-toast";
 import { JobDelete } from "../companyDialogs/JobDelete";
-
+import  {AddPostForm}  from '../companyDialogs/AddPostForm';
 
 
 
@@ -77,6 +77,9 @@ function PostsCard() {
             icon={<MagnifyingGlassIcon className="h-5 w-5" color="white" />}
           />
         </div>
+        <Button size="sm" variant="outlined" color="white">
+        <AddPostForm  />
+        </Button>
       </div>
 
       <div className="flex flex-col items-center  mb-10 ">
@@ -88,15 +91,14 @@ function PostsCard() {
               _id,
               job_title,
               end_time,
-              job_type,
-              required_skills,
               is_active,
             }) => {
               return (
                 <Card
                   key={job_title}
-                  className="flex mr-0  sm:flex-row justify-between container my-2 mx-2  xl:w-[38rem] border bg-white  rounded-md hover:shadow-xl "
+                  className="flex flex-row justify-between container my-5 cursor-pointer  border bg-white  rounded-md hover:shadow-xl custom-sm sm:w-[25rem]  sm:ml-10  md:w-[25rem] md:h-[8rem]  xl:w-[30rem] "
                 >
+                  
                   <div className="m-2 mt-4 w-auto h-auto">
                     <img
                       src={data.companyData.image}

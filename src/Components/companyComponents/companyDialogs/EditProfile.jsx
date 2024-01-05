@@ -55,7 +55,7 @@ export function EditProfile({ data }) {
       <Button onClick={handleOpen} variant="outlined">
         edit
       </Button>
-      <Dialog og open={open} handler={handleOpen} size="xl">
+      <Dialog og open={open} handler={handleOpen} size="xl" className="h-[30rem]  scrollable">
         <section className=" p-3 mx-auto rounded-md shadow-md bg-light-blue-600 dark:bg-gray-800 ">
           <h1 className="text-xl font-bold text-white capitalize dark:text-white">
             Account settings
