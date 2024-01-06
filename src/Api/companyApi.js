@@ -322,3 +322,21 @@ export async function cancelInterview(interviewId) {
     console.log(error);
   }
 }
+
+export async function paymentsuccess(subscription) {
+  try {
+    const response = await companyCheck.post("/paymentsuccess",subscription);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function checkpayment() {
+  try {
+    const response = await companyCheck.get("/paymentStatus");
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}

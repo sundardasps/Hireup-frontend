@@ -49,7 +49,7 @@ function CompanyRoutes(){
          <Route path='/payment' element={<CompanyPayment/>}/>
          <Route path='/interviewsList' element={<InterviewList/>}/> 
          <Route path='/chat' element={<CompanyChatPage/>}/>
-         <Route path='/status' element={<PaymentSuccessPage/>}/>
+         <Route path='/success' element={<PaymentSuccessPage/>}/>
          <Route path='/room' element={<CompanyVideoChatPage/>}/>
          <Route path='*' element={<ErrorComponent/>}/>
 

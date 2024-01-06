@@ -52,13 +52,7 @@ function CompanySidebar() {
           </Typography>
           
           </ListItem>
-          <ListItem key={"addpost"} 
-          >
-            <ListItemPrefix>
-              <PlusCircleIcon className="h-5 w-5" color='white'/>
-            </ListItemPrefix>
-            {payment === 1 ? <AddPostForm />:<SelectPayment/>}
-          </ListItem>
+
           <ListItem key={"schedule"} 
             onClick={() => {
               navigate("/company/interviewsList")

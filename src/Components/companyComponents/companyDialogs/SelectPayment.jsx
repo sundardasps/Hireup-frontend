@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import stripeImg from '../../../../public/Stripe.jpeg'
 import secureImg from '../../../../public/secureImage.png'
 
@@ -14,43 +14,36 @@ import {
   CardHeader,
   Card,
   IconButton,
+  Input,
 } from "@material-tailwind/react";
 import { CheckIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
 import { stripePayment } from "../../../Api/companyApi";
-import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import { useSelector } from "react-redux";
+import { loadStripe } from "@stripe/stripe-js";
+import Payment from "./Payment";
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLICKEY);
 export default function SelectPayment() {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(!open);
+  const handleOpen = () => {setOpen(!open),setSelected("")};
+  const [clientSecret,setClientSecret] = useState("")
+  const [selected,setSelected] = useState(null)
 
-  // let stripePromise;
-  // const getstrip = () => {
-
-  //   if (!stripePromise) {
-  //     stripePromise = loadStripe(
-  //       "pk_test_51OPm1SSEvDV8XVWTfK2X8ECVdBlEbO2diz7Q03vMTeRu5NTRBWUXao9A30CWLB81ksqLwbbFGOsgYhLHdYrYxp9600iTX6StsD"
-  //     );
-  //   }
-  //   return stripePromise;
-  // };
-
+  const  stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHBLE_KEY)
   const prices = [
     {
-      id: "price_1OPmTkSEvDV8XVWTbQkNKkTS",
       amount:199,   
-      interval: "month",
+      type: "basic",
       
     },
     {
-      id: "price_1OPmUmSEvDV8XVWTjXjI1ybY",
       amount:999,
-      interval: "every 6 months",
+      type: "standerd",
     },
     {
-      id: "price_1OSxGZSEvDV8XVWTxnVXNSjY",
       amount:1999,
-      interval: "year",
+      type: "premium",
     },
   ];
 
@@ -58,14 +51,24 @@ export default function SelectPayment() {
 
   const handlePayment = async (price) => {
     try {
-
       const res = await stripePayment(price);
       if (res.status === 200) {
-        window.location.href = res?.data?.session.url;
+        setSelected(res.data.selected)
+        setClientSecret(res.data.clientSecret)
+
       }
     } catch (error) {
       console.log(error.message);
     }
+  };
+
+
+  const appearance = {
+    theme: 'stripe',
+  };
+  const options = {
+    clientSecret,
+    appearance,
   };
 
   return (
@@ -360,13 +363,26 @@ export default function SelectPayment() {
             </CardFooter>
           </Card>
         </div>
+        
         <div className="flex justify-center gap-3 mt-5 p-4  ">
-          <Card className=" bg-transparent w-[30rem] border p-5 ">
-            <img src={secureImg} alt="" />
-          </Card>
-           <Typography variant="h3" color="white" className="text-center mt-auto mb-auto ">With</Typography>
-            <img src={stripeImg} alt="" className="w-50 h-48 mt-1 rounded-md object-cover" />
-          
+        <div className="relative flex justify-center items-center w-full max-w-[24rem]">
+      <Input
+        type="email"
+        label="selected amount"
+        value={selected?.amount}
+        color="white"
+        className="pr-20"
+        containerProps={{
+          className: "min-w-0",
+        }}
+      />
+         </div>
+         {selected ? clientSecret && (
+                                <Elements options={options} stripe={stripePromise}>
+                                  <Payment Secret={clientSecret} selected={selected}  />
+                                </Elements>
+                              ) : ""
+                              }
         </div>
       </Dialog>
     </>

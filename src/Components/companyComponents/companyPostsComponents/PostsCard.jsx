@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
-import { companyPosts } from "../../../Api/companyApi";
+import { checkpayment, companyPosts } from "../../../Api/companyApi";
 import { useEffect, useState } from "react";
 import { BuildingOffice2Icon,MagnifyingGlassIcon, UserGroupIcon} from "@heroicons/react/24/solid";
 import { Button,Card,CardFooter,Input,Tab,Tabs,TabsHeader,Tooltip,Typography,} from "@material-tailwind/react";
 import toast from "react-hot-toast";
 import { JobDelete } from "../companyDialogs/JobDelete";
 import  {AddPostForm}  from '../companyDialogs/AddPostForm';
-
+import SelectPayment from '../../../Components/companyComponents/companyDialogs/SelectPayment'
 
 
 
@@ -29,6 +29,11 @@ function PostsCard() {
     },
   ];
 
+
+
+
+  
+
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setDebouncedSearch(search);
@@ -43,6 +48,15 @@ function PostsCard() {
         (res) => res.data
       ),
   });
+
+
+  const {data:companyData} = useQuery({
+    queryKey:["paymentCheck",],
+    queryFn:  ()=>{ 
+      const response  =  checkpayment()
+      return response
+    } 
+ })
 
   const handlePage = async (newPage) => {
     if (newPage < 1 || newPage > data.totalPage) {
@@ -78,7 +92,7 @@ function PostsCard() {
           />
         </div>
         <Button size="sm" variant="outlined" color="white">
-        <AddPostForm  />
+       {companyData?.data?.is_payment === 1 ? <AddPostForm /> : <SelectPayment/>}
         </Button>
       </div>
 

@@ -1,67 +1,55 @@
 import React, { useEffect, useState } from 'react'
-import { Card } from '@material-tailwind/react'
-import { useLocation } from 'react-router-dom'
+import { Button, Card, CardBody, CardFooter, CardHeader, Typography } from '@material-tailwind/react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { CheckIcon } from '@heroicons/react/24/solid';
 export default function Success() {
 
-  const { search } = useLocation()
-  let [message, setMessage] = useState('');
-  let [success, setSuccess] = useState(false);
-  let [sessionId, setSessionId] = useState('');
-  
-  const query = new URLSearchParams(window.location.search);
-  console.log(query.get('success'),'issss working');
+  const navigate = useNavigate()
 
-  useEffect(() => {
+   
 
-    if (query.get('success')) {
-      setSuccess(true);
-      setSessionId(query.get('session_id'));
-    }
 
-    if (query.get('canceled')) {
-      setSuccess(false);
-      setMessage(
-        "Order canceled -- continue to shop around and checkout when you're ready."
-      );
-    }
-  }, [sessionId]);
 
-//   if (!success && message === '') {
-//     return <ProductDisplay />;
-//   } else if (success && sessionId !== '') {
-//     return <SuccessDisplay sessionId={sessionId} />;
-//   } else {
-//     return <Message message={message} />;
-//   }
-// }
-
-  // console.log(qu, "premium price id")
-  // console.log(success,"successssssss")
 
   return (
-    <div>
-       <svg
-    xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
-    width="14px"
-    height="16px"
-    viewBox="0 0 14 16"
-    version="1.1"
-  >
-    <defs />
-    <g id="Flow" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-      <g
-        id="0-Default"
-        transform="translate(-121.000000, -40.000000)"
-        fill="#E184DF"
-      >
-        <path
-          d="M127,50 L126,50 C123.238576,50 121,47.7614237 121,45 C121,42.2385763 123.238576,40 126,40 L135,40 L135,56 L133,56 L133,42 L129,42 L129,56 L127,56 L127,50 Z M127,48 L127,42 L126,42 C124.343146,42 123,43.3431458 123,45 C123,46.6568542 124.343146,48 126,48 L127,48 Z"
-          id="Pilcrow"
-        />
-      </g>
-    </g>
-  </svg>
-    </div>
+   <div className='mt-5'>
+       <div className="flex justify-center   gap-5">
+           <Card
+            color="blue"
+            variant="gradient"
+            className="w-full max-w-[30rem] h-[20rem] p-5 border "
+          >
+            <CardHeader
+              floated={false}
+              shadow={false}
+              color="transparent"
+              className="m-0  rounded-none border-b border-white/10 pb-4 text-center"
+            >
+           <Typography  variant='h3' color='white'>Payment Completed</Typography>
+            </CardHeader>
+            <CardBody className="p-0 m-0  rounded-none border-b border-white/10 pb-4 text-center">
+            <Typography
+                variant="small"
+                color="white"
+                className="font-normal uppercase"
+              >
+                basic
+              </Typography>
+              <Typography
+                variant="h1"
+                color="white"
+                className="mt-1 flex justify-center gap-1 text-7xl font-normal"
+              >
+                <span className="mt-1 text-xs">₹</span>999{" "}
+              </Typography>
+            </CardBody>
+            <CardFooter className='flex justify-center'>
+              <Button onClick={()=>navigate("/company/posts")}>
+                Continue
+              </Button>
+            </CardFooter>
+          </Card>
+        </div>
+   </div>
   )
 }
