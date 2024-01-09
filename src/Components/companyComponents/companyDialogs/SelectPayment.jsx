@@ -23,7 +23,6 @@ import { Elements } from "@stripe/react-stripe-js";
 import { useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import Payment from "./Payment";
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLICKEY);
 export default function SelectPayment() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {setOpen(!open),setSelected("")};
