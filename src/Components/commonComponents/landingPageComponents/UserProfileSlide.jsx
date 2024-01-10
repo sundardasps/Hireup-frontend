@@ -17,8 +17,8 @@ function UserProfileSlide() {
   useEffect(() => {
     const getAllCompanies = async () => {
       const response = await getCompanies();
-      if (response.data.fetched) {
-        setDetails(response.data)
+      if (response && response.data && response.data.fetched) {
+        setDetails(response?.data)
         const loopedAvatars = [
           ...response.data.companyData,
           ...response.data.companyData,
