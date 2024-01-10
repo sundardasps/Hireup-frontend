@@ -38,7 +38,7 @@ export default function SelectPayment() {
     },
     {
       amount:999,
-      type: "standerd",
+      type: "standard",
     },
     {
       amount:1999,
