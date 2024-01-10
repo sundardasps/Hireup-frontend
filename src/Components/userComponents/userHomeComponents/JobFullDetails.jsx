@@ -24,7 +24,7 @@ import JobApply from "../userDialogs/JobApply";
 import {useQuery} from '@tanstack/react-query'
 import { checkJobAppliedOrNot } from "../../../Api/userApi";
 import toast from "react-hot-toast";
-import user from "../../../../../backend/models/userModel";
+
 export function JobFullDetails({ jobdata }) {
   const token = localStorage.getItem("token")
   const decode = jwtDecode(token)
