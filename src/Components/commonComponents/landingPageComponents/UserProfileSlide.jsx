@@ -22,7 +22,6 @@ function UserProfileSlide() {
         setDetails(response.data)
         const loopedAvatars = [
           ...response.data.companyData,
-          ...response.data.companyData,
         ];
         setAvatars(loopedAvatars);
       } else {
