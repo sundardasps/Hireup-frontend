@@ -1,6 +1,6 @@
 import { MagnifyingGlassIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
-
+import Logo from '../../../../public/logo.png'
 import {
   Card,
   CardHeader,
@@ -172,7 +172,7 @@ export function CategoriesTable() {
                       <td className={classes}>
                         <div className="flex items-center gap-3">
                           <Avatar
-                            src={"/public/6876640.jpg"}
+                            src={Logo}
                             alt={title}
                             size="sm"
                             onClick={() => navigate(`/admin/category/${_id}`)}
