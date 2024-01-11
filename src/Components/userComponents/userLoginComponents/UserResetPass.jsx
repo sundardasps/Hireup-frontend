@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import { userResetPasswordSchema } from "../../../Utils/yupValidations/yupUserValidations";
-
+import defaultImg from '../../../../public/6876640.jpg'
 import toast, { Toaster } from "react-hot-toast";
 import { Button } from "@material-tailwind/react";
 import { userResetPass } from "../../../Api/userApi";
@@ -35,7 +35,7 @@ function UserResetPass() {
           <div className="w-full bg-cover relative max-w-md lg:max-w-2xl lg:w-7/12">
             <div className="flex flex-col items-center justify-center w-full h-full relative lg:pr-2 sm:pr-5">
               <img
-                src="/public/6876640.jpg"
+                src={defaultImg}
                 className="w-full h-auto lg:h-full max-w-full"
               />
             </div>

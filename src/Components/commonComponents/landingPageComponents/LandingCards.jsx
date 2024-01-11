@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardBody } from "@material-tailwind/react";
 import { TypeAnimation } from "react-type-animation";
 import { useNavigate } from "react-router-dom";
-
+import PremiumPng from "../../../../public/premium.png"
 function LandingCards() {
   const navigate = useNavigate();
   return (
@@ -49,7 +49,7 @@ function LandingCards() {
               <h1 className=" text-white ">Premium </h1>
               <img
                 className="animated-image flex w-6 h-6 "
-                src="/public/premium.png"
+                src={PremiumPng}
                 alt=""
               />
             </div>

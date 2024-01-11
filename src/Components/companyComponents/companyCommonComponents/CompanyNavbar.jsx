@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logOutDetails2 } from "../../../Redux/storeSlices/companyslice";
 import toast from "react-hot-toast";
-import { TableCellsIcon } from "@heroicons/react/24/outline";
+import Logo from '../../../../public/logo.png'
 
 function CompanyNavbar() {
   const dispatch = useDispatch();
@@ -209,7 +209,7 @@ function CompanyNavbar() {
         className="mr-4 cursor-pointer py-1.5"
       >
          <div className="font-extrabold text-xl cursor-pointer text-blue-500  flex items-center gap-1">
-          <img src="/public/logo.png" className="min-w-fit h-10"/><span>HireUp</span>
+          <img src={Logo} className="min-w-fit h-10"/><span>HireUp</span>
         </div>
       </Typography>
       <div className="hidden lg:block">

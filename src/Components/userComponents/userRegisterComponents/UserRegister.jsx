@@ -9,7 +9,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../../Redux/storeSlices/userSlice";
-
+import userRegiImage from '../../../../public/6876640.jpg'
 function UserRegister() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -415,7 +415,7 @@ function UserRegister() {
         <div className="w-full bg-cover relative max-w-md lg:max-w-2xl lg:w-7/12">
           <div className="flex flex-col items-center justify-center w-full h-full relative lg:pr-2 sm:pr-5">
             <img
-              src="/public/6876640.jpg"
+              src={userRegiImage}
               className="w-full h-auto lg:h-full max-w-full"
             />
           </div>
