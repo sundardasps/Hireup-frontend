@@ -14,10 +14,11 @@ import {
 function UserProfileSlide() {
   const [avatars, setAvatars] = useState([]);
   const [details,setDetails] =useState([])
+
   useEffect(() => {
     const getAllCompanies = async () => {
       const response = await getCompanies();
-      if (response && response.data && response.data.fetched) {
+      if (response.data.fetched) {
         setDetails(response?.data)
         const loopedAvatars = [
           ...response.data.companyData,
