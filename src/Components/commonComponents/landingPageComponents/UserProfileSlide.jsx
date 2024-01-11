@@ -18,7 +18,7 @@ function UserProfileSlide() {
   useEffect(() => {
     const getAllCompanies = async () => {
       const response = await getCompanies();
-      if (response.data.fetched) {
+      if (response.data.fetched){
         setDetails(response.data)
         const loopedAvatars = [
           ...response.data.companyData,
@@ -33,7 +33,7 @@ function UserProfileSlide() {
 
   return (
     <>
-      <div className="flex flex-col sm:flex-row justify-around lg:mx-10">
+      <div className="flex flex-col sm:flex-row justify-around lg:mx-10 lg:mt-16 lg:m-10">
         <Card className=" m-5 lg:w-[16rem] p-5 border rounded-md shadow-sm shadow-blue-gray-200 hover:shadow-md cursor-pointer">
           <div className="flex ">
             <BriefcaseIcon

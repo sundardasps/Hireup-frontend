@@ -59,7 +59,7 @@ export default function Payment({ Secret, selected }) {
       console.log(response, "out");
       if (response.data.created) {
         console.log(response, "inside");
-        navigate("/company/success")
+        navigate("/company/success",{state:{amount:selected.amount}})
       }
     }
     if (error.type === "card_error" || error.type === "validation_error") {

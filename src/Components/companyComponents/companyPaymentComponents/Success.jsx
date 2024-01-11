@@ -5,12 +5,10 @@ import { CheckIcon } from '@heroicons/react/24/solid';
 export default function Success() {
 
   const navigate = useNavigate()
+  const location = useLocation()
+  const {amount}   = location.state
 
-   
-
-
-
-
+  
   return (
    <div className='mt-5'>
        <div className="flex justify-center   gap-5">
@@ -40,7 +38,7 @@ export default function Success() {
                 color="white"
                 className="mt-1 flex justify-center gap-1 text-7xl font-normal"
               >
-                <span className="mt-1 text-xs">₹</span>999{" "}
+                <span className="mt-1 text-xs">₹</span>{amount?amount:""}{" "}
               </Typography>
             </CardBody>
             <CardFooter className='flex justify-center'>
