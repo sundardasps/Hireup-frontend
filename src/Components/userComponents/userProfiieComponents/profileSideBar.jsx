@@ -1,16 +1,9 @@
 import {
   ChevronDownIcon,
-  ChevronRightIcon,
-  InboxIcon,
-  PresentationChartBarIcon,
 } from "@heroicons/react/24/solid";
 import {
   Accordion,
-  AccordionBody,
-  AccordionHeader,
-  Button,
   Card,
-  Chip,
   List,
   ListItem,
   ListItemPrefix,
