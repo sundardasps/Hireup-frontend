@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-import dayjs from "dayjs";
 import { Typography } from "@material-tailwind/react";
 import { getDashboard } from "../../../Api/adminApi";
 import { useQuery } from "@tanstack/react-query";
@@ -119,7 +118,7 @@ export default function DashboardGraphs() {
             opts.w.globals.series[opts.seriesIndex]
           );
         },
-      }, // Correct placement of the closing curly brace
+      }, 
       title: {
         text: "Total amount",
       },
@@ -149,25 +148,25 @@ export default function DashboardGraphs() {
         <div className="border  p-1 w-[12rem] text-white  h-[6rem] shadow-md shadow-blue-gray-200  bg-light-blue-300">
           <div className="flex flex-col items-center ">
             <Typography variant="h5">Active companies</Typography>
-            <Typography variant="h2">{data?.data?.activeUsers}</Typography>
+            <Typography variant="h2">{data&&data.data&&data.data.activeUsers}</Typography>
           </div>
         </div>
         <div className="border  p-1 w-[12rem] text-white  h-[6rem] shadow-md shadow-blue-gray-200  bg-green-500">
           <div className="flex flex-col items-center ">
             <Typography variant="h5">Total Users</Typography>
-            <Typography variant="h2">{data?.data?.activeJobs}</Typography>
+            <Typography variant="h2">{data&&data.data&&data.data.activeJobs}</Typography>
           </div>
         </div>
         <div className="border  p-1 w-[12rem] text-white  h-[6rem] shadow-md shadow-blue-gray-200  bg-amber-800">
           <div className="flex flex-col items-center ">
             <Typography variant="h5">Active jobs</Typography>
-            <Typography variant="h2">{data?.data?.applications}</Typography>
+            <Typography variant="h2">{data&&data.data&&data.data.applications}</Typography>
           </div>
         </div>
         <div className="border  p-1 w-[12rem] text-white  h-[6rem] shadow-md shadow-blue-gray-200  bg-yellow-600">
           <div className="flex flex-col items-center ">
             <Typography variant="h5">Total amount</Typography>
-            <Typography variant="h2">{data?.data?.grandTotal}</Typography>
+            <Typography variant="h2">{data&&data.data&&data.data.grandTotal}</Typography>
           </div>
         </div>
       </div>
