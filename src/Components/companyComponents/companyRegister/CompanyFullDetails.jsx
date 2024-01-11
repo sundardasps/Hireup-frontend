@@ -76,7 +76,7 @@ function CompanyFullDetails() {
 
   return (
    
-      <div className="flex  bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 p-5 ">
+      <div className="flex h-screen  bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 p-5 ">
         <div className="p-5 w-[20rem]">
         <Typography color="white" variant="h1" className="text-center ">Provide all company details and move forward. </Typography>
         </div>
