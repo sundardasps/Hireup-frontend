@@ -122,7 +122,7 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
             <div className="flex justify-between p-1 rounded-sm">
               <div className="flex gap-2">
                 <Avatar
-                  src={userData ? userData?.companyData?.userDp : userLogo}
+                  src={userData ? userData?.companyData.userDp : userLogo}
                   className="m-1"
                 />
                 <Typography

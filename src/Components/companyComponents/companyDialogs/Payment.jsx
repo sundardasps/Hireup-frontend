@@ -46,7 +46,7 @@ export default function Payment({ Secret, selected }) {
       redirect: "if_required",
     });
 
-    console.log(error, "iiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+
 
     if (paymentIntent) {
       let subscriptionStatus = {
