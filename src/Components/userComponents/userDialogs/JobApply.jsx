@@ -24,7 +24,7 @@ import { applyJob, getUserResumes } from "../../../Api/userApi";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { useQueryClient} from '@tanstack/react-query'
-
+import  {ViewResume}  from'.././../userComponents/userDialogs/ViewResume'
 function JobApply({ data }) {
   const [open, setOpen] = React.useState(false);
   const [next, setNext] = useState(0);
@@ -72,7 +72,7 @@ function JobApply({ data }) {
       initialValues: initialValue,
       validationSchema:
         userResumes.length > 0 ? resumeUploadedSchema : resumeSchema,
-      onSubmit: async (value) => {
+        onSubmit: async (value) => {
         handleLoading();
         const formData = new FormData();
         formData.append("resume", value.resume);
@@ -94,6 +94,7 @@ function JobApply({ data }) {
 
   const handleOpen = () => {
     setFieldValue("resume", "");
+    setFile("")
     setNext(() => 0);
     setOpen((cur) => !cur);
   };
@@ -211,6 +212,7 @@ function JobApply({ data }) {
                         name="resume"
                         onChange={handleFile}
                         size="lg"
+                        accept=".pdf"
                         className="  block    cursor-pointer rounded border border-solid border-neutral-300 bg-clip-padding py-[0.32rem] text-xs font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary"
                       />
                       {errors.resume && (
@@ -235,19 +237,12 @@ function JobApply({ data }) {
                     (next === 0 && userData.userTitle)
                   }
                   size="lg"
-                />
-              )}
+                  />
+                  )}
               {file && (
                 <>
                   {fileType === "application/pdf" ? (
-                    <iframe
-                      src={file}
-                      width="100%"
-                      height="70px"
-                      loading="lazy"
-                      title="PDF-file"
-                      className="border-2 scrollable "
-                    ></iframe>
+                  <ViewResume data={file}/>
                   ) : (
                     <div className="w-24 h-auto border-2 ">
                       <img
