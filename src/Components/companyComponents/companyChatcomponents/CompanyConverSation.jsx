@@ -19,13 +19,11 @@ export default function CompanyConverSation({
         console.log(data.companyData);
         setUserData(data.companyData);
         setLastApiMessage(data?.chat?.last_Message);
-        // Check if messages prop is available and has at least one message
         if (
           messages &&
           messages.length > 0 &&
           messages[messages.length - 1].senderId === userData?._id
         ) {
-          // Use the last message from the prop
           setLastMessage(messages[messages.length - 1].text);
         }
       } catch (error) {

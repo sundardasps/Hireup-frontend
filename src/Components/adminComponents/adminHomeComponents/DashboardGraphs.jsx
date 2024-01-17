@@ -120,7 +120,7 @@ export default function DashboardGraphs() {
         },
       }, 
       title: {
-        text: "Total amount",
+        text: "Payment types",
       },
       responsive: [
         {
@@ -166,7 +166,7 @@ export default function DashboardGraphs() {
         <div className="border  p-1 w-[12rem] text-white  h-[6rem] shadow-md shadow-blue-gray-200  bg-yellow-600">
           <div className="flex flex-col items-center ">
             <Typography variant="h5">Total amount</Typography>
-            <Typography variant="h2">{data&&data.data&&data.data.grandTotal}</Typography>
+            <Typography variant="h2">{data&&data.data&&data.data.grandTotal}/-</Typography>
           </div>
         </div>
       </div>
