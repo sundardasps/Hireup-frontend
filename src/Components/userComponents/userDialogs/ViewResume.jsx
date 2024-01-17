@@ -16,11 +16,24 @@ export function ViewResume({ data }) {
         className="bg-transparent shadow-none"
       >
         <Card className="mx-auto w-full sm:w-96 h-full">
-          <iframe src={data} width="100%" height="500rem" title="PDF-file"></iframe>
-          
+          <iframe
+            src={data}
+            width="100%"
+            height="500rem"
+            title="PDF-file"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              bottom: 0,
+              right: 0,
+              width: "100%",
+              height: "500rem",
+              border: "none",
+            }}
+          ></iframe>
         </Card>
       </Dialog>
     </>
   );
 }
-
