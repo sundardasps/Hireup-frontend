@@ -242,7 +242,7 @@ function JobApply({ data }) {
               {file && (
                 <>
                   {fileType === "application/pdf" ? (
-                  <ViewResume data={file}/>
+                  <ViewResume data={}/>
                   ) : (
                     <div className="w-24 h-auto border-2 ">
                       <img

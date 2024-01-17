@@ -1,19 +1,10 @@
-import React, { useState } from "react";
-import { Document, Page } from 'react-pdf';
-
+import React from "react";
 import { Button, Dialog, Card } from "@material-tailwind/react";
 
 export function ViewResume({ data }) {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen((cur) => !cur);
-
-  const [numPages, setNumPages] = useState();
-  const [pageNumber, setPageNumber] = useState(1);
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
-
 
   return (
     <>
@@ -24,20 +15,25 @@ export function ViewResume({ data }) {
         handler={handleOpen}
         className="bg-transparent shadow-none"
       >
-            <div>
-      
-      <Document file={data} onLoadSuccess={onDocumentLoadSuccess}>
-        <Page pageNumber={pageNumber} renderTextLayer={false} renderAnnotationLayer={false} />
-
-      </Document>
-    
-      <p>
-        Page{pageNumber}of {numPages}
-      </p>
-    </div>
-
+        <Card className="mx-auto w-full sm:w-96 h-full">
+          <iframe
+            src={data}
+            width="100%"
+            height="500rem"
+            title="PDF-file"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              bottom: 0,
+              right: 0,
+              width: "100%",
+              height: "500rem",
+              border: "none",
+            }}
+          ></iframe>
+        </Card>
       </Dialog>
     </>
   );
 }
-
