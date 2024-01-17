@@ -24,7 +24,7 @@ import { applyJob, getUserResumes } from "../../../Api/userApi";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { useQueryClient} from '@tanstack/react-query'
-import  {ViewResume}  from'.././../userComponents/userDialogs/ViewResume'
+
 function JobApply({ data }) {
   const [open, setOpen] = React.useState(false);
   const [next, setNext] = useState(0);
@@ -242,10 +242,9 @@ function JobApply({ data }) {
               {file && (
                 <>
                   {fileType === "application/pdf" ? (
-                    <>
-                  <ViewResume data={file}/>
-                  <a href={file}>dddddddddddddddddddddddddddddddddd</a>
-                  </>
+                       <div className="flex gap-1 text-white text-base border p-1 rounded-md bg-blue-500">
+                       <DocumentIcon className="w-5 h-5"/><a href={file}>View resume</a>
+                       </div>
                   ) : (
                     <div className="w-24 h-auto border-2 ">
                       <img
