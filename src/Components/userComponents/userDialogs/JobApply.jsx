@@ -58,7 +58,6 @@ function JobApply({ data }) {
 
   const handleFile = (event) => {
     const currentFile = event.currentTarget.files[0];
-    console.log("currentFile",currentFile);
     setFileType(currentFile.type);
     setFieldValue("resume", currentFile);
     setFile(URL.createObjectURL(event.target.files[0]));
@@ -244,7 +243,7 @@ function JobApply({ data }) {
                 <>
                   {fileType === "application/pdf" ? (
                        <div className="flex gap-1 text-white text-base border p-1 rounded-md bg-blue-500">
-                        <ViewResume file={file} />
+                        <ViewResume resume={values.resume} />
                         {/* <DocumentIcon className="w-5 h-5"/><a href={file}>View resume</a> */}
                        </div>
                   ) : (
