@@ -1,11 +1,11 @@
 import React from "react";
 import { Button, Dialog, Card } from "@material-tailwind/react";
 
-export function ViewResume({ resume }) {
+export function ViewResume({ file }) {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen((cur) => !cur);
-  console.log(resume,"oooooooooooooooooooooooooooooooo");
+  console.log(file,"oooooooooooooooooooooooooooooooo");
   return (
     <>
       <Button onClick={handleOpen}>View Resume</Button>

@@ -243,8 +243,8 @@ function JobApply({ data }) {
                 <>
                   {fileType === "application/pdf" ? (
                        <div className="flex gap-1 text-white text-base border p-1 rounded-md bg-blue-500">
-                        <ViewResume resume={values.resume} />
-                        <DocumentIcon className="w-5 h-5"/><a href={file}>View resume</a>
+                        <ViewResume file={file} />
+                        {/* <DocumentIcon className="w-5 h-5"/><a href={file}>View resume</a> */}
                        </div>
                   ) : (
                     <div className="w-24 h-auto border-2 ">
