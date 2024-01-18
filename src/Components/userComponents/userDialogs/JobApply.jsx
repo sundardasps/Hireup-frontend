@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { DocumentIcon, PlusIcon } from "@heroicons/react/24/solid";
-
+import {ViewResume} from '../../../Components/userComponents/userDialogs/ViewResume'
 import {
   Button,
   Dialog,
@@ -243,7 +243,8 @@ function JobApply({ data }) {
                 <>
                   {fileType === "application/pdf" ? (
                        <div className="flex gap-1 text-white text-base border p-1 rounded-md bg-blue-500">
-                       <DocumentIcon className="w-5 h-5"/><a href={file}>View resume</a>
+                        <ViewResume resume={values.resume} />
+                        <DocumentIcon className="w-5 h-5"/><a href={file}>View resume</a>
                        </div>
                   ) : (
                     <div className="w-24 h-auto border-2 ">

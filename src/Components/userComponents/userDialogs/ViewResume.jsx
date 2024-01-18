@@ -1,11 +1,11 @@
 import React from "react";
 import { Button, Dialog, Card } from "@material-tailwind/react";
 
-export function ViewResume({ data }) {
+export function ViewResume({ resume }) {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen((cur) => !cur);
-
+  console.log(resume,"oooooooooooooooooooooooooooooooo");
   return (
     <>
       <Button onClick={handleOpen}>View Resume</Button>
@@ -15,10 +15,10 @@ export function ViewResume({ data }) {
         handler={handleOpen}
         className="bg-transparent shadow-none"
       >
-        <Card className="mx-auto w-full sm:w-96 h-full">
+        {/* <Card className="mx-auto w-full sm:w-96 h-full">
           <iframe src={data} width="100%" height="500rem" title="PDF-file"></iframe>
           
-        </Card>
+        </Card> */}
       </Dialog>
     </>
   );
