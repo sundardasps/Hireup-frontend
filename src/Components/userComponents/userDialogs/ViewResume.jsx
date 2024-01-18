@@ -5,7 +5,7 @@ export function ViewResume({ resume }) {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen((cur) => !cur);
-  console.log(resume,"oooooooooooooooooooooooooooooooo");
+  console.log(resume?.file?.name,"oooooooooooooooooooooooooooooooo");
   return (
     <>
       <Button onClick={handleOpen}>View Resume</Button>
