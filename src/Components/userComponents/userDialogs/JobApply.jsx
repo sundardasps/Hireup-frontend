@@ -58,6 +58,7 @@ function JobApply({ data }) {
 
   const handleFile = (event) => {
     const currentFile = event.currentTarget.files[0];
+    console.log("currentFile",currentFile);
     setFileType(currentFile.type);
     setFieldValue("resume", currentFile);
     setFile(URL.createObjectURL(event.target.files[0]));
