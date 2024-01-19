@@ -72,7 +72,7 @@ export default function DashboardGraphs() {
         },
       }, // Correct placement of the closing curly brace
       title: {
-        text: "Total view",
+        text: "Overview",
       },
       responsive: [
         {
