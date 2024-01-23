@@ -357,7 +357,7 @@ function UserDetails() {
                         <EditExperience addData={{ data }} />
                       </div>
                       <div className="mb-2">
-                        <Typography className="text-gray-600" variant="small">Totel ({data ? data.total:""} + year experience)</Typography>
+                        <Typography className="text-gray-600" variant="small">Total ({data ? data.total:""} + year experience)</Typography>
                       </div>
 
                       <ul className="list-inside space-y-2 scrollable max-h-48">

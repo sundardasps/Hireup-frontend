@@ -125,7 +125,7 @@ export default function EditPost({ postData }) {
               )}
 
               <Input
-                label="salery"
+                label="salary"
                 name="salery"
                 value={values.salery}
                 onChange={handleChange}
