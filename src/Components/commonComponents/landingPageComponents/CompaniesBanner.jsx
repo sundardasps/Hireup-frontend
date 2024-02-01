@@ -16,7 +16,7 @@ function CompaniesBanner() {
       <Typography variant="h4" className="text-center">
         Why Choose Us?
       </Typography>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center mt-10">
         <Typography variant="paragraph" className="lg:w-[40rem] text-center">
           At Hireup, we curate top-notch opportunities in select software,
           domains, and technologies. Elevate your career by connecting with
