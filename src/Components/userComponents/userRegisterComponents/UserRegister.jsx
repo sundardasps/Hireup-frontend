@@ -43,7 +43,6 @@ function UserRegister() {
               "======================================================"
             );
             if (result.data.created) {
-              alert();
               console.log(result);
               dispatch(
                 setUserDetails({

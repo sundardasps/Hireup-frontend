@@ -23,7 +23,7 @@ function UserChat() {
     const getChats = async () => {
       try {
         const { data } = await userChats(currentUser);
-        
+        console.log(data,"llllllllllllllllllllllllllllllll");
         setChats(data);
       } catch (error) {
         console.log(error);
