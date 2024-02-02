@@ -77,7 +77,7 @@ function UserChat() {
         </div>
         <div  className="pb-5 border-b-2">
         <div className="h-[17rem] scrollable  border-blue-gray-200">
-          {chats.map((chat, index) => (
+          {chats&&chats.map((chat, index) => (
             <div key={index} onClick={() => setCurrentChat(chat)}>
               <UserConversation
                 data={chat}
