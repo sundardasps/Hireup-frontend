@@ -105,7 +105,7 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
 
   function isURL(text) {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
-    return urlRegex.test(text);
+    return urlRegex.test(text);  
   }
 
   useEffect(() => {

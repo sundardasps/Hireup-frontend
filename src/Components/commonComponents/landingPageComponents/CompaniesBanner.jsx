@@ -1,22 +1,17 @@
 import {
   Card,
-  CardHeader,
   CardBody,
-  CardFooter,
   Typography,
-  Avatar,
-  Tooltip,
+
 } from "@material-tailwind/react";
-import React from "react";
-import company from "../../../../public/office.jpg";
 
 function CompaniesBanner() {
   return (
-    <div className=" bg-blue-gray-0 mt-10">
+    <div className=" bg-blue-gray-0 mt-32 mb-10">
       <Typography variant="h4" className="text-center">
         Why Choose Us?
       </Typography>
-      <div className="flex justify-center items-center mb-14 mt-10">
+      <div className="flex justify-center items-center m-5">
         <Typography variant="paragraph" className="lg:w-[40rem] text-center">
           At Hireup, we curate top-notch opportunities in select software,
           domains, and technologies. Elevate your career by connecting with
@@ -24,7 +19,7 @@ function CompaniesBanner() {
         </Typography>
       </div>
       <div className=" flex flex-col sm:flex-row justify-around lg:mx-10  ">
-        <Card className="max-w-[18rem] h-[18rem] overflow-hidden mb-3 bg-white shadow-md shadow-blue-gray-200 border m-auto mt-4">
+        <Card className="max-w-[18rem] h-[18rem] overflow-hidden mb-3 shadow-xl shadow-blue-gray-200 border m-auto mt-4">
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-4">
               User-Friendly Design
@@ -48,7 +43,7 @@ function CompaniesBanner() {
           </CardBody>
         </Card>
 
-        <Card className="max-w-[18rem] h-[18rem] overflow-hidden mb-3 bg-white shadow-blue-gray-200 border m-auto mt-4">
+        <Card className="max-w-[18rem] h-[18rem] overflow-hidden mb-3 shadow-xl shadow-blue-gray-200 border m-auto mt-4">
 
           <CardBody className="p-4">
             <Typography variant="h5" color="blue-gray" className="mb-4">
@@ -73,7 +68,7 @@ function CompaniesBanner() {
           </CardBody>
         </Card>
 
-        <Card className="max-w-[18rem] h-[18rem] overflow-hidden mb-3 bg-white shadow-blue-gray-200 border m-auto mt-4">
+        <Card className="max-w-[18rem] h-[18rem] overflow-hidden mb-3 shadow-xl shadow-blue-gray-200 border m-auto mt-4">
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-4">
               Security and Privacy

@@ -9,11 +9,13 @@ function LandingPage() {
   return (
     <>
       <LandingNavbar/>
+      <div className="container  m-auto">
       <LandingCards />
       <UserProfileSlide/> 
       <CompaniesBanner/>
+      </div>
       <UserFooter/>
-    </>
+      </>
   );
 }
 

@@ -36,7 +36,7 @@ function UserNavbar() {
   const navigate = useNavigate();
 
   const userDp = useSelector((state) => {
-    return state.user.userDp;
+    return state.userDp
   });
 
   const handleLogOut = () => {
@@ -59,6 +59,7 @@ function UserNavbar() {
     return (
       <ul className=" flex justify-center  lg:gap-5   lg:mb-0 lg:mt-0 lg:flex-row lg:items-center  ">
         <>
+        <Typography>{user.userName}</Typography>
           <a
             onClick={() => navigate("/user")}
             className="flex justify-center p-2 w-[4rem]  hover:bg-blue-gray-50 rounded-md  transition-colors cursor-pointer "

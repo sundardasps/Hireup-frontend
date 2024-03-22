@@ -36,6 +36,7 @@
 
       
     }
+    
     @media (max-width: 1024px) {
       .hidden-lg-at-1024 {
         display: none !important;
