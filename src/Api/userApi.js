@@ -371,4 +371,14 @@ export async function jobDetails(id) {
   }
 }
 
+export async function getJobs(search) {
+
+  try {
+    const response = await userCheck.get(`/getJobs/${search}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 

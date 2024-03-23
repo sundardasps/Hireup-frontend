@@ -1,15 +1,14 @@
 
 import '../../css/jobsScroll.css'
-import phoneImg from '../../../../public/handwithphone.png'
+import phoneImg from '../../../../public/phonevertical.png'
 function JobsScroll() {
   return (
-    <div className="  ">
-<img style={{ width: '64%', height: 'auto' }} className='justify-end ml-auto '   src={phoneImg} alt="" />
-<div className='absolute  top-0 right-32 bottom-0  jobs  w-auto p-0'> 
-    <div className="tag-list">
-      <div className="  loop-slider" style={{ '--duration': '15951ms', '--direction': 'normal' }} >
-        <div className="inner">
-        <div className="tag"><span>#</span> Software Engineer</div>
+
+   <div  className='m-auto '> 
+    <div className="absolute top-0 bottom-0 m-auto  max-h-[30rem] gap-1 md:max-w-max    left-0 right-0   flex shrink-0 flex-col overflow-hidden  ">
+      <div className="  loop-slider " style={{ '--duration': '15951ms', '--direction': 'normal' }} >
+        <div className="inner ">
+      <div className="tag"><span>#</span> Software Engineer</div>
       <div className="tag"><span>#</span> Frontend Developer</div>
       <div className="tag"><span>#</span> UI Designer</div>
       <div className="tag"><span>#</span> Product Manager</div>
@@ -84,8 +83,10 @@ function JobsScroll() {
       </div>
       <div className="fade"></div>
     </div>
+
   </div>
-</div>
+
+
   )
 }
 

@@ -1,20 +1,87 @@
-import { Card, CardHeader, CardBody } from "@material-tailwind/react";
+import { Card, CardHeader, CardBody, Input } from "@material-tailwind/react";
 import { TypeAnimation } from "react-type-animation";
 import { useNavigate } from "react-router-dom";
 import PremiumPng from "../../../../public/premium.png";
 import JobsScroll from "./JobsScroll";
+import { useEffect, useState } from "react";
+import { getJobs } from "../../../Api/userApi";
+import phoneImg from "../../../../public/png.png";
 
 function LandingCards() {
   const navigate = useNavigate();
+  const [search, setSearch] = useState();
+  const [jobs, setJobs] = useState([]);
+  const [jobName, setJobname] = useState("");
+
+  const handleSearch = (e) => {
+    //  setInterval(() => {
+    //   setSearch(e.target.value);
+    // }, 500);
+  };
+
+  // useEffect(() => {
+  //   const getJobsNames = async () => {
+  //     try {
+  //       const result = await getJobs(search);
+  //       if (result && result.status === 200) {
+  //         setJobs(result.data.jobs);
+  //       } else {
+  //         console.log(result && result.data);
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+
+  //   getJobsNames();
+
+  // }, []);
+
   return (
     <>
-      <div className="flex">
-        <header className="job-portal-header m-auto">
+      <div className="md:flex my-5">
+        <header className="job-portal-header w-1/2 m-auto">
           <h1>Find Your Dream Job</h1>
           <p>Explore Thousands of Opportunities</p>
+          <div className=" w-full">
+            <input
+              placeholder="Search Jobes Here!"
+              type="search"
+              onChange={handleSearch}
+              className="border h-[4rem] p-3 border-blue-600 text-center  my-5 rounded-full  w-full"
+            />
+            {jobs.length > 0 ? (
+              <ul
+                role="menu"
+                data-popover="menu"
+                data-popover-placement="bottom"
+                className="max-h-[10rem]  w-3/4 m-auto p-3 overflow-auto rounded-md border border-blue-gray-50 bg-white  font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none "
+              >
+                {jobs &&
+                  jobs.map((value) => (
+                    <li
+                      key={value._id}
+                      role="menuitem"
+                      className="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                    >
+                      {value.name}
+                    </li>
+                  ))}
+              </ul>
+            ) : (
+              ""
+            )}
+          </div>
         </header>
-        <div className="relative w-1/2 ml-auto  ">
-          <JobsScroll />
+        <div className="relative w-1/4 bg-white ">
+          <div className="">
+            <JobsScroll />
+          </div>
+          <img
+            className="relative"
+            src={phoneImg}
+            alt=""
+          />
         </div>
       </div>
       <div className=" md:flex  p-5 pt-10 justify-center relative  md:gap-7 sm:gap-10 overflow-p-10 mb-36">
@@ -78,9 +145,7 @@ function LandingCards() {
           </Card>
         </div>
         <div className=" md:w-auto p-5 ">
-          <div className="text-xl font-bold tracking-tight text-black sm:text-4xl cursor-pointer mb-10 h-20 ">
-            Welcome ,
-            <br />
+          <div className="text-xl font-bold tracking-tight text-black sm:text-4xl cursor-pointer mb-10 h-10 ">
             <TypeAnimation
               cursor={false}
               sequence={["Choose Your Role Wisely", 5000, ""]}
