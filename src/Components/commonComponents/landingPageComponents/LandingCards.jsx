@@ -10,16 +10,16 @@ import {
 import { TypeAnimation } from "react-type-animation";
 import { useNavigate } from "react-router-dom";
 import PremiumPng from "../../../../public/premium.png";
+import companyImgDefault from "../../../../public/default.jpeg";
 import JobsScroll from "./JobsScroll";
 import { useEffect, useState } from "react";
-import { getAllJobs, getJobs, getJobsName } from "../../../Api/userApi";
+import { getJobs, getJobsName } from "../../../Api/userApi";
 import phoneImg from "../../../../public/png.png";
 import { useQuery } from "@tanstack/react-query";
 import {
   BookmarkIcon,
   BuildingOffice2Icon,
   CheckCircleIcon,
-  MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
 import { format } from "timeago.js";
 import toast, { Toaster } from "react-hot-toast";
@@ -27,7 +27,6 @@ function LandingCards() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [jobs, setJobs] = useState([]);
-  const [dropDownShow, setdropDownShow] = useState();
   const [searchedJobs, setsearchedJobs] = useState(false);
 
   const handleSearch = (e) => {
@@ -71,7 +70,7 @@ function LandingCards() {
     <>
       <div className="md:flex my-10 md:mb-10 ">
         <header className=" p-2 md:w-1/2 m-auto ">
-          <p className="text-2xl xl:text-8xl mb-5">Find Your Dream Job</p>
+          <p className="text-4xl xl:text-8xl mb-5">Find Your <span className="text-blue-500 font-medium">Dream</span>  Job</p>
           <p className="">Explore Thousands of Opportunities</p>
           <div className=" w-full">
             <div className=" flex  mt-5 shadow-xl rounded-full shadow-blue-gray-200">
@@ -124,7 +123,7 @@ function LandingCards() {
           </div>
         </header>
 
-        <div className="relative w-1/5 hidden md:block  bg-white">
+        <div className="relative w-1/5  hidden md:block  bg-white">
           <JobsScroll />
           <img className="relative" src={phoneImg} alt="" />
         </div>
@@ -142,11 +141,11 @@ function LandingCards() {
                 e.stopPropagation(), handleClick();
               }}
               key={index}
-              className={`flex flex-row justify-between container  cursor-pointer  border bg-white  rounded-md hover:shadow-xl    md:w-[25rem] md:h-[8rem]  xl:w-[27rem] `}
+              className={`flex flex-row justify-between container mb-3 cursor-pointer  border bg-white  rounded-md hover:shadow-xl    md:w-[25rem] md:h-[8rem]  xl:w-[27rem] `}
             >
               <div className="m-2 mt-4 w-auto h-auto">
                 <img
-                  src={data.companyImage}
+                  src={data.companyImage?data.companyImage:companyImgDefault}
                   style={{ width: "80px", height: "50px" }}
                   className="rounded-sm"
                 />
@@ -216,7 +215,7 @@ function LandingCards() {
               navigate("/company/companyRegister");
             }}
             shadow={false}
-            className="animated-image relative  md:max-w-[16rem]  w-full grid    object-fill   items-end justify-center   overflow-hidden shadow-2xl border   border-blue-600  hover:scale-105 duration-500 h-[15rem] "
+            className=" animated-image relative  md:max-w-[16rem] mb-5 xl:mb-0  w-full grid    object-fill   items-end justify-center   overflow-hidden shadow-2xl border   border-blue-600  hover:scale-105 duration-500 h-[15rem] "
           >
             <CardHeader
               floated={false}
@@ -248,7 +247,7 @@ function LandingCards() {
 
           <Card
             shadow={false}
-            className="animated-image-top relative  mt-5 grid  md:max-w-[16rem]  w-full object-fill   items-end justify-center   overflow-hidden shadow-2xl border   border-blue-600  hover:scale-105 duration-500 h-[15rem] "
+            className="animated-image-top relative  mb-5 xl:mb-0  grid  md:max-w-[16rem]  w-full object-fill   items-end justify-center   overflow-hidden shadow-2xl border   border-blue-600  hover:scale-105 duration-500 h-[15rem] "
             onClick={() => {
               navigate("/user/register");
             }}
@@ -268,21 +267,21 @@ function LandingCards() {
             </CardBody>
           </Card>
         </div>
-        <div className=" md:w-auto p-5 ">
-          <div className="text-xl font-bold tracking-tight text-black sm:text-4xl cursor-pointer mb-10 h-10 ">
+        <div className="md:py-10  p-5 border  md:w-2/5  rounded-2xl rounded-bl-none border-light-blue-700  ">
+          <div className="text-lgfont-bold  tracking-tight text-black sm:text-4xl cursor-pointer mb-2 h-max">
+            Hi,
             <TypeAnimation
               cursor={false}
-              sequence={["Choose Your Role Wisely", 5000, ""]}
-              wrapper="h2"
+              sequence={["Choose Your Role..", 5000, ""]}
               repeat={Infinity}
             />
           </div>
-          <p className="mt-auto text-lg leading-8 text-gray-500 ">
+          <p className="text-sm sm:text-lg leading-6 text-gray-500 ">
             Connecting Opportunity Seekers with Opportunity <br /> Creators
             Where Dreams Find Their Perfect Match
           </p>
-          <p className="pt-2 text-sm font-semibold leading-6 text-blue-400">
-            Enroll now <span aria-hidden="true">→</span>
+          <p className="pt-2 text-sm font-semibold leading-6 cursor-pointer text-blue-400">
+          <span aria-hidden="true">👈</span> select one 
           </p>
         </div>
         {/* style for renedering effect */}

@@ -2,7 +2,8 @@ import { Avatar, Card, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { getCompanies } from "../../../Api/userApi";
 import toast from "react-hot-toast";
-import phoneImg from "../../../../public/handwithphone.png";
+import companyImgDefault from "../../../../public/default.jpeg";
+
 import {
   BriefcaseIcon,
   BuildingOffice2Icon,
@@ -47,7 +48,7 @@ function UserProfileSlide() {
               >
                 <div className="flex justify-center">
                   <img
-                    src={data.image}
+                    src={data.image?data.image:companyImgDefault}
                     style={{ width: "60px", height: "50px" }}
                     className="rounded-sm shadow"
                   />

@@ -1,6 +1,5 @@
 import { Bars3CenterLeftIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
-import Logo   from '../../../../public/logo.png'
 
 import { useNavigate } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
@@ -36,7 +35,7 @@ function UserNavbar() {
         className="mr-4 cursor-pointer py-1.5"
       >
          <div className="font-extrabold text-2xl cursor-pointer text-blue-500  flex items-center gap-1">
-          <img src={Logo} className="min-w-fit h-10"/><span>HireUp</span>
+          <span>HireUp</span>
         </div>
       </Typography>
         {/* Menu icon */}

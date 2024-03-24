@@ -8,7 +8,7 @@ function MainLoading({ showLogo = true, loaderProps = {} }) {
 
        <div className=''>
           <div className="font-extrabold text-2xl cursor-pointer text-blue-500  flex items-center gap-1">
-          <img src="/public/logo.png" className="min-w-fit h-14"/><span>HireUp</span>
+          <span>HireUp</span>
          </div>
        
         <BarLoader className=' m-auto mt-1' {...loaderProps} />
