@@ -32,8 +32,8 @@ function UserProfileSlide() {
 
   return (
     <>
-      <div className="flex  lg:mx-10 lg:mt-12 lg:m-10 md:border-r-2  border-r-indigo-600 ">
-        <div className="border  border-blue-600 p-5 hidden lg:block rounded-tr-3xl rounded-bl-3xl bg-indigo-600">
+      <div className="flex  lg:mx-10 lg:mt-12 lg:m-10 md:border-r-2  border-r-blue-600 ">
+        <div className="border  border-blue-600 p-5 hidden lg:block rounded-tr-3xl rounded-bl-3xl bg-blue-600">
           <Typography variant="h1" color="white" className="font-sans">
             Featured <br /> companies...
           </Typography>

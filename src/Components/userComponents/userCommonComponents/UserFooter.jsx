@@ -6,7 +6,7 @@ function UserFooter() {
 
   return (
     <>
-      <footer className=" relative w-full   border-t p-8">
+      <footer className=" relative w-full   border-t border-blue-600 p-8">
         <div className="flex w-full flex-col items-center justify-center  py-4 md:flex-row md:justify-between">
           <Typography
             variant="small"

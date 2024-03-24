@@ -20,6 +20,7 @@ import {
   BookmarkIcon,
   BuildingOffice2Icon,
   CheckCircleIcon,
+  MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
 import { format } from "timeago.js";
 import toast, { Toaster } from "react-hot-toast";
@@ -46,7 +47,7 @@ function LandingCards() {
       if (search.trim() !== "") {
         const result = await getJobs({ search: search }).then((res) =>
           setsearchedJobs(res.data.data)
-        );
+        ).catch(toast.error("Search reasult not found!"));
         return result;
       }
     } catch (error) {
@@ -85,9 +86,9 @@ function LandingCards() {
                 variant="gradient"
                 color="white"
                 onClick={() => handleFetchJobs()}
-                className="my-auto h-[4rem] rounded-r-full border-blue-600 border p-5 w-1/4 "
+                className="my-auto h-[4rem] rounded-r-full border-blue-600 border  w-1/4 "
               >
-                Search
+                <MagnifyingGlassIcon  className="w-10 m-auto"/>
               </Button>
             </div>
             <div className="h-[6rem]">
@@ -134,6 +135,7 @@ function LandingCards() {
       <div
         className={`grid-cols-2 md:flex mb-10 py-5 h-max gap-5 border-b-4 border-light-blue-700 mx-2`}
       >
+        <Typography></Typography>
         {searchedJobs &&
           searchedJobs.map((data, index) => (
             <Card
