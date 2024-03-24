@@ -18,8 +18,8 @@ function CompaniesBanner() {
           companies seeking skilled professionals.
         </Typography>
       </div>
-      <div className=" flex flex-col sm:flex-row justify-around lg:mx-10  ">
-        <Card className="max-w-[18rem] h-[18rem] overflow-hidden mb-3 shadow-xl shadow-blue-gray-200 border m-auto mt-4">
+      <div className=" flex w-full flex-col gap-3 sm:flex-row justify-around lg:mx-10 p-3 ">
+        <Card className=" w-full md:max-w-[18rem] h-[18rem] scrollable mb-3 shadow-xl shadow-blue-gray-200 border m-auto mt-4">
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-4">
               User-Friendly Design
@@ -43,7 +43,7 @@ function CompaniesBanner() {
           </CardBody>
         </Card>
 
-        <Card className="max-w-[18rem] h-[18rem] overflow-hidden mb-3 shadow-xl shadow-blue-gray-200 border m-auto mt-4">
+        <Card className="w-full md:max-w-[18rem] h-[18rem] scrollable overflow-hidden mb-3 shadow-xl shadow-blue-gray-200 border m-auto mt-4">
 
           <CardBody className="p-4">
             <Typography variant="h5" color="blue-gray" className="mb-4">
@@ -68,7 +68,7 @@ function CompaniesBanner() {
           </CardBody>
         </Card>
 
-        <Card className="max-w-[18rem] h-[18rem] overflow-hidden mb-3 shadow-xl shadow-blue-gray-200 border m-auto mt-4">
+        <Card className="w-full md:max-w-[18rem] h-[18rem] scrollable overflow-hidden mb-3 shadow-xl shadow-blue-gray-200 border m-auto mt-4">
           <CardBody>
             <Typography variant="h5" color="blue-gray" className="mb-4">
               Security and Privacy

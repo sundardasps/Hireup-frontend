@@ -371,10 +371,12 @@ export async function jobDetails(id) {
   }
 }
 
-export async function getJobs() {
+//------------------------------- For landing page ------------------ //
+
+export async function getJobsName() {
 
   try {
-    const response = await userCheck.get(`/getJobs`);
+    const response = await userCheck.get(`/getJobsName`);
     return response;
   } catch (error) {
     console.log(error);
@@ -382,3 +384,13 @@ export async function getJobs() {
 }
 
 
+export async function getJobs({ search}) {
+  try {
+    const response = await userCheck.get("/getJobs", {
+      params: { search},
+    });
+    return response;
+  } catch (error) {
+    console.log(error); 
+  }
+}
