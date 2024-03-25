@@ -45,9 +45,13 @@ function LandingCards() {
   const handleFetchJobs = async () => {
     try {
       if (search.trim() !== "") {
-        const result = await getJobs({ search: search }).then((res) =>
-          setsearchedJobs(res.data.data)
-        ).catch(toast.error("Search reasult not found!"));
+        const result = await getJobs({ search: search });
+        if (result.data.dataFetched) {
+          setsearchedJobs(result.data.data);
+        } else {
+          toast.error("Search reasult not found!");
+        }
+
         return result;
       }
     } catch (error) {
@@ -71,7 +75,10 @@ function LandingCards() {
     <>
       <div className="md:flex my-10 md:mb-10 ">
         <header className=" p-2 md:w-1/2 m-auto ">
-          <p className="text-4xl xl:text-8xl mb-5">Find Your <span className="text-blue-500 font-medium">Dream</span>  Job</p>
+          <p className="text-4xl xl:text-8xl mb-5">
+            Find Your <span className="text-blue-500 font-medium">Dream</span>{" "}
+            Job
+          </p>
           <p className="">Explore Thousands of Opportunities</p>
           <div className=" w-full">
             <div className=" flex  mt-5 shadow-xl rounded-full shadow-blue-gray-200">
@@ -88,7 +95,7 @@ function LandingCards() {
                 onClick={() => handleFetchJobs()}
                 className="my-auto h-[4rem] rounded-r-full border-blue-600 border  w-1/4 "
               >
-                <MagnifyingGlassIcon  className="w-10 m-auto"/>
+                <MagnifyingGlassIcon className="w-10 m-auto" />
               </Button>
             </div>
             <div className="h-[6rem]">
@@ -115,7 +122,7 @@ function LandingCards() {
                           }}
                           className="block w-full cursor-pointer my-3  bg-blue-gray-100 border select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
                         >
-                          {value.name} 
+                          {value.name}
                         </li>
                       ))}
                 </ul>
@@ -133,9 +140,8 @@ function LandingCards() {
         <span className="text-base ml-4 ">Search result🔻</span>
       )}
       <div
-        className={`grid-cols-2 md:flex mb-10 py-5 h-max gap-5 border-b-4 border-light-blue-700 mx-2`}
+        className={`grid  md:grid-cols-2 xl:grid-cols-3  mb-10 py-5 h-max gap-5 border-b-4 border-light-blue-700 mx-2`}
       >
-        <Typography></Typography>
         {searchedJobs &&
           searchedJobs.map((data, index) => (
             <Card
@@ -143,33 +149,33 @@ function LandingCards() {
                 e.stopPropagation(), handleClick();
               }}
               key={index}
-              className={`flex flex-row justify-between container mb-3 cursor-pointer  border bg-white  rounded-md hover:shadow-xl    md:w-[25rem] md:h-[8rem]  xl:w-[27rem] `}
+              className={`flex flex-row justify-between container mb-3 cursor-pointer  border bg-white  rounded-md hover:shadow-xl    md:w-[22rem]  md:h-[8rem]   `}
             >
-              <div className="m-2 mt-4 w-auto h-auto">
+              <div className="mx-3 mt-3 w-auto h-auto">
                 <img
-                  src={data.companyImage?data.companyImage:companyImgDefault}
+                  src={
+                    data.companyImage ? data.companyImage : companyImgDefault
+                  }
                   style={{ width: "80px", height: "50px" }}
                   className="rounded-sm"
                 />
               </div>
-              <div className="flex flex-col  w-full  m-5">
+              <div className="flex flex-col  w-full  my-2">
                 <div className="">
-                  <Typography
-                    color="blue"
-                    className="text-sm font-bold   md:text-base"
-                  >
+                  <Typography color="blue" className=" md:text-xs font-bold ">
                     {data.job_title}
+                    {/* {data.job_title.slice(0,10)+"..."} */}
                   </Typography>
                 </div>
                 <div className="flex gap-1">
                   <BuildingOffice2Icon className="h-4 w-4 text-teal-500" />
-                  <Typography className="text-sm md:text-xs">
+                  <Typography className="md:text-xs">
                     {data.companyName}
                   </Typography>
                 </div>
                 <div className="flex flex-col sm:flex-row justify-between items-start">
                   <div className="flex justify-center gap-2 ">
-                    <Typography className="font-serift text-sm text-gray-600 md:text-xs">
+                    <Typography className="font-serift text-gray-600 md:text-xs">
                       {data.companyLocation}({data.job_type})
                     </Typography>
                   </div>
@@ -179,8 +185,8 @@ function LandingCards() {
                     {format(data.createdAt)}
                   </Typography>
                   {data.is_active ? (
-                    <div className=" flex text-green-400 mt-2 font-normal text-xs md:text-sm">
-                      <CheckCircleIcon className="w-4 h-4 mt-auto" /> Actively
+                    <div className=" flex text-green-400 mt-2 font-normal  md:text-xs">
+                      <CheckCircleIcon className="w-4 h-4 mt-auto " /> Actively
                       recruiting
                     </div>
                   ) : (
@@ -193,7 +199,10 @@ function LandingCards() {
                       e.stopPropagation(), handleClick(data);
                     }}
                   >
-                    <span className="sm:block hidden "> Show details</span>
+                    <span className="sm:block hidden  md:text-xs">
+                      {" "}
+                      Show details
+                    </span>
                   </div>
                 </div>
               </div>
@@ -283,7 +292,7 @@ function LandingCards() {
             Where Dreams Find Their Perfect Match
           </p>
           <p className="pt-2 text-sm font-semibold leading-6 cursor-pointer text-blue-400">
-          <span aria-hidden="true">👈</span> select one 
+            <span aria-hidden="true">👈</span> select one
           </p>
         </div>
         {/* style for renedering effect */}
