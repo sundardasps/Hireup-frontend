@@ -32,8 +32,14 @@ function UserProfileSlide() {
 
   return (
     <>
+      <Typography
+        variant="h3"
+        className="sm:block md:hidden text-center  font-medium "
+      >
+        <span>Featured companies...</span>
+      </Typography>
       <div className="flex  lg:mx-10 lg:mt-12 lg:m-10 md:border-r-2  border-r-blue-600 ">
-        <div className="border  border-blue-600 p-5 hidden lg:block rounded-tr-3xl rounded-bl-3xl bg-blue-600">
+        <div className="border  border-blue-600 p-5 hidden md:block rounded-tr-3xl rounded-bl-3xl bg-blue-600">
           <Typography variant="h1" color="white" className="font-sans">
             Featured <br /> companies...
           </Typography>
@@ -48,7 +54,7 @@ function UserProfileSlide() {
               >
                 <div className="flex justify-center">
                   <img
-                    src={data.image?data.image:companyImgDefault}
+                    src={data.image ? data.image : companyImgDefault}
                     style={{ width: "60px", height: "50px" }}
                     className="rounded-sm shadow"
                   />
