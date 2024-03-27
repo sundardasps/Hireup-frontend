@@ -322,7 +322,7 @@ function JobCards() {
             data.data &&
             data.data.map((data, index) => (
               <Card
-                onClick={(e) => {
+                onClick={(e) => { 
                   e.stopPropagation(),
                     navigate("/user/jobDetails", {
                       state: { jobId: data._id },

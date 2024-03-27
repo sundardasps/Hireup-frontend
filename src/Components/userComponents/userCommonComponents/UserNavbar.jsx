@@ -198,7 +198,6 @@ function UserNavbar() {
             className="mr-4 cursor-pointer py-1.5"
           >
             <div className="font-extrabold text-xl cursor-pointer text-blue-500  flex items-center gap-1">
-              <img src={Logo} className="min-w-fit h-10" />
               <span>HireUp</span>
             </div>
           </Typography>

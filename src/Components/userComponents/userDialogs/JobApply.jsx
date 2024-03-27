@@ -106,7 +106,7 @@ function JobApply({ data }) {
           handleOpen();
         }}
       >
-        Apply
+        Apply for this job
       </p>
       <Dialog
         size="xs"

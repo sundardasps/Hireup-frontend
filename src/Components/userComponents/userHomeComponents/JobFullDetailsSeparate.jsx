@@ -30,7 +30,7 @@ import {
 import JobApply from "../userDialogs/JobApply";
 import toast from "react-hot-toast";
 import { jwtDecode } from "jwt-decode";
-import { CheckCircleIcon } from "@heroicons/react/24/solid";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import DefaultImg from "../../../../public/istockphoto-1454186576-612x612.jpg";
 
 function JobFullDetailsSeparate() {
@@ -183,14 +183,16 @@ function JobFullDetailsSeparate() {
             color="white"
           />
           <div className="w-2/3  md:ml-16 md:mt-16  ">
-            <Typography className="font-medium" color="white" variant="h1">
+            <Typography className="text-3xl  md:text-5xl " color="white" >
               {data ? data.data.jobDetails.job_title : ""} <br />
-              <span className="flex">
-                <span className="font-thin mr-5">at</span>
+              <span className="md:flex">
+                <span className=" mr-5">at</span>
+                <div className="flex w-max ">
                 {data?.data?.companyData?.companyName}
                 {data?.data?.isApproved && (
                   <CheckCircleIcon className="w-10 h-10 m-auto mx-2 " />
                 )}
+                </div>
               </span>
             </Typography>
             <div className="my-5 text-blue-gray-900 md:w-1/2 ">
@@ -203,14 +205,28 @@ function JobFullDetailsSeparate() {
                   {data ? data?.data?.count : ""}
                 </span>
               </div>
-              <Button variant="gradient" className="text-sm">
-                Apply for this job
-              </Button>
+              <div className="md:flex ">
+              <Button className="border bg-transparent mr-5 mb-5 md:mb-0" onClick={()=>handleSaveJob(jobId)}>Save job</Button>
+              {checkApplied ? (
+                <Button className="bg-blue-gray-200">Applied.</Button>
+              ) : (
+                <Button
+                  className={`text-sm w-max flex  ${
+                    checkApplied ? "bg-blue-gray-600" : "bg-green-400"
+                  }`}
+
+                  onClick={()=>(<JobApply  data={{ jobdata: data?.data?.jobDetails }} />)}
+                >
+                  <CursorArrowRippleIcon className="w-6 h-6" />
+                  <JobApply  data={{ jobdata: data?.data?.jobDetails }} />
+                </Button>
+              )}
+              </div>
             </div>
           </div>
         </div>
 
-        <div className=" md:grid grid-cols-5 grid-rows-5 gap-1">
+        <div className=" md:grid grid-cols-5 grid-rows-5 gap-1 m-auto">
           <div className="col-span-3 p-10 ">
             <Typography className="my-1 text-blue-gray-400 text-lg font-semibold">
               About this role
@@ -234,8 +250,8 @@ function JobFullDetailsSeparate() {
                 </span>
                 <br />
                 <div className="text-xs mt-2">
-                  <span>{data?.data?.companyData?.companyName}</span>,
-                  <span>{data?.data?.companyData?.address}</span>
+                  <span>{data?.data?.companyData.companyName}</span>,
+                  <span>{data?.data?.companyData.address}</span>
                   <br />
                   <span className="text-xs mt-2 font-bold flex">
                     <CurrencyRupeeIcon className="w-5 h-5 " />
@@ -277,11 +293,10 @@ function JobFullDetailsSeparate() {
           </div>
           <div className="col-span-2 col-start-4 p-5  ">
             <div className="md:w-2/3">
-              {checkApplied ? (
-                <h3 className="flex text-sm hover:bg-green-300 rounded-md cursor-pointer border w-auto my-3 p-3 gap-1">
+              {!checkApplied ? (
+                <h3 className="flex text-base hover:bg-green-300 rounded-md cursor-pointer border w-auto my-3 p-3 gap-1">
                   <CursorArrowRippleIcon className="w-6 h-6" />
-                  <JobApply data={{ jobdata: data?.data?.jobDetails }} /> for
-                  this job
+                  <JobApply data={{ jobdata: data?.data?.jobDetails }} />
                 </h3>
               ) : (
                 <h3
@@ -292,17 +307,17 @@ function JobFullDetailsSeparate() {
                   Applied !
                 </h3>
               )}
-              <h3 className="text-sm hover:bg-green-300 rounded-md border w-auto my-3 p-3 cursor-pointer">
+              {/* <h3 className="text-sm hover:bg-green-300 rounded-md border w-auto my-3 p-3 cursor-pointer">
                 Apply for this job
               </h3>
               <h3 className="text-sm hover:bg-green-300 rounded-md border w-auto my-3 p-3 cursor-pointer">
                 Apply for this job
-              </h3>
+              </h3> */}
             </div>
-            <div className="w-2/3 my-10">
+            {/* <div className="w-2/3 my-10">
               <Typography>Copy url</Typography>
-              <Input value={"http://localhost:5173/user/jobDetails"} />
-            </div>
+              <Input value={window.location} />
+            </div> */}
           </div>
         </div>
       </div>
