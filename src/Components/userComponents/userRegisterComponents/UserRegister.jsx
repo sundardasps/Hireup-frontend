@@ -38,10 +38,6 @@ function UserRegister() {
         )
         .then((res) => {
           userRegisterGoogle(res.data).then((result) => {
-            console.log(
-              result,
-              "======================================================"
-            );
             if (result.data.created) {
               console.log(result);
               dispatch(

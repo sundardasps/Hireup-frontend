@@ -24,7 +24,7 @@ import {
 } from "../../../Api/userApi";
 import InfiniteScrollComponent from "react-infinite-scroll-component";
 
-import { CheckCircleIcon, BookmarkIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon, BookmarkIcon } from "@heroicons/react/24/solid";
 import { JobFullDetails } from "./JobFullDetails";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -36,8 +36,10 @@ import MainLoading from "../../commonComponents/Loadings/MainLoding";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import defaultDp from "../../../../public/user.png";
+import defaultCompany from "../../../../public/istockphoto-1454186576-612x612.jpg";
 import toast from "react-hot-toast";
 import { format } from "timeago.js";
+import { useQueryClient } from "@tanstack/react-query";
 
 function JobCards() {
   const [open, setOpen] = React.useState(0);
@@ -49,7 +51,8 @@ function JobCards() {
   const [scrolls, setScrolls] = React.useState(1);
   const [hasMore, setHAsMore] = useState(true);
   const [initialFetch, setInitialFetch] = useState(false);
-
+  const [load, setLoad] = useState(false);
+  const queryClient = useQueryClient();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -65,10 +68,7 @@ function JobCards() {
       { filter, search: debounsedSearch, scroll: scrolls },
     ],
     queryFn: async () => {
-      const response = await getAllJobs({
-        search: debounsedSearch,
-        filter,
-        scroll: scrolls,
+      const response = await getAllJobs({search: debounsedSearch,filter,scroll: scrolls,
       }).then((res) => res.data, setInitialFetch(true));
 
       return response;
@@ -76,10 +76,7 @@ function JobCards() {
   });
 
   useEffect(() => {
-    const fetchCategory = async () => {
-      await categoryDataForUser().then((res) => setCategory(res.data.data));
-    };
-
+  
     //always scroll up ref
     window.scrollTo({
       top: 0,
@@ -87,7 +84,7 @@ function JobCards() {
       behavior: "smooth",
     });
 
-    fetchCategory();
+
     const timeoutId = setTimeout(() => {
       setDebouncedSearch(search);
     }, 1000);
@@ -125,6 +122,12 @@ function JobCards() {
   };
   //-----------------------------------------------------//
 
+  const handleLoad = () => {
+    setLoad((curr) => !curr);
+  };
+
+  //-----------------------------------------------------//
+
   const handleShowDetails = (jobData) => {
     setSelectedJob(jobData);
   };
@@ -142,6 +145,15 @@ function JobCards() {
     }
   };
 
+  useEffect(() => {
+    const fetchCategory = async () => {
+      await categoryDataForUser().then((res) => setCategory(res.data.data));
+    };
+
+    fetchCategory();
+  },[]);
+
+
   if (isLoading || !selectedJob) {
     if (data && data.data && data.data.length > 0 && !selectedJob) {
       setSelectedJob(data.data[0]);
@@ -151,7 +163,7 @@ function JobCards() {
 
   return (
     <div className="flex  ">
-      <div className="">
+      <div className="w-1/3">
         <Card className=" h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5   hidden md:block ">
           <div className="grid justify-center  m-3 border-b-2 p-2">
             <div className="flex justify-center mb-2 ">
@@ -272,110 +284,123 @@ function JobCards() {
           <List></List>
         </Card>
       </div>
-
-      <InfiniteScrollComponent
-        dataLength={data.data.length}
-        //This is important field to render the next data
-        className="mt-4 scrollable"
-        next={fetchDataTrigger}
-        hasMore={hasMore}
-        loader={
-          <div className="flex justify-center gap-2">
-            <>
-              <Spinner className="h-5 w-5" />
-            </>
-          </div>
-        }
-        endMessage={
-          <p className="mt-10 text-center">
-            {data.data.length > 0 ? (
-              <b>Yay! You have seen it all</b>
-            ) : (
-              <b>No data found!</b>
-            )}
-          </p>
-        }
-      >
-        {data &&
-          data.data &&
-          data.data.map((data, index) => (
-            <Card
-              onClick={(e) => {
-                e.stopPropagation(),
-                  navigate("/user/jobDetails", {
-                    state: { jobId: data._id },
-                  });
-              }}
-              key={index}
-              className={`flex flex-row justify-between container my-5 cursor-pointer  border bg-white  rounded-md hover:shadow-xl custom-sm sm:w-[25rem]  sm:ml-10  md:w-[25rem] md:h-[8rem]  xl:w-[30rem] ${
-                selectedJob._id === data._id && "bg-blue-gray-50"
-              } `}
-            >
-              <div className="m-2 mt-4 w-auto h-auto">
-                <img
-                  src={data.companyImage}
-                  style={{ width: "80px", height: "50px" }}
-                  className="rounded-sm"
-                />
-              </div>
-              <div className="flex flex-col  w-full  m-5">
-                <div className="">
-                  <Typography
-                    color="blue"
-                    className="text-sm font-bold   md:text-base"
-                  >
-                    {data.job_title}
-                  </Typography>
+      <div className="mt-5 w-5/6  h-[39rem]  scrollable">
+        <InfiniteScrollComponent
+          dataLength={data && data.data.length ? data.data.length : 0}
+          //This is important field to render the next data
+          className=" "
+          hasMore={hasMore}
+          loader={
+            <div className="flex justify-center gap-2">
+              <>
+                <Button
+                  size="sm"
+                  variant="text"
+                  onClick={() => fetchDataTrigger()}
+                  className={`font-extralight`}
+                >
+                  {load && <Spinner />}
+                  Load more
+                </Button>
+              </>
+            </div>
+          }
+          endMessage={
+            <p className="mt-10 text-center font-light">
+              {data && data?.data?.length > 0 ? (
+                <span className="grid cursor-pointer">
+                  <b>Yay! You have seen it all</b>
+                  <span className="text-xs hover:text-sm">Tap to reload.</span>
+                </span>
+              ) : (
+                <b>No data found!</b>
+              )}
+            </p>
+          }
+        >
+          {data &&
+            data.data &&
+            data.data.map((data, index) => (
+              <Card
+                onClick={(e) => {
+                  e.stopPropagation(),
+                    navigate("/user/jobDetails", {
+                      state: { jobId: data._id },
+                    });
+                }}
+                key={index}
+                className={`flex flex-row justify-between container mb-5 cursor-pointer border hover:border-blue-600 bg-white  rounded-md hover:shadow-xl  w-[19.4rem]   h-[7rem]  md:mx-10  md:w-[25rem]   xl:w-[30rem] ${
+                  selectedJob._id === data._id && "bg-blue-gray-50"
+                } `}
+              >
+                <div className="mx-3 mt-3 w-auto h-auto ">
+                  <img
+                    src={data.companyImage ? data.companyImage : defaultCompany}
+                    style={{ width: "80px", height: "50px" }}
+                    className="rounded-sm "
+                  />
                 </div>
-                <div className="flex gap-1">
-                  <BuildingOffice2Icon className="h-4 w-4 text-teal-500" />
-                  <Typography className="text-sm md:text-xs">
-                    {data.companyName}
-                  </Typography>
-                </div>
-                <div className="flex flex-col sm:flex-row justify-between items-start">
-                  <div className="flex justify-center gap-2 ">
-                    <Typography className="font-serift text-sm text-gray-600 md:text-xs">
-                      {data.companyLocation}({data.job_type})
+                <div className="flex flex-col   w-full   my-2">
+                  <div className="">
+                    <Typography
+                      color="blue"
+                      className="text-xs font-bold   md:text-base"
+                    >
+                      {data.job_title}
                     </Typography>
                   </div>
-                </div>
-                <div className="flex justify-between">
-                  <Typography className="text-xs mt-auto">
-                    {format(data.createdAt)}
-                  </Typography>
-                  {data.is_active ? (
-                    <div className=" flex text-green-400 mt-2 font-normal text-xs md:text-sm">
-                      <CheckCircleIcon className="w-4 h-4 mt-auto" /> Actively
+                  <div className="flex gap-1">
+                    <BuildingOffice2Icon className="h-4 w-4 text-teal-500" />
+                    <Typography className="text-xs md:text-xs">
+                      {data.companyName}
+                    </Typography>
+                  </div>
+                  <div className="flex flex-col sm:flex-row justify-between items-start">
+                    <div className="flex justify-center gap-2 ">
+                      <Typography className="font-serift text-xs text-gray-600 md:text-xs">
+                        {data.companyLocation}({data.job_type})
+                      </Typography>
+                    </div>
+                  </div>
+                  <div className="flex justify-between  ">
+                    <span className="text-xs my-3 ">
+                      {format(data.createdAt)}
+                    </span>
+
+                    <div
+                      className={`flex ${
+                        data.is_active ? " text-green-400" : " text-white"
+                      }  my-3  font-normal text-xs `}
+                    >
+                      <CheckCircleIcon className="w-4 h-4 " /> Actively
                       recruiting
                     </div>
-                  ) : (
-                    <div className=" flex  mt-2 font-normal "></div>
-                  )}
-                  <div
-                    className="mt-2 cursor-pointer font-light hover:underline left-0  text-xs  md:text-sm "
-                    style={{ userSelect: "none" }}
-                    onClick={(e) => {
-                      e.stopPropagation(), handleShowDetails(data);
-                    }}
-                  >
-                    <span className="sm:block hidden "> Show details</span>
+
+                    <div
+                      className="my-3  cursor-pointer  font-light hover:underline  text-xs  "
+                      style={{ userSelect: "none" }}
+                      onClick={(e) => {
+                        e.stopPropagation(), handleShowDetails(data);
+                      }}
+                    >
+                      <span className=" sm:block hidden "> Show details</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <CardFooter className=" ">
-                <BookmarkIcon
-                  className="w-5 h-5  cursor-pointer  underline"
-                  onClick={(e) => {
-                    e.stopPropagation(), handleSaveJob(data._id);
-                  }}
-                />
-              </CardFooter>
-            </Card>
-          ))}
-      </InfiniteScrollComponent>
+                <CardFooter className=" ">
+                  <BookmarkIcon
+                    className="w-5 h-5  cursor-pointer  underline"
+                    onClick={(e) => {
+                      e.stopPropagation(), handleSaveJob(data._id);
+                    }}
+                  />
+                </CardFooter>
+              </Card>
+            ))}
+        </InfiniteScrollComponent>
+      </div>
 
-      <div className="  m-5  hidden lg:block hidden-lg-at-1024 ">
+      <div className=" m-5  hidden lg:block hidden-lg-at-1024 ">
         {selectedJob && <JobFullDetails jobdata={selectedJob} />}
       </div>
     </div>

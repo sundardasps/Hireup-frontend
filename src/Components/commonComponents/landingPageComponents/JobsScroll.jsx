@@ -5,7 +5,7 @@ function JobsScroll() {
   return (
 
    <div  className='m-auto '> 
-    <div className="absolute top-0 bottom-0 m-auto  max-h-[28rem] gap-1 md:max-w-min px-5 border-2 border-black rounded-3xl   left-0 right-0   flex shrink-0 flex-col overflow-hidden  ">
+    <div className="absolute top-0 bottom-0 m-auto  max-h-[28rem] gap-1 md:max-w-min px-5  rounded-3xl   left-0 right-0   flex shrink-0 flex-col overflow-hidden  ">
       <div className="  loop-slider " style={{ '--duration': '15951ms', '--direction': 'normal' }} >
         <div className="inner ">
       <div className="tag"><span>#</span> Software Engineer</div>

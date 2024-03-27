@@ -9,7 +9,7 @@ import { setUserDetails } from "../../../Redux/storeSlices/userSlice";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import UserLoginImg from '../../../../public/6876640.jpg'
+import UserLoginImg from "../../../../public/6876640.jpg";
 function UserLogin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,12 +49,12 @@ function UserLogin() {
                 dispatch(
                   setUserDetails({
                     userName: result.data.loginData.userName,
-                    email:result.data.loginData.email,
+                    email: result.data.loginData.email,
                     role: "user",
-                    userTitle:result.data.loginData.userTitle,
-                    userDp:result.data.loginData.userDp,
-                    number:result.data.loginData.number,
-                    userId:result.data.loginData._id
+                    userTitle: result.data.loginData.userTitle,
+                    userDp: result.data.loginData.userDp,
+                    number: result.data.loginData.number,
+                    userId: result.data.loginData._id,
                   })
                 );
                 localStorage.setItem("token", result.data.jwtToken);
@@ -69,8 +69,6 @@ function UserLogin() {
     }
   }, [user, dispatch, navigate]);
 
-
-
   const { handleBlur, handleChange, handleSubmit, errors, touched, values } =
     useFormik({
       initialValues: initialValue,
@@ -83,10 +81,10 @@ function UserLogin() {
               userName: response.data.loginData.userName,
               email: response.data.loginData.email,
               role: "user",
-              userTitle:response.data.loginData.userTitle,
-              userDp:response.data.loginData.userDp,
-              number:response.data.loginData.number,
-              userId:response.data.loginData._id
+              userTitle: response.data.loginData.userTitle,
+              userDp: response.data.loginData.userDp,
+              number: response.data.loginData.number,
+              userId: response.data.loginData._id,
             })
           );
           localStorage.setItem("token", response.data.jwtToken);
@@ -100,15 +98,7 @@ function UserLogin() {
   return (
     <div className=" flex flex-col items-center justify-between pt-0 pr-2 sm:pr-5 pb-0 pl-2 sm:pl-5 mt-0 mx-auto max-w-screen-xl xl:px-5 lg:flex-row">
       <div className="flex flex-col items-center w-full pr-2 sm:pr-5  pl-2 sm:pl-5 lg:flex-row">
-        <div className="w-full bg-cover relative max-w-md lg:max-w-2xl lg:w-7/12">
-          <div className="flex flex-col items-center justify-center w-full h-full relative lg:pr-2 sm:pr-5">
-            <img
-              src={UserLoginImg}
-              className="w-full h-auto lg:h-full max-w-full"
-            />
-          </div>
-        </div>
-        <div className="w-full mt-5 sm:mt-20 mr-0 mb-0 ml-0 relative z-10 max-w-2xl lg:mt-0 lg:w-5/12">
+        <div className="w-full mt-5 sm:mt-20 mr-0 mb-0 ml-0 relative z-10 max-w-2xl lg:mt-0 lg:w-5/12 border hover:border-blue-600 rounded-md">
           <form action="" onSubmit={handleSubmit}>
             <div className="flex flex-col items-start justify-start pt-5 sm:pt-10 pr-2 sm:pr-5 pb-5 sm:pb-10 pl-2 sm:pl-5 bg-white shadow-2xl rounded-xl relative z-10">
               <p className="w-full text-2xl sm:text-4xl font-medium text-center leading-snug font-serif">
@@ -383,6 +373,14 @@ function UserLogin() {
               </g>
             </g>
           </svg>
+        </div>
+        <div className="w-full bg-cover relative max-w-md lg:max-w-2xl lg:w-7/12">
+          <div className="flex flex-col items-center justify-center w-full h-full relative lg:pr-2 sm:pr-5">
+            <img
+              src={UserLoginImg}
+              className="w-full h-auto lg:h-full max-w-full"
+            />
+          </div>
         </div>
       </div>
       <Toaster />

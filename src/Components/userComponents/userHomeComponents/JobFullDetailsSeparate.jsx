@@ -15,6 +15,7 @@ import {
   MenuHandler,
   MenuItem,
   MenuList,
+  Typography,
 } from "@material-tailwind/react";
 import {
   ArrowLeftIcon,
@@ -75,9 +76,10 @@ function JobFullDetailsSeparate() {
   };
 
   return (
-    <div className="flex justify-center">
+    <>
+      {/* <div className=" border m-auto container">
       <Card  className="  container  my-3 w-screen   bg-white  h-auto border  rounded-none">
-        <div className="flex  flex-col bg-blue-500  ">
+        <div className="flex  flex-col bg-blue-500">
           <div className="flex justify-between ">
             <ArrowLeftIcon
               className="w-10 h-6 m-4 cursor-pointer"
@@ -165,7 +167,35 @@ function JobFullDetailsSeparate() {
           )}
         </CardFooter>
       </Card>
-    </div>
+    </div> */}
+
+      {/* <div className="w-screen bg-blue-400 container mx-auto p-5"> */}
+        {/* <div className="w-2/3  md:ml-16 md:mt-16  border">
+          <Typography className="font-extralight" color="white" variant="h1">
+            Senior ui/ux developer <br />
+           <span>at</span> {""} Luminar
+          </Typography>
+        </div>
+        <div>
+          jjj
+        </div>
+      <div></div> */}
+      <div className="container mx-auto">
+      <div className="grid grid-cols-12 gap-4">
+
+
+<div className="col-span-12 md:col-span-12  h-96 bg-blue-gray-400">1</div>
+
+
+<div className="col-span-12 md:col-span-6  h-96 bg-blue-gray-600">2</div>
+
+
+<div className="col-span-12 md:col-span-6  h-96 bg-blue-gray-800">3</div>
+
+</div>
+</div>
+      {/* </div> */}
+    </>
   );
 }
 

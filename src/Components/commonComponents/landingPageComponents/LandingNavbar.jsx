@@ -45,13 +45,12 @@ function UserNavbar() {
         >
           {isOpen ? <XMarkIcon /> : <Bars3CenterLeftIcon />}
         </div>
-        {/* Link items (responsive) */}
         <ul
-          className={`md:flex md:items-center md:pb-0 pb-12 md:static bg-white md:z-auto z-[-1] w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
-            isOpen ? "top-12" : "hidden md:top-0 md:flex"
+          className={`md:flex md:items-center md:pb-0 md:static bg-white md:z-auto z-[-1] w-full md:w-auto md:pl-0 transition-all duration-500 ease-in ${
+            isOpen ? "top-12 transition-all duration-500 ease-in delay-100" : "hidden md:top-0 md:flex"
           }`}
         >
-          <li className="md:ml-8 md:my-0 my-7 font-normal">
+          <li className=" font-normal ">
            <span className="m-1">Already Registered?</span>
             <Menu>
               <MenuHandler>

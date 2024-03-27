@@ -66,6 +66,7 @@ export async function categoryDataForUser() {
 
 export async function getAllJobs({ search, filter ,scroll}) {
   try {
+    console.log( search, filter ,scroll);
     const response = await userCheck.get("/getAllJobs", {
       params: { search, filter ,scroll},
     });

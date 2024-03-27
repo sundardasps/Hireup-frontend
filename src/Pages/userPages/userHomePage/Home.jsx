@@ -6,7 +6,7 @@ import { SideBarFilter } from '../../../Components/userComponents/userHomeCompon
 
 function Home() {
   return (
-    <div >
+    <div className='flex justify-center'>
         <JobCards />
     </div>
   );
