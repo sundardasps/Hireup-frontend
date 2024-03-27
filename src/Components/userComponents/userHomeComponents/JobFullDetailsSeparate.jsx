@@ -250,8 +250,8 @@ function JobFullDetailsSeparate() {
                 </span>
                 <br />
                 <div className="text-xs mt-2">
-                  <span>{data?.data?.companyData.companyName}</span>,
-                  <span>{data?.data?.companyData.address}</span>
+                  <span>{data?.data?.companyData?.companyName}</span>,
+                  <span>{data?.data?.companyData?.address}</span>
                   <br />
                   <span className="text-xs mt-2 font-bold flex">
                     <CurrencyRupeeIcon className="w-5 h-5 " />
