@@ -187,7 +187,7 @@ function JobFullDetailsSeparate() {
               {data ? data.data.jobDetails.job_title : ""} <br />
               <span className="flex">
                 <span className="font-thin mr-5">at</span>
-                {data.data.companyData.companyName}
+                {data?.data?.companyData?.companyName}
                 {data?.data?.isApproved && (
                   <CheckCircleIcon className="w-10 h-10 m-auto mx-2 " />
                 )}
@@ -195,8 +195,8 @@ function JobFullDetailsSeparate() {
             </Typography>
             <div className="my-5 text-blue-gray-900 md:w-1/2 ">
               <div className="text-xs my-4">
-                <span>{data.data.companyData.companyName}</span>,
-                <span>{data.data.companyData.address}</span>
+                <span>{data?.data?.companyData?.companyName}</span>,
+                <span>{data?.data?.companyData?.address}</span>
                 <br />
                 <span className="text-base text-blue-gray-100">
                   Total applicants: {""}
@@ -234,8 +234,8 @@ function JobFullDetailsSeparate() {
                 </span>
                 <br />
                 <div className="text-xs mt-2">
-                  <span>{data.data.companyData.companyName}</span>,
-                  <span>{data.data.companyData.address}</span>
+                  <span>{data?.data?.companyData?.companyName}</span>,
+                  <span>{data?.data?.companyData?.address}</span>
                   <br />
                   <span className="text-xs mt-2 font-bold flex">
                     <CurrencyRupeeIcon className="w-5 h-5 " />
