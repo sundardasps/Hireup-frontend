@@ -189,9 +189,9 @@ function UserNavbar() {
     };
   }, []);
   return (
-    <div>
-      <Navbar className="fixed top-0 left-0 right-0 z-50  h-auto max-w-screen-xxl px-6 py-2 rounded-none  ">
-        <div className="flex items-center justify-between text-blue-gray-900">
+
+      <div className="fixed m-auto top-0 left-0 right-0 z-50  h-auto bg-white px-6 py-2 rounded-none border shadow-md  ">
+        <div className="flex items-center justify-between text-blue-gray-900 ">
           <Typography
             as="a"
             variant="h3"
@@ -220,8 +220,8 @@ function UserNavbar() {
         <Collapse open={openNav}>
           <NavList />
         </Collapse>
-      </Navbar>
-    </div>
+      </div>
+
   );
 }
 

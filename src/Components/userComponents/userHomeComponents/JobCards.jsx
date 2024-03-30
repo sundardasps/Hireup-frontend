@@ -163,7 +163,7 @@ function JobCards() {
 
   return (
     <div className="flex  ">
-      <div className="w-1/3">
+      <div className="md:w-1/3">
         <Card className=" h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5   hidden md:block ">
           <div className="grid justify-center  m-3 border-b-2 p-2">
             <div className="flex justify-center mb-2 ">
@@ -284,7 +284,7 @@ function JobCards() {
           <List></List>
         </Card>
       </div>
-      <div className="mt-5 w-5/6  h-[39rem]  scrollable">
+      <div className="mt-5  md:min-w-[30rem]  md:w-2/3 pl-2  h-[39rem]  scrollable">
         <InfiniteScrollComponent
           dataLength={data && data.data.length ? data.data.length : 0}
           //This is important field to render the next data
@@ -329,7 +329,7 @@ function JobCards() {
                     });
                 }}
                 key={index}
-                className={`flex flex-row justify-between container mb-5 cursor-pointer border hover:border-blue-600 bg-white  rounded-md hover:shadow-xl  w-[19.4rem]   h-[7rem]  md:mx-10  md:w-[25rem]   xl:w-[30rem] ${
+                className={`flex flex-row justify-between container mb-5 cursor-pointer border hover:border-blue-600 bg-white  rounded-md hover:shadow-xl  w-auto  h-[7rem]  md:mx-10  md:w-[25rem]   xl:w-[30rem] ${
                   selectedJob._id === data._id && "bg-blue-gray-50"
                 } `}
               >
