@@ -5,9 +5,9 @@ import UserDetails from '../../../Components/userComponents/userProfiieComponent
 
 function Profile() {
   return (
-     <div className=''>
+     <>
      <UserDetails/>
-     </div>
+     </>
   )
 }
 

@@ -166,21 +166,20 @@ function UserDetails() {
   if (error) {
     return <h1>error.....</h1>;
   }
-
   return (
     <>
-      <div className="flex justify-center bg-blue-gray-50">
-        <div className="bg-transparent scrollable p-2">
-          <div className="container mx-auto my-5 ">
+
+    
+          <div className="mx-auto my-5  overflow-hidden w-auto md:p-2">
             <div className="md:flex no-wrap md:-mx-2 ">
               <div className="w-full md:w-6/12 md:mx-2">
-                <div className=" bg-white p-2 shadow-sm rounded-lg shadow-blue-gray-200">
+                <div className=" bg-white  p-2 shadow-xl rounded-lg border border-blue-gray-100 shadow-blue-gray-200">
                   <div className=" relative mb-20">
                     {/* Background Image */}
                     <div className="bgimage relative">
                       <img
                         src={
-                          data.exist.userCoverDp
+                          data?.exist?.userCoverDp
                             ? data.exist.userCoverDp
                             : banner
                         }
@@ -195,7 +194,7 @@ function UserDetails() {
                     <div className=" absolute bottom-[-50%] left-24 transform -translate-x-1/2 mb-5">
                       <a onClick={handleOpen}>
                         <img
-                          src={data.exist.userDp ? data.exist.userDp : userLogo}
+                          src={data.exist?.userDp ? data.exist?.userDp : userLogo}
                           className="relative inline-block h-40 w-40 rounded-full outline-double object-cover object-center cursor-pointer"
                           alt="Profile"
                         />
@@ -242,7 +241,7 @@ function UserDetails() {
 
                 <div className="my-4"></div>
 
-                <div className="bg-white p-2 shadow-sm rounded-lg shadow-blue-gray-200">
+                <div className="bg-white p-2 shadow-xl  border border-blue-gray-100 rounded-lg shadow-blue-gray-200">
                   <form action="">
                     <div className="flex justify-between  space-x-3 font-semibold text-gray-900 text-xl leading-8">
                       <span>Add skills</span>
@@ -298,7 +297,7 @@ function UserDetails() {
               </div>
 
               <div className="w-full mt-5 md:w-6/12  md:mx-2 lg:mt-0">
-                <div className="bg-white p-2 shadow-sm rounded-lg shadow-blue-gray-200">
+                <div className="bg-white p-2 shadow-xl rounded-lg border border-blue-gray-100  shadow-blue-gray-200">
                   <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8  w-[50rem]">
                     <span className="text-green-500">
                       <svg
@@ -349,7 +348,7 @@ function UserDetails() {
 
                 <div className="my-4"></div>
 
-                <div className="bg-white p-2 shadow-sm rounded-lg shadow-blue-gray-200">
+                <div className="bg-white p-2 shadow-xl  border border-blue-gray-100 rounded-lg shadow-blue-gray-200">
                   <div className="grid  ">
                     <div>
                       <div className="flex justify-between  items-center space-x-2 font-semibold text-gray-900 leading-8 ">
@@ -383,7 +382,7 @@ function UserDetails() {
                 
 
                 
-                <div className="bg-white p-2 shadow-sm rounded-lg shadow-blue-gray-200">
+                <div className="bg-white p-2 shadow-xl rounded-lg border border-blue-gray-100 shadow-blue-gray-200">
                   <div className="grid  ">
                     <div>
                       <div className="flex justify-between items-center space-x-2 font-semibold text-gray-900 leading-8 ">
@@ -421,7 +420,7 @@ function UserDetails() {
                 
                 <div className="my-4"></div>
 
-                <div className="bg-white p-2 shadow-sm rounded-lg shadow-blue-gray-200">
+                <div className="bg-white p-2 shadow-xl rounded-lg border border-blue-gray-100 shadow-blue-gray-200">
                   <div className="grid  ">
                     <div>
                       <div className="flex justify-between items-center space-x-2 font-semibold text-gray-900 leading-8 ">
@@ -452,8 +451,8 @@ function UserDetails() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+      
+ 
 
       <Dialog size="xs" open={open} className="bg-transparent shadow-none">
         <Card className="mx-auto w-full max-w-[25rem]   ">
