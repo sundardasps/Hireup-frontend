@@ -162,30 +162,29 @@ function LandingCards() {
               </div>
               <div className="flex flex-col  w-full  my-2">
                 <div className="">
-                  <Typography color="blue" className=" md:text-xs font-bold ">
-                    {data.job_title}
-                    {/* {data.job_title.slice(0,10)+"..."} */}
+                  <Typography color="blue" className="text-[0.7rem] md:text-xs font-bold ">
+                    {data.job_title.length > 30 ? data.job_title.slice(0,30)+"...":data.job_title}
                   </Typography>
                 </div>
                 <div className="flex gap-1">
                   <BuildingOffice2Icon className="h-4 w-4 text-teal-500" />
-                  <Typography className="md:text-xs">
+                  <Typography className="text-[0.7rem] md:text-xs">
                     {data.companyName}
                   </Typography>
                 </div>
                 <div className="flex flex-col sm:flex-row justify-between items-start">
                   <div className="flex justify-center gap-2 ">
-                    <Typography className="font-serift text-gray-600 md:text-xs">
+                    <Typography className="font-serift text-gray-600 text-[0.7rem] md:text-xs">
                       {data.companyLocation}({data.job_type})
                     </Typography>
                   </div>
                 </div>
                 <div className="flex justify-between">
-                  <Typography className="text-xs mt-auto">
+                  <Typography className="text-xs text-[0.6rem] mt-auto">
                     {format(data.createdAt)}
                   </Typography>
                   {data.is_active ? (
-                    <div className=" flex text-green-400 mt-2 font-normal  md:text-xs">
+                    <div className=" flex text-green-400 mt-2 font-normal text-[0.6rem]  md:text-xs">
                       <CheckCircleIcon className="w-4 h-4 mt-auto " /> Actively
                       recruiting
                     </div>
@@ -199,7 +198,7 @@ function LandingCards() {
                       e.stopPropagation(), handleClick(data);
                     }}
                   >
-                    <span className="sm:block hidden  md:text-xs">
+                    <span className="sm:block hidden text-[0.7rem]  md:text-xs">
                       {" "}
                       Show details
                     </span>
