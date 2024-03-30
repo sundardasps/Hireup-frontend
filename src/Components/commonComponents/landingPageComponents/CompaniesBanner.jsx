@@ -7,7 +7,7 @@ import {
 
 function CompaniesBanner() {
   return (
-    <div className=" bg-blue-gray-0 mt-32 mb-10">
+    <div className=" bg-blue-gray-0 mt-10 mb-10">
       <Typography variant="h4" className="text-center">
         Why Choose Us?
       </Typography>

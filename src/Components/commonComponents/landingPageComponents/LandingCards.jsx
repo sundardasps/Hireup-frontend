@@ -98,13 +98,13 @@ function LandingCards() {
                 <MagnifyingGlassIcon className="w-10 m-auto" />
               </Button>
             </div>
-            <div className="h-[6rem]">
+            <div className={`h-[6rem]  md:w-full`}>
               {
                 <ul
                   role="menu"
                   data-popover="menu"
                   data-popover-placement="bottom"
-                  className="max-h-[10rem]   right-0 w-2/3  m-auto mt-2 scrollable    p-3 overflow-auto rounded-md   bg-transparent  font-sans text-sm font-normal text-blue-gray-500 "
+                  className=" right-0   m-auto mt-2 scrollable    p-3 overflow-auto rounded-md    font-sans text-sm font-normal "
                 >
                   {jobs &&
                     jobs
@@ -120,7 +120,7 @@ function LandingCards() {
                           onClick={() => {
                             setSearch(value.name);
                           }}
-                          className="block w-full cursor-pointer my-3  bg-blue-gray-100 border select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                          className="block w-full cursor-pointer my-3 shadow-md border-gray-600 bg-white border select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
                         >
                           {value.name}
                         </li>
@@ -218,7 +218,7 @@ function LandingCards() {
           ))}
       </div>
 
-      <div className=" md:flex  p-5 pt-10 justify-center relative  md:gap-7 sm:gap-10 overflow-p-10 mb-36">
+      <div className=" md:flex  p-5 pt-10 justify-center relative  md:gap-7 sm:gap-10 overflow-p-10 md:mb-20">
         <div className="xl:flex mt-auto  gap-5  md:w-1/2 ">
           {/* Company selection div */}
           <Card
@@ -278,7 +278,7 @@ function LandingCards() {
             </CardBody>
           </Card>
         </div>
-        <div className="md:py-10  p-5 border  md:w-2/5  rounded-2xl rounded-bl-none border-light-blue-700  ">
+        <div className="md:py-10  p-5   md:w-2/5  rounded-2xl rounded-bl-none border-light-blue-700  ">
           <div className="text-lgfont-bold  tracking-tight text-black sm:text-4xl cursor-pointer mb-2 h-max">
             Hi,
             <TypeAnimation
@@ -290,9 +290,6 @@ function LandingCards() {
           <p className="text-sm sm:text-lg leading-6 text-gray-500 ">
             Connecting Opportunity Seekers with Opportunity <br /> Creators
             Where Dreams Find Their Perfect Match
-          </p>
-          <p className="pt-2 text-sm font-semibold leading-6 cursor-pointer text-blue-400">
-            <span aria-hidden="true">👈</span> select one
           </p>
         </div>
         {/* style for renedering effect */}
