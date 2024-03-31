@@ -30,6 +30,7 @@ import { checkJobAppliedStatus, createChat, getSingleJobData } from "../../../Ap
 import { jwtDecode } from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
 export default function AppliedJobStatus(jobdata) {
+  console.log(jobdata,"kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
   const [open, setOpen] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
   const [isLastStep, setIsLastStep] = React.useState(false);
@@ -43,9 +44,9 @@ export default function AppliedJobStatus(jobdata) {
   const userId = decode.exist._id
 
   const {data} = useQuery({
-    queryKey:["appliedStatus",{jobId:jobdata.jobData._id}],
+    queryKey:["appliedStatus",{jobId:jobdata.jobdata._id}],
     queryFn:async () =>{
-      const response = await checkJobAppliedStatus(userId,jobdata.jobData._id)
+      const response = await checkJobAppliedStatus(userId,jobdata.jobdata._id)
       return response
     }
   })

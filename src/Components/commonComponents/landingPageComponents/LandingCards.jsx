@@ -74,7 +74,7 @@ function LandingCards() {
   return (
     <>
       <div className="md:flex my-10 md:mb-10 ">
-        <header className=" p-2 md:w-1/2 m-auto ">
+        <header className=" p-2 md:w-1/2 m-auto  ">
           <p className="text-4xl xl:text-8xl mb-5">
             Find Your <span className="text-blue-500 font-medium">Dream</span>{" "}
             Job
@@ -98,13 +98,14 @@ function LandingCards() {
                 <MagnifyingGlassIcon className="w-10 m-auto" />
               </Button>
             </div>
-            <div className={`h-[6rem]  md:w-full`}>
-              {
+
+            {
+              search && searchedJobs.length < 1 && (
                 <ul
                   role="menu"
                   data-popover="menu"
                   data-popover-placement="bottom"
-                  className=" right-0   m-auto mt-2 scrollable    p-3 overflow-auto rounded-md    font-sans text-sm font-normal "
+                  className="absolute  mt-2 z-10 min-w-[180px] overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none"
                 >
                   {jobs &&
                     jobs
@@ -120,14 +121,29 @@ function LandingCards() {
                           onClick={() => {
                             setSearch(value.name);
                           }}
-                          className="block w-full cursor-pointer my-3 shadow-md border-gray-600 bg-white border select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                          className="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
                         >
                           {value.name}
                         </li>
                       ))}
                 </ul>
-              }
-            </div>
+              )
+              //    <ul role="menu" data-popover="menu" data-popover-placement="bottom"
+              //    class="absolute z-10 min-w-[180px] overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none">
+              //    <li role="menuitem"
+              //      class="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+              //      Menu Item 1
+              //    </li>
+              //    <li role="menuitem"
+              //      class="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+              //      Menu Item 2
+              //    </li>
+              //    <li role="menuitem"
+              //      class="block w-full cursor-pointer select-none rounded-md px-3 pt-[9px] pb-2 text-start leading-tight transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+              //      Menu Item 3
+              //    </li>
+              //  </ul>
+            }
           </div>
         </header>
 
@@ -149,7 +165,7 @@ function LandingCards() {
                 e.stopPropagation(), handleClick();
               }}
               key={index}
-              className={`flex flex-row justify-between container mb-3 cursor-pointer  border bg-white  rounded-md hover:shadow-xl    md:w-[22rem]  md:h-[8rem]   `}
+              className={`flex flex-row justify-between container mb-3 cursor-pointer  border bg-white  rounded-md hover:shadow-xl  h-[8rem]  md:w-[22rem]  md:h-[8rem]   `}
             >
               <div className="mx-3 mt-3 w-auto h-auto">
                 <img
@@ -162,8 +178,13 @@ function LandingCards() {
               </div>
               <div className="flex flex-col  w-full  my-2">
                 <div className="">
-                  <Typography color="blue" className="text-[0.7rem] md:text-xs font-bold ">
-                    {data.job_title.length > 30 ? data.job_title.slice(0,30)+"...":data.job_title}
+                  <Typography
+                    color="blue"
+                    className="text-[0.7rem] md:text-xs font-bold "
+                  >
+                    {data.job_title.length > 30
+                      ? data.job_title.slice(0, 30) + "..."
+                      : data.job_title}
                   </Typography>
                 </div>
                 <div className="flex gap-1">
@@ -217,7 +238,7 @@ function LandingCards() {
           ))}
       </div>
 
-      <div className=" md:flex  p-5 pt-10 justify-center relative  md:gap-7 sm:gap-10 overflow-p-10 md:mb-20">
+      <div className=" m-3 md:flex bg-blue-400 rounded-3xl  p-5 pt-10 justify-center relative mb-10 md:gap-7 sm:gap-10 overflow-p-10 md:mb-20">
         <div className="xl:flex mt-auto  gap-5  md:w-1/2 ">
           {/* Company selection div */}
           <Card
@@ -225,7 +246,7 @@ function LandingCards() {
               navigate("/company/companyRegister");
             }}
             shadow={false}
-            className=" animated-image relative  md:max-w-[16rem] mb-5 xl:mb-0  w-full grid    object-fill   items-end justify-center   overflow-hidden shadow-2xl border   border-blue-600  hover:scale-105 duration-500 h-[15rem] "
+            className=" animated-image relative  md:max-w-[16rem] mb-5 xl:mb-0  w-full grid    object-fill   items-end justify-center   overflow-hidden shadow-2xl border   border-white  hover:scale-105 duration-500 h-[15rem] "
           >
             <CardHeader
               floated={false}
@@ -257,7 +278,7 @@ function LandingCards() {
 
           <Card
             shadow={false}
-            className="animated-image-top relative  mb-5 xl:mb-0  grid  md:max-w-[16rem]  w-full object-fill   items-end justify-center   overflow-hidden shadow-2xl border   border-blue-600  hover:scale-105 duration-500 h-[15rem] "
+            className="animated-image-top relative  mb-5 xl:mb-0  grid  md:max-w-[16rem]  w-full object-fill   items-end justify-center   overflow-hidden shadow-2xl border   border-white  hover:scale-105 duration-500 h-[15rem] "
             onClick={() => {
               navigate("/user/register");
             }}
@@ -278,7 +299,7 @@ function LandingCards() {
           </Card>
         </div>
         <div className="md:py-10  p-5   md:w-2/5  rounded-2xl rounded-bl-none border-light-blue-700  ">
-          <div className="text-lgfont-bold  tracking-tight text-black sm:text-4xl cursor-pointer mb-2 h-max">
+          <div className="text-lgfont-bold  tracking-tight text-white sm:text-4xl cursor-pointer mb-2 h-max">
             Hi,
             <TypeAnimation
               cursor={false}
@@ -286,7 +307,7 @@ function LandingCards() {
               repeat={Infinity}
             />
           </div>
-          <p className="text-sm sm:text-lg leading-6 text-gray-500 ">
+          <p className="text-sm sm:text-lg leading-6 text-gray-300 ">
             Connecting Opportunity Seekers with Opportunity <br /> Creators
             Where Dreams Find Their Perfect Match
           </p>

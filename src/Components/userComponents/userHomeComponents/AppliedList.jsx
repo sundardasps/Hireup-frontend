@@ -26,6 +26,7 @@ import {
 import DefaultImg from "../../../../public/istockphoto-1454186576-612x612.jpg";
 import { JobFullDetails } from "./JobFullDetails";
 import { useNavigate } from "react-router-dom";
+import AppliedJobStatus from "../userDialogs/AppliedJobStatus";
 function AppliedList() {
   const navigate = useNavigate();
   const [category, setCategory] = React.useState([]);
@@ -112,7 +113,7 @@ function AppliedList() {
         </Card>
       </div>
 
-      <div className="grid  mx-auto  lg:grid-cols-2 md:px-6 lg:grid-rows-4  scollable ">
+      <div className="md:grid  mx-auto  lg:grid-cols-2 md:px-6 lg:grid-rows-4  scollable ">
         
         {data && data.appliedJobData && data.appliedJobData.length > 0 ? (
           data.appliedJobData.map((data, index) => (
@@ -177,7 +178,7 @@ function AppliedList() {
                         e.stopPropagation(), handleShowDetails(data);
                       }}
                     >
-                      <span className=" sm:block hidden "> Show details</span>
+                      <AppliedJobStatus jobdata={data} />
                     </div>
                 </div>
               </div>

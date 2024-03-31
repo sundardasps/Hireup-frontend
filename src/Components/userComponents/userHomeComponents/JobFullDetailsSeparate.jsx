@@ -79,109 +79,8 @@ function JobFullDetailsSeparate() {
 
   return (
     <>
-      {/* <div className=" border m-auto container">
-        <Card className="  container  my-3 w-screen   bg-white  h-auto border  rounded-none">
-          <div className="flex  flex-col bg-blue-500">
-            <div className="flex justify-between ">
-              <ArrowLeftIcon
-                className="w-10 h-6 m-4 cursor-pointer"
-                onClick={() => navigate("/user")}
-              />
-              <text className="flex justify-around text-4xl m-2 text-white font-bold mx-5 ">
-                {data ? data.data.jobDetails.job_title : ""}
-                {data?.data?.isApproved && (
-                  <CheckCircleIcon className="w-5 h-5 m-auto mx-2 " />
-                )}
-              </text>
-              <Menu>
-                <MenuHandler>
-                  <EllipsisVerticalIcon className="w-10 h-8 m-4 cursor-pointer" />
-                </MenuHandler>
-                <MenuList>
-                  <MenuItem
-                    onClick={() => {
-                      handleSaveJob(jobId);
-                    }}
-                  >
-                    Save
-                  </MenuItem>
-                  <MenuItem>Cancel</MenuItem>
-                </MenuList>
-              </Menu>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-1 m-5 mb-3 ">
-            <text className="flex bg-blue-gray-50 p-2 ">
-              <ShoppingBagIcon className="w-5 h-5 " />
-              {data ? data.data.jobDetails.job_type : ""}
-            </text>
-            <text className="flex p-2">
-              <ComputerDesktopIcon className="w-5 h-5 " />
-              {data ? data.data.jobDetails.experience : ""} year experience
-              needed
-            </text>
-            <text className="flex bg-blue-gray-50 p-2">
-              <CurrencyRupeeIcon className="w-5 h-5 " />
-              Salary : {""}
-              {data ? data.data.jobDetails.salery : ""} /-
-            </text>
-            <text className="flex p-2 ">
-              <CalendarDaysIcon className="w-5 h-5  " />
-              Application will closes on {""}
-              {data ? data.data.jobDetails.end_time : ""}
-            </text>
-            <text className="flex bg-blue-gray-50 p-2 ">
-              <CalendarDaysIcon className="w-5 h-5 " />
-              Total applied: {""}
-              {data ? data?.data?.count : ""}
-            </text>
-          </div>
-
-          <div className="mx-4">
-            <p>Skills required</p>
-          </div>
-          <CardBody className="flex flex-col sm:flex-row justify-between w-auto h-auto bg-white m-2 first-letter shadow-inner rounded border">
-            {data ? data.data.jobDetails.required_skills : ""}
-          </CardBody>
-          <div className="mx-4">
-            <p>Responsibilities</p>
-          </div>
-          <CardBody className="flex flex-col sm:flex-row justify-between w-auto h-auto bg-white m-2 first-letter shadow-inner rounded border">
-            {data ? data.data.jobDetails.responsibilities : ""}
-          </CardBody>
-          <CardFooter className="">
-            {checkApplied ? (
-              <Button
-                size="sm"
-                color="green"
-                className="flex"
-                onClick={() => navigate("/user/appliedJobs")}
-              >
-                <CursorArrowRippleIcon className="w-4 h-4" />
-                Application submitted.
-              </Button>
-            ) : (
-              <Button
-                size="sm"
-                color="blue"
-                className="flex border shadow-xl shadow-blue-gray-200"
-              >
-                <CursorArrowRippleIcon className="w-4 h-4" />
-                <JobApply data={{ jobdata: data?.data?.jobDetails }} />
-              </Button>
-            )}
-          </CardFooter>
-        </Card>
-      </div> */}
-
-      <div className="container m-auto">
+      <div className="container m-auto  ">
         <div className=" bg-blue-400  p-5">
-          <ArrowLeftIcon
-            className="w-20 h-6  cursor-pointer"
-            onClick={() => navigate("/user")}
-            color="white"
-          />
           <div className="w-2/3  md:ml-16 md:mt-16  ">
             <Typography className="text-3xl  md:text-5xl " color="white" >
               {data ? data.data.jobDetails.job_title : ""} <br />
@@ -226,7 +125,7 @@ function JobFullDetailsSeparate() {
           </div>
         </div>
 
-        <div className=" md:grid grid-cols-5 grid-rows-5 gap-1 m-auto">
+        <div className=" md:grid grid-cols-5 grid-rows-5 gap-1 m-auto ">
           <div className="col-span-3 p-10 ">
             <Typography className="my-1 text-blue-gray-400 text-lg font-semibold">
               About this role

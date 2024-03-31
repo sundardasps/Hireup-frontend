@@ -52,8 +52,6 @@ function JobCards() {
   const [hasMore, setHAsMore] = useState(true);
   const [initialFetch, setInitialFetch] = useState(false);
   const [load, setLoad] = useState(false);
-  const queryClient = useQueryClient();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const user = useSelector((state) => {
@@ -68,7 +66,10 @@ function JobCards() {
       { filter, search: debounsedSearch, scroll: scrolls },
     ],
     queryFn: async () => {
-      const response = await getAllJobs({search: debounsedSearch,filter,scroll: scrolls,
+      const response = await getAllJobs({
+        search: debounsedSearch,
+        filter,
+        scroll: scrolls,
       }).then((res) => res.data, setInitialFetch(true));
 
       return response;
@@ -76,14 +77,12 @@ function JobCards() {
   });
 
   useEffect(() => {
-  
     //always scroll up ref
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: "smooth",
     });
-
 
     const timeoutId = setTimeout(() => {
       setDebouncedSearch(search);
@@ -151,8 +150,7 @@ function JobCards() {
     };
 
     fetchCategory();
-  },[]);
-
+  }, []);
 
   if (isLoading || !selectedJob) {
     if (data && data.data && data.data.length > 0 && !selectedJob) {
@@ -284,26 +282,37 @@ function JobCards() {
           <List></List>
         </Card>
       </div>
-      <div className="mt-5  md:min-w-[30rem]  md:w-2/3 pl-2  h-[39rem]  scrollable">
+      <div className="mt-5  md:min-w-[37rem]  md:w-2/3 pl-2  h-[39rem]  scrollable">
         <InfiniteScrollComponent
           dataLength={data && data.data.length ? data.data.length : 0}
           //This is important field to render the next data
           className=" "
           hasMore={hasMore}
           loader={
-            <div className="flex justify-center gap-2">
-              <>
-                <Button
-                  size="sm"
-                  variant="text"
-                  onClick={() => fetchDataTrigger()}
-                  className={`font-extralight`}
-                >
-                  {load && <Spinner />}
-                  Load more
-                </Button>
-              </>
-            </div>
+            data?.data?.length > 0 ? (
+              <div className="flex justify-center gap-2">
+                <>
+                  <Button
+                    size="sm"
+                    variant="text"
+                    onClick={() => fetchDataTrigger()}
+                    className={`font-extralight`}
+                  >
+                    {load && <Spinner />}
+                    Load more
+                  </Button>
+                </>
+              </div>
+            ) : (
+              <div className="text-center mt-10">
+                <Typography variant="h4">Hmmmm..</Typography>
+                <br />
+                <span>
+                  We couldn't find any matches for{" "}
+                  <span className="text-lg font-medium">"{search}"</span>
+                </span>
+              </div>
+            )
           }
           endMessage={
             <p className="mt-10 text-center font-light">
@@ -322,14 +331,14 @@ function JobCards() {
             data.data &&
             data.data.map((data, index) => (
               <Card
-                onClick={(e) => { 
+                onClick={(e) => {
                   e.stopPropagation(),
                     navigate("/user/jobDetails", {
                       state: { jobId: data._id },
                     });
                 }}
                 key={index}
-                className={`flex flex-row justify-between container mb-5 cursor-pointer border hover:border-blue-600 bg-white  rounded-md hover:shadow-xl  w-auto  h-[7rem]  md:mx-10  md:w-[25rem]   xl:w-[30rem] ${
+                className={`flex flex-row justify-between container mb-5 cursor-pointer border hover:border-blue-600 bg-white  rounded-md hover:shadow-xl   w-auto  h-[7rem]  md:mx-10  md:w-[25rem]   xl:w-[30rem] ${
                   selectedJob._id === data._id && "bg-blue-gray-50"
                 } `}
               >

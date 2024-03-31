@@ -122,7 +122,6 @@ function SavedJobsCards() {
                         e.stopPropagation(), handleShowDetails(data);
                       }}
                     >
-                      <span className=" sm:block hidden "> Show details</span>
                     </div>
                 </div>
               </div>
