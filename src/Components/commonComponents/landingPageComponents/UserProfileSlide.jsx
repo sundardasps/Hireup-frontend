@@ -50,9 +50,9 @@ function UserProfileSlide() {
             {avatars.map((data, index) => (
               <Card
                 key={index}
-                className="justify-center container my-5 w-36 h-40 shadow-lg  bg-white rounded-md hover:shadow-xl border border-solid border-gray-300"
+                className="justify-center hover:scale-105 container my-5 w-36 h-40 shadow-lg  bg-white rounded-md  border border-solid border-gray-300"
               >
-                <div className="flex justify-center">
+                <div className="flex justify-center ">
                   <img
                     src={data.image ? data.image : companyImgDefault}
                     style={{ width: "60px", height: "50px" }}
