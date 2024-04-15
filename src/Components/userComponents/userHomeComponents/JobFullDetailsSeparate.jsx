@@ -79,7 +79,7 @@ function JobFullDetailsSeparate() {
 
   return (
     <>
-      <div className="container m-auto  ">
+      <div className="container m-auto ">
         <div className=" bg-blue-400  p-5">
           <div className="w-2/3  md:ml-16 md:mt-16  ">
             <Typography className="text-3xl  md:text-5xl " color="white" >
@@ -125,7 +125,7 @@ function JobFullDetailsSeparate() {
           </div>
         </div>
 
-        <div className=" md:grid grid-cols-5 grid-rows-5 gap-1 m-auto ">
+        <div className=" md:grid grid-cols-5 grid-rows-5 gap-1 m-auto h-screen border">
           <div className="col-span-3 p-10 ">
             <Typography className="my-1 text-blue-gray-400 text-lg font-semibold">
               About this role
@@ -152,8 +152,8 @@ function JobFullDetailsSeparate() {
                   <span>{data?.data?.companyData?.companyName}</span>,
                   <span>{data?.data?.companyData?.address}</span>
                   <br />
-                  <span className="text-xs mt-2 font-bold flex">
-                    <CurrencyRupeeIcon className="w-5 h-5 " />
+                  <span className="text-xs mt-2 font-normal flex">
+                    <CurrencyRupeeIcon className="w-5 h-5 " /> &nbsp;
                     {""}
                     {data ? data.data.jobDetails.salery : ""} /-
                   </span>
@@ -174,7 +174,7 @@ function JobFullDetailsSeparate() {
             </div>
             <div className="col-span-3 row-start-3 my-5  ">
               <Typography>Skills</Typography>
-              <div className="flex flex-wrap">
+              <div className="flex flex-wrap border rounded-md p-3 shadow-inner  ">
                 {data
                   ? data.data.jobDetails.required_skills
                       .split(",")
@@ -206,17 +206,17 @@ function JobFullDetailsSeparate() {
                   Applied !
                 </h3>
               )}
-              {/* <h3 className="text-sm hover:bg-green-300 rounded-md border w-auto my-3 p-3 cursor-pointer">
+              <h3 className="text-sm hover:bg-green-300 rounded-md border w-auto my-3 p-3 cursor-pointer">
                 Apply for this job
               </h3>
               <h3 className="text-sm hover:bg-green-300 rounded-md border w-auto my-3 p-3 cursor-pointer">
                 Apply for this job
-              </h3> */}
+              </h3>
             </div>
-            {/* <div className="w-2/3 my-10">
+            <div className="w-2/3 my-10">
               <Typography>Copy url</Typography>
               <Input value={window.location} />
-            </div> */}
+            </div>
           </div>
         </div>
       </div>

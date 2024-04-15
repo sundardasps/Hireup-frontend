@@ -258,11 +258,12 @@ function JobApply({ data }) {
               )}
             </CardBody>
             <CardFooter className="flex justify-end gap-2">
-              <Button variant="gradient" onClick={() => handleOpen()}>
+              <Button size="sm" variant="gradient" onClick={() => handleOpen()}>
                 Discard
               </Button>
               <Button
                 type={next === 2 && "submit"}
+                size="sm"
                 variant="gradient"
                 color="blue"
                 onClick={handleNext}

@@ -160,9 +160,9 @@ function JobCards() {
   }
 
   return (
-    <div className="flex  ">
+    <div className="flex ">
       <div className="md:w-1/3">
-        <Card className=" h-auto w-full max-w-[17rem] p-1 shadow-xl shadow-blue  border m-5   hidden md:block ">
+        <Card className=" h-auto w-full max-w-[16rem] p-1 shadow-xl shadow-blue  border m-5   hidden md:block ">
           <div className="grid justify-center  m-3 border-b-2 p-2">
             <div className="flex justify-center mb-2 ">
               <Avatar
