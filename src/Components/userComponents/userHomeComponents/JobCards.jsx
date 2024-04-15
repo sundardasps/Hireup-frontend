@@ -319,7 +319,7 @@ function JobCards() {
               {data && data?.data?.length > 0 ? (
                 <span className="grid cursor-pointer">
                   <b>Yay! You have seen it all</b>
-                  <span className="text-xs hover:text-sm">Tap to reload.</span>
+                  <span onClick={()=>window.location.reload()} className="text-xs hover:text-sm">Tap to reload.</span>
                 </span>
               ) : (
                 <b>No data found!</b>
