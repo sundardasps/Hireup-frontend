@@ -12,6 +12,7 @@ import { useQuery ,useQueryClient} from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import {
+  companyCreateChat,
   jobAppliedUsers,
   rejectUserApplication,
 } from "../../../Api/companyApi";
@@ -25,6 +26,7 @@ import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/solid";
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
+import { useSelector } from "react-redux";
 
 function AppliedUsersList() {
   const location = useLocation();
@@ -57,6 +59,10 @@ function AppliedUsersList() {
     },
   });
 
+  const currentUser = useSelector((state) => {
+    return state.company.id;
+  });
+
   const TABS = [
     {
       label: "All",
@@ -81,6 +87,18 @@ function AppliedUsersList() {
       console.log(error);
     }
   };
+
+  const tapToChat = async (ids)=>{
+    
+    try {
+      const response = await companyCreateChat(ids)
+      if(response){
+        navigate("/company/chat")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 
   return (
@@ -165,6 +183,7 @@ function AppliedUsersList() {
                   size="sm"
                   variant="outlined"
                   color="white"
+                  onClick={()=>tapToChat({companyId:currentUser,userId:value._id})}
                 >
                   Message
                 </Button>

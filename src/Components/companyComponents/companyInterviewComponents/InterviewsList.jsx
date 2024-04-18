@@ -75,7 +75,7 @@ export default function InterviewsList() {
   return (
     <>
       <Card className="h-screen w-full shadow border  my-5">
-        <div className="flex    gap-4 md:flex-row bg-blue-500 p-3 rounded-t-lg">
+        {/* <div className="flex    gap-4 md:flex-row bg-blue-500 p-3 rounded-t-lg">
         <div className="w-full md:w-72">
           <Input
             label="Search title"
@@ -88,7 +88,7 @@ export default function InterviewsList() {
             icon={<MagnifyingGlassIcon className="h-5 w-5" color="white" />}
           />
         </div>
-      </div>
+      </div> */}
         <CardBody className="overflow-y-scroll  h-full">
           <div className="mt-2 overflow-hidden">
             <ul className=" -ml-2 flex flex-col gap-4 items-center">

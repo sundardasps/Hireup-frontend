@@ -10,6 +10,7 @@ import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
 import chatImage from "../../../../public/chat_image.png";
 import {
+  Bars4Icon,
   PaperAirplaneIcon,
   PaperClipIcon,
   PlusIcon,
@@ -18,7 +19,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import VideoCall from "../companyVideoComponents/VideoCall";
 
-function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
+function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages ,setMobileUx}) {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [newMessage, setNewMessage] = useState("");
@@ -203,6 +204,7 @@ function ChatBox({ chat, currentUser, setSendMessage, messages, setMessages }) {
           </div>
 
           <div className="flex p-3 h-[4rem] rounded-b-md ">
+           <Bars4Icon className='block md:hidden w-10' onClick={()=>setMobileUx(false)} />
             <InputEmoji value={newMessage} onChange={handleMessage} />
             <div className="p-2 rounded-lg   ">
               <PaperClipIcon className="w-6 h-6 cursor-pointer" color="black" />

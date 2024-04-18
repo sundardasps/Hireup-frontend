@@ -11,6 +11,7 @@ function CompanyChat() {
   const [currentChat, setCurrentChat] = useState(null);
   const [sendMessage, setSendMessage] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [mobileUx, setMobileUx] = useState(false);
 
   const currentUser = useSelector((state) => {
     return state.company.id;
@@ -61,40 +62,42 @@ function CompanyChat() {
     return online ? true : false;
   };
   return (
-    <div className="flex  justify-center mt-5">
-      <div className="flex gap-1  w-[60rem]">
-        <Card className="w-[20rem] p-3 h-screen shadow-md border bg-blue-500">
-          <div className="flex gap-3">
-            <Input color="white" type="search" label="Search company" />
-          </div>
-          
-          <div className="pb-5 border-b-2">
-          <div className="h-[17rem] scrollable  border-blue-gray-200  ">
-            {chats.map((chat, index) => (
-              <div key={index} onClick={() => setCurrentChat(chat)}>
-                <CompanyConversations
-                  data={chat}
-                  currentUser={currentUser}
-                  online={checkOnlineStatus(chat)}
-                  messages={messages}
-                />
-              </div>
-            ))}
-          </div>
-          </div>
-        </Card>
+    <div className="flex gap-1 mt-5 ">
+      <Card
+        className={`md:w-[20rem] w-screen p-3  h-screen md:h-auto  shadow-md border bg-blue-500 ${
+          !mobileUx ? "sm:block" : "hidden"
+        }   md:block `}
+      >
+        <div className="  scrollable  border-blue-gray-200  ">
+          {chats.map((chat, index) => (
+            <div
+              key={index}
+              onClick={() => {
+                setCurrentChat(chat), setMobileUx(true);
+              }}
+            >
+              <CompanyConversations
+                data={chat}
+                currentUser={currentUser}
+                online={checkOnlineStatus(chat)}
+                messages={messages}
+              />
+            </div>
+          ))}
+        </div>
+      </Card>
 
-        <Card className="h-screen border w-full ">
-          <div></div>
-          <ChatBox
-            chat={currentChat}
-            currentUser={currentUser}
-            setSendMessage={setSendMessage}
-            messages={messages}
-            setMessages={setMessages}
-          />
-        </Card>
-      </div>
+      <Card className={` w-full ${mobileUx ? "sm:block " : "hidden"} md:block`}>
+        <div></div>
+        <ChatBox
+          chat={currentChat}
+          currentUser={currentUser}
+          setSendMessage={setSendMessage}
+          messages={messages}
+          setMessages={setMessages}
+          setMobileUx={setMobileUx}
+        />
+      </Card>
     </div>
   );
 }

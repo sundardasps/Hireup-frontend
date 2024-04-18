@@ -11,6 +11,7 @@ import userLogo from "../../../../public/user.png";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
 import {
+  Bars4Icon,
   PaperAirplaneIcon,
   PaperClipIcon,
   PlusIcon,
@@ -26,6 +27,7 @@ function ChatBox({
   messages,
   setMessages,
   ownMessage,
+  setMobileUx
 }) {
   const [userData, setUserData] = useState(null);
   const [newMessage, setNewMessage] = useState("");
@@ -219,6 +221,7 @@ function ChatBox({
           </div>
 
           <div className="flex p-3 h-[4rem] rounded-b-md ">
+            <Bars4Icon className='block md:hidden w-10' onClick={()=>setMobileUx(false)} />
             <InputEmoji value={newMessage} onChange={handleMessage} />
             <div className="p-2 rounded-lg   ">
               <PaperClipIcon className="w-6 h-6 cursor-pointer" color="black" />
@@ -235,7 +238,7 @@ function ChatBox({
           </div>
         </>
       ) : (
-        <div className="flex flex-col bg-blue-gray-50 object-cover h-screen  items-center rounded-xl justify-center ">
+        <div className="flex flex-col  object-cover h-screen  items-center  justify-center ">
           <img src={chatImage} alt="" className="w-36 h-36 object-cover " />
           <span className="text-center ml-4  text-lg font-normal text-blue-gray-500">
             Tap to start...
