@@ -169,8 +169,8 @@ function JobFullDetailsSeparate() {
                 )}
               </div>
             </div>
-            <div className="col-span-3 row-start-3 my-5 font-normal">
-              <p>{data ? data.data.jobDetails.responsibilities : ""}</p>
+            <div className=" my-5 font-normal">
+              <p className="h-[10rem]  scrollable p-5 shadow-inner border rounded-md ">{data ? data.data.jobDetails.responsibilities : ""}</p>
             </div>
             <div className="col-span-3 row-start-3 my-5  ">
               <Typography>Skills</Typography>

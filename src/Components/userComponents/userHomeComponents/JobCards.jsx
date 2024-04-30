@@ -378,7 +378,7 @@ function JobCards() {
 
                     <div
                       className={`flex ${
-                        data.is_active ? " text-green-400" : " text-white"
+                        data.is_active ? " text-green-400" : " hidden"
                       }  my-3  font-normal text-xs `}
                     >
                       <CheckCircleIcon className="w-4 h-4 " /> Actively

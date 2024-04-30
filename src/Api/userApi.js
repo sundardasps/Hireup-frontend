@@ -66,7 +66,6 @@ export async function categoryDataForUser() {
 
 export async function getAllJobs({ search, filter ,scroll}) {
   try {
-    console.log( search, filter ,scroll);
     const response = await userCheck.get("/getAllJobs", {
       params: { search, filter ,scroll},
     });
@@ -375,7 +374,6 @@ export async function jobDetails(id) {
 //------------------------------- For landing page ------------------ //
 
 export async function getJobsName() {
-
   try {
     const response = await userCheck.get(`/getJobsName`);
     return response;

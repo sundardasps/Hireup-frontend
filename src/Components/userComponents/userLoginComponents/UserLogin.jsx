@@ -75,7 +75,7 @@ function UserLogin() {
       validationSchema: userLogInSchema,
       onSubmit: async (value) => {
         const response = await userLogin(value);
-        if (response.data.loginSuccess) {
+        if (response.data.loginSuccess){
           dispatch(
             setUserDetails({
               userName: response.data.loginData.userName,
